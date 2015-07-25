@@ -31,7 +31,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+							<a href="#/"><img src="images/home/logo.png" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
@@ -59,10 +59,10 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Lista želja</a></li>
+								<li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span class="badge alert-warning">{{wishlistItems}}</span></a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
-								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span class="badge">{{cartItems}}</span></a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Ulaz</a></li>
+								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span class="badge alert-success">{{cartItems}}</span></a></li>
+								<li><a href="#/login"><i class="fa fa-lock"></i> Ulaz</a></li>
 							</ul>
 						</div>
 					</div>
@@ -133,11 +133,10 @@
 									<h1><span>E</span>-PAYS</h1>
 									<h2>Kupovina svakodnevnih namirnica</h2>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Kupi odmah</button>
+									<button type="button" class="btn btn-default get">O nama</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png"  class="pricing" alt="" />
+									<img src="images/home/veggies.jpg" class="girl img-responsive" alt="" style="height: 400px;width: 400px;"/>
 								</div>
 							</div>
 							<div class="item">
@@ -145,24 +144,22 @@
 									<h1><span>E</span>-PAYS</h1>
 									<h2>24/7</h2>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Kupi odmah</button>
+									<button type="button" class="btn btn-default get">Pretraga prodavaca</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png"  class="pricing" alt="" />
+									<img src="images/home/fruit-vegetables.jpg" class="girl img-responsive" alt="" style="height: 400px;width: 400px;"/>
 								</div>
 							</div>
 							
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>E</span>-PAYS</h1>
-									<h2>Najsvežije - direktno od prodavca</h2>
+									<h2>Pratite naš blog</h2>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Kupi odmah</button>
+									<button type="button" class="btn btn-default get">Vidi blog</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png" class="pricing" alt="" />
+									<img src="images/home/sourcherry.jpg" class="girl img-responsive" alt="" />
 								</div>
 							</div>
 							
@@ -297,18 +294,6 @@
 								</ul>
 							</div>
 						</div><!--/brands_products-->
-						
-						<div class="price-range"><!--price-range-->
-							<h2>Opseg cene</h2>
-							<div class="well text-center">
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="2000" data-slider-step="5" data-slider-value="[250,1550]" id="sl2" ><br />
-								 <b class="pull-left">RSD 0</b> <b class="pull-right">RSD 2000</b>
-							</div>
-						</div><!--/price-range-->
-						
-						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
-						</div><!--/shipping-->
 					
 					</div>
 				</div>
@@ -324,21 +309,15 @@
 										<img src="{{farmer.img}}" alt="" />
 										<h2>{{farmer.name}}</h2>
 										<p>{{farmer.location}}</p>
-										<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Pogledaj ponudu</a>
+										<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
 									</div>
 									<div class="product-overlay">
 										<div class="overlay-content">
 											<h2>{{farmer.name}}</h2>
 											<p>{{farmer.location}}</p>
-											<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Pogledaj ponudu</a>
+											<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
 										</div>
 									</div>
-								</div>
-								<div class="choose">
-									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Pogledaj ocene</a></li>
-										<li><a ng-click="putInCart(farmer.name, farmer.location)"><i class="fa fa-plus-square"></i>Dodaj u kolica</a></li>
-									</ul>
 								</div>
 							</div>
 						</div>	

@@ -1,19 +1,22 @@
-angular.module('paysApp').controller("mainCtrl", ["$scope", "$http", "$filter", "localStorageService", "GeoLocationService", "CartService", 
-	function (scope, http, filter, localStorageService, GeoLocationService, CartService) {
+angular.module('paysApp').controller("mainCtrl", ["$scope", "$http", "$filter", "localStorageService", "GeoLocationService", "CartService" , "WishlistService", 
+	function (scope, http, filter, localStorageService, GeoLocationService, CartService, WishlistService) {
+
 
 	console.log("Main Ctrl!");
 	scope.msg = "Main Ctrl!";
-	console.log(GeoLocationService.hello());
+
 
 	scope.cartItems = CartService.getItemsSize();
+	scope.wishlistItems = WishlistService.getItemsSize();
 	scope.countries = ['Serbia', 'Croatia', 'BiH'];
 	scope.selectedCountry = 'Serbia';
 	scope.currencies = ['RSD', 'HRK', 'EUR'];
 	scope.selectedCurrency = 'RSD';
 
-    GeoLocationService.getLocation();
 
-
+    scope.initGeo = function () {
+    	GeoLocationService.getLocation();
+    }
 
 
 	scope.putInCart = function (key, value) {

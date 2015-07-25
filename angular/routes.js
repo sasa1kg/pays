@@ -12,6 +12,12 @@ angular.module("paysApp").config(['$routeProvider', function(routeProvider) {
 		resolve: {
 		}
 	})
+	.when("/wishlist", {
+		templateUrl: "partials/wishlist.html",
+		controller: "wishlistCtrl",
+		resolve: {
+		}
+	})
 	.when("/blogSingle", {
 		templateUrl: "partials/blog-single.html",
 		controller: "blogSingleCtrl",
@@ -30,15 +36,15 @@ angular.module("paysApp").config(['$routeProvider', function(routeProvider) {
 		resolve: {
 		}
 	})
-	.when("/paysAngular", {
-		templateUrl: "partials/mainPage.html",
-		controller: "mainCtrl",
-		resolve: {
-		}
-	})
 	.when("/farmer/:id/", {
 		templateUrl: "partials/farmerPage.html",
 		controller: "farmCtrl",
+		resolve: {
+		}
+	})
+	.when("/farmer/:id/product/:productid", {
+		templateUrl: "partials/product-details.html",
+		controller: "productDetailsCtrl",
 		resolve: {
 		}
 	})

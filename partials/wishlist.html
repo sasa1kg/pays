@@ -1,5 +1,4 @@
-
-<header id="header" data-ng-init="initGeo()"><!--header-->
+	<header id="header" data-ng-init="initGeo()"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
@@ -59,10 +58,10 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
-								<li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span class="badge alert-warning">{{wishlistItems}}</span></a></li>
+								<li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span class="badge alert-warning">{{wishlistItemsSize}}</span></a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
-								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span class="badge alert-success">{{cartItems}}</span></a></li>
-								<li><a href="#/login"><i class="fa fa-lock"></i> Ulaz</a></li>
+								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span class="badge alert-success">{{cartItemsSize}}</span></a></li>
+								<li><a href="login.html"><i class="fa fa-lock"></i> Ulaz</a></li>
 							</ul>
 						</div>
 					</div>
@@ -115,42 +114,64 @@
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-	<section id="form"><!--form-->
+
+	<section id="cart_items">
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-1">
-					<div class="login-form"><!--login form-->
-						<h2>Uđi na svoj nalog</h2>
-						<form action="#">
-							<input type="text" placeholder="Korisničko ime" />
-							<input type="password" placeholder="Lozinka" />
-							<button type="submit" class="btn btn-default">Ulaz</button>
-						</form>
-					</div><!--/login form-->
-				</div>
-				<div class="col-sm-1">
-					<h2 class="or">ILI</h2>
-				</div>
-				<div class="col-sm-4">
-					<div class="signup-form"><!--sign up form-->
-						<h2>Postani novi kupac</h2>
-						<form action="#">
-							<input type="text" placeholder="Ime i prezime"/>
-							<input type="email" placeholder="E-mail adresa"/>
-							<input type="password" placeholder="Lozinka"/>
-							<hr>
-							<input type="text" placeholder="Ulica i broj"/>
-							<input type="text" placeholder="Poštanski broj"/>
-							<input type="text" placeholder="Grad"/>
-							<button type="submit" class="btn btn-default">Registruj se</button>
-						</form>
-					</div><!--/sign up form-->
-				</div>
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#/pays">Home</a></li>
+				  <li class="active">Lista želja</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Proizvod</td>
+							<td class="description"></td>
+							<td class="price">Cena</td>
+							<td class="quantity">Količina</td>
+							<td class="total">Ukupno</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat = "item in wishlistItems">
+							<td class="cart_product">
+								<a href=""><img src="{{item.image}}" alt="{{item.itemName}}" style="width:128px;height:128px;"></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">{{item.itemName}}</a></h4>
+								<p>ID proizvoda: {{item.itemId}}</p>
+								<p>Farmer: {{item.farmer}}</p>
+								<p>Lokacija: {{item.farmerLocation}}</p>
+							</td>
+							<td class="cart_price">
+								<p>{{item.itemPrice}} RSD / {{item.itemMeasure}}</p>
+							</td>
+							<td class="cart_quantity">
+							
+										<div class="cart_quantity_button">
+											<a class="cart_quantity_up" ng-click="more(item.itemId, item.farmerId)"> + </a>
+											<input class="cart_quantity_input" type="text" name="quantity" ng-model="item.itemNum" autocomplete="off" size="2">
+											<a class="cart_quantity_down" ng-click="less(item.itemId, item.farmerId)"> - </a>
+										</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">{{item.itemPrice * item.itemNum}} RSD</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" ng-click="remove(item.itemId, item.farmerId)"><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" ng-click="putToCart(item.itemId, item.farmerId)"><i class="fa fa-shopping-cart"></i></a>
+							</td>
+								
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
-	</section><!--/form-->
-	
-	
+	</section> <!--/#cart_items-->
+
 	<footer id="footer"><!--Footer-->
 		<div class="footer-top">
 			<div class="container">

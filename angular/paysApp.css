@@ -2,3 +2,18 @@
 	height: 128px;
 	width: 128px;
 }
+
+.farmerimage {
+	border: 3px solid orange !important;
+	border-radius: 20px !important;
+}
+.cursorhover {
+	cursor: pointer;
+}
+.actionbar {
+	margin-left: 0px;
+	width: 100%;
+}
+.fromtop {
+	margin-top: 10px;
+}

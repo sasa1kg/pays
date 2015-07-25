@@ -1,24 +1,24 @@
 
-	<header id="header"><!--header-->
+	<header id="header" data-ng-init="initGeo()"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i> info@domain.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> +381 21 1101100</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@pays.rs</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -31,28 +31,26 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+							<a href="#/"><img src="images/home/logo.png" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
 								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									USA
+									{{selectedCountry}}
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
-									<li><a href="">Canada</a></li>
-									<li><a href="">UK</a></li>
+									<li ng-repeat="country in countries"><a href="#">{{country}}</a></li>
 								</ul>
 							</div>
 							
 							<div class="btn-group">
 								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									DOLLAR
+									{{selectedCurrency}}
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
-									<li><a href="">Canadian Dollar</a></li>
-									<li><a href="">Pound</a></li>
+									<li ng-repeat="currency in currencies"><a href="#">{{currency}}</a></li>
 								</ul>
 							</div>
 						</div>
@@ -60,11 +58,11 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
-								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
+								<li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span class="badge alert-warning">{{wishlistItems}}</span></a></li>
+								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
+								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span class="badge alert-success">{{cartItems}}</span></a></li>
+								<li><a href="login.html"><i class="fa fa-lock"></i> Ulaz</a></li>
 							</ul>
 						</div>
 					</div>
@@ -86,30 +84,31 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+								<li><a href="index.html" class="active">Početna</a></li>
+								<li class="dropdown"><a href="#">Prodavnica<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html" class="active">Product Details</a></li> 
-										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
+                                        <li><a href="shop.html">Proizvodi</a></li>
+										<li><a href="product-details.html">Detalji proizvoda</a></li> 
+										<li><a href="checkout.html">Kupovina</a></li> 
+										<li><a href="cart.html">Kolica</a></li> 
+										<li><a href="login.html">Ulaz</a></li> 
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
+                                        <li><a href="blog.html">Lista blogova</a></li>
+										<li><a href="blog-single.html">Jedan blog</a></li>
                                     </ul>
                                 </li> 
-								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
+								<li><a href="404.html">Za prodavce</a></li>
+								<li><a href="404.html">Za distributere</a></li>
+								<li><a href="contact-us.html">Kontaktirajte nas</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<input type="text" placeholder="Pretraga"/>
 						</div>
 					</div>
 				</div>
@@ -122,19 +121,17 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						<h2>Kategorije prodavca</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-							<div class="panel panel-default" ng-repeat = "category in farmerCategories">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#/farmer/{{farmerId}}/category/{{category.id}}">{{category.name}}</a></h4>
-								</div>
-							</div>
-						</div><!--/category-products-->
-					
+
 						<div class="brands_products"><!--brands_products-->
 							<h2>Podaci o prodavcu</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
+
+									<li>
+										<div>
+											<img src="{{farmer.img}}" alt = "{{farmer.name}}" class="farmerimage"></img>
+										</div>
+									</li>
 									<li><a>{{farmer.name}}</a></li>
 									<li><a>{{farmer.location}}</a></li>
 									<li>
@@ -157,86 +154,45 @@
 								</ul>
 							</div>
 						</div><!--/brands_products-->
-						
-						<div class="price-range"><!--price-range-->
-							<h2>Price Range</h2>
-							<div class="well">
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-								 <b>$ 0</b> <b class="pull-right">$ 600</b>
+
+						</br>
+						<h2>Kategorije prodavca</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default" ng-repeat = "category in farmerCategories">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="#/farmer/{{farmerId}}/category/{{category.id}}">{{category.name}}</a></h4>
+								</div>
 							</div>
-						</div><!--/price-range-->
-						
-						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
-						</div><!--/shipping-->
+						</div><!--/category-products-->
 						
 					</div>
 				</div>
 
 				<div class="col-sm-9 padding-right">
-					<h2 class="title text-center">Prodavac</h2>
+					<h2 class="title text-center">Proizvodi</h2>
 					<div class="product-details">
-						<div class="col-sm-3">
+						<div class="col-sm-3" ng-repeat="product in farmerProducts">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-												<img src="images/cart/tomato.png" alt="" />
-												<h2>$56</h2>
-												<p>Paradajz</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												<a href="#/farmer/{{farmerId}}/product/{{product.id}}">
+													<img src="{{product.image}}" alt="{{product.name}}" class="cursorhover"/>
+												</a>
+												<h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
+												<p>{{product.name}}</p>
+												<a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Dodaj u kolica</a>
+									</div>
+									<div class="choose">
+										<ul class="nav nav-pills nav-justified">
+											<li class="cursorhover"><a href="#/farmer/{{farmerId}}/product/{{product.id}}"><i class="fa fa-caret-square-o-right"></i>Više informacija</a></li>
+										</ul>
+										<ul class="nav nav-pills nav-justified">
+											<li class="cursorhover"><a ng-click="addToWishlist(product.id)"><i class="fa fa-plus-square"></i>U listu želja</a></li>
+										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-												<img src="images/cart/tomato.png" alt="" />
-												<h2>$56</h2>
-												<p>Paradajz</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-												<img src="images/cart/tomato.png" alt="" />
-												<h2>$56</h2>
-												<p>Paradajz</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-												<img src="images/cart/tomato.png" alt="" />
-												<h2>$56</h2>
-												<p>Paradajz</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-												<img src="images/cart/tomato.png" alt="" />
-												<h2>$56</h2>
-												<p>Paradajz</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
 					</div>
 				</div>
 			</div>	
