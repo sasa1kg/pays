@@ -130,7 +130,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
-									<h1><span>E</span>-PAYS</h1>
+									<h1><span>PAYS</span> web shop</h1>
 									<h2>Kupovina svakodnevnih namirnica</h2>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
 									<button type="button" class="btn btn-default get">O nama</button>
@@ -141,7 +141,7 @@
 							</div>
 							<div class="item">
 								<div class="col-sm-6">
-									<h1><span>E</span>-PAYS</h1>
+									<h1><span>PAYS</span> direktno od proizvođača</h1>
 									<h2>24/7</h2>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
 									<button type="button" class="btn btn-default get">Pretraga prodavaca</button>
@@ -165,10 +165,10 @@
 							
 						</div>
 						
-						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+						<a class="left control-carousel hidden-xs" data-slide="prev">
 							<i class="fa fa-angle-left"></i>
 						</a>
-						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+						<a class="right control-carousel hidden-xs" data-slide="next">
 							<i class="fa fa-angle-right"></i>
 						</a>
 					</div>
@@ -183,130 +183,116 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						<h2>Kategorije</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+						<h2>Pretraga</h2>
+						<div class="panel-group category-products orangeborder" id="accordian"><!--category-productsr-->
+	
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Agrumi
-										</a>
-									</h4>
-								</div>
-								<div id="sportswear" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Limun </a></li>
-											<li><a href="#">Pomorandža </a></li>
-											<li><a href="#">Grejpfrut </a></li>
-											<li><a href="#">Mandarine </a></li>
-										</ul>
+									<div class="signup-form">
+									<form action="#">
+										<h4 class="panel-title"><a href="#">U krugu od </a></h4>
+										<select class="input" ng-model="distance">
+ 											  <option selected="true" disabled="disabled" value="">Izaberi udaljenost</option>
+											  <option value="10">10 km</option>
+											  <option value="20">20 km</option>
+											  <option value="50">50 km</option>
+											  <option value="100">100 km</option>
+										</select>
+									</br>
+									</br>
+										<table class="table table-condensed">
+											<tr ng-show="locationDefined()">
+												<td class="notopborder">
+													<h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank" ng-show="locationDefined()">Od vaše lokacije</a></h4>
+												</td>
+												<td class="cart_delete notopborder">
+													<a class="cart_quantity_delete pull-right" ng-click="changeSearchMode()"><i class="fa fa-times"></i></a>
+												</td>
+											</tr>
+											<tr ng-show="!locationDefined()">
+												<td class="notopborder">
+													<input type="text" id="searchPlace" ng-model="searchPlaceValue" ng-blur="searchPlaceBlur()" placeholder="Mesto" ng-show="!locationDefined()"/>
+												</td>
+											</tr>
+											<tr ng-show="!locationDefined() && locationFound">
+												<td class="notopborder"> 
+													<h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank" ng-show="!locationDefined() && locationFound">Pronađena lokacija</a></h4>
+													<h4 class="panel-title"><a ng-show="!locationDefined() && !locationFound">Greška</a></h4>
+												</td>
+												<td class="cart_delete notopborder">
+													<a class="cart_quantity_delete pull-right" ng-click="clearSearch()"><i class="fa fa-times"></i></a>
+												</td>
+											</tr>
+										</table>
+										
+										
+										
+									<hr class= "orangehr">
+										<h4 class="panel-title"><a>Kategorija </a></h4>
+										<select ng-model="categoryId" ng-change="changedCat()" >
+											 <option value="" selected="true">Izaberi kategoriju</option>
+											 <option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+										</select>
+										</br>
+										<h4 class="panel-title" ng-show="subcategories.length > 0"><a>Podkategorija </a></h4>
+										<select ng-model="subcategoryId" ng-change="changedSubCat()" ng-show="subcategories.length > 0">
+											  <option value="" selected="true">Izaberi podkategoriju</option>
+											  <option ng-repeat="subcat in subcategories" value="{{subcat.id}}">{{subcat.name}}</option>
+										</select>
+										</br>
+										<h4 class="panel-title" ng-show="subcatproducts.length > 0"><a>Proizvodi </a></h4>
+										<select ng-model="subcatProductId" ng-change="changedSubCatProd()" ng-show="subcatproducts.length > 0">
+											  <option value="" selected="true">Izaberi proizvod</option>
+											  <option ng-repeat="subcatprod in subcatproducts" value="{{subcatprod.id}}">{{subcatprod.name}}</option>
+										</select>
+										</br>
+										</br>
+										<h4 class="panel-title" ng-show="subcatProductId!="""><a href="#">Maksimalna cena (po jedinici) </a></h4>
+										<div range-slider min="0" max="5000" model-max="maxPrice" pin-handle="min" show-values="true" filter="currency:'RSD '"></div>
+										</br>
+										<h4 class="panel-title"><a href="#">Minimalna količina </a></h4>
+										<div range-slider min="0" max="500" model-min="minQuantity" pin-handle="max" show-values="true"></div>
+										</br>
+										<button type="button" class="btn btn-fefault cart actionbar" ng-click="addCriteria(categoryId, subcategoryId, subcatProductId, maxPrice, minQuantity)">
+										<i class="fa fa-location"></i>
+											Dodaj kriterijum
+										</button>	
+										<table class="table table-condensed">
+										<tr ng-repeat="crit in searchCriterias">
+												<td>
+												<h4 class="panel-title"><a>Kategorija: {{crit.category}}</a></h4>
+												<h4 class="panel-title"><a>Podkategorija: {{crit.subcategory}}</a></h4>
+												<h4 class="panel-title"><a>Proizvod: {{crit.product}}</a></h4>
+												<h4 class="panel-title"><a>Max cena: {{crit.maxPrice}}</a></h4>
+												<h4 class="panel-title"><a>Min količina: {{crit.minQuantity}}</a></h4>
+												</td>
+												<td class="cart_delete">
+												<a class="cart_quantity_delete pull-right" ng-click="removeCriteria(crit.id)"><i class="fa fa-times"></i></a>
+												</td>
+										</tr>
+										</table>
+										<hr class= "orangehr">
+										<button type="button" class="btn btn-fefault cart actionbar" ng-click="setSearchPrepared()">
+										<i class="fa fa-search"></i>
+											Pretraži
+										</button>	
+									</form>
 									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Jezgrasto voće
-										</a>
-									</h4>
-								</div>
-								<div id="mens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Badem</a></li>
-											<li><a href="#">Kesten</a></li>
-											<li><a href="#">Lešnik</a></li>
-											<li><a href="#">Orah</a></li>
-											<li><a href="#">Brazilski orah</a></li>
-											<li><a href="#">Indijski orah</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Povrće
-										</a>
-									</h4>
-								</div>
-								<div id="womens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Paradajz</a></li>
-											<li><a href="#">Krastavac</a></li>
-											<li><a href="#">Krompir</a></li>
-											<li><a href="#">Tikvice</a></li>
-											<li><a href="#">Luk</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Mlečni proizvodi</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Mesne prerađevine</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Zdrava hrana</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Pekara</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Jaja</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Sokovi i pekmezi</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Začinsko bilje</a></h4>
 								</div>
 							</div>
 						</div><!--/category-products-->
-					
-						<div class="brands_products"><!--brands_products-->
-							<h2>Najbolje ocenjeni</h2>
-							<div class="brands-name">
-								<ul class="nav nav-pills nav-stacked">
-									<li ng-repeat="recommended in recommendedFarmers"><a href="#/farmer/{{recommended.id}}"> <span class="pull-right">({{recommended.items}})</span>{{recommended.name}}</a></li>
-								</ul>
-							</div>
-						</div><!--/brands_products-->
-					
 					</div>
 				</div>
 				
 				<div class="col-sm-9 padding-right">
+					<div cg-busy="{promise:nearByFarmers,message:'Učitavanje...',backdrop:true}"></div>
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">U vašoj okolini</h2>
-
 						<div class="col-sm-4" ng-repeat="farmer in farmers">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="{{farmer.img}}" alt="" />
+										<img src="{{farmer.img}}" alt="{{farmer.name}}" style="width: 268px;height: 249px;"/>
 										<h2>{{farmer.name}}</h2>
 										<p>{{farmer.location}}</p>
 										<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
@@ -318,395 +304,12 @@
 											<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
 										</div>
 									</div>
-								</div>
-							</div>
-						</div>	
-					</div><!--features_items-->
-					
-					<div class="category-tab"><!--category-tab-->
-						<div class="col-sm-12">
-							<ul class="nav nav-tabs">
-								<li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
-								<li><a href="#blazers" data-toggle="tab">Blazers</a></li>
-								<li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
-								<li><a href="#kids" data-toggle="tab">Kids</a></li>
-								<li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
-							</ul>
-						</div>
-						<div class="tab-content">
-							<div class="tab-pane fade active in" id="tshirt" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="tab-pane fade" id="blazers" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="tab-pane fade" id="sunglass" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="tab-pane fade" id="kids" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="tab-pane fade" id="poloshirt" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-											
-										</div>
-									</div>
+									<!--<img src="images/home/sale.png" class="new" alt=""></img>-->
 								</div>
 							</div>
 						</div>
-					</div><!--/category-tab-->
-					
-					<div class="recommended_items"><!--recommended_items-->
-						<h2 class="title text-center">Preporučujemo</h2>
 						
-						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-							<div class="carousel-inner">
-								<div class="item active">	
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">	
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-								<i class="fa fa-angle-left"></i>
-							  </a>
-							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-								<i class="fa fa-angle-right"></i>
-							  </a>			
-						</div>
-					</div><!--/recommended_items-->
+					</div><!--features_items-->
 					
 				</div>
 			</div>

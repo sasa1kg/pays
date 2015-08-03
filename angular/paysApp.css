@@ -17,3 +17,21 @@
 .fromtop {
 	margin-top: 10px;
 }
+.orangeborder {
+	border: 2px solid orange;
+}
+.orangehr {
+	border-top: 3px solid orange;
+}
+.notopborder {
+	border-top: 0px !important;
+}
+.dropdownlist {
+	background-color: #ddd;
+}
+.dropdownaction {
+	background: #aaa !important;
+}
+.dropdownaction:HOVER {
+	background: orange !important;
+}

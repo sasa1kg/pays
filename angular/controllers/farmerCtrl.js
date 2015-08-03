@@ -52,8 +52,8 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 	}
 
 	scope.farmer = {
-		"name" : "Farmer  jedan",
-		"location" : "Novi Sad",
+		"name" : "Marija Martinović",
+		"location" : "Sremska Kamenica",
 		"img" : "images/home/product1.jpg",
 		"items" : 10,
 		"reviews" : "",

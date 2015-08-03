@@ -1,5 +1,5 @@
 
-	<header id="header" data-ng-init="initGeo()"><!--header-->
+	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
@@ -126,7 +126,6 @@
 							<h2>Podaci o prodavcu</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-
 									<li>
 										<div>
 											<img src="{{farmer.img}}" alt = "{{farmer.name}}" class="farmerimage"></img>
@@ -170,6 +169,11 @@
 
 				<div class="col-sm-9 padding-right">
 					<h2 class="title text-center">Proizvodi</h2>
+
+					<textarea rows="2" readonly="true" style="font-size: 20px;">
+						Naše povrće je uvek sveže.
+					</textarea>
+									
 					<div class="product-details">
 						<div class="col-sm-3" ng-repeat="product in farmerProducts">
 							<div class="product-image-wrapper">

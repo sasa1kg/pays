@@ -1,0 +1,430 @@
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +381 21 1101100</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@pays.rs</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="#/"><img src="images/home/logo.png" alt="" /></a>
+						</div>
+						<div class="btn-group pull-right">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+									{{selectedCountry}}
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li ng-repeat="country in countries"><a href="#">{{country}}</a></li>
+								</ul>
+							</div>
+							
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+									{{selectedCurrency}}
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li ng-repeat="currency in currencies"><a href="#">{{currency}}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
+								<li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span class="badge alert-warning">{{wishlistItemsSize}}</span></a></li>
+								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
+								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span class="badge alert-success">{{cartItemsSize}}</span></a></li>
+								<li><a href="login.html"><i class="fa fa-lock"></i> Ulaz</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="index.html" class="active">Početna</a></li>
+								<li class="dropdown"><a href="#">Prodavnica<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="shop.html">Proizvodi</a></li>
+										<li><a href="product-details.html">Detalji proizvoda</a></li> 
+										<li><a href="checkout.html">Kupovina</a></li> 
+										<li><a href="cart.html">Kolica</a></li> 
+										<li><a href="login.html">Ulaz</a></li> 
+                                    </ul>
+                                </li> 
+								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="blog.html">Lista blogova</a></li>
+										<li><a href="blog-single.html">Jedan blog</a></li>
+                                    </ul>
+                                </li> 
+								<li><a href="404.html">Za prodavce</a></li>
+								<li><a href="404.html">Za distributere</a></li>
+								<li><a href="contact-us.html">Kontaktirajte nas</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="Pretraga"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#/pays">Home</a></li>
+				  <li class="active">Pretraga</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">PRETRAGA</td>
+							<td class="description"></td>
+							<td class="price"></td>
+							<td class="quantity"></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="cart_price">
+								<p>Na udaljenosti {{distance}} km od</p>
+								<p><a href="{{locationLink}}" target="_blank">{{locationName}}</a></p>
+							</td>
+							<td class="cart_description">
+							</td>
+							<td class="cart_product">
+								<p></p>
+							</td>
+							<td class="cart_quantity">
+								<p></p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Proizvođač</td>
+							<td class="description"></td>
+							<td class="price">Lokacija</td>
+							<td class="quantity">Količina</td>
+							<td class="total">Ukupno</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat-start = "result in searchResults | orderBy:'priceSum':reverse">
+							<td class="cart_product">
+								<a href=""><img src="{{result.data.image}}" alt="{{result.data.farmerName}}" style="width:128px;height:128px;"></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="#/farmer/{{result.data.farmerId}}">{{result.data.farmer}}</a></h4>
+								<p>Tip proizvodjaca: {{result.data.farmerType}}</p>
+							</td>
+							<td class="cart_price">
+								<p>{{result.data.location}}</p>
+							</td>
+							<td class="cart_quantity">
+							
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">{{result.chosenPriceSum}} RSD</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" ng-show="!result.isExtended" ng-click="extend(result.data.farmerId)"><i class="fa fa-chevron-down" ></i></a>
+								<a class="cart_quantity_delete" ng-show="result.isExtended" ng-click="collapse(result.data.farmerId)"><i class="fa fa-chevron-up"></i></a>
+								<a class="cart_quantity_delete"><i class="fa fa-shopping-cart" ng-click="addAll(result.data.farmerId)"></i></a>
+							</td>
+						</tr>
+						<tr class="dropdownlist" ng-repeat-end ng-repeat = "product in result.data.searchProducts" ng-show="result.isExtended">
+							<td class="cart_product">
+											<a href=""><img src="{{product.productImage}}" alt="{{product.productName}}" style="width:68px;height:68px;"></a>
+										</td>
+										<td class="cart_description">
+											<h4><a href="">{{product.productName}}</a></h4>
+											<p>ID proizvoda: {{product.productId}}</p>
+											<p>Na lageru: {{product.productStock}} {{product.productMeasure}}</p>
+										</td>
+										<td class="cart_price">
+											<p>{{product.productPrice}} RSD / {{product.productMeasure}}</p>
+										</td>
+										<td class="cart_quantity">
+										
+													<div class="cart_quantity_button">
+														<a class="cart_quantity_up cursorhover" ng-click="moreItem(result.data.farmerId, product.productId)"> + </a>
+														<input class="cart_quantity_input" type="text" name="quantity" ng-model="product.productAmmount" ng-change="checkStock(result.data.farmerId, product.productId)" ng-disabled="true" autocomplete="off" size="2">
+														<a class="cart_quantity_down cursorhover" ng-click="lessItem(result.data.farmerId, product.productId)"> - </a>
+													</div>
+										</td>
+										<td class="cart_total">
+											<p class="cart_total_price">{{product.productPrice * product.productAmmount}} RSD</p>
+										</td>
+										<td class="cart_delete">
+											<a class="cart_quantity_delete dropdownaction"><i class="fa fa-shopping-cart"></i></a>
+											<a class="cart_quantity_delete dropdownaction"><i class="fa fa-plus"></i></a>
+										</td>
+							<!--<table class="table table-condensed">
+								<thead>
+									<tr class="cart_menu">
+										<td class="image">Proizvod {{result.data.searchProducts.length}}</td>
+										<td class="description"></td>
+										<td class="price">Cena</td>
+										<td class="quantity">Količina</td>
+										<td class="total">Ukupno</td>
+										<td></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat = "product in result.data.searchProducts">
+										<td class="cart_product">
+											<a href=""><img src="{{product.productImage}}" alt="{{product.productName}}" style="width:68px;height:68px;"></a>
+										</td>
+										<td class="cart_description">
+											<h4><a href="">{{product.productName}}</a></h4>
+											<p>ID proizvoda: {{product.productId}}</p>
+										</td>
+										<td class="cart_price">
+											<p>{{product.productName}} RSD / {{product.productMeasure}}</p>
+										</td>
+										<td class="cart_quantity">
+										
+													<div class="cart_quantity_button">
+														<a class="cart_quantity_up"> + </a>
+														<input class="cart_quantity_input" type="text" name="quantity" ng-model="product.productAmmount" autocomplete="off" size="2">
+														<a class="cart_quantity_down"> - </a>
+													</div>
+										</td>
+										<td class="cart_total">
+											<p class="cart_total_price">{{product.productPrice * product.productAmmount}} RSD</p>
+										</td>
+										<td class="cart_delete">
+											<a class="cart_quantity_delete"><i class="fa fa-shopping-cart"></i></a>
+										</td>
+											
+									</tr>
+								</tbody>
+							</table>-->
+						</tr>
+					</tbody>
+				</table>
+				<div class="container">
+				<div paging
+  					page="35" 
+  					page-size="10" 
+  					total="1000"
+  					paging-action="foo('bar', page)">
+				</div>  
+				</div>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="companyinfo">
+							<h2><span>e</span>-shopper</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+						</div>
+					</div>
+					<div class="col-sm-7">
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe1.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe2.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe3.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="images/home/iframe4.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />
+							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Service</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Online Help</a></li>
+								<li><a href="">Contact Us</a></li>
+								<li><a href="">Order Status</a></li>
+								<li><a href="">Change Location</a></li>
+								<li><a href="">FAQ’s</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Quock Shop</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">T-Shirt</a></li>
+								<li><a href="">Mens</a></li>
+								<li><a href="">Womens</a></li>
+								<li><a href="">Gift Cards</a></li>
+								<li><a href="">Shoes</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Policies</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Terms of Use</a></li>
+								<li><a href="">Privecy Policy</a></li>
+								<li><a href="">Refund Policy</a></li>
+								<li><a href="">Billing System</a></li>
+								<li><a href="">Ticket System</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="">Company Information</a></li>
+								<li><a href="">Careers</a></li>
+								<li><a href="">Store Location</a></li>
+								<li><a href="">Affillate Program</a></li>
+								<li><a href="">Copyright</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3 col-sm-offset-1">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<form action="#" class="searchform">
+								<input type="text" placeholder="Your email address" />
+								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+								<p>Get the most recent updates from <br />our site and be updated your self...</p>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
