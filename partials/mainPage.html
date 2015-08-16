@@ -119,7 +119,109 @@
 	<section id="slider"><!--slider-->
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Pretraga</h2>
+						<div class="panel-group category-products orangeborder" id="accordian"><!--category-productsr-->
+
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="signup-form">
+										<form action="#">
+											<h4 class="panel-title"><a href="#">U krugu od </a></h4>
+											<select class="input" ng-model="distance">
+												<option selected="true" disabled="disabled" value="">Izaberi udaljenost</option>
+												<option value="10">10 km</option>
+												<option value="20">20 km</option>
+												<option value="50">50 km</option>
+												<option value="100">100 km</option>
+											</select>
+											</br>
+											</br>
+											<table class="table table-condensed">
+												<tr ng-show="locationDefined()">
+													<td class="notopborder">
+														<h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank" ng-show="locationDefined()">Od vaše lokacije</a></h4>
+													</td>
+													<td class="cart_delete notopborder">
+														<a class="cart_quantity_delete pull-right" ng-click="changeSearchMode()"><i class="fa fa-times"></i></a>
+													</td>
+												</tr>
+												<tr ng-show="!locationDefined()">
+													<td class="notopborder">
+														<input type="text" id="searchPlace" ng-model="searchPlaceValue" ng-blur="searchPlaceBlur()" placeholder="Mesto" ng-show="!locationDefined()"/>
+													</td>
+												</tr>
+												<tr ng-show="!locationDefined() && locationFound">
+													<td class="notopborder">
+														<h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank" ng-show="!locationDefined() && locationFound">Pronađena lokacija</a></h4>
+														<h4 class="panel-title"><a ng-show="!locationDefined() && !locationFound">Greška</a></h4>
+													</td>
+													<td class="cart_delete notopborder">
+														<a class="cart_quantity_delete pull-right" ng-click="clearSearch()"><i class="fa fa-times"></i></a>
+													</td>
+												</tr>
+											</table>
+
+
+
+											<hr class= "orangehr">
+											<h4 class="panel-title"><a>Kategorija </a></h4>
+											<select ng-model="categoryId" ng-change="changedCat()" >
+												<option value="" selected="true">Izaberi kategoriju</option>
+												<option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+											</select>
+											</br>
+											<h4 class="panel-title" ng-show="subcategories.length > 0"><a>Podkategorija </a></h4>
+											<select ng-model="subcategoryId" ng-change="changedSubCat()" ng-show="subcategories.length > 0">
+												<option value="" selected="true">Izaberi podkategoriju</option>
+												<option ng-repeat="subcat in subcategories" value="{{subcat.id}}">{{subcat.name}}</option>
+											</select>
+											</br>
+											<h4 class="panel-title" ng-show="subcatproducts.length > 0"><a>Proizvodi </a></h4>
+											<select ng-model="subcatProductId" ng-change="changedSubCatProd()" ng-show="subcatproducts.length > 0">
+												<option value="" selected="true">Izaberi proizvod</option>
+												<option ng-repeat="subcatprod in subcatproducts" value="{{subcatprod.id}}">{{subcatprod.name}}</option>
+											</select>
+											</br>
+											</br>
+											<h4 class="panel-title" ng-show="subcatProductId!="""><a href="#">Maksimalna cena (po jedinici) </a></h4>
+											<div range-slider min="0" max="5000" model-max="maxPrice" pin-handle="min" show-values="true" filter="currency:'RSD '"></div>
+											</br>
+											<h4 class="panel-title"><a href="#">Minimalna količina </a></h4>
+											<div range-slider min="0" max="500" model-min="minQuantity" pin-handle="max" show-values="true"></div>
+											</br>
+											<button type="button" class="btn btn-fefault cart actionbar" ng-click="addCriteria(categoryId, subcategoryId, subcatProductId, maxPrice, minQuantity)">
+												<i class="fa fa-location"></i>
+												Dodaj kriterijum
+											</button>
+											<table class="table table-condensed">
+												<tr ng-repeat="crit in searchCriterias">
+													<td>
+														<h4 class="panel-title"><a>Kategorija: {{crit.category}}</a></h4>
+														<h4 class="panel-title"><a>Podkategorija: {{crit.subcategory}}</a></h4>
+														<h4 class="panel-title"><a>Proizvod: {{crit.product}}</a></h4>
+														<h4 class="panel-title"><a>Max cena: {{crit.maxPrice}}</a></h4>
+														<h4 class="panel-title"><a>Min količina: {{crit.minQuantity}}</a></h4>
+													</td>
+													<td class="cart_delete">
+														<a class="cart_quantity_delete pull-right" ng-click="removeCriteria(crit.id)"><i class="fa fa-times"></i></a>
+													</td>
+												</tr>
+											</table>
+											<hr class= "orangehr">
+											<button type="button" class="btn btn-fefault cart actionbar" ng-click="setSearchPrepared()">
+												<i class="fa fa-search"></i>
+												Pretraži
+											</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div><!--/category-products-->
+					</div>
+				</div>
+				<div class="col-sm-7">
 					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
@@ -174,121 +276,86 @@
 					</div>
 					
 				</div>
+				<div class="col-sm-2">
+					<h4 class="title text-center">Lista želja:</h4>
+				</div>
 			</div>
 		</div>
 	</section><!--/slider-->
 	
 	<section>
 		<div class="container">
+			<h2 class="title text-center">Reklamni prostor</h2>
+			<div cg-busy="{promise:nearByFarmers,message:'Učitavanje...',backdrop:true}"></div>
 			<div class="row">
-				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>Pretraga</h2>
-						<div class="panel-group category-products orangeborder" id="accordian"><!--category-productsr-->
-	
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<div class="signup-form">
-									<form action="#">
-										<h4 class="panel-title"><a href="#">U krugu od </a></h4>
-										<select class="input" ng-model="distance">
- 											  <option selected="true" disabled="disabled" value="">Izaberi udaljenost</option>
-											  <option value="10">10 km</option>
-											  <option value="20">20 km</option>
-											  <option value="50">50 km</option>
-											  <option value="100">100 km</option>
-										</select>
-									</br>
-									</br>
-										<table class="table table-condensed">
-											<tr ng-show="locationDefined()">
-												<td class="notopborder">
-													<h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank" ng-show="locationDefined()">Od vaše lokacije</a></h4>
-												</td>
-												<td class="cart_delete notopborder">
-													<a class="cart_quantity_delete pull-right" ng-click="changeSearchMode()"><i class="fa fa-times"></i></a>
-												</td>
-											</tr>
-											<tr ng-show="!locationDefined()">
-												<td class="notopborder">
-													<input type="text" id="searchPlace" ng-model="searchPlaceValue" ng-blur="searchPlaceBlur()" placeholder="Mesto" ng-show="!locationDefined()"/>
-												</td>
-											</tr>
-											<tr ng-show="!locationDefined() && locationFound">
-												<td class="notopborder"> 
-													<h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank" ng-show="!locationDefined() && locationFound">Pronađena lokacija</a></h4>
-													<h4 class="panel-title"><a ng-show="!locationDefined() && !locationFound">Greška</a></h4>
-												</td>
-												<td class="cart_delete notopborder">
-													<a class="cart_quantity_delete pull-right" ng-click="clearSearch()"><i class="fa fa-times"></i></a>
-												</td>
-											</tr>
-										</table>
-										
-										
-										
-									<hr class= "orangehr">
-										<h4 class="panel-title"><a>Kategorija </a></h4>
-										<select ng-model="categoryId" ng-change="changedCat()" >
-											 <option value="" selected="true">Izaberi kategoriju</option>
-											 <option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
-										</select>
-										</br>
-										<h4 class="panel-title" ng-show="subcategories.length > 0"><a>Podkategorija </a></h4>
-										<select ng-model="subcategoryId" ng-change="changedSubCat()" ng-show="subcategories.length > 0">
-											  <option value="" selected="true">Izaberi podkategoriju</option>
-											  <option ng-repeat="subcat in subcategories" value="{{subcat.id}}">{{subcat.name}}</option>
-										</select>
-										</br>
-										<h4 class="panel-title" ng-show="subcatproducts.length > 0"><a>Proizvodi </a></h4>
-										<select ng-model="subcatProductId" ng-change="changedSubCatProd()" ng-show="subcatproducts.length > 0">
-											  <option value="" selected="true">Izaberi proizvod</option>
-											  <option ng-repeat="subcatprod in subcatproducts" value="{{subcatprod.id}}">{{subcatprod.name}}</option>
-										</select>
-										</br>
-										</br>
-										<h4 class="panel-title" ng-show="subcatProductId!="""><a href="#">Maksimalna cena (po jedinici) </a></h4>
-										<div range-slider min="0" max="5000" model-max="maxPrice" pin-handle="min" show-values="true" filter="currency:'RSD '"></div>
-										</br>
-										<h4 class="panel-title"><a href="#">Minimalna količina </a></h4>
-										<div range-slider min="0" max="500" model-min="minQuantity" pin-handle="max" show-values="true"></div>
-										</br>
-										<button type="button" class="btn btn-fefault cart actionbar" ng-click="addCriteria(categoryId, subcategoryId, subcatProductId, maxPrice, minQuantity)">
-										<i class="fa fa-location"></i>
-											Dodaj kriterijum
-										</button>	
-										<table class="table table-condensed">
-										<tr ng-repeat="crit in searchCriterias">
-												<td>
-												<h4 class="panel-title"><a>Kategorija: {{crit.category}}</a></h4>
-												<h4 class="panel-title"><a>Podkategorija: {{crit.subcategory}}</a></h4>
-												<h4 class="panel-title"><a>Proizvod: {{crit.product}}</a></h4>
-												<h4 class="panel-title"><a>Max cena: {{crit.maxPrice}}</a></h4>
-												<h4 class="panel-title"><a>Min količina: {{crit.minQuantity}}</a></h4>
-												</td>
-												<td class="cart_delete">
-												<a class="cart_quantity_delete pull-right" ng-click="removeCriteria(crit.id)"><i class="fa fa-times"></i></a>
-												</td>
-										</tr>
-										</table>
-										<hr class= "orangehr">
-										<button type="button" class="btn btn-fefault cart actionbar" ng-click="setSearchPrepared()">
-										<i class="fa fa-search"></i>
-											Pretraži
-										</button>	
-									</form>
+				<div class="col-sm-2 padding-right">
+					<h4 class="title text-center vertical-text-center">Najbolje ocenjeni</h4>
+				</div>
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="{{farmer.img}}" alt="{{farmer.name}}" style="width: 268px;height: 249px;"/>
+										<h2>{{farmer.name}}</h2>
+										<p>{{farmer.location}}</p>
+										<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
 									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>{{farmer.name}}</h2>
+											<p>{{farmer.location}}</p>
+											<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
+										</div>
+									</div>
+									<!--<img src="images/home/sale.png" class="new" alt=""></img>-->
 								</div>
 							</div>
-						</div><!--/category-products-->
-					</div>
+						</div>
+
+					</div><!--features_items-->
+
 				</div>
-				
+			</div>
+			<div class="row">
+				<div class="col-sm-2 padding-right">
+					<h4 class="title text-center vertical-text-center">Najčešće posećeni</h4>
+				</div>
 				<div class="col-sm-9 padding-right">
-					<div cg-busy="{promise:nearByFarmers,message:'Učitavanje...',backdrop:true}"></div>
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">U vašoj okolini</h2>
-						<div class="col-sm-4" ng-repeat="farmer in farmers">
+						<div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="{{farmer.img}}" alt="{{farmer.name}}" style="width: 268px;height: 249px;"/>
+										<h2>{{farmer.name}}</h2>
+										<p>{{farmer.location}}</p>
+										<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>{{farmer.name}}</h2>
+											<p>{{farmer.location}}</p>
+											<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
+										</div>
+									</div>
+									<!--<img src="images/home/sale.png" class="new" alt=""></img>-->
+								</div>
+							</div>
+						</div>
+
+					</div><!--features_items-->
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2 padding-right">
+					<h4 class="title text-center vertical-text-center">Najviše kupovina</h4>
+				</div>
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
