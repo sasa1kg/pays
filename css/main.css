@@ -704,7 +704,18 @@ h2.title:before{
 	left: 50%;
 	margin-left: -110px;
 }
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  zoom:0.4;
+  display:inline
+}
 
+.category-item-label{
+  color: #101010;
+  font-size: small;
+  padding-bottom: 5px;
+}
 .category-products .panel {
 	background-color: #FFFFFF;
 	border: 0px;

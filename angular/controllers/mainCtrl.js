@@ -1,13 +1,10 @@
-angular.module('paysApp').controller("mainCtrl", ["$scope", "$http", "$filter", "$location", "localStorageService", 
+angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http", "$filter", "$location", "localStorageService",
 	"GeoLocationService", "CartService" , "WishlistService", "SearchService",
-	function (scope, http, filter, location, localStorageService, GeoLocationService, CartService, WishlistService, SearchService) {
+	function (scope, $document, http, filter, location, localStorageService, GeoLocationService, CartService, WishlistService, SearchService) {
 
 
 	console.log("Main Ctrl!");
 	scope.msg = "Main Ctrl!";
-
-
-
 
 	scope.geoLoc = null;
 	scope.geoLocSearch = null;
@@ -291,6 +288,21 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$http", "$filter", 
 				}
 		});
 	};
+		scope.cancelSearchPrepared = function () {
+			console.log("Search configuration canceled.");
+		};
+
+		scope.itemSelected = function () {
+			var titleElement = angular.element($document[0].querySelector('#rightSliderSideTitle'));
+			var text = titleElement.text();
+			var rightSliderSideArea = angular.element($document[0].querySelector('#rightSliderSideArea'));
+			if(text == "Reklame"){
+				titleElement.text("Lista želja:");
+				rightSliderSideArea.empty();
+
+			}
+			rightSliderSideArea.append("<h5>Stavka</h5>")
+		};
 
 	scope.distance = "";
 

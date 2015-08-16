@@ -1,540 +1,584 @@
+<header id="header"><!--header-->
+    <div class="header_top"><!--header_top-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> +381 21 1101100</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> info@pays.rs</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/header_top-->
 
-	<header id="header"><!--header-->
-		<div class="header_top"><!--header_top-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +381 21 1101100</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> info@pays.rs</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="social-icons pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header_top-->
-		
-		<div class="header-middle"><!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4">
-						<div class="logo pull-left">
-							<a href="#/"><img src="images/home/logo.png" alt="" /></a>
-						</div>
-						<div class="btn-group pull-right">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									{{selectedCountry}}
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li ng-repeat="country in countries"><a href="#">{{country}}</a></li>
-								</ul>
-							</div>
-							
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									{{selectedCurrency}}
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li ng-repeat="currency in currencies"><a href="#">{{currency}}</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-8">
-						<div class="shop-menu pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
-								<li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span class="badge alert-warning">{{wishlistItems}}</span></a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
-								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span class="badge alert-success">{{cartItems}}</span></a></li>
-								<li><a href="#/login"><i class="fa fa-lock"></i> Ulaz</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html" class="active">Početna</a></li>
-								<li class="dropdown"><a href="#">Prodavnica<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Proizvodi</a></li>
-										<li><a href="product-details.html">Detalji proizvoda</a></li> 
-										<li><a href="checkout.html">Kupovina</a></li> 
-										<li><a href="cart.html">Kolica</a></li> 
-										<li><a href="login.html">Ulaz</a></li> 
-                                    </ul>
-                                </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Lista blogova</a></li>
-										<li><a href="blog-single.html">Jedan blog</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="404.html">Za prodavce</a></li>
-								<li><a href="404.html">Za distributere</a></li>
-								<li><a href="contact-us.html">Kontaktirajte nas</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Pretraga"/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-bottom-->
-	</header><!--/header-->
-	
-	<section id="slider"><!--slider-->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>Pretraga</h2>
-						<div class="panel-group category-products orangeborder" id="accordian"><!--category-productsr-->
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <a href="#/"><img src="images/home/logo.png" alt=""/></a>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+                                {{selectedCountry}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="country in countries"><a href="#">{{country}}</a></li>
+                            </ul>
+                        </div>
 
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<div class="signup-form">
-										<form action="#">
-											<h4 class="panel-title"><a href="#">U krugu od </a></h4>
-											<select class="input" ng-model="distance">
-												<option selected="true" disabled="disabled" value="">Izaberi udaljenost</option>
-												<option value="10">10 km</option>
-												<option value="20">20 km</option>
-												<option value="50">50 km</option>
-												<option value="100">100 km</option>
-											</select>
-											</br>
-											</br>
-											<table class="table table-condensed">
-												<tr ng-show="locationDefined()">
-													<td class="notopborder">
-														<h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank" ng-show="locationDefined()">Od vaše lokacije</a></h4>
-													</td>
-													<td class="cart_delete notopborder">
-														<a class="cart_quantity_delete pull-right" ng-click="changeSearchMode()"><i class="fa fa-times"></i></a>
-													</td>
-												</tr>
-												<tr ng-show="!locationDefined()">
-													<td class="notopborder">
-														<input type="text" id="searchPlace" ng-model="searchPlaceValue" ng-blur="searchPlaceBlur()" placeholder="Mesto" ng-show="!locationDefined()"/>
-													</td>
-												</tr>
-												<tr ng-show="!locationDefined() && locationFound">
-													<td class="notopborder">
-														<h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank" ng-show="!locationDefined() && locationFound">Pronađena lokacija</a></h4>
-														<h4 class="panel-title"><a ng-show="!locationDefined() && !locationFound">Greška</a></h4>
-													</td>
-													<td class="cart_delete notopborder">
-														<a class="cart_quantity_delete pull-right" ng-click="clearSearch()"><i class="fa fa-times"></i></a>
-													</td>
-												</tr>
-											</table>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+                                {{selectedCurrency}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="currency in currencies"><a href="#">{{currency}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
+                            <li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span
+                                    class="badge alert-warning">{{wishlistItems}}</span></a></li>
+                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
+                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span
+                                    class="badge alert-success">{{cartItems}}</span></a></li>
+                            <li><a href="#/login"><i class="fa fa-lock"></i> Ulaz</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/header-middle-->
+
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="mainmenu pull-left">
+                        <ul class="nav navbar-nav collapse navbar-collapse">
+                            <li><a href="index.html" class="active">Početna</a></li>
+                            <li class="dropdown"><a href="#">Prodavnica<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="shop.html">Proizvodi</a></li>
+                                    <li><a href="product-details.html">Detalji proizvoda</a></li>
+                                    <li><a href="checkout.html">Kupovina</a></li>
+                                    <li><a href="cart.html">Kolica</a></li>
+                                    <li><a href="login.html">Ulaz</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="blog.html">Lista blogova</a></li>
+                                    <li><a href="blog-single.html">Jedan blog</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="404.html">Za prodavce</a></li>
+                            <li><a href="404.html">Za distributere</a></li>
+                            <li><a href="contact-us.html">Kontaktirajte nas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="search_box pull-right">
+                        <input type="text" placeholder="Pretraga"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/header-bottom-->
+</header><!--/header-->
+
+<section id="slider"><!--slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Pretraga</h2>
+
+                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="signup-form">
+                                    <form action="#">
+                                        <h4 class="panel-title"><a href="#">U krugu od </a></h4>
+                                        <select class="input" ng-model="distance">
+                                            <option selected="true" disabled="disabled" value="">Izaberi udaljenost
+                                            </option>
+                                            <option value="10">10 km</option>
+                                            <option value="20">20 km</option>
+                                            <option value="50">50 km</option>
+                                            <option value="100">100 km</option>
+                                        </select>
+                                        </br>
+                                        </br>
+                                        <table class="table table-condensed">
+                                            <tr ng-show="locationDefined()">
+                                                <td class="notopborder">
+                                                    <h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank"
+                                                                               ng-show="locationDefined()">Od vaše
+                                                        lokacije</a></h4>
+                                                </td>
+                                                <td class="cart_delete notopborder">
+                                                    <a class="cart_quantity_delete pull-right"
+                                                       ng-click="changeSearchMode()"><i class="fa fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="!locationDefined()">
+                                                <td class="notopborder">
+                                                    <input type="text" id="searchPlace" ng-model="searchPlaceValue"
+                                                           ng-blur="searchPlaceBlur()" placeholder="Mesto"
+                                                           ng-show="!locationDefined()"/>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="!locationDefined() && locationFound">
+                                                <td class="notopborder">
+                                                    <h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank"
+                                                                               ng-show="!locationDefined() && locationFound">Pronađena
+                                                        lokacija</a></h4>
+                                                    <h4 class="panel-title"><a
+                                                            ng-show="!locationDefined() && !locationFound">Greška</a>
+                                                    </h4>
+                                                </td>
+                                                <td class="cart_delete notopborder">
+                                                    <a class="cart_quantity_delete pull-right" ng-click="clearSearch()"><i
+                                                            class="fa fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <hr class="orangehr">
+                                        <h4 class="panel-title"><a>Kategorija </a></h4>
+
+                                        </br>
+                                        <ul>
+                                            <li class="checkbox category-item-label" ng-repeat="cat in categories">
+                                                <label class="category-item-label"><input type="checkbox"
+                                                                                          value="{{cat.id}}">{{cat.name}}</label>
+                                            </li>
+                                        </ul>
+
+                                        <hr class="orangehr">
+                                        <button type="button" class="btn btn-fefault cart actionbar"
+                                                ng-click="setSearchPrepared()">
+                                            <i class="fa fa-search"></i>
+                                            Pretraži
+                                        </button>
+                                        <button type="button" class="btn btn-fefault cart actionbar"
+                                                ng-click="itemSelected()">
+                                            <i class="fa fa-times"></i>
+                                            Poništi pretragu
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/category-products-->
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#slider-carousel" data-slide-to="1"></li>
+                        <li data-target="#slider-carousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="col-sm-6">
+                                <h1><span>PAYS</span> web shop</h1>
+
+                                <h2>Kupovina svakodnevnih namirnica</h2>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. </p>
+                                <button type="button" class="btn btn-default get">O nama</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="images/home/veggies.jpg" class="girl img-responsive" alt=""
+                                     style="height: 400px;width: 400px;"/>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="col-sm-6">
+                                <h1><span>PAYS</span> direktno od proizvođača</h1>
+
+                                <h2>24/7</h2>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. </p>
+                                <button type="button" class="btn btn-default get">Pretraga prodavaca</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="images/home/fruit-vegetables.jpg" class="girl img-responsive" alt=""
+                                     style="height: 400px;width: 400px;"/>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="col-sm-6">
+                                <h1><span>E</span>-PAYS</h1>
+
+                                <h2>Pratite naš blog</h2>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. </p>
+                                <button type="button" class="btn btn-default get">Vidi blog</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="images/home/sourcherry.jpg" class="girl img-responsive" alt=""/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a class="left control-carousel hidden-xs" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="right control-carousel hidden-xs" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-sm-2">
+                <h4 id="rightSliderSideTitle" class="title text-center">Reklame</h4>
+
+                <div id="rightSliderSideArea">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nulla aliquam, congue sapien in,
+                        posuere eros. Nulla facilisi. Aenean in volutpat elit, vitae faucibus sem. Duis ultrices aliquet
+                        urna ut laoreet. Aliquam vel enim in nisl hendrerit pretium ac nec augue. Mauris justo lectus,
+                        tempus ut sollicitudin sit amet, imperdiet ac erat. In lacinia posuere suscipit.</p>
+                </div>
 
 
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
 
-											<hr class= "orangehr">
-											<h4 class="panel-title"><a>Kategorija </a></h4>
-											<select ng-model="categoryId" ng-change="changedCat()" >
-												<option value="" selected="true">Izaberi kategoriju</option>
-												<option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
-											</select>
-											</br>
-											<h4 class="panel-title" ng-show="subcategories.length > 0"><a>Podkategorija </a></h4>
-											<select ng-model="subcategoryId" ng-change="changedSubCat()" ng-show="subcategories.length > 0">
-												<option value="" selected="true">Izaberi podkategoriju</option>
-												<option ng-repeat="subcat in subcategories" value="{{subcat.id}}">{{subcat.name}}</option>
-											</select>
-											</br>
-											<h4 class="panel-title" ng-show="subcatproducts.length > 0"><a>Proizvodi </a></h4>
-											<select ng-model="subcatProductId" ng-change="changedSubCatProd()" ng-show="subcatproducts.length > 0">
-												<option value="" selected="true">Izaberi proizvod</option>
-												<option ng-repeat="subcatprod in subcatproducts" value="{{subcatprod.id}}">{{subcatprod.name}}</option>
-											</select>
-											</br>
-											</br>
-											<h4 class="panel-title" ng-show="subcatProductId!="""><a href="#">Maksimalna cena (po jedinici) </a></h4>
-											<div range-slider min="0" max="5000" model-max="maxPrice" pin-handle="min" show-values="true" filter="currency:'RSD '"></div>
-											</br>
-											<h4 class="panel-title"><a href="#">Minimalna količina </a></h4>
-											<div range-slider min="0" max="500" model-min="minQuantity" pin-handle="max" show-values="true"></div>
-											</br>
-											<button type="button" class="btn btn-fefault cart actionbar" ng-click="addCriteria(categoryId, subcategoryId, subcatProductId, maxPrice, minQuantity)">
-												<i class="fa fa-location"></i>
-												Dodaj kriterijum
-											</button>
-											<table class="table table-condensed">
-												<tr ng-repeat="crit in searchCriterias">
-													<td>
-														<h4 class="panel-title"><a>Kategorija: {{crit.category}}</a></h4>
-														<h4 class="panel-title"><a>Podkategorija: {{crit.subcategory}}</a></h4>
-														<h4 class="panel-title"><a>Proizvod: {{crit.product}}</a></h4>
-														<h4 class="panel-title"><a>Max cena: {{crit.maxPrice}}</a></h4>
-														<h4 class="panel-title"><a>Min količina: {{crit.minQuantity}}</a></h4>
-													</td>
-													<td class="cart_delete">
-														<a class="cart_quantity_delete pull-right" ng-click="removeCriteria(crit.id)"><i class="fa fa-times"></i></a>
-													</td>
-												</tr>
-											</table>
-											<hr class= "orangehr">
-											<button type="button" class="btn btn-fefault cart actionbar" ng-click="setSearchPrepared()">
-												<i class="fa fa-search"></i>
-												Pretraži
-											</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div><!--/category-products-->
-					</div>
-				</div>
-				<div class="col-sm-7">
-					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-							<li data-target="#slider-carousel" data-slide-to="1"></li>
-							<li data-target="#slider-carousel" data-slide-to="2"></li>
-						</ol>
-						
-						<div class="carousel-inner">
-							<div class="item active">
-								<div class="col-sm-6">
-									<h1><span>PAYS</span> web shop</h1>
-									<h2>Kupovina svakodnevnih namirnica</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">O nama</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="images/home/veggies.jpg" class="girl img-responsive" alt="" style="height: 400px;width: 400px;"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<h1><span>PAYS</span> direktno od proizvođača</h1>
-									<h2>24/7</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Pretraga prodavaca</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="images/home/fruit-vegetables.jpg" class="girl img-responsive" alt="" style="height: 400px;width: 400px;"/>
-								</div>
-							</div>
-							
-							<div class="item">
-								<div class="col-sm-6">
-									<h1><span>E</span>-PAYS</h1>
-									<h2>Pratite naš blog</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Vidi blog</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="images/home/sourcherry.jpg" class="girl img-responsive" alt="" />
-								</div>
-							</div>
-							
-						</div>
-						
-						<a class="left control-carousel hidden-xs" data-slide="prev">
-							<i class="fa fa-angle-left"></i>
-						</a>
-						<a class="right control-carousel hidden-xs" data-slide="next">
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</div>
-					
-				</div>
-				<div class="col-sm-2">
-					<h4 class="title text-center">Lista želja:</h4>
-				</div>
-			</div>
-		</div>
-	</section><!--/slider-->
-	
-	<section>
-		<div class="container">
-			<h2 class="title text-center">Reklamni prostor</h2>
-			<div cg-busy="{promise:nearByFarmers,message:'Učitavanje...',backdrop:true}"></div>
-			<div class="row">
-				<div class="col-sm-2 padding-right">
-					<h4 class="title text-center vertical-text-center">Najbolje ocenjeni</h4>
-				</div>
-				<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
-						<div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="{{farmer.img}}" alt="{{farmer.name}}" style="width: 268px;height: 249px;"/>
-										<h2>{{farmer.name}}</h2>
-										<p>{{farmer.location}}</p>
-										<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>{{farmer.name}}</h2>
-											<p>{{farmer.location}}</p>
-											<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
-										</div>
-									</div>
-									<!--<img src="images/home/sale.png" class="new" alt=""></img>-->
-								</div>
-							</div>
-						</div>
+<section>
+    <div class="container">
+        <h2 class="title text-center">Reklamni prostor</h2>
 
-					</div><!--features_items-->
+        <div cg-busy="{promise:nearByFarmers,message:'Učitavanje...',backdrop:true}"></div>
+        <div class="row">
+            <div class="col-sm-2 padding-right">
+                <h4 class="title text-center vertical-text-center">Najviše prodali u toku godine</h4>
+            </div>
+            <div class="col-sm-9 padding-right">
+                <div class="features_items"><!--features_items-->
+                    <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="{{farmer.img}}" alt="{{farmer.name}}"
+                                         style="width: 268px;height: 249px;"/>
 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-2 padding-right">
-					<h4 class="title text-center vertical-text-center">Najčešće posećeni</h4>
-				</div>
-				<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
-						<div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="{{farmer.img}}" alt="{{farmer.name}}" style="width: 268px;height: 249px;"/>
-										<h2>{{farmer.name}}</h2>
-										<p>{{farmer.location}}</p>
-										<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>{{farmer.name}}</h2>
-											<p>{{farmer.location}}</p>
-											<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
-										</div>
-									</div>
-									<!--<img src="images/home/sale.png" class="new" alt=""></img>-->
-								</div>
-							</div>
-						</div>
+                                    <h2>{{farmer.name}}</h2>
 
-					</div><!--features_items-->
+                                    <p>{{farmer.location}}</p>
+                                    <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-user"></i>Pogledaj ponudu</a>
+                                </div>
+                                <div class="product-overlay">
+                                    <div class="overlay-content">
+                                        <h2>{{farmer.name}}</h2>
 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-2 padding-right">
-					<h4 class="title text-center vertical-text-center">Najviše kupovina</h4>
-				</div>
-				<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
-						<div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="{{farmer.img}}" alt="{{farmer.name}}" style="width: 268px;height: 249px;"/>
-										<h2>{{farmer.name}}</h2>
-										<p>{{farmer.location}}</p>
-										<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>{{farmer.name}}</h2>
-											<p>{{farmer.location}}</p>
-											<a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i class="fa fa-user"></i>Pogledaj ponudu</a>
-										</div>
-									</div>
-									<!--<img src="images/home/sale.png" class="new" alt=""></img>-->
-								</div>
-							</div>
-						</div>
-						
-					</div><!--features_items-->
-					
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<footer id="footer"><!--Footer-->
-		<div class="footer-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="companyinfo">
-							<h2>Pays</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-						</div>
-					</div>
-					<div class="col-sm-7">
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe1.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe2.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe3.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="images/home/iframe4.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="address">
-							<img src="images/home/map.png" alt="" />
-							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="footer-widget">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Service</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Pomoć online</a></li>
-								<li><a href="#">Kontaktirajte nas</a></li>
-								<li><a href="#">Status narudžbine</a></li>
-								<li><a href="#">Promeni lične podatke</a></li>
-								<li><a href="#">Česta pitanja</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Brzi linkovi</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Mesne prerađevine</a></li>
-								<li><a href="#">Agrumi</a></li>
-								<li><a href="#">Jaja</a></li>
-								<li><a href="#">Sokovi i pekmezi</a></li>
-								<li><a href="#">Mlečne prerađevine</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Policies</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Uslovi korišćenja</a></li>
-								<li><a href="#">Privatnost</a></li>
-								<li><a href="#">Povrat novca</a></li>
-								<li><a href="#">Sistem naplate</a></li>
-								<li><a href="#">Sistem dostave proizvoda</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>O PAYS-u</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Ko smo mi?</a></li>
-								<li><a href="#">Kontaktirajte nas</a></li>
-								<li><a href="#">Pridružite nam se</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3 col-sm-offset-1">
-						<div class="single-widget">
-							<h2>O PAYS-u</h2>
-							<form action="#" class="searchform">
-								<input type="text" placeholder="Vaša mejl adresa" />
-								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-								<p>Primite najnovije ponude na vašu mejl adresu <br />i kupujte po najpovoljnijim cenama...</p>
-							</form>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-		
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2015 PAYS. Sva prava zadržana.</p>
-				</div>
-			</div>
-		</div>
-		
-	</footer><!--/Footer-->
+                                        <p>{{farmer.location}}</p>
+                                        <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                                                class="fa fa-user"></i>Pogledaj ponudu</a>
+                                    </div>
+                                </div>
+                                <!--<img src="images/home/sale.png" class="new" alt=""></img>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--features_items-->
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 padding-right">
+                <h4 class="title text-center vertical-text-center">Najviše različitih proizvoda</h4>
+            </div>
+            <div class="col-sm-9 padding-right">
+                <div class="features_items"><!--features_items-->
+                    <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="{{farmer.img}}" alt="{{farmer.name}}"
+                                         style="width: 268px;height: 249px;"/>
+
+                                    <h2>{{farmer.name}}</h2>
+
+                                    <p>{{farmer.location}}</p>
+                                    <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-user"></i>Pogledaj ponudu</a>
+                                </div>
+                                <div class="product-overlay">
+                                    <div class="overlay-content">
+                                        <h2>{{farmer.name}}</h2>
+
+                                        <p>{{farmer.location}}</p>
+                                        <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                                                class="fa fa-user"></i>Pogledaj ponudu</a>
+                                    </div>
+                                </div>
+                                <!--<img src="images/home/sale.png" class="new" alt=""></img>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--features_items-->
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 padding-right">
+                <h4 class="title text-center vertical-text-center">Najviše podrudžbina</h4>
+            </div>
+            <div class="col-sm-9 padding-right">
+                <div class="features_items"><!--features_items-->
+                    <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="{{farmer.img}}" alt="{{farmer.name}}"
+                                         style="width: 268px;height: 249px;"/>
+
+                                    <h2>{{farmer.name}}</h2>
+
+                                    <p>{{farmer.location}}</p>
+                                    <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-user"></i>Pogledaj ponudu</a>
+                                </div>
+                                <div class="product-overlay">
+                                    <div class="overlay-content">
+                                        <h2>{{farmer.name}}</h2>
+
+                                        <p>{{farmer.location}}</p>
+                                        <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                                                class="fa fa-user"></i>Pogledaj ponudu</a>
+                                    </div>
+                                </div>
+                                <!--<img src="images/home/sale.png" class="new" alt=""></img>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--features_items-->
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer"><!--Footer-->
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="companyinfo">
+                        <h2>Pays</h2>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="col-sm-3">
+                        <div class="video-gallery text-center">
+                            <a href="#">
+                                <div class="iframe-img">
+                                    <img src="images/home/iframe1.png" alt=""/>
+                                </div>
+                                <div class="overlay-icon">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </div>
+                            </a>
+
+                            <p>Circle of Hands</p>
+
+                            <h2>24 DEC 2014</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="video-gallery text-center">
+                            <a href="#">
+                                <div class="iframe-img">
+                                    <img src="images/home/iframe2.png" alt=""/>
+                                </div>
+                                <div class="overlay-icon">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </div>
+                            </a>
+
+                            <p>Circle of Hands</p>
+
+                            <h2>24 DEC 2014</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="video-gallery text-center">
+                            <a href="#">
+                                <div class="iframe-img">
+                                    <img src="images/home/iframe3.png" alt=""/>
+                                </div>
+                                <div class="overlay-icon">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </div>
+                            </a>
+
+                            <p>Circle of Hands</p>
+
+                            <h2>24 DEC 2014</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="video-gallery text-center">
+                            <a href="#">
+                                <div class="iframe-img">
+                                    <img src="images/home/iframe4.png" alt=""/>
+                                </div>
+                                <div class="overlay-icon">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </div>
+                            </a>
+
+                            <p>Circle of Hands</p>
+
+                            <h2>24 DEC 2014</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="address">
+                        <img src="images/home/map.png" alt=""/>
+
+                        <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-widget">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Service</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Pomoć online</a></li>
+                            <li><a href="#">Kontaktirajte nas</a></li>
+                            <li><a href="#">Status narudžbine</a></li>
+                            <li><a href="#">Promeni lične podatke</a></li>
+                            <li><a href="#">Česta pitanja</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Brzi linkovi</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Mesne prerađevine</a></li>
+                            <li><a href="#">Agrumi</a></li>
+                            <li><a href="#">Jaja</a></li>
+                            <li><a href="#">Sokovi i pekmezi</a></li>
+                            <li><a href="#">Mlečne prerađevine</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Policies</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Uslovi korišćenja</a></li>
+                            <li><a href="#">Privatnost</a></li>
+                            <li><a href="#">Povrat novca</a></li>
+                            <li><a href="#">Sistem naplate</a></li>
+                            <li><a href="#">Sistem dostave proizvoda</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>O PAYS-u</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Ko smo mi?</a></li>
+                            <li><a href="#">Kontaktirajte nas</a></li>
+                            <li><a href="#">Pridružite nam se</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <div class="single-widget">
+                        <h2>O PAYS-u</h2>
+
+                        <form action="#" class="searchform">
+                            <input type="text" placeholder="Vaša mejl adresa"/>
+                            <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i>
+                            </button>
+                            <p>Primite najnovije ponude na vašu mejl adresu <br/>i kupujte po najpovoljnijim cenama...
+                            </p>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <p class="pull-left">Copyright © 2015 PAYS. Sva prava zadržana.</p>
+            </div>
+        </div>
+    </div>
+
+</footer><!--/Footer-->
 	
