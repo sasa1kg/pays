@@ -10,6 +10,8 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 	scope.geoLocSearch = null;
 	scope.gmapsLocLink = "";
 
+	scope.wishlistItems = [];
+
 	scope.getCarts = function () {
 		scope.cartItems = CartService.getItemsSize();
 		scope.wishlistItems = WishlistService.getItemsSize();
@@ -134,7 +136,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 		}
 	}
 
-	var counter=0;
+
 	scope.addCriteria = function (category, subcategory, product, maxPrice, minQuantity) {
 		var categoryName = "";
 		var subCategoryName = "";
@@ -290,18 +292,19 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 	};
 		scope.cancelSearchPrepared = function () {
 			console.log("Search configuration canceled.");
+			scope.wishlistItems = [];
 		};
 
 		scope.itemSelected = function () {
-			var titleElement = angular.element($document[0].querySelector('#rightSliderSideTitle'));
-			var text = titleElement.text();
-			var rightSliderSideArea = angular.element($document[0].querySelector('#rightSliderSideArea'));
-			if(text == "Reklame"){
-				titleElement.text("Lista želja:");
-				rightSliderSideArea.empty();
+		//	scope.wishlistItems.push('ASDASD');
+			scope.wishlistItems = ['ASDASD','ASDASD11'];
+			console.log(scope.wishlistItems.length);
+		};
 
-			}
-			rightSliderSideArea.append("<h5>Stavka</h5>")
+		scope.isWishListEmpty = function(){
+		//	console.log(scope.wishlistItems[0]);
+			console.log(typeof scope.wishlistItems[0] === 'undefined' || scope.wishlistItems.length == 0);
+			return typeof scope.wishlistItems[0] === 'undefined' || scope.wishlistItems.length == 0;
 		};
 
 	scope.distance = "";

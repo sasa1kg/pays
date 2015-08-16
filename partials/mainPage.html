@@ -187,7 +187,7 @@
                                         <ul>
                                             <li class="checkbox category-item-label" ng-repeat="cat in categories">
                                                 <label class="category-item-label"><input type="checkbox"
-                                                                                          value="{{cat.id}}">{{cat.name}}</label>
+                                                                                          value="{{cat.id}}" ng-model="check()">{{cat.name}}</label>
                                             </li>
                                         </ul>
 
@@ -198,7 +198,7 @@
                                             Pretraži
                                         </button>
                                         <button type="button" class="btn btn-fefault cart actionbar"
-                                                ng-click="itemSelected()">
+                                                ng-click="cancelSearchPrepared()">
                                             <i class="fa fa-times"></i>
                                             Poništi pretragu
                                         </button>
@@ -277,15 +277,19 @@
 
             </div>
             <div class="col-sm-2">
-                <h4 id="rightSliderSideTitle" class="title text-center">Reklame</h4>
+                <h4 class="title text-center" ng-show="isWishListEmpty()">Reklame</h4>
 
-                <div id="rightSliderSideArea">
+                <div ng-show="isWishListEmpty()">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nulla aliquam, congue sapien in,
                         posuere eros. Nulla facilisi. Aenean in volutpat elit, vitae faucibus sem. Duis ultrices aliquet
                         urna ut laoreet. Aliquam vel enim in nisl hendrerit pretium ac nec augue. Mauris justo lectus,
                         tempus ut sollicitudin sit amet, imperdiet ac erat. In lacinia posuere suscipit.</p>
                 </div>
 
+                <h4 class="title text-center" ng-show="isWishListEmpty() === false">Lista želja:</h4>
+
+                <p class="text-leftr" ng-show="isWishListEmpty() === false" ng-repeat=" item in wishlistItems">
+                    {{item}}</p>
 
             </div>
         </div>
