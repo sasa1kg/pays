@@ -184,12 +184,11 @@
                                         <h4 class="panel-title"><a>Kategorija </a></h4>
 
                                         </br>
-                                        <ul>
-                                            <li class="checkbox category-item-label" ng-repeat="cat in categories">
-                                                <label class="category-item-label"><input type="checkbox"
-                                                                                          value="{{cat.id}}" ng-model="check()">{{cat.name}}</label>
-                                            </li>
-                                        </ul>
+                                        <label class="category-item-label" ng-repeat="cat in categories">
+                                            <input type="checkbox"
+                                                          checklist-model="selectCategories" checklist-value="cat"
+                                                   ng-change="check(cat.id, checked)">{{cat.name}}
+                                        </label>
 
                                         <hr class="orangehr">
                                         <button type="button" class="btn btn-fefault cart actionbar"
@@ -211,7 +210,7 @@
                 </div>
             </div>
             <div class="col-sm-7">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel" ng-show="noSelectedCategory()">
                     <ol class="carousel-indicators">
                         <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
                         <li data-target="#slider-carousel" data-slide-to="1"></li>
@@ -274,6 +273,23 @@
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </div>
+                <div ng-show="!noSelectedCategory()">
+                    <ol class="item" ng-repeat="product in getProducts()">
+                        <div class = "col-sm 3">
+                            <img src="images/home/veggies.jpg" class="img-responsive" width="30px" height="20px">
+                        </div>
+
+                        <h4 class="title title-center col-sm 5">{{product.name}}</h4>
+                        <h6>Minimalna količina</h6>
+                        <input type="text" class="form-control col-sm-2">
+                        <h6>Maksimalna cena</h6>
+                        <input type="text" class="form-control col-sm-2">
+
+                        <div type="button" class="btn btn-default get" ng-click="addToSearchWishlist(product.name)">Dodaj
+
+                        </div>
+                    </ol>
+                </div>
 
             </div>
             <div class="col-sm-2">
@@ -288,7 +304,7 @@
 
                 <h4 class="title text-center" ng-show="isWishListEmpty() === false">Lista želja:</h4>
 
-                <p class="text-leftr" ng-show="isWishListEmpty() === false" ng-repeat=" item in wishlistItems">
+                <p class="text-left" ng-show="isWishListEmpty() === false" ng-repeat=" item in searchWishlistItems">
                     {{item}}</p>
 
             </div>

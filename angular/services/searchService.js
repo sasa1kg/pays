@@ -381,4 +381,269 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 		return categories;
 	}
 
+	this.getProductsInCategory = function (category) {
+		var products = [];
+		console.log("Search category ".concat(category));
+		if (category == 0) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Paradajz"
+				},
+				{
+					"id" : 1,
+					"name" : "Krastavac"
+				},
+				{
+					"id" : 2,
+					"name" : "Mladi luk"
+				}
+			]
+		} else if (category == 1) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Jabuke"
+				},
+				{
+					"id" : 1,
+					"name" : "Kruske"
+				},
+				{
+					"id" : 2,
+					"name" : "Jagode"
+				}
+			]
+		} else if (category == 2) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Jagnjetina"
+				},
+				{
+					"id" : 1,
+					"name" : "Kobasica"
+				},
+				{
+					"id" : 2,
+					"name" : "Piletina"
+				}
+			]
+		} else if (category == 3) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Mleko"
+				},
+				{
+					"id" : 1,
+					"name" : "Jogurt"
+				},
+				{
+					"id" : 2,
+					"name" : "Sir"
+				}
+			]
+		} else if (category == 4) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Bagremov med"
+				},
+				{
+					"id" : 1,
+					"name" : "Livadski med"
+				},
+			]
+		} else if (category == 5) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Kokosija jaja"
+				},
+			]
+		} else if (category == 6) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Ovas"
+				},
+				{
+					"id" : 1,
+					"name" : "Raz"
+				},
+				{
+					"id" : 2,
+					"name" : "Brasno"
+				}
+			]
+		} else if (category == 7) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Sampinjoni"
+				},
+			]
+		} else if (category == 8) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Orah"
+				},
+				{
+					"id" : 1,
+					"name" : "Lesnik"
+				},
+				{
+					"id" : 2,
+					"name" : "Suve smokve"
+				}
+			]
+		} else if (category == 9) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Suva paprika"
+				},
+			]
+		} else if (category == 10) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Kornisoni"
+				},
+				{
+					"id" : 1,
+					"name" : "Tursija"
+				},
+			]
+		} else if (category == 11) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Domaci sok"
+				},
+				{
+					"id" : 1,
+					"name" : "Kabeza"
+				},
+				{
+					"id" : 2,
+					"name" : "Sirup"
+				}
+			]
+		} else if (category == 12) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Rakija"
+				},
+				{
+					"id" : 1,
+					"name" : "Vino"
+				},
+				{
+					"id" : 2,
+					"name" : "Pivo"
+				}
+			]
+		} else if (category == 13) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Cokolada"
+				},
+				{
+					"id" : 1,
+					"name" : "Bombone"
+				},
+			]
+		} else if (category == 14) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Hleb"
+				},
+				{
+					"id" : 1,
+					"name" : "Kifle"
+				},
+			]
+		} else if (category == 15) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Sapun"
+				},
+				{
+					"id" : 1,
+					"name" : "Sampon"
+				},
+			]
+		} else if (category == 16) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Organske jabuke"
+				},
+				{
+					"id" : 1,
+					"name" : "Organska zelena salata"
+				},
+				{
+					"id" : 2,
+					"name" : "Jagode"
+				}
+			]
+		} else if (category == 17) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Korpa"
+				},
+				{
+					"id" : 1,
+					"name" : "Ceger"
+				},
+				{
+					"id" : 2,
+					"name" : "Jagode"
+				}
+			]
+		} else if (category == 18) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Petunije"
+				},
+				{
+					"id" : 1,
+					"name" : "Hrizanteme"
+				},
+				{
+					"id" : 2,
+					"name" : "Jagode"
+				}
+			]
+		} else if (category == 1) {
+			products = [
+				{
+					"id" : 0,
+					"name" : "Jabuke"
+				},
+				{
+					"id" : 1,
+					"name" : "Kruske"
+				},
+				{
+					"id" : 2,
+					"name" : "Jagode"
+				}
+			]
+		}
+
+		return products;
+		}
+
+
 }]);

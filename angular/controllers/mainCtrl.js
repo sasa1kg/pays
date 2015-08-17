@@ -10,7 +10,11 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 	scope.geoLocSearch = null;
 	scope.gmapsLocLink = "";
 
-	scope.wishlistItems = [];
+	scope.searchWishlistItems = [];
+
+	scope.selectedCategories = [];
+
+	scope.foundProducts = [];
 
 	scope.getCarts = function () {
 		scope.cartItems = CartService.getItemsSize();
@@ -292,20 +296,47 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 	};
 		scope.cancelSearchPrepared = function () {
 			console.log("Search configuration canceled.");
-			scope.wishlistItems = [];
+			scope.searchWishlistItems = [];
 		};
 
-		scope.itemSelected = function () {
-		//	scope.wishlistItems.push('ASDASD');
-			scope.wishlistItems = ['ASDASD','ASDASD11'];
-			console.log(scope.wishlistItems.length);
-		};
 
 		scope.isWishListEmpty = function(){
-		//	console.log(scope.wishlistItems[0]);
-			console.log(typeof scope.wishlistItems[0] === 'undefined' || scope.wishlistItems.length == 0);
-			return typeof scope.wishlistItems[0] === 'undefined' || scope.wishlistItems.length == 0;
+			return typeof scope.searchWishlistItems[0] === 'undefined' || scope.searchWishlistItems.length == 0;
 		};
+
+		scope.noSelectedCategory = function() {
+			return typeof scope.selectedCategories[0] === 'undefined' || scope.selectedCategories.length == 0;
+		}
+
+		scope.check = function(value, checked) {
+			var idx = scope.selectedCategories.indexOf(value);
+			if (idx >= 0 && !checked) {
+				scope.selectedCategories.splice(idx, 1);
+			}
+			if (idx < 0 && checked) {
+				scope.selectedCategories.push(value);
+			}
+
+			scope.foundProducts= [];
+			for (var cat in scope.selectedCategories) {
+				var products = SearchService.getProductsInCategory(scope.selectedCategories[cat]);
+				for (var prod in products) {
+					scope.foundProducts.push(products[prod]);
+				}
+			}
+
+		}
+
+		scope.getProducts = function() {
+			return scope.foundProducts;
+		}
+
+		scope.addToSearchWishlist = function(product){
+			console.log("Added product ".concat(product));
+			scope.searchWishlistItems.push(product);
+		}
+
+
 
 	scope.distance = "";
 
