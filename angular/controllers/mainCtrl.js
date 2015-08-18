@@ -15,6 +15,8 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 	scope.selectedCategories = [];
 
 	scope.foundProducts = [];
+	scope.foundFarmers = [];
+
 
 	scope.getCarts = function () {
 		scope.cartItems = CartService.getItemsSize();
@@ -248,7 +250,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 	}
 
 	scope.setSearchPrepared = function () {
-		/*if (scope.locationDefined && !scope.locationFound) {
+	/*	if (scope.locationDefined && !scope.locationFound) {
 			var location = {
 				"name" : "YOUR_LOC",
 				"longitude" : scope.geoLoc.lng,
@@ -287,16 +289,19 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 					"longitude" : "",
 					"latitude" : ""
 				};
-		}*/
+		}
 		SearchService.setSearchObject(scope.getLocation(), [], true).then(function(data) {
 				if (data) {
 					location.path("/search");
 				}
 		});
+*/
+		scope.foundFarmers = scope.farmersLoaded;
 	};
 		scope.cancelSearchPrepared = function () {
 			console.log("Search configuration canceled.");
 			scope.searchWishlistItems = [];
+			scope.foundFarmers = [];
 		};
 
 
@@ -306,6 +311,11 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 
 		scope.noSelectedCategory = function() {
 			return typeof scope.selectedCategories[0] === 'undefined' || scope.selectedCategories.length == 0;
+		}
+
+		scope.noFoundFarmers= function() {
+			console.log("no selected farmers? ".concat(typeof scope.foundFarmers[0] === 'undefined' || scope.foundFarmers.length == 0));
+			return typeof scope.foundFarmers[0] === 'undefined' || scope.foundFarmers.length == 0;
 		}
 
 		scope.check = function(value, checked) {

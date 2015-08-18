@@ -214,7 +214,7 @@
                 </div>
             </div>
             <div class="col-sm-7">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel" ng-show="noSelectedCategory()">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel" ng-show="noSelectedCategory() && noFoundFarmers()">
                     <ol class="carousel-indicators">
                         <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
                         <li data-target="#slider-carousel" data-slide-to="1"></li>
@@ -277,7 +277,7 @@
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </div>
-                <div class="col-sm-12" ng-show="!noSelectedCategory()">
+                <div class="col-sm-12" ng-show="!noSelectedCategory() && noFoundFarmers()">
                     <row class="col-sm-12" ng-repeat="product in getProducts()">
                         <div class = "col-sm-1">
                             <img src="images/home/veggies.jpg" class="img-responsive" width="30px" height="20px">
@@ -299,7 +299,30 @@
                         </div>
                        </row>
                    </div>
+                <div class="col-sm-12" ng-show="!noFoundFarmers()">
+                    <div class="features_items col-sm-12"><!--features_items-->
+                        <div class="col-sm-4" ng-repeat="farmer in farmers">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="{{farmer.img}}" alt="{{farmer.name}}"
+                                             style="width: 168px;height: 149px;"/>
 
+                                        <h2>{{farmer.name}}</h2>
+
+                                        <p>{{farmer.location}}</p>
+                                        <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                                                class="fa fa-user"></i>Pogledaj ponudu</a>
+                                    </div>
+
+                                    <!--<img src="images/home/sale.png" class="new" alt=""></img>-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--features_items-->
+                </div>
                </div>
                <div class="col-sm-2">
                    <h4 class="title text-center" ng-show="isWishListEmpty()">Reklame</h4>
