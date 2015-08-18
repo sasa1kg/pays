@@ -184,11 +184,15 @@
                                         <h4 class="panel-title"><a>Kategorija </a></h4>
 
                                         </br>
-                                        <label class="category-item-label" ng-repeat="cat in categories">
-                                            <input type="checkbox"
+
+                                        <row class="col-sm-12" ng-repeat="cat in categories">
+                                            <div class="col-sm-4"><input type="checkbox"
                                                           checklist-model="selectCategories" checklist-value="cat"
-                                                   ng-change="check(cat.id, checked)">{{cat.name}}
-                                        </label>
+                                                   ng-change="check(cat.id, checked)">
+
+                                            </div>
+                                            <p class="category-item-label">{{cat.name}}</p>
+                                        </row>
 
                                         <hr class="orangehr">
                                         <button type="button" class="btn btn-fefault cart actionbar"
@@ -273,44 +277,49 @@
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </div>
-                <div ng-show="!noSelectedCategory()">
-                    <ol class="item" ng-repeat="product in getProducts()">
-                        <div class = "col-sm 3">
+                <div class="col-sm-12" ng-show="!noSelectedCategory()">
+                    <row class="col-sm-12" ng-repeat="product in getProducts()">
+                        <div class = "col-sm-1">
                             <img src="images/home/veggies.jpg" class="img-responsive" width="30px" height="20px">
                         </div>
 
-                        <h4 class="title title-center col-sm 5">{{product.name}}</h4>
-                        <h6>Minimalna količina</h6>
-                        <input type="text" class="form-control col-sm-2">
-                        <h6>Maksimalna cena</h6>
-                        <input type="text" class="form-control col-sm-2">
-
-                        <div type="button" class="btn btn-default get" ng-click="addToSearchWishlist(product.name)">Dodaj
-
+                        <h4 class="title title-center col-sm-2">{{product.name}}</h4>
+                        <h6 class = "col-sm-2">Minimalna količina:</h6>
+                        <div class = "col-sm-2">
+                            <input type="text" class="form-control">
                         </div>
-                    </ol>
-                </div>
 
-            </div>
-            <div class="col-sm-2">
-                <h4 class="title text-center" ng-show="isWishListEmpty()">Reklame</h4>
+                        <h6 class = "col-sm-1">Cena do:</h6>
+                        <div class = "col-sm-2">
+                            <input type="text" class="form-control">
+                        </div>
 
-                <div ng-show="isWishListEmpty()">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nulla aliquam, congue sapien in,
-                        posuere eros. Nulla facilisi. Aenean in volutpat elit, vitae faucibus sem. Duis ultrices aliquet
-                        urna ut laoreet. Aliquam vel enim in nisl hendrerit pretium ac nec augue. Mauris justo lectus,
-                        tempus ut sollicitudin sit amet, imperdiet ac erat. In lacinia posuere suscipit.</p>
-                </div>
+                        <div type="button" class="btn btn-primary-no-margin col-sm-2"
+                             ng-click="addToSearchWishlist(product.name)">Dodaj
+                        </div>
+                       </row>
+                   </div>
 
-                <h4 class="title text-center" ng-show="isWishListEmpty() === false">Lista želja:</h4>
+               </div>
+               <div class="col-sm-2">
+                   <h4 class="title text-center" ng-show="isWishListEmpty()">Reklame</h4>
 
-                <p class="text-left" ng-show="isWishListEmpty() === false" ng-repeat=" item in searchWishlistItems">
-                    {{item}}</p>
+                   <div ng-show="isWishListEmpty()">
+                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nulla aliquam, congue sapien in,
+                           posuere eros. Nulla facilisi. Aenean in volutpat elit, vitae faucibus sem. Duis ultrices aliquet
+                           urna ut laoreet. Aliquam vel enim in nisl hendrerit pretium ac nec augue. Mauris justo lectus,
+                           tempus ut sollicitudin sit amet, imperdiet ac erat. In lacinia posuere suscipit.</p>
+                   </div>
 
-            </div>
-        </div>
-    </div>
-</section><!--/slider-->
+                   <h4 class="title text-center" ng-show="isWishListEmpty() === false">Lista želja:</h4>
+
+                   <p class="text-left" ng-show="isWishListEmpty() === false" ng-repeat=" item in searchWishlistItems">
+                       {{item}}</p>
+
+               </div>
+           </div>
+       </div>
+   </section><!--/slider-->
 
 <section>
     <div class="container">

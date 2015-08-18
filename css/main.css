@@ -2414,6 +2414,12 @@ h2.title {
   margin-top: 16px;
 }
 
+.btn.btn-primary-no-margin {
+    background:#FE980F;
+    border: 0 none;
+    border-radius: 0;
+}
+
 .blank-arrow {
   position: relative;
 }
