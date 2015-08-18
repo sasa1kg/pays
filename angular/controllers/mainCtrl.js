@@ -53,71 +53,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 	};
 
 
-	scope.farmersLoaded = [
-			{
-				"name" : "Jovan Jovanovic",
-				"location" : "Novi Sad",
-				"img" : "images/home/product1.jpg",
-				"items" : 10,
-				"id" : 145
-			},
-			{
-				"name" : "Domaća pijaca",
-				"location" : "Novi Sad",
-				"img" : "images/home/healthy-logo2.jpg",
-				"items" : 10,
-				"id" : 145
-			},
-			{
-				"name" : "Dejan Dejanović",
-				"location" : "Budisava",
-				"img" : "images/home/product2.jpg",
-				"items" : 8,
-				"id" : 155
-			},
-			{
-				"name" : "Milan Milanović",
-				"location" : "Čurug",
-				"img" : "images/home/product3.jpg",
-				"items" : 4,
-				"id" : 165
-			},
-			{
-				"name" : "Zdrav o i fit d.o.o",
-				"location" : "Beška",
-				"img" : "images/home/healthy-logo.jpg",
-				"items" : 22,
-				"id" : 301
-			},
-			{
-				"name" : "Stevan Stevanović",
-				"location" : "Begeč",
-				"img" : "images/home/product4.jpg",
-				"items" : 2,
-				"id" : 175
-			},
-			{
-				"name" : "Marko Marković",
-				"location" : "Crvenka",
-				"img" : "images/home/product1.jpg",
-				"items" : 22,
-				"id" : 185
-			},
-			{
-				"name" : "Anđela Jovović",
-				"location" : "Bačka Topola",
-				"img" : "images/home/product5.jpg",
-				"items" : 4,
-				"id" : 195
-			},
-			{
-				"name" : "Marina Marović",
-				"location" : "Kovilj",
-				"img" : "images/home/product6.jpg",
-				"items" : 2,
-				"id" : 208
-			}
-	];
+	scope.farmersLoaded = SearchService.getFarmers();
 	
 	scope.searchPlaceValue = "";
 	scope.locationFound = false;
@@ -152,6 +88,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 				categoryName = scope.categories[i].name;
 			}
 		};
+
 		for (var j = scope.subcategories.length - 1; j >= 0; j--) {
 			if (scope.subcategories[j].id == subcategory) {
 				subCategoryName = scope.subcategories[j].name;
@@ -297,6 +234,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document","$http",
 		});
 */
 		scope.foundFarmers = scope.farmersLoaded;
+		SearchService.setSearchedItems(scope.searchWishlistItems);
 	};
 		scope.cancelSearchPrepared = function () {
 			console.log("Search configuration canceled.");

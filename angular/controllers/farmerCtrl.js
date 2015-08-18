@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", "$routeParams", "CartService", "WishlistService",  
-	function (scope, http, filter, routeParams, CartService, WishlistService) {
+angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", "$routeParams", "CartService", "WishlistService", "SearchService",
+	function (scope, http, filter, routeParams, CartService, WishlistService, SearchService) {
 
 
 	console.log("FARM! " + routeParams.id);
@@ -10,7 +10,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 	scope.wishlistItems = WishlistService.getItemsSize();
 
 	scope.farmerId = routeParams.id;
-
+	scope.searchedItems = [];
 
 	scope.addToWishlist = function (productId) {
 		for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
@@ -51,14 +51,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 		}
 	}
 
-	scope.farmer = {
-		"name" : "Marija Martinović",
-		"location" : "Sremska Kamenica",
-		"img" : "images/home/product1.jpg",
-		"items" : 10,
-		"reviews" : "",
-		"id" : scope.farmerId
-	};
+	scope.farmer = SearchService.getFarmerById(scope.farmerId);
 
 	scope.farmerProducts = [
 		{
@@ -135,5 +128,6 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 			"id" : 104
 		}
 	];
-	
+
+	scope.searchedItems = SearchService.getSearchedItems();
 }]);
