@@ -99,7 +99,13 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             this.searchWishListItems = items;
         }
         this.getSearchedItems = function(){
-            return this.searchWishListItems;
+
+            var retArray = [];
+            for (var i = this.searchWishListItems.length- 1; i >= 0; i--) {
+                retArray.push(this.getProducts()[this.searchWishListItems[i].id]);
+            };
+
+            return retArray;
         }
         this.setSearchObject = function (position, criterias, doSearch) {
             var deferred = q.defer();
@@ -464,6 +470,452 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             return categories;
         }
 
+        this.products = [
+            {
+                "id": 0,
+                "name": "Paradajz",
+                "image": "images/cart/tomato.png",
+                "price": "100",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Povrce"
+            },
+            {
+                "id": 1,
+                "name": "Krastavac",
+                "image": "images/cart/cucumber.png",
+                "price": "120",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "55",
+                "category": "Povrce"
+            },
+            {
+                "id": 2,
+                "name": "Mladi luk",
+                "image": "images/cart/onion.gif",
+                "price": "22",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "44",
+                "category": "Povrce"
+            },
+            {
+                "id": 3,
+                "name": "Jabuke",
+                "image": "images/home/veggies.jpg",
+                "price": "150",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "22",
+                "category": "Voce"
+            },
+            {
+                "id": 4,
+                "name": "Kruske",
+                "image": "images/home/veggies.jpg",
+                "price": "105",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "21",
+                "category": "Voce"
+            },
+            {
+                "id": 5,
+                "name": "Jagode",
+                "image": "images/home/veggies.jpg",
+                "price": "180",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "77",
+                "category": "Voce"
+            },
+            {
+                "id": 6,
+                "name": "Jagnjetina",
+                "image": "images/home/veggies.jpg",
+                "price": "100",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "66",
+                "category": "Meso i mesne preradjevine"
+            },
+            {
+                "id": 7,
+                "name": "Kobasica",
+                "image": "images/home/veggies.jpg",
+                "price": "120",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Meso i mesne preradjevine"
+            },
+            {
+                "id": 8,
+                "name": "Piletina",
+                "image": "images/home/veggies.jpg",
+                "price": "300",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Meso i mesne preradjevine"
+            },
+            {
+                "id": 9,
+                "name": "Mleko",
+                "image": "images/home/veggies.jpg",
+                "price": "10",
+                "measure": "litar",
+                "currency": "RSD",
+                "stock": "18",
+                "category": "Mleko i mlecni proizvodi"
+            },
+            {
+                "id": 10,
+                "name": "Jogurt",
+                "image": "images/home/veggies.jpg",
+                "price": "100",
+                "measure": "litar",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Mleko i mlecni proizvodi"
+            },
+            {
+                "id": 11,
+                "name": "Sir",
+                "image": "images/home/veggies.jpg",
+                "price": "108",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Mleko i mlecni proizvodi"
+            },
+            {
+                "id": 12,
+                "name": "Bagremov med",
+                "image": "images/home/veggies.jpg",
+                "price": "100",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "48",
+                "category": "Med i pcelinji proizvodi"
+            },
+            {
+                "id": 13,
+                "name": "Livadski med",
+                "image": "images/home/veggies.jpg",
+                "price": "100",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "66",
+                "category": "Med i pcelinji proizvodi"
+            },
+            {
+                "id": 14,
+                "name": "Kokosija jaja",
+                "image": "images/home/veggies.jpg",
+                "price": "10",
+                "measure": "kom",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Jaja"
+            },
+            {
+                "id": 15,
+                "name": "Ovas",
+                "image": "images/home/veggies.jpg",
+                "price": "50",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "73",
+                "category": "Zitarice i brasno"
+            },
+            {
+                "id": 16,
+                "name": "Raz",
+                "image": "images/home/veggies.jpg",
+                "price": "70",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Zitarice i brasno"
+            },
+            {
+                "id": 17,
+                "name": "Brasno",
+                "image": "images/home/veggies.jpg",
+                "price": "30",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "780",
+                "category": "Zitarice i brasno"
+            },
+            {
+                "id": 18,
+                "name": "Sampinjoni",
+                "image": "images/home/veggies.jpg",
+                "price": "140",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Gljive"
+            },
+            {
+                "id": 19,
+                "name": "Orah",
+                "image": "images/home/veggies.jpg",
+                "price": "100",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Suseno voce i orasasti plodovi"
+            },
+            {
+                "id": 20,
+                "name": "Lesnik",
+                "image": "images/home/veggies.jpg",
+                "price": "110",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "78",
+                "category": "Suseno voce i orasasti plodovi"
+            },
+            {
+                "id": 21,
+                "name": "Suve smokve",
+                "image": "images/home/veggies.jpg",
+                "price": "109",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "100",
+                "category": "Suseno voce i orasasti plodovi"
+            },
+            {
+                "id": 22,
+                "name": "Suva paprika",
+                "image": "images/home/veggies.jpg",
+                "price": "139",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "110",
+                "category": "Suseno povrce"
+            },
+            {
+                "id": 23,
+                "name": "Kornisoni",
+                "image": "images/home/veggies.jpg",
+                "price": "109",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "105",
+                "category": "Zimnica"
+            },
+            {
+                "id": 24,
+                "name": "Tursija",
+                "image": "images/home/veggies.jpg",
+                "price": "169",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Zimnica"
+            },
+            {
+                "id": 25,
+                "name": "Domaci sok",
+                "image": "images/home/veggies.jpg",
+                "price": "129",
+                "measure": "litar",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Bezalkoholna pica i sirupi"
+            },
+            {
+                "id": 26,
+                "name": "Kabeza",
+                "image": "images/home/veggies.jpg",
+                "price": "16",
+                "measure": "litar",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Bezalkoholna pica i sirupi"
+            },
+            {
+                "id": 27,
+                "name": "Sirup",
+                "image": "images/home/veggies.jpg",
+                "price": "69",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Bezalkoholna pica i sirupi"
+            },
+            {
+                "id": 28,
+                "name": "Rakija",
+                "image": "images/home/veggies.jpg",
+                "price": "300",
+                "measure": "litar",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Alkoholna pica"
+            },
+            {
+                "id": 29,
+                "name": "Vino",
+                "image": "images/home/veggies.jpg",
+                "price": "200",
+                "measure": "litar",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Alkoholna pica"
+            },
+            {
+                "id": 30,
+                "name": "Pivo",
+                "image": "images/home/veggies.jpg",
+                "price": "110",
+                "measure": "litar",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Alkoholna pica"
+            },
+            {
+                "id": 31,
+                "name": "Cokolada",
+                "image": "images/home/veggies.jpg",
+                "price": "130",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Slatkisi"
+            },
+            {
+                "id": 32,
+                "name": "Bombone",
+                "image": "images/home/veggies.jpg",
+                "price": "120",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Slatkisi"
+            },
+            {
+                "id": 33,
+                "name": "Hleb",
+                "image": "images/home/veggies.jpg",
+                "price": "30",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Peciva"
+            },
+            {
+                "id": 34,
+                "name": "Kifle",
+                "image": "images/home/veggies.jpg",
+                "price": "20",
+                "measure": "kom",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Peciva"
+            },
+            {
+                "id": 35,
+                "name": "Sapun",
+                "image": "images/home/veggies.jpg",
+                "price": "134",
+                "measure": "kom",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Kozmetika i higijena"
+            },
+            {
+                "id": 36,
+                "name": "Sampon",
+                "image": "images/home/veggies.jpg",
+                "price": "120",
+                "measure": "litar",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Kozmetika i higijena"
+            },
+            {
+                "id": 37,
+                "name": "Organske jagode",
+                "image": "images/home/veggies.jpg",
+                "price": "129",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Organski proizvodi"
+            },
+            {
+                "id": 38,
+                "name": "Organska zelena salata",
+                "image": "images/home/veggies.jpg",
+                "price": "140",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Organski proizvodi"
+            },
+            {
+                "id": 39,
+                "name": "Organske jagode",
+                "image": "images/home/veggies.jpg",
+                "price": "200",
+                "measure": "kg",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Organski proizvodi"
+            },
+            {
+                "id": 40,
+                "name": "Korpa",
+                "image": "images/home/veggies.jpg",
+                "price": "169",
+                "measure": "kom",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Gotove korpe"
+            },
+            {
+                "id": 41,
+                "name": "Ceger",
+                "image": "images/home/veggies.jpg",
+                "price": "210",
+                "measure": "kom",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Gotove korpe"
+            },
+            {
+                "id": 42,
+                "name": "Petunije",
+                "image": "images/home/veggies.jpg",
+                "price": "210",
+                "measure": "kom",
+                "currency": "RSD",
+                "stock": "10",
+                "category": "Cvece i sadnice"
+            },
+            {
+                "id": 43,
+                "name": "Hrizanteme",
+                "image": "images/home/veggies.jpg",
+                "price": "330",
+                "measure": "kom",
+                "currency": "RSD",
+                "stock": "101",
+                "category": "Cvece i sadnice"
+            }
+        ];
+
+        this.getProducts = function(){
+            return this.products;
+        }
         this.getProductsInCategory = function (category) {
             var products = [];
             console.log("Search category ".concat(category));
@@ -485,248 +937,226 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             } else if (category == 1) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 3,
                         "name": "Jabuke"
                     },
                     {
-                        "id": 1,
+                        "id": 4,
                         "name": "Kruske"
                     },
                     {
-                        "id": 2,
+                        "id": 5,
                         "name": "Jagode"
                     }
                 ]
             } else if (category == 2) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 6,
                         "name": "Jagnjetina"
                     },
                     {
-                        "id": 1,
+                        "id": 7,
                         "name": "Kobasica"
                     },
                     {
-                        "id": 2,
+                        "id": 8,
                         "name": "Piletina"
                     }
                 ]
             } else if (category == 3) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 9,
                         "name": "Mleko"
                     },
                     {
-                        "id": 1,
+                        "id": 10,
                         "name": "Jogurt"
                     },
                     {
-                        "id": 2,
+                        "id": 11,
                         "name": "Sir"
                     }
                 ]
             } else if (category == 4) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 12,
                         "name": "Bagremov med"
                     },
                     {
-                        "id": 1,
+                        "id": 13,
                         "name": "Livadski med"
                     },
                 ]
             } else if (category == 5) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 14,
                         "name": "Kokosija jaja"
                     },
                 ]
             } else if (category == 6) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 15,
                         "name": "Ovas"
                     },
                     {
-                        "id": 1,
+                        "id": 16,
                         "name": "Raz"
                     },
                     {
-                        "id": 2,
+                        "id": 17,
                         "name": "Brasno"
                     }
                 ]
             } else if (category == 7) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 18,
                         "name": "Sampinjoni"
                     },
                 ]
             } else if (category == 8) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 19,
                         "name": "Orah"
                     },
                     {
-                        "id": 1,
+                        "id": 20,
                         "name": "Lesnik"
                     },
                     {
-                        "id": 2,
+                        "id": 21,
                         "name": "Suve smokve"
                     }
                 ]
             } else if (category == 9) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 22,
                         "name": "Suva paprika"
                     },
                 ]
             } else if (category == 10) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 23,
                         "name": "Kornisoni"
                     },
                     {
-                        "id": 1,
+                        "id": 24,
                         "name": "Tursija"
                     },
                 ]
             } else if (category == 11) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 25,
                         "name": "Domaci sok"
                     },
                     {
-                        "id": 1,
+                        "id": 26,
                         "name": "Kabeza"
                     },
                     {
-                        "id": 2,
+                        "id": 27,
                         "name": "Sirup"
                     }
                 ]
             } else if (category == 12) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 28,
                         "name": "Rakija"
                     },
                     {
-                        "id": 1,
+                        "id": 29,
                         "name": "Vino"
                     },
                     {
-                        "id": 2,
+                        "id": 30,
                         "name": "Pivo"
                     }
                 ]
             } else if (category == 13) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 31,
                         "name": "Cokolada"
                     },
                     {
-                        "id": 1,
+                        "id": 32,
                         "name": "Bombone"
                     },
                 ]
             } else if (category == 14) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 33,
                         "name": "Hleb"
                     },
                     {
-                        "id": 1,
+                        "id": 34,
                         "name": "Kifle"
                     },
                 ]
             } else if (category == 15) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 35,
                         "name": "Sapun"
                     },
                     {
-                        "id": 1,
+                        "id": 36,
                         "name": "Sampon"
                     },
                 ]
             } else if (category == 16) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 37,
                         "name": "Organske jabuke"
                     },
                     {
-                        "id": 1,
+                        "id": 38,
                         "name": "Organska zelena salata"
                     },
                     {
-                        "id": 2,
-                        "name": "Jagode"
+                        "id": 39,
+                        "name": "Organske Jagode"
                     }
                 ]
             } else if (category == 17) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 40,
                         "name": "Korpa"
                     },
                     {
-                        "id": 1,
+                        "id": 41,
                         "name": "Ceger"
-                    },
-                    {
-                        "id": 2,
-                        "name": "Jagode"
                     }
                 ]
             } else if (category == 18) {
                 products = [
                     {
-                        "id": 0,
+                        "id": 42,
                         "name": "Petunije"
                     },
                     {
-                        "id": 1,
+                        "id": 43,
                         "name": "Hrizanteme"
                     },
-                    {
-                        "id": 2,
-                        "name": "Jagode"
-                    }
-                ]
-            } else if (category == 1) {
-                products = [
-                    {
-                        "id": 0,
-                        "name": "Jabuke"
-                    },
-                    {
-                        "id": 1,
-                        "name": "Kruske"
-                    },
-                    {
-                        "id": 2,
-                        "name": "Jagode"
-                    }
                 ]
             }
 
             return products;
         }
+
 
 
     }]);

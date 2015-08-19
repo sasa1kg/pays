@@ -53,7 +53,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 
 	scope.farmer = SearchService.getFarmerById(scope.farmerId);
 
-	scope.farmerProducts = [
+	scope.farmerProducts =  SearchService.getProducts();/*[
 		{
 			"id" : 10,
 			"name" : "Paradajz",
@@ -108,7 +108,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 			"currency" : "RSD",
 			"image" : "images/cart/onion.gif"
 		}
-	];
+	];*/
 
 	scope.farmerCategories = [
 		{

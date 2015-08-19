@@ -189,25 +189,14 @@
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <a href="#/farmer/{{farmerId}}/product/{{product.id}}">
-                                <img src="images/home/vegetables4.jpg" alt="{{product}}" class="cursorhover"/>
+                                <img src="{{product.image}}" alt="{{product.name}}" height="128px" width="128px" class="cursorhover"/>
                             </a>
 
-                            <h2>999 RSD/kg</h2>
+                            <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
 
-                            <p>{{product}}</p>
+                            <p>{{product.name}}</p>
                             <a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>Dodaj u kolica</a>
-                        </div>
-                        <div class="choose">
-                            <ul class="nav nav-pills nav-justified">
-                                <li class="cursorhover"><a
-                                        href="#/farmer/{{farmerId}}/product/{{product.id}}"><i
-                                        class="fa fa-caret-square-o-right"></i>Više informacija</a></li>
-                            </ul>
-                            <ul class="nav nav-pills nav-justified">
-                                <li class="cursorhover"><a ng-click="addToWishlist(product.id)"><i
-                                        class="fa fa-plus-square"></i>U listu želja</a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -226,7 +215,7 @@
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <a href="#/farmer/{{farmerId}}/product/{{product.id}}">
-                                <img src="{{product.image}}" alt="{{product.name}}" class="cursorhover"/>
+                                <img src="{{product.image}}" alt="{{product.name}}" height="200px" width="128px" class="cursorhover"/>
                             </a>
 
                             <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
@@ -234,17 +223,6 @@
                             <p>{{product.name}}</p>
                             <a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>Dodaj u kolica</a>
-                        </div>
-                        <div class="choose">
-                            <ul class="nav nav-pills nav-justified">
-                                <li class="cursorhover"><a
-                                        href="#/farmer/{{farmerId}}/product/{{product.id}}"><i
-                                        class="fa fa-caret-square-o-right"></i>Više informacija</a></li>
-                            </ul>
-                            <ul class="nav nav-pills nav-justified">
-                                <li class="cursorhover"><a ng-click="addToWishlist(product.id)"><i
-                                        class="fa fa-plus-square"></i>U listu želja</a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>

@@ -187,8 +187,8 @@
 
                                         <row class="col-sm-12" ng-repeat="cat in categories">
                                             <div class="col-sm-4"><input type="checkbox"
-                                                          checklist-model="selectCategories" checklist-value="cat"
-                                                   ng-change="check(cat.id, checked)">
+                                                           ng-model="checkedValue"
+                                                   ng-change="check(cat.id, checkedValue)">
 
                                             </div>
                                             <p class="category-item-label">{{cat.name}}</p>
@@ -295,7 +295,7 @@
                         </div>
 
                         <div type="button" class="btn btn-primary-no-margin col-sm-2"
-                             ng-click="addToSearchWishlist(product.name)">Dodaj
+                             ng-click="addToSearchWishlist(product)">Dodaj
                         </div>
                        </row>
                    </div>
@@ -337,7 +337,7 @@
                    <h4 class="title text-center" ng-show="isWishListEmpty() === false">Lista želja:</h4>
 
                    <p class="text-left" ng-show="isWishListEmpty() === false" ng-repeat=" item in searchWishlistItems">
-                       {{item}}</p>
+                       {{item.name}}</p>
 
                </div>
            </div>
