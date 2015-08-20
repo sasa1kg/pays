@@ -613,6 +613,14 @@ ul.sub-menu {
   margin-bottom: 22px;
   margin-top: 10px;
 }
+.item span {
+  color: #363432;
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  margin-top: 10px;
+}
 
 .item  p {
 	color:#363432;
@@ -704,13 +712,18 @@ h2.title:before{
 	left: 50%;
 	margin-left: -110px;
 }
-input[type=checkbox]
+.zoom-checkbox
 {
-  /* Double-sized Checkboxes */
+
+  zoom:1.5;
+  display:inline
+}
+.category-checkbox
+{
+
   zoom:0.4;
   display:inline
 }
-
 .category-item-label{
   color: #101010;
   font-size: small;
@@ -2540,4 +2553,9 @@ h2.title {
 
 .contact-info .social-networks ul li a:hover{
   color: #FE980F;
+}
+
+.new-wrap{
+  white-space: normal;
+  width:11em;
 }

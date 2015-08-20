@@ -1,6 +1,6 @@
-angular.module('paysApp').controller("mainCtrl", ["$scope", "$document", "$http", "$filter", "$location", "localStorageService",
+angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document", "$http", "$filter", "$location", "localStorageService",
     "GeoLocationService", "CartService", "WishlistService", "SearchService",
-    function (scope, $document, http, filter, location, localStorageService, GeoLocationService, CartService, WishlistService, SearchService) {
+    function (scope, $sce, $document, http, filter, location, localStorageService, GeoLocationService, CartService, WishlistService, SearchService) {
 
 
         console.log("Main Ctrl!");
@@ -17,7 +17,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document", "$http"
 
         scope.foundProducts = [];
         scope.foundFarmers = [];
-
 
         scope.getCarts = function () {
             scope.cartItems = CartService.getItemsSize();
@@ -238,9 +237,8 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document", "$http"
             scope.foundFarmers = scope.farmersLoaded;
             SearchService.setSearchedItems(scope.searchWishlistItems);
         };
-        scope.cancelSearchPrepared = function () {
+        scope.cancelSearch = function () {
             console.log("Search configuration canceled.");
-            scope.searchWishlistItems = [];
             scope.foundFarmers = [];
         };
 
@@ -250,7 +248,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document", "$http"
         };
 
         scope.noSelectedCategory = function () {
-            console.log(scope.selectedCategories);
             return typeof scope.selectedCategories[0] === 'undefined' || scope.selectedCategories.length == 0;
         }
 
@@ -282,12 +279,32 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document", "$http"
             return scope.foundProducts;
         }
 
-        scope.addToSearchWishlist = function (product) {
-            console.log("Added product ".concat(product));
-            scope.searchWishlistItems.push(product);
+        scope.addOrRemoveSearchWishlistItem = function (product,checked) {
+
+            if(checked) {
+                var prodFound = false;
+                for (var prod in scope.searchWishlistItems) {
+                    if (prod == product.id) {
+                        prodFound = true;
+                    }
+                }
+
+                if (prodFound == false) {
+                    console.log("Adding product ".concat(product.name));
+                    scope.searchWishlistItems.push(product);
+                }
+            } else {
+                console.log("Removing product ".concat(product.name));
+                var idx = scope.searchWishlistItems.indexOf(product);
+                if (idx >= 0) {
+                    scope.searchWishlistItems.splice(idx, 1);
+                }
+            }
         }
 
-
+        scope.clearSelectedSearchProducts = function () {
+            scope.searchWishlistItems = [];
+        }
         scope.distance = "";
 
         scope.getLocation = function () {
@@ -315,8 +332,9 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$document", "$http"
             }
         };
 
-        //INIT FUNCTIONS
+//INIT FUNCTIONS
         scope.initGeo();
         scope.getCategories();
         scope.getCarts();
-    }]);
+    }])
+;

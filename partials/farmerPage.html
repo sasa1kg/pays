@@ -62,7 +62,7 @@
                             <li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span
                                     class="badge alert-warning">{{wishlistItems}}</span></a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
-                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span
+                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Korpa <span
                                     class="badge alert-success">{{cartItems}}</span></a></li>
                             <li><a href="login.html"><i class="fa fa-lock"></i> Ulaz</a></li>
                         </ul>
@@ -94,7 +94,7 @@
                                     <li><a href="shop.html">Proizvodi</a></li>
                                     <li><a href="product-details.html">Detalji proizvoda</a></li>
                                     <li><a href="checkout.html">Kupovina</a></li>
-                                    <li><a href="cart.html">Kolica</a></li>
+                                    <li><a href="cart.html">Korpa</a></li>
                                     <li><a href="login.html">Ulaz</a></li>
                                 </ul>
                             </li>
@@ -134,9 +134,9 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="col-sm-6">
-                        <h1>{{farmer.name}}</h1>
+                        <h1 ng-bind-html="farmer.name | html"></h1>
 
-                        <h2>{{farmer.location}}</h2>
+                        <h2 ng-bind-html="farmer.location | html"></h2>
 
                         <h3>Kupovina svakodnevnih namirnica</h3>
 
@@ -196,7 +196,7 @@
 
                             <p>{{product.name}}</p>
                             <a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>Dodaj u kolica</a>
+                                    class="fa fa-shopping-cart"></i>Dodaj u korpu</a>
                         </div>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
 
                             <p>{{product.name}}</p>
                             <a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>Dodaj u kolica</a>
+                                    class="fa fa-shopping-cart"></i>Dodaj u korpu</a>
                         </div>
                     </div>
                 </div>

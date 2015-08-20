@@ -26,56 +26,56 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "id": 145
             },
             {
-                "name": "Domaæa pijaca",
+                "name": 'Doma&#263;a pijaca',
                 "location": "Novi Sad",
                 "img": "images/home/healthy-logo2.jpg",
                 "items": 10,
                 "id": 145
             },
             {
-                "name": "Dejan Dejanoviæ",
+                "name": "Dejan Dejanovi&#263;",
                 "location": "Budisava",
                 "img": "images/home/product2.jpg",
                 "items": 8,
                 "id": 155
             },
             {
-                "name": "Milan Milanoviæ",
-                "location": "Èurug",
+                "name": "Milan Milanovi&#263;",
+                "location": "&#269;urug",
                 "img": "images/home/product3.jpg",
                 "items": 4,
                 "id": 165
             },
             {
                 "name": "Zdrav o i fit d.o.o",
-                "location": "Beška",
+                "location": "Be&scaron;ka",
                 "img": "images/home/healthy-logo.jpg",
                 "items": 22,
                 "id": 301
             },
             {
-                "name": "Stevan Stevanoviæ",
-                "location": "Begeè",
+                "name": "Stevan Stevanovi&#263;",
+                "location": "Bege&#269;",
                 "img": "images/home/product4.jpg",
                 "items": 2,
                 "id": 175
             },
             {
-                "name": "Marko Markoviæ",
+                "name": "Marko Markovi&#263;",
                 "location": "Crvenka",
                 "img": "images/home/product1.jpg",
                 "items": 22,
                 "id": 185
             },
             {
-                "name": "Anðela Jovoviæ",
-                "location": "Baèka Topola",
+                "name": "An&#273;ela Jovovi&#263;",
+                "location": "Ba&#269;ka Topola",
                 "img": "images/home/product5.jpg",
                 "items": 4,
                 "id": 195
             },
             {
-                "name": "Marina Maroviæ",
+                "name": "Marina Marovi&#263;",
                 "location": "Kovilj",
                 "img": "images/home/product6.jpg",
                 "items": 2,

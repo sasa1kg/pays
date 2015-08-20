@@ -62,7 +62,7 @@
                             <li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span
                                     class="badge alert-warning">{{wishlistItems}}</span></a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
-                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span
+                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Korpa <span
                                     class="badge alert-success">{{cartItems}}</span></a></li>
                             <li><a href="#/login"><i class="fa fa-lock"></i> Ulaz</a></li>
                         </ul>
@@ -76,7 +76,7 @@
     <div class="header-bottom"><!--header-bottom-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-10">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse"
                                 data-target=".navbar-collapse">
@@ -94,7 +94,7 @@
                                     <li><a href="shop.html">Proizvodi</a></li>
                                     <li><a href="product-details.html">Detalji proizvoda</a></li>
                                     <li><a href="checkout.html">Kupovina</a></li>
-                                    <li><a href="cart.html">Kolica</a></li>
+                                    <li><a href="cart.html">Korpa</a></li>
                                     <li><a href="login.html">Ulaz</a></li>
                                 </ul>
                             </li>
@@ -110,10 +110,17 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="search_box pull-right">
-                        <input type="text" placeholder="Pretraga"/>
-                    </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-fefault cart actionbar"
+                            ng-click="setSearchPrepared()">
+                        <i class="fa fa-search"></i>
+                        Pretraži
+                    </button>
+                    <button type="button " class="btn btn-fefault cart actionbar new-wrap"
+                            ng-click="clearSelectedSearchProducts()">
+                        <i class="fa fa-times"></i>
+                        Poništi izbor za pretragu
+                    </button>
                 </div>
             </div>
         </div>
@@ -134,23 +141,13 @@
                             <div class="panel-heading">
                                 <div class="signup-form">
                                     <form action="#">
-                                        <h4 class="panel-title"><a href="#">U krugu od </a></h4>
-                                        <select class="input" ng-model="distance">
-                                            <option selected="true" disabled="disabled" value="">Izaberi udaljenost
-                                            </option>
-                                            <option value="10">10 km</option>
-                                            <option value="20">20 km</option>
-                                            <option value="50">50 km</option>
-                                            <option value="100">100 km</option>
-                                        </select>
-                                        </br>
-                                        </br>
+
                                         <table class="table table-condensed">
                                             <tr ng-show="locationDefined()">
                                                 <td class="notopborder">
                                                     <h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank"
-                                                                               ng-show="locationDefined()">Od vaše
-                                                        lokacije</a></h4>
+                                                                               ng-show="locationDefined()">Vaša
+                                                        lokacija</a></h4>
                                                 </td>
                                                 <td class="cart_delete notopborder">
                                                     <a class="cart_quantity_delete pull-right"
@@ -179,6 +176,15 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        <h4 class="panel-title"><a href="#">U krugu od </a></h4>
+                                        <select class="input" ng-model="distance">
+                                            <option selected="true" disabled="disabled" value="">Izaberi udaljenost
+                                            </option>
+                                            <option value="10">10 km</option>
+                                            <option value="20">20 km</option>
+                                            <option value="50">50 km</option>
+                                            <option value="100">100 km</option>
+                                        </select>
 
                                         <hr class="orangehr">
                                         <h4 class="panel-title"><a>Kategorija </a></h4>
@@ -186,9 +192,9 @@
                                         </br>
 
                                         <row class="col-sm-12" ng-repeat="cat in categories">
-                                            <div class="col-sm-4"><input type="checkbox"
-                                                           ng-model="checkedValue"
-                                                   ng-change="check(cat.id, checkedValue)">
+                                            <div class="col-sm-4"><input type="checkbox" class = "category-checkbox"
+                                                                         ng-model="checkedValue"
+                                                                         ng-change="check(cat.id, checkedValue)">
 
                                             </div>
                                             <p class="category-item-label">{{cat.name}}</p>
@@ -201,7 +207,7 @@
                                             Pretraži
                                         </button>
                                         <button type="button" class="btn btn-fefault cart actionbar"
-                                                ng-click="cancelSearchPrepared()">
+                                                ng-click="cancelSearch()">
                                             <i class="fa fa-times"></i>
                                             Poništi pretragu
                                         </button>
@@ -214,7 +220,8 @@
                 </div>
             </div>
             <div class="col-sm-7">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel" ng-show="noSelectedCategory() && noFoundFarmers()">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel"
+                     ng-show="noSelectedCategory() && noFoundFarmers()">
                     <ol class="carousel-indicators">
                         <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
                         <li data-target="#slider-carousel" data-slide-to="1"></li>
@@ -279,26 +286,27 @@
                 </div>
                 <div class="col-sm-12" ng-show="!noSelectedCategory() && noFoundFarmers()">
                     <row class="col-sm-12" ng-repeat="product in getProducts()">
-                        <div class = "col-sm-1">
-                            <img src="images/home/veggies.jpg" class="img-responsive" width="30px" height="20px">
+
+                        <div class="col-sm-1"><input type="checkbox" class = "zoom-checkbox"
+                                                     ng-model="checkedProductValue"
+                                                     ng-change="addOrRemoveSearchWishlistItem(product, checkedProductValue)">
+
                         </div>
 
-                        <h4 class="title title-center col-sm-2">{{product.name}}</h4>
-                        <h6 class = "col-sm-2">Minimalna količina:</h6>
-                        <div class = "col-sm-2">
+                        <h4 class="title text-left col-sm-3">{{product.name}}</h4>
+                        <h6 class="col-sm-2">Minimalna količina:</h6>
+
+                        <div class="col-sm-2">
                             <input type="text" class="form-control">
                         </div>
 
-                        <h6 class = "col-sm-1">Cena do:</h6>
-                        <div class = "col-sm-2">
+                        <h6 class="col-sm-2">Cena do:</h6>
+
+                        <div class="col-sm-2">
                             <input type="text" class="form-control">
                         </div>
-
-                        <div type="button" class="btn btn-primary-no-margin col-sm-2"
-                             ng-click="addToSearchWishlist(product)">Dodaj
-                        </div>
-                       </row>
-                   </div>
+                    </row>
+                </div>
                 <div class="col-sm-12" ng-show="!noFoundFarmers()">
                     <div class="features_items col-sm-12"><!--features_items-->
                         <div class="col-sm-4" ng-repeat="farmer in farmers">
@@ -308,9 +316,9 @@
                                         <img src="{{farmer.img}}" alt="{{farmer.name}}"
                                              style="width: 168px;height: 149px;"/>
 
-                                        <h2>{{farmer.name}}</h2>
+                                        <h2 ng-bind-html="farmer.name | html"></h2>
 
-                                        <p>{{farmer.location}}</p>
+                                        <p ng-bind-html="farmer.location | html"></p>
                                         <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
                                                 class="fa fa-user"></i>Pogledaj ponudu</a>
                                     </div>
@@ -323,26 +331,31 @@
                     </div>
                     <!--features_items-->
                 </div>
-               </div>
-               <div class="col-sm-2">
-                   <h4 class="title text-center" ng-show="isWishListEmpty()">Reklame</h4>
+            </div>
+            <div class="col-sm-2">
+                <div ng-if="isWishListEmpty() && noSelectedCategory()">
+                    <h4 class="title text-center">Reklame</h4>
 
-                   <div ng-show="isWishListEmpty()">
-                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nulla aliquam, congue sapien in,
-                           posuere eros. Nulla facilisi. Aenean in volutpat elit, vitae faucibus sem. Duis ultrices aliquet
-                           urna ut laoreet. Aliquam vel enim in nisl hendrerit pretium ac nec augue. Mauris justo lectus,
-                           tempus ut sollicitudin sit amet, imperdiet ac erat. In lacinia posuere suscipit.</p>
-                   </div>
+                    <div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nulla aliquam, congue sapien
+                            in,
+                            posuere eros. Nulla facilisi. Aenean in volutpat elit, vitae faucibus sem. Duis ultrices
+                            aliquet
+                            urna ut laoreet. Aliquam vel enim in nisl hendrerit pretium ac nec augue. Mauris justo
+                            lectus,
+                            tempus ut sollicitudin sit amet, imperdiet ac erat. In lacinia posuere suscipit.</p>
+                    </div>
+                </div>
+                <div ng-if="!isWishListEmpty() || !noSelectedCategory()">
+                    <h5 class="title text-center">Proizvodi za pretragu:</h5>
 
-                   <h4 class="title text-center" ng-show="isWishListEmpty() === false">Lista želja:</h4>
-
-                   <p class="text-left" ng-show="isWishListEmpty() === false" ng-repeat=" item in searchWishlistItems">
-                       {{item.name}}</p>
-
-               </div>
-           </div>
-       </div>
-   </section><!--/slider-->
+                    <p class="text-left" ng-repeat=" item in searchWishlistItems">
+                        {{item.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
 
 <section>
     <div class="container">
@@ -362,7 +375,7 @@
                                     <img src="{{farmer.img}}" alt="{{farmer.name}}"
                                          style="width: 268px;height: 249px;"/>
 
-                                    <h2>{{farmer.name}}</h2>
+                                    <h2 ng-bind-html="farmer.name | html"></h2>
 
                                     <p>{{farmer.location}}</p>
                                     <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
@@ -370,7 +383,7 @@
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
-                                        <h2>{{farmer.name}}</h2>
+                                        <h2 ng-bind-html="farmer.name | html"></h2>
 
                                         <p>{{farmer.location}}</p>
                                         <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
@@ -400,7 +413,7 @@
                                     <img src="{{farmer.img}}" alt="{{farmer.name}}"
                                          style="width: 268px;height: 249px;"/>
 
-                                    <h2>{{farmer.name}}</h2>
+                                    <h2 ng-bind-html="farmer.name | html"></h2>
 
                                     <p>{{farmer.location}}</p>
                                     <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
@@ -408,7 +421,7 @@
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
-                                        <h2>{{farmer.name}}</h2>
+                                        <h2 ng-bind-html="farmer.name | html"></h2>
 
                                         <p>{{farmer.location}}</p>
                                         <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
@@ -438,7 +451,7 @@
                                     <img src="{{farmer.img}}" alt="{{farmer.name}}"
                                          style="width: 268px;height: 249px;"/>
 
-                                    <h2>{{farmer.name}}</h2>
+                                    <h2 ng-bind-html="farmer.name | html"></h2>
 
                                     <p>{{farmer.location}}</p>
                                     <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
@@ -446,7 +459,7 @@
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
-                                        <h2>{{farmer.name}}</h2>
+                                        <h2 ng-bind-html="farmer.name | html"></h2>
 
                                         <p>{{farmer.location}}</p>
                                         <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i

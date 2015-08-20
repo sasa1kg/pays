@@ -60,7 +60,7 @@
 								<li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
 								<li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span class="badge alert-warning">{{wishlistItemSize}}</span></a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
-								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Kolica <span class="badge alert-success">{{cartItemsSize}}</span></a></li>
+								<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Korpa <span class="badge alert-success">{{cartItemsSize}}</span></a></li>
 								<li><a href="login.html"><i class="fa fa-lock"></i> Ulaz</a></li>
 							</ul>
 						</div>
@@ -89,7 +89,7 @@
                                         <li><a href="shop.html">Proizvodi</a></li>
 										<li><a href="product-details.html">Detalji proizvoda</a></li> 
 										<li><a href="checkout.html">Kupovina</a></li> 
-										<li><a href="cart.html">Kolica</a></li> 
+										<li><a href="cart.html">Korpa</a></li>
 										<li><a href="login.html">Ulaz</a></li> 
                                     </ul>
                                 </li> 
@@ -120,7 +120,7 @@
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="#/pays">Home</a></li>
-				  <li class="active">Kolica</li>
+				  <li class="active">Korpa</li>
 				</ol>
 			</div>
 			<div class="table-responsive cart_info">
@@ -137,12 +137,12 @@
 					<tbody>
 						<tr>
 							<td class="cart_price">
-								<p>{{farmerName}}</p>
+								<p ng-bind-html="farmerName | html"></p>
 							</td>
 							<td class="cart_description">
 							</td>
 							<td class="cart_product">
-								<p>{{farmerLocation}}</p>
+								<p ng-bind-html="farmerLocation | html"></p>
 							</td>
 							<td class="cart_quantity">
 								<p>{{farmerId}}</p>
@@ -260,7 +260,7 @@
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul>
-							<li>Kolica <span>{{totalPrice}} RSD</span></li>
+							<li>Korpa <span>{{totalPrice}} RSD</span></li>
 							<li>Dostava <span>{{shipping}} RSD</span></li>
 							<li>Ukupno <span>{{total}} RSD</span></li>
 						</ul>
