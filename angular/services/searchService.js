@@ -30,7 +30,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "location": "Novi Sad",
                 "img": "images/home/healthy-logo2.jpg",
                 "items": 10,
-                "id": 145
+                "id": 147
             },
             {
                 "name": "Dejan Dejanovi&#263;",
@@ -83,27 +83,29 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             }
         ];
 
-        this.getFarmers = function() {
+        this.getFarmers = function () {
             return this.farmers;
         }
 
-        this.getFarmerById = function(id){
-            for (var i = this.farmers.length- 1; i >= 0; i--) {
+        this.getFarmerById = function (id) {
+            for (var i = this.farmers.length - 1; i >= 0; i--) {
                 if (this.farmers[i].id == id) {
                     return this.farmers[i];
                 }
-            };
+            }
+            ;
         }
 
-        this.setSearchedItems = function(items){
+        this.setSearchedItems = function (items) {
             this.searchWishListItems = items;
         }
-        this.getSearchedItems = function(){
+        this.getSearchedItems = function () {
 
             var retArray = [];
-            for (var i = this.searchWishListItems.length- 1; i >= 0; i--) {
+            for (var i = this.searchWishListItems.length - 1; i >= 0; i--) {
                 retArray.push(this.getProducts()[this.searchWishListItems[i].id]);
-            };
+            }
+            ;
 
             return retArray;
         }
@@ -913,7 +915,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             }
         ];
 
-        this.getProducts = function(){
+        this.getProducts = function () {
             return this.products;
         }
         this.getProductsInCategory = function (category) {
@@ -1157,6 +1159,61 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             return products;
         }
 
+        this.distributors = [
+            {
+                "id": 0,
+                "name": "Kurir d.o.o",
+                "location": "Novi Sad",
+                "img":" images/home/courier1.jpg"
+            },
+            {
+                "id": 1,
+                "name": "Kombi prevoz",
+                "location": "Rumenka",
+                "img":" images/home/courier1.jpg"
+            }
 
+        ];
 
+        this.getDistributorById = function (distributorId) {
+            console.log(this.distributors[distributorId]);
+            return this.distributors[distributorId];
+        }
+
+        this.vehicles = [
+            {
+                "id": 0,
+                "number": 2,
+                "cooled": true,
+                "height": 120,
+                "width": 150,
+                "depth": 200,
+                "amount": 500,
+                "img":" images/home/vehicle1.jpg"
+            },
+            {
+                "id": 1,
+                "number": 6,
+                "cooled": false,
+                "height": 160,
+                "width": 140,
+                "depth": 220,
+                "amount": 730,
+                "img":" images/home/vehicle2.jpg"
+            },
+            {
+                "id": 2,
+                "number": 9,
+                "cooled": true,
+                "height": 110,
+                "width": 155,
+                "depth": 250,
+                "amount": 650,
+                "img":" images/home/vehicle1.jpg"
+            }
+        ]
+
+        this.getVehiclesByDistributorId = function(distId){
+            return this.vehicles;
+        }
     }]);

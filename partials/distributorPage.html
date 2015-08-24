@@ -129,34 +129,34 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="col-sm-6">
-                        <h1 ng-bind-html="farmer.name | html"></h1>
+                        <h1 ng-bind-html="distributor.name | html"></h1>
 
-                        <h2 ng-bind-html="farmer.location | html"></h2>
+                        <h2 ng-bind-html="distributor.location | html"></h2>
 
-                        <h3>Kupovina svakodnevnih namirnica</h3>
+                        <h3>Prevoz svakodnevnih namirnica</h3>
 
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua. </p>
                     </div>
                     <div class="col-sm-6">
-                        <img src="{{farmer.img}}" class="girl img-responsive" alt=""
+                        <img src="{{distributor.img}}" class="girl img-responsive" alt=""
                              style="height: 400px;width: 400px;"/>
                     </div>
                 </div>
                 <div class="item col-sm-12">
-                    <img src="images/home/vegetables1.jpg" class="girl img-responsive col-sm-12" alt=""
+                    <img src="images/home/courier2.jpg" class="girl img-responsive col-sm-12" alt=""
                          style="height: 400px;"/>
                 </div>
                 <div class="item col-sm-12">
-                    <img src="images/home/vegetables2.jpg" class="girl img-responsive col-sm-12" alt=""
+                    <img src="images/home/courier3.jpg" class="girl img-responsive col-sm-12" alt=""
                          style="height: 400px;"/>
                 </div>
                 <div class="item col-sm-12">
-                    <img src="images/home/vegetables3.jpg" class="girl img-responsive col-sm-12" alt=""
+                    <img src="images/home/courier4.jpg" class="girl img-responsive col-sm-12" alt=""
                          style="height: 400px;"/>
                 </div>
                 <div class="item col-sm-12">
-                    <img src="images/home/vegetables4.jpg" class="girl img-responsive col-sm-12" alt=""
+                    <img src="images/home/courier5.jpg" class="girl img-responsive col-sm-12" alt=""
                          style="height: 400px;"/>
                 </div>
 
@@ -175,49 +175,20 @@
 
 <section>
     <div class="container">
-        <hr class="orangehr">
         <div class="row">
-            <h2 class="title text-center">Traženi proizvodi</h2>
+            <h2 class="title text-center">Vozni park</h2>
+            <div class="product-details">
+                <div class="col-sm-4" ng-repeat="vehicle in distributorVehicles">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                    <img src="{{vehicle.img}}" height="200px" width="128px" class="cursorhover"/>
+                            </div>
 
-            <div class="col-sm-3" ng-repeat="product in searchedItems">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <a href="#/farmer/{{farmerId}}/product/{{product.id}}">
-                                <img src="{{product.image}}" alt="{{product.name}}" height="128px" width="128px" class="cursorhover"/>
-                            </a>
-
-                            <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
-
-                            <p>{{product.name}}</p>
-                            <a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>Dodaj u korpu</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-
-        <h2 class="title text-center">Svi proizvodi</h2>
-
-
-        <div class="product-details">
-            <div class="col-sm-3" ng-repeat="product in farmerProducts">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <a href="#/farmer/{{farmerId}}/product/{{product.id}}">
-                                <img src="{{product.image}}" alt="{{product.name}}" height="200px" width="128px" class="cursorhover"/>
-                            </a>
-
-                            <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
-
-                            <p>{{product.name}}</p>
-                            <a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>Dodaj u korpu</a>
+                            <h4>Broj vozila : {{vehicle.number}}</h4>
+                            <h4>Rashladjen prevoz: {{vehicle.cooled == true ? "Da" : "Ne"}}</h4>
+                            <h4>Gabariti za prevoz[cm]: {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}</h4>
+                            <h4>Količina za prevoz: {{vehicle.amount}} kg</h4>
                         </div>
                     </div>
                 </div>
