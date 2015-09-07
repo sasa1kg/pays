@@ -35,3 +35,8 @@
 .dropdownaction:HOVER {
 	background: orange !important;
 }
+.hover {
+	cursor: pointer;
+	margin-left: 15px;
+	margin-top: 5px;
+}
