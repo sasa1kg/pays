@@ -1,42 +1,58 @@
-.cartitempicture{
-	height: 128px;
-	width: 128px;
+.cartitempicture {
+    height: 128px;
+    width: 128px;
 }
 
 .farmerimage {
-	border: 3px solid orange !important;
-	border-radius: 20px !important;
+    border: 3px solid orange !important;
+    border-radius: 20px !important;
 }
+
 .cursorhover {
-	cursor: pointer;
+    cursor: pointer;
 }
+
 .actionbar {
-	margin-left: 0px;
-	width: 100%;
+    margin-left: 0px;
+    width: 100%;
 }
+
 .fromtop {
-	margin-top: 10px;
+    margin-top: 10px;
 }
+
 .orangeborder {
-	border: 2px solid orange;
+    border: 2px solid orange;
 }
+
 .orangehr {
-	border-top: 3px solid orange;
+    border-top: 3px solid orange;
+    width: 100%;
+    float: left;
 }
+
 .notopborder {
-	border-top: 0px !important;
+    border-top: 0px !important;
 }
+
 .dropdownlist {
-	background-color: #ddd;
+    background-color: #ddd;
 }
+
 .dropdownaction {
-	background: #aaa !important;
+    background: #aaa !important;
 }
+
 .dropdownaction:HOVER {
-	background: orange !important;
+    background: orange !important;
 }
+
 .hover {
-	cursor: pointer;
-	margin-left: 15px;
-	margin-top: 5px;
+    cursor: pointer;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.collapsed_checkbox {
+    margin: 0px;
 }
