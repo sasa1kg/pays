@@ -182,5 +182,4 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
 		};
 		return price;
 	}
-
 }]);

@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$filter", "CartService", "WishlistService",
-    function (scope, http, filter, CartService, WishlistService) {
+angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$filter", "CartService", "WishlistService",
+    function (scope, http, location, filter, CartService, WishlistService) {
 
         console.log("Cart Ctrl!");
 
@@ -48,7 +48,15 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$filter", 
             scope.calculateTotal();
         }
 
+        scope.goBack = function() {
+            window.history.back();
+        }
 
+        scope.emptyCart = function(){
+            console.log("Empty cart");
+            CartService.resetCart();
+            scope.loadData();
+        }
         scope.loadData();
         scope.price = CartService.getTotalCartAmount() + "";
     }]);

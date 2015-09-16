@@ -193,9 +193,9 @@
                                     class="fa fa-shopping-cart"></i>Dodaj u korpu</a>
 
                             <div ng-if="isProductInCart(product.id)" class="cart_quantity_button add-remove-product-aligment">
-                                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(item.itemId)"> + </a>
+                                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.id)"> + </a>
                                 <input class="cart_quantity_input" type="text" name="quantity" ng-model="product.itemNum" ng-change="setAmount(product.id,product.itemNum)" autocomplete="off" size="5">
-                                <a class="cart_quantity_down cursor-pointer" ng-click="less(item.itemId)"> - </a>
+                                <a class="cart_quantity_down cursor-pointer" ng-click="less(product.id)"> - </a>
                             </div>
                         </div>
                     </div>
