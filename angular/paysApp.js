@@ -3,7 +3,6 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageMo
 	'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate'])
     .filter('html',function($sce){
     return function(input){
-        console.log("AAAA".concat(input));
         return $sce.trustAsHtml(input);
     }
 });
@@ -36,7 +35,7 @@ paysApp.config(function($translateProvider) {
       ACCOUNT: 'Account',
       WISHLIST: 'Wishlist',
       SHOPPING: 'Shopping',
-      CART: 'Cart',
+      CART: 'Cart overview',
 	  LOGIN: 'Log in',
 	  CONTACT : 'Contact us',
 	  PRODUCTS : 'Products',
@@ -44,6 +43,7 @@ paysApp.config(function($translateProvider) {
 	  BLOG_LIST : 'Blog list',
 	  BLOG_ONE : 'One blog',
 	  SEARCH_RESET : 'Reset search parameters',
+      PAY : ' Payment',
     YOUR_LOCATION : 'Your location',
     CATEGORY : 'Category',
     LOCATION_PLACE : 'Location',
@@ -71,7 +71,7 @@ paysApp.config(function($translateProvider) {
       ACCOUNT: 'Nalog',
       WISHLIST: 'Lista želja',
       SHOPPING: 'Kupovina',
-      CART: 'Kolica',
+      CART: 'Pregled korpe',
 	  LOGIN: 'Ulaz',
 	  CONTACT : 'Kontaktirajte nas',
 	  PRODUCTS : 'Proizvodi',
@@ -79,7 +79,8 @@ paysApp.config(function($translateProvider) {
 	  BLOG_LIST : 'Lista blogova',
 	  BLOG_ONE : 'Jedan blog',
 	  SEARCH_RESET : 'Poništi izbor za pretragu',
-    YOUR_LOCATION : 'Vaša lokacija',
+            PAY : ' Plaćanje',
+            YOUR_LOCATION : 'Vaša lokacija',
     CATEGORY : 'Kategorija',
     LOCATION_PLACE : 'Mesto',
     MARKETING_SPACE : 'Reklamni prostor',

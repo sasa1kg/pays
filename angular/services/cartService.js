@@ -42,7 +42,7 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
 			var identifier = JSON.parse(keys[i]);
 			if (identifier.productId == productId && identifier.farmerId == farmerId && identifier.type == "cart") {
 				var localItem = localStorageService.get(keys[i]);
-				localItem.itemNum = localItem.itemNum + ammount;
+				localItem.itemNum = ammount;
 				localStorageService.set(keys[i], localItem);
 				added = true;
 				return;
@@ -90,6 +90,22 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
 				var localItem = localStorageService.get(keys[i]);
 				if (localItem.itemNum > 1) {
 					localItem.itemNum = localItem.itemNum - 1;
+					localStorageService.set(keys[i], localItem);
+				} else {
+					localStorageService.remove(keys[i]);
+				}
+			}
+		}
+	}
+
+	this.updateProductAmount = function (productId, farmerId, amount) {
+		var keys = localStorageService.keys();
+		for (var i = keys.length - 1; i >= 0; i--) {
+			var identifier = JSON.parse(keys[i]);
+			if (identifier.type == "cart" && identifier.productId == productId && identifier.farmerId == farmerId) {
+				var localItem = localStorageService.get(keys[i]);
+				if (localItem.itemNum >= 1) {
+					localItem.itemNum = amount;
 					localStorageService.set(keys[i], localItem);
 				} else {
 					localStorageService.remove(keys[i]);
@@ -152,6 +168,19 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
 			}
 		}
 		return items;
+	}
+
+	this.getTotalCartAmount = function() {
+		var price = 0;
+		var keys = localStorageService.keys();
+		for (var i = keys.length - 1; i >= 0; i--) {
+			var identifier = JSON.parse(keys[i]);
+			if (identifier.type == "cart") {
+				var localItem = localStorageService.get(keys[i]);
+				price += localItem.itemNum * localItem.itemPrice;
+			}
+		};
+		return price;
 	}
 
 }]);

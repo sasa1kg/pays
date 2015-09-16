@@ -105,8 +105,6 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             for (var i = this.searchWishListItems.length - 1; i >= 0; i--) {
                 retArray.push(this.getProducts()[this.searchWishListItems[i].id]);
             }
-            ;
-
             return retArray;
         }
         this.setSearchObject = function (position, criterias, doSearch) {

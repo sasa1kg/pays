@@ -55,13 +55,15 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
-                            <li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span
+                            <li><a href="#"><i class="fa fa-user"></i> {{ 'ACCOUNT' | translate}}</a></li>
+                            <li><a href="#/wishlist"><i class="fa fa-star"></i> {{ 'WISHLIST' | translate}} <span
                                     class="badge alert-warning">{{wishlistItems}}</span></a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
-                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Korpa <span
-                                    class="badge alert-success">{{cartItems}}</span></a></li>
-                            <li><a href="login.html"><i class="fa fa-lock"></i> Ulaz</a></li>
+                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> {{ 'SHOPPING' | translate}}</a>
+                            </li>
+                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
+                                    class="badge alert-success">{{price}}</span></a></li>
+                            <li><a href="#/checkout"> {{ 'PAY' | translate}}</a></li>
+                            <li><a href="#/login"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -187,8 +189,14 @@
                             <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
 
                             <p>{{product.name}}</p>
-                            <a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
+                            <a ng-if="!isProductInCart(product.id)" ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>Dodaj u korpu</a>
+
+                            <div ng-if="isProductInCart(product.id)" class="cart_quantity_button add-remove-product-aligment">
+                                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(item.itemId)"> + </a>
+                                <input class="cart_quantity_input" type="text" name="quantity" ng-model="product.itemNum" ng-change="setAmount(product.id,product.itemNum)" autocomplete="off" size="5">
+                                <a class="cart_quantity_down cursor-pointer" ng-click="less(item.itemId)"> - </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -213,8 +221,14 @@
                             <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
 
                             <p>{{product.name}}</p>
-                            <a ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
+                            <a ng-if="!isProductInCart(product.id)" ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>Dodaj u korpu</a>
+
+                            <div ng-if="isProductInCart(product.id)" class="cart_quantity_button add-remove-product-aligment">
+                                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.id)"> + </a>
+                                <input class="cart_quantity_input" type="text" name="quantity" ng-model="product.itemNum" ng-change="setAmount(product.id,product.itemNum)" autocomplete="off" size="5">
+                                <a class="cart_quantity_down cursor-pointer" ng-click="less(product.id)"> - </a>
+                            </div>
                         </div>
                     </div>
                 </div>

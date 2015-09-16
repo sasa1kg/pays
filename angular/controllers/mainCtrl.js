@@ -18,6 +18,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.foundProducts = [];
         scope.foundFarmers = [];
 
+
         scope.getCarts = function () {
             scope.cartItems = CartService.getItemsSize();
             scope.wishlistItems = WishlistService.getItemsSize();
@@ -256,7 +257,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             return typeof scope.foundFarmers[0] === 'undefined' || scope.foundFarmers.length == 0;
         }
 
-        scope.check = function (value, checked) {
+        scope.check = function (value,checked) {
             var idx = scope.selectedCategories.indexOf(value);
             if (idx >= 0 && !checked) {
                 scope.selectedCategories.splice(idx, 1);
@@ -303,7 +304,9 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         }
 
         scope.clearSelectedSearchProducts = function () {
+            console.log("AAAAA")
             scope.searchWishlistItems = [];
+            scope.selectedCategories = [];
         }
         scope.distance = "";
 
@@ -336,5 +339,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.initGeo();
         scope.getCategories();
         scope.getCarts();
+
+        scope.price = CartService.getTotalCartAmount()+"";
     }])
 ;

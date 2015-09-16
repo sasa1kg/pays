@@ -55,13 +55,15 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> Nalog</a></li>
-                            <li><a href="#/wishlist"><i class="fa fa-star"></i> Lista želja <span
+                            <li><a href="#"><i class="fa fa-user"></i> {{ 'ACCOUNT' | translate}}</a></li>
+                            <li><a href="#/wishlist"><i class="fa fa-star"></i> {{ 'WISHLIST' | translate}} <span
                                     class="badge alert-warning">{{wishlistItems}}</span></a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kupovina</a></li>
-                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> Korpa <span
-                                    class="badge alert-success">{{cartItems}}</span></a></li>
-                            <li><a href="login.html"><i class="fa fa-lock"></i> Ulaz</a></li>
+                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> {{ 'SHOPPING' | translate}}</a>
+                            </li>
+                            <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
+                                    class="badge alert-success">{{price}}</span></a></li>
+                            <li><a href="#/checkout"> {{ 'PAY' | translate}}</a></li>
+                            <li><a href="#/login"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a></li>
                         </ul>
                     </div>
                 </div>

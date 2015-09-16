@@ -61,7 +61,8 @@
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> {{ 'SHOPPING' | translate}}</a>
                             </li>
                             <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
-                                    class="badge alert-success">{{cartItems}}</span></a></li>
+                                    class="badge alert-success">{{price}}</span></a></li>
+                            <li><a href="#/checkout"> {{ 'PAY' | translate}}</a></li>
                             <li><a href="#/login"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a></li>
                         </ul>
                     </div>
@@ -140,24 +141,6 @@
                             <!--< class="signup-form">-->
                             <form action="#">
 
-                                <hr class="orangehr">
-
-                                <h4 class="panel-title"><a>{{ 'CATEGORY' | translate}} </a></h4>
-
-                                </br>
-
-                                <row class="col-sm-12" ng-repeat="cat in categories">
-
-
-                                    <label class="category-item-label checkbox collapsed_checkbox">
-                                        <input type="checkbox" class="category-checkbox"
-                                               ng-model="checkedValue"
-                                               ng-change="check(cat.id, checkedValue)">
-                                        {{cat.name}}
-                                    </label>
-                                </row>
-                                <hr class="orangehr">
-
                                 <table class="table table-condensed">
                                     <tr ng-show="locationDefined()">
                                         <td class="notopborder">
@@ -206,6 +189,25 @@
                                 </select>
 
                                 <hr class="orangehr">
+
+                                <h4 class="panel-title"><a>{{ 'CATEGORY' | translate}} </a></h4>
+
+                                </br>
+
+                                <row class="col-sm-12" ng-repeat="cat in categories">
+
+
+                                    <label class="category-item-label checkbox collapsed_checkbox">
+                                        <input type="checkbox" class="category-checkbox"
+                                               value="{{cat.name}}"
+                                               ng-checked="selectedCategories.indexOf(cat.id) > -1"
+                                               ng-model="checkedValue"
+                                               ng-click="check(cat.id,checkedValue)">
+                                        {{cat.name}}
+                                    </label>
+                                </row>
+
+                                <hr class="orangehr">
                                 <button type="button" class="btn btn-fefault cart actionbar"
                                         ng-click="setSearchPrepared()">
                                     <i class="fa fa-search"></i>
@@ -216,6 +218,7 @@
                                     <i class="fa fa-times"></i>
                                     {{ 'SEARCH_RESET' | translate}}
                                 </button>
+
                             </form>
                         </div>
                     </div>

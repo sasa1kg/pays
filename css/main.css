@@ -274,8 +274,6 @@ a#scrollUp i{
 .navbar-toggle .icon-bar {
     background-color: #fff;
 }
-
-
 .nav.navbar-nav > li:hover > ul.sub-menu{
   display: block;
   -webkit-animation: fadeInUp 400ms;
@@ -1256,6 +1254,10 @@ h2.title {
 	left:0
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 .product-information h2 {
   color: #363432;
   font-family: 'Roboto', sans-serif;
@@ -1307,6 +1309,9 @@ h2.title {
   margin-top: 15px;
 }
 
+.add-remove-product-aligment{
+  padding-left: 25%;
+}
 
 .cart {
   background: #FE980F;
