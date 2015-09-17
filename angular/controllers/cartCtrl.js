@@ -20,15 +20,18 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
         scope.deleteCartItem = function (itemId) {
             CartService.remove(itemId, scope.farmerId);
             scope.loadData();
+            scope.price = CartService.getTotalCartAmount()+"";
         };
 
         scope.addMore = function (itemId) {
             CartService.more(itemId, scope.farmerId);
             scope.loadData();
+            scope.price = CartService.getTotalCartAmount()+"";
         }
         scope.less = function (itemId) {
             CartService.less(itemId, scope.farmerId);
             scope.loadData();
+            scope.price = CartService.getTotalCartAmount()+"";
         };
 
 
@@ -55,7 +58,9 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
         scope.emptyCart = function(){
             console.log("Empty cart");
             CartService.resetCart();
-            scope.loadData();
+            $('#emptyCartModal').modal('hide');
+            $('.modal-backdrop').remove();
+            location.path('#/');
         }
         scope.loadData();
         scope.price = CartService.getTotalCartAmount() + "";

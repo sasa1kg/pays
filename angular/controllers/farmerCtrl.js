@@ -52,8 +52,12 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                     }
                 }
 
+
+
                 scope.cartItems = CartService.getItemsSize();
                 scope.wishlistItems = WishlistService.getItemsSize();
+
+                scope.price = CartService.getTotalCartAmount()+"";
             } else {
                 alert("Proizvodi drugog farmera su u kolicima.");
             }
@@ -77,6 +81,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                     scope.farmerProducts[i].itemNum++;
                 }
             }
+            scope.price = CartService.getTotalCartAmount()+"";
         }
 
         scope.less = function (productId) {
@@ -86,6 +91,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                     scope.farmerProducts[i].itemNum--;
                 }
             }
+            scope.price = CartService.getTotalCartAmount()+"";
         }
 
         scope.setAmount = function (productId, amount) {
@@ -98,7 +104,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                     }
                 }
                 CartService.updateProductAmount(productId,scope.farmerId,amount);
-
+                scope.price = CartService.getTotalCartAmount()+"";
             }
         }
 

@@ -1825,7 +1825,13 @@ h2.title {
 /*************************
 *******checkout CSS******
 **************************/
+.order-row {
+  margin-bottom: 20px;
+}
 
+.order-row-padding {
+  padding-left: 10%;
+}
 .step-one {
   margin-bottom: -10px
 }
