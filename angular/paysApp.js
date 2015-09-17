@@ -1,6 +1,6 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageModule',
     'GeoLocationService', 'CartService', 'WishlistService', 'SearchService',
-    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate'])
+    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate','ui.bootstrap.datetimepicker'])
     .filter('html', function ($sce) {
         return function (input) {
             return $sce.trustAsHtml(input);
@@ -62,7 +62,27 @@ paysApp.config(function ($translateProvider) {
         ABOUT_US: 'About us',
         TITLE_1: 'Everyday items shop',
         TITLE_2: 'direct from farmers',
-        TITLE_3: 'Follow our blog'
+        TITLE_3: 'Follow our blog',
+        ORDER: 'Order',
+        ORDER_DATA_SUFFIX: 'information about your delivery',
+        WHO: 'Who',
+        NAME_SURNAME: 'Name and surname:',
+        WHERE: 'Where',
+        CHOOSE_CITY: 'Choose city:',
+        CITY: 'City',
+        STREET: 'Street:',
+        HOUSE_NUMBER: 'Number:',
+        APARTMENT: 'Appartment:',
+        FLOOR: 'Floor:',
+        ENTRANCE: 'Entrance:',
+        PREDEFINED_LOCATION: 'Predefined location:',
+        WHEN: 'When',
+        AVAILABLE_TERMIN: 'Available period:',
+        VALUE: 'Value:',
+        CARD_TYPE: 'Card type',
+        NOTE: 'Comment',
+        NOTE_MSG:'Please enter Your comment for delivery'
+
     })
         .translations('rs', {
             HOME: 'Početna',
@@ -105,7 +125,26 @@ paysApp.config(function ($translateProvider) {
             ABOUT_US: 'O nama',
             TITLE_1: 'Kupovina svakodnevnih namirnica',
             TITLE_2: 'direktno od proizvođača',
-            TITLE_3: 'Pratite naš blog'
+            TITLE_3: 'Pratite naš blog',
+            ORDER: 'Narudžbina',
+            ORDER_DATA_SUFFIX: 'podaci za Vašu isporuku',
+            WHO: 'Kome',
+            NAME_SURNAME: 'Ime i prezime:',
+            WHERE: 'Gde',
+            CHOOSE_CITY: 'Izaberite grad:',
+            CITY: 'Grad',
+            STREET: 'Ulica:',
+            HOUSE_NUMBER: 'Broj:',
+            APARTMENT: 'Stan:',
+            FLOOR: 'Sprat:',
+            ENTRANCE: 'Ulaz:',
+            PREDEFINED_LOCATION: 'Predefinisana lokacija:',
+            WHEN: 'Kada',
+            AVAILABLE_TERMIN: 'Slobodni termini:',
+            VALUE: 'Vrednost',
+            CARD_TYPE: 'Vrsta kartice',
+            NOTE: 'Napomena',
+            NOTE_MSG:'Molimo unesite napomenu za Vašu isporuku'
         });
     $translateProvider.preferredLanguage('en');
 });

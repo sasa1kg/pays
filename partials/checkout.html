@@ -127,7 +127,7 @@
         <!--/breadcrums-->
 
         <div class="step-one">
-            <h2 class="text-center">{{ 'ORDER' | translate}} {{orderId}} , {{'ORDER_DATA_SUFFIX'}}</h2>
+            <h2 class="text-center">{{ 'ORDER' | translate}} {{orderId}} , {{'ORDER_DATA_SUFFIX' | translate}}</h2>
         </div>
 
         <hr class="orangehr">
@@ -159,7 +159,7 @@
                         <div class="col-sm-10">
                             <form>
                                 <select>
-                                    <option>Grad</option>
+                                    <option>{{ 'CITY' | translate}}</option>
                                     <option>Novi Sad</option>
                                     <option>Beograd</option>
                                     <option>Subotica</option>
@@ -178,7 +178,7 @@
                     <input class="col-sm-1" type="text"
                            autocomplete="off">
 
-                    <div class="text-center col-sm-1">{{ 'APARTMENT' | translate}}</div>
+                    <div class="text-center col-sm-2">{{ 'APARTMENT' | translate}}</div>
                     <input class="col-sm-1" type="text"
                            autocomplete="off"><i class="fa fa-asterisk"></i>
                 </row>
@@ -223,6 +223,15 @@
             </div>
             <div class="col-sm-11">
                 <div class="text-center col-sm-3">{{ 'AVAILABLE_TERMIN' | translate}}</div>
+                <div class="dropdown col-sm-8">
+                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
+                        <div class="input-group"><input type="text" class="form-control" data-ng-model="data.dateDropDownInput | date:'d MMMM yyyy, HH:mm'"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                    </ul>
+                </div>
             </div>
         </row>
 
@@ -237,9 +246,9 @@
                     <div class="text-left col-sm-4">{{ currency}}</div>
                 </div>
                 <div class="col-sm-5">
-                    <div class="text-right col-sm-2">{{ 'CARD_TYPE' | translate}}</div>
+                    <div class="text-right col-sm-3">{{ 'CARD_TYPE' | translate}}</div>
 
-                    <div class="col-sm-10 form-two">
+                    <div class="col-sm-9 form-two">
                         <form>
                             <select>
                                 <option>{{ 'CARD_TYPE' | translate}}</option>
@@ -262,8 +271,7 @@
             <div class="col-sm-11">
                 <div class="text-center col-sm-3">{{ 'NOTE' | translate}}</div>
                 <div class="col-sm-9">
-                    <textarea  type="text" columns="5" class="col-sm-12" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua."></textarea>
+                    <textarea  type="text" rows="4" class="col-sm-12" placeholder="{{ 'NOTE_MSG' | translate}} "></textarea>
                 </div>
             </div>
         </row>
