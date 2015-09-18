@@ -137,9 +137,9 @@
                 <div class="text-center">{{ 'WHO' | translate}}</div>
             </div>
             <div class="col-sm-11">
-                <div class="text-center col-sm-3">{{ 'NAME_SURNAME' | translate}}</div>
+                <div class="text-right col-sm-3">{{ 'NAME_SURNAME' | translate}}</div>
                 <input class="col-sm-8" type="text"
-                       autocomplete="off"><i class="fa fa-asterisk"></i>
+                       autocomplete="off" ng-model="nameSurname"><i class="fa fa-asterisk asterisk-padding"></i>
             </div>
         </row>
 
@@ -151,18 +151,17 @@
             </div>
             <div class="col-sm-11">
                 <row class="col-sm-12 order-row">
-                    <div class="col-sm-4">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3">
+                    <div class="col-sm-3 location-checkbox-padding">
+                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="predefLoc"
+                               ng-value="cityString">
                         {{ 'CHOOSE_CITY' | translate}}
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         <div class="col-sm-10">
                             <form>
-                                <select>
-                                    <option>{{ 'CITY' | translate}}</option>
-                                    <option>Novi Sad</option>
-                                    <option>Beograd</option>
-                                    <option>Subotica</option>
+                                <select ng-model="city">
+                                    <option ng-repeat="city in cities" value="{{city.name}}">{{city.name | html}}
+                                    </option>
                                 </select>
                             </form>
                         </div>
@@ -170,44 +169,41 @@
                     </div>
                 </row>
                 <row class="col-sm-12 order-row order-row-padding">
-                    <div class="text-center col-sm-2">{{ 'STREET' | translate}}</div>
+                    <div class="text-right col-sm-2">{{ 'STREET' | translate}}</div>
                     <input class="col-sm-4" type="text"
-                           autocomplete="off">
+                           autocomplete="off" ng-model="street">
 
-                    <div class="text-center col-sm-1">{{ 'HOUSE_NUMBER' | translate}}</div>
+                    <div class="text-right col-sm-1">{{ 'HOUSE_NUMBER' | translate}}</div>
                     <input class="col-sm-1" type="text"
-                           autocomplete="off">
+                           autocomplete="off" ng-model="number">
 
-                    <div class="text-center col-sm-2">{{ 'APARTMENT' | translate}}</div>
+                    <div class="text-right col-sm-2">{{ 'APARTMENT' | translate}}</div>
                     <input class="col-sm-1" type="text"
-                           autocomplete="off"><i class="fa fa-asterisk"></i>
+                           autocomplete="off" ng-model="appartment"><i class="fa fa-asterisk asterisk-padding"></i>
                 </row>
 
                 <row class="col-sm-12 order-row order-row-padding">
-                    <div class="text-center col-sm-2">{{ 'FLOOR' | translate}}</div>
+                    <div class="text-right col-sm-2">{{ 'FLOOR' | translate}}</div>
                     <input class="col-sm-1" type="text"
-                           autocomplete="off">
+                           autocomplete="off" ng-model="floor">
 
-                    <div class="text-center col-sm-2">{{ 'ENTRANCE' | translate}}</div>
+                    <div class="text-right col-sm-2">{{ 'ENTRANCE' | translate}}</div>
                     <input class="col-sm-1" type="text"
-                           autocomplete="off">
+                           autocomplete="off" ng-model="entrance">
                 </row>
 
                 <!--predefined location -->
                 <div class="col-sm-12">
-                    <div class="col-sm-4">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3">
+                    <div class="col-sm-4 location-checkbox-padding">
+                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="predefLoc"
+                               ng-value="predefinedLocationString">
                         {{ 'PREDEFINED_LOCATION' | translate}}
                     </div>
                     <div class="col-sm-8">
-                        <row class="col-sm-12">
-                            <input type="radio" name="locRadio">{{ 'CHOOSE_CITY' | translate}}
-                        </row>
-                        <row class="col-sm-12">
-                            <input type="radio" name="locRadio">{{ 'CHOOSE_CITY' | translate}}
-                        </row>
-                        <row class="col-sm-12">
-                            <input type="radio" name="locRadio">{{ 'CHOOSE_CITY' | translate}}
+                        <row class="col-sm-12" ng-repeat="address in addresses">
+                            <input type="radio" name="addressRadio" ng-model="chosenAdress"
+                                   ng-value="address">{{ address |
+                            html}}<!-- TODO-->
                         </row>
 
                     </div>
@@ -222,14 +218,17 @@
                 <div class="text-center">{{ 'WHEN' | translate}}</div>
             </div>
             <div class="col-sm-11">
-                <div class="text-center col-sm-3">{{ 'AVAILABLE_TERMIN' | translate}}</div>
-                <div class="dropdown col-sm-8">
+                <div class="text-right col-sm-3">{{ 'AVAILABLE_TERMIN' | translate}}</div>
+                <div class="dropdown col-sm-8"><!-- TODO-->
                     <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
-                        <div class="input-group"><input type="text" class="form-control" data-ng-model="data.dateDropDownInput | date:'d MMMM yyyy, HH:mm'"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <div class="input-group"><input type="text" class="form-control"
+                                                        data-ng-model="data.dateDropDownInput | date:'d MMMM yyyy, HH:mm'"><span
+                                class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                        <datetimepicker data-ng-model="data.dateDropDownInput"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
                     </ul>
                 </div>
             </div>
@@ -250,16 +249,17 @@
 
                     <div class="col-sm-9 form-two">
                         <form>
-                            <select>
-                                <option>{{ 'CARD_TYPE' | translate}}</option>
-                                <option>Visa</option>
-                                <option>Master</option>
-                                <option>American express</option>
-                            </select>
+                            <form>
+                                <select ng-model="creditCard">
+                                    <option ng-repeat="card in cards" value="{{card}}">{{card| html}}
+                                    </option>
+                                </select>
+                            </form>
                         </form>
                     </div>
                 </div>
-                <a class="btn btn-fefault cart col-sm-1 text-center">{{ 'PAY' | translate}}</a>
+                <a class="btn btn-fefault cart col-sm-1 text-center" ng-click="executePayment()">{{ 'PAY' |
+                    translate}}</a>
             </div>
         </row>
 
@@ -271,7 +271,8 @@
             <div class="col-sm-11">
                 <div class="text-center col-sm-3">{{ 'NOTE' | translate}}</div>
                 <div class="col-sm-9">
-                    <textarea  type="text" rows="4" class="col-sm-12" placeholder="{{ 'NOTE_MSG' | translate}} "></textarea>
+                    <textarea type="text" rows="4" class="col-sm-12"
+                              placeholder="{{ 'NOTE_MSG' | translate}} "ng-model="note"></textarea>
                 </div>
             </div>
         </row>

@@ -1828,9 +1828,14 @@ h2.title {
 .order-row {
   margin-bottom: 20px;
 }
-
+.asterisk-padding{
+  padding-left: 10px;
+}
 .order-row-padding {
   padding-left: 10%;
+}
+.location-checkbox-padding{
+ padding-left: 10%;
 }
 .step-one {
   margin-bottom: -10px
