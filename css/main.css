@@ -1837,6 +1837,17 @@ h2.title {
 .location-checkbox-padding{
  padding-left: 10%;
 }
+.amount-currency-text{
+  font-size: 16px;
+}
+
+.amount-text {
+.amount-currency-text;
+
+  font-weight: bold;
+  padding-left: 10px;
+}
+
 .step-one {
   margin-bottom: -10px
 }

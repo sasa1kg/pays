@@ -10,7 +10,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$http", "$filte
     scope.currency = "RSD";
 
     scope.nameSurname = "";
-    scope.predefLoc = "";
+    scope.locationType = "";
 
     scope.predefinedLocationString = "predefinedLocation";
     scope.cityString = "city";
@@ -21,10 +21,12 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$http", "$filte
     scope.appartment = "";
     scope.floor = "";
     scope.entrance = "";
-    scope.chosenAdress = "";
+    scope.chosenAddress = "";
 
     scope.creditCard = "";
     scope.note = "";
+
+    scope.dateDropDownInput = "";
     scope.cities = [
         {
             "id": 0,
@@ -53,17 +55,22 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$http", "$filte
         'Visa Electron'
     ]
     scope.executePayment = function () {
-        console.log("NAME " + scope.nameSurname);
-        console.log("PREDEF LOC " + scope.predefLoc);
-        console.log("STREET " + scope.street);
-        console.log("NUMBER " + scope.number);
-        console.log("APPARTMENT " + scope.appartment);
-        console.log("FLOOR " + scope.floor);
-        console.log("ENTRANCE " + scope.entrance);
-        console.log("CITY " + scope.city);
-        //console.log("CHOSEN ADDRESS " + scope.chosenAdress);
-        console.log("CREDIT CARD " + scope.creditCard);
-        console.log("NOTE "+ scope.note);
+        console.log("Payment Information!");
+        console.log("Name " + scope.nameSurname);
+        if (scope.locationType == scope.predefinedLocationString) {
+            console.log("Delivery to predefined address : " + scope.chosenAddress);
+        } else if (scope.locationType == scope.cityString) {
+            console.log("Delivery to city : " + scope.city + " Street: " + scope.street + " Number: " + scope.number +
+                " Appartment: "+ scope.appartment + " Floor: " + scope.floor + " Entrance: " + scope.entrance);
+        } else {
+            console.error("Unsupported location type!");
+        }
+        console.log("Delivery time: " + scope.dateDropDownInput);
+        console.log("Credit card: " + scope.creditCard);
+        console.log("Note: " + scope.note);
     }
 
+    scope.changed = function (adr) {
+        scope.chosenAddress = adr;
+    }
 }]);

@@ -152,7 +152,7 @@
             <div class="col-sm-11">
                 <row class="col-sm-12 order-row">
                     <div class="col-sm-3 location-checkbox-padding">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="predefLoc"
+                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType"
                                ng-value="cityString">
                         {{ 'CHOOSE_CITY' | translate}}
                     </div>
@@ -195,16 +195,16 @@
                 <!--predefined location -->
                 <div class="col-sm-12">
                     <div class="col-sm-4 location-checkbox-padding">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="predefLoc"
+                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType"
                                ng-value="predefinedLocationString">
                         {{ 'PREDEFINED_LOCATION' | translate}}
                     </div>
                     <div class="col-sm-8">
-                        <row class="col-sm-12" ng-repeat="address in addresses">
-                            <input type="radio" name="addressRadio" ng-model="chosenAdress"
-                                   ng-value="address">{{ address |
-                            html}}<!-- TODO-->
-                        </row>
+                        <div class="col-sm-12" ng-repeat="address in addresses">
+                            <label>
+                            <input type="radio" name="addressRadio" ng-change="changed(address)">{{ address |
+                            html}}</label>
+                        </div>
 
                     </div>
 
@@ -219,15 +219,15 @@
             </div>
             <div class="col-sm-11">
                 <div class="text-right col-sm-3">{{ 'AVAILABLE_TERMIN' | translate}}</div>
-                <div class="dropdown col-sm-8"><!-- TODO-->
+                <div class="dropdown col-sm-8">
                     <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
                         <div class="input-group"><input type="text" class="form-control"
-                                                        data-ng-model="data.dateDropDownInput | date:'d MMMM yyyy, HH:mm'"><span
+                                                        data-ng-model="dateDropDownInput | date:'d MMMM yyyy, HH:mm'"><span
                                 class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="data.dateDropDownInput"
+                        <datetimepicker data-ng-model="dateDropDownInput"
                                         data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
                     </ul>
                 </div>
@@ -239,15 +239,15 @@
             <div class="col-sm-1">
             </div>
             <div class="col-sm-11">
-                <div class="text-center col-sm-3">{{ 'VALUE' | translate}}</div>
-                <div class="text-center col-sm-2">
-                    <div class="text-right col-sm-7">{{ amount}}</div>
-                    <div class="text-left col-sm-4">{{ currency}}</div>
+                <div class="text-right col-sm-2">{{ 'VALUE' | translate}}</div>
+                <div class="text-right col-sm-2">
+                    <div class="text-right col-sm-8 amount-currency-text amount-text">{{ amount}}</div>
+                    <div class="text-left col-sm-4 amount-currency-text">{{ currency}}</div>
                 </div>
                 <div class="col-sm-5">
-                    <div class="text-right col-sm-3">{{ 'CARD_TYPE' | translate}}</div>
+                    <div class="text-right col-sm-5">{{ 'CARD_TYPE' | translate}}</div>
 
-                    <div class="col-sm-9 form-two">
+                    <div class="col-sm-6 form-two">
                         <form>
                             <form>
                                 <select ng-model="creditCard">
@@ -258,7 +258,7 @@
                         </form>
                     </div>
                 </div>
-                <a class="btn btn-fefault cart col-sm-1 text-center" ng-click="executePayment()">{{ 'PAY' |
+                <a class="btn btn-fefault cart col-sm-2 text-center" ng-click="executePayment()">{{ 'PAY' |
                     translate}}</a>
             </div>
         </row>

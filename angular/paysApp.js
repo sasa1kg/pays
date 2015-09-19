@@ -79,7 +79,7 @@ paysApp.config(function ($translateProvider) {
         WHEN: 'When',
         AVAILABLE_TERMIN: 'Available period:',
         VALUE: 'Value:',
-        CARD_TYPE: 'Card type',
+        CARD_TYPE: 'Card type:',
         NOTE: 'Comment',
         NOTE_MSG:'Please enter Your comment for delivery'
 
@@ -142,7 +142,7 @@ paysApp.config(function ($translateProvider) {
             WHEN: 'Kada',
             AVAILABLE_TERMIN: 'Slobodni termini:',
             VALUE: 'Vrednost',
-            CARD_TYPE: 'Vrsta kartice',
+            CARD_TYPE: 'Vrsta kartice:',
             NOTE: 'Napomena',
             NOTE_MSG:'Molimo unesite napomenu za Vašu isporuku'
         });
