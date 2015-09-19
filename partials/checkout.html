@@ -202,7 +202,8 @@
                     <div class="col-sm-8">
                         <div class="col-sm-12" ng-repeat="address in addresses">
                             <label>
-                            <input type="radio" name="addressRadio" ng-change="changed(address)">{{ address |
+                            <input type="radio" name="addressRadio" ng-model="chosenAddress"
+                                   ng-change="changed(address)">{{ address |
                             html}}</label>
                         </div>
 
@@ -244,8 +245,8 @@
                     <div class="text-right col-sm-8 amount-currency-text amount-text">{{ amount}}</div>
                     <div class="text-left col-sm-4 amount-currency-text">{{ currency}}</div>
                 </div>
-                <div class="col-sm-5">
-                    <div class="text-right col-sm-5">{{ 'CARD_TYPE' | translate}}</div>
+                <div class="col-sm-">
+                    <div class="text-right col-sm-6">{{ 'CARD_TYPE' | translate}}</div>
 
                     <div class="col-sm-6 form-two">
                         <form>
