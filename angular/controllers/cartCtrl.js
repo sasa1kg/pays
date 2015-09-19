@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$filter", "CartService", "WishlistService",
-    function (scope, http, location, filter, CartService, WishlistService) {
+angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$filter", "$modal", "CartService", "WishlistService",
+    function (scope, http, location, filter, modal, CartService, WishlistService) {
 
         console.log("Cart Ctrl!");
 
@@ -55,13 +55,31 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
             window.history.back();
         }
 
-        scope.emptyCart = function(){
-            console.log("Empty cart");
-            CartService.resetCart();
-            $('#emptyCartModal').modal('hide');
-            $('.modal-backdrop').remove();
-            location.path('#/');
-        }
+
+        scope.openEmptyCartModal = function () {
+
+            var modalInstance = modal.open({
+                animation: true,
+                templateUrl: 'emptyCartModal.html',
+                controller: 'EmptyCartModalInstanceCtrl',
+                size: 'sm'
+            });
+        };
+
         scope.loadData();
         scope.price = CartService.getTotalCartAmount() + "";
     }]);
+
+angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance,$location,CartService) {
+
+    $scope.emptyCart = function(){
+        console.log("Empty cart");
+        CartService.resetCart();
+        $modalInstance.close();
+        $location.path('#/');
+    }
+
+    $scope.cancelModal = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});

@@ -120,18 +120,17 @@
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-                <li><a href="#/pays">Home</a></li>
-                <li class="active">Korpa</li>
+                <li><a href="#/pays">{{ 'HOME' | translate}}</a></li>
+                <li class="active">{{ 'CART' | translate }}</li>
             </ol>
         </div>
         <div class="table-responsive cart_info">
             <table class="table table-condensed">
                 <thead>
                 <tr class="cart_menu">
-                    <td class="image">Farmer</td>
-                    <td class="description"></td>
-                    <td class="price">Lokacija</td>
-                    <td class="quantity">ID farmera</td>
+                    <td class="image">{{ 'FARMER' | translate}}</td>
+                    <td class="price">{{ 'LOCATION' | translate}}</td>
+                    <td class="quantity">{{' FARMER_ID' | translate}}</td>
                     <td></td>
                 </tr>
                 </thead>
@@ -139,8 +138,6 @@
                 <tr>
                     <td class="cart_price">
                         <p ng-bind-html="farmerName | html"></p>
-                    </td>
-                    <td class="cart_description">
                     </td>
                     <td class="cart_product">
                         <p ng-bind-html="farmerLocation | html"></p>
@@ -156,11 +153,11 @@
             <table class="table table-condensed">
                 <thead>
                 <tr class="cart_menu">
-                    <td class="image">Proizvod</td>
+                    <td class="image">{{ 'ITEM' | translate}}</td>
                     <td class="description"></td>
-                    <td class="price">Cena</td>
-                    <td class="quantity">Količina</td>
-                    <td class="total">Ukupno</td>
+                    <td class="price">{{ 'PRICE' | translate}}</td>
+                    <td class="quantity">{{ 'ITEM_AMOUNT' | translate}}</td>
+                    <td class="total">{{ 'MONEY_AMOUNT' | translate}}</td>
                     <td></td>
                 </tr>
                 </thead>
@@ -172,7 +169,7 @@
                     <td class="cart_description">
                         <h4><a href="">{{item.itemName}}</a></h4>
 
-                        <p>ID proizvoda: {{item.itemId}}</p>
+                        <p>{{ 'ITEM_ID' | translate}}{{item.itemId}}</p>
                     </td>
                     <td class="cart_price">
                         <p>{{item.itemPrice}} RSD / {{item.itemMeasure}}</p>
@@ -210,37 +207,31 @@
                         <li>{{ 'DELIVERY' | translate}} <span>{{shipping}} RSD</span></li>
                         <li>{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
                     </ul>
+
+                    <script type="text/ng-template" id="emptyCartModal.html">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">{{ 'EMPTY_CART' | translate}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{ 'DIALOG_EMPTY_CART_QUESTION' | translate}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default check_out"
+                                    ng-click="emptyCart()">{{ 'YES' |
+                                translate}}
+                            </button>
+                            <button type="button" class="btn btn-default check_out" ng-click="cancelModal()">{{ 'NO'
+                                |
+                                translate}}
+                            </button>
+                        </div>
+                    </script>
+
                     <a class="btn btn-default update" ng-click="goBack()">{{ 'UPDATE_CART' | translate}}</a>
                     <a class="btn btn-default check_out" href="#/checkout">{{ 'PAY' | translate}}</a>
-                    <a class="btn btn-default check_out" data-toggle="modal" data-target="#emptyCartModal">{{
+                    <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
                         'EMPTY_CART' | translate}}</a>
-
-                    <div id="emptyCartModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog modal-sm">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">{{ 'EMPTY_CART' | translate}}</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>{{ 'DIALOG_EMPTY_CART_QUESTION' | translate}}</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default check_out" data-dismiss="modal"
-                                            ng-click="emptyCart()">{{ 'YES' |
-                                        translate}}
-                                    </button>
-                                    <button type="button" class="btn btn-default check_out" data-dismiss="modal">{{ 'NO'
-                                        |
-                                        translate}}
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

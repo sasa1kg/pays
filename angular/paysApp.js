@@ -1,6 +1,6 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageModule',
     'GeoLocationService', 'CartService', 'WishlistService', 'SearchService',
-    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate','ui.bootstrap.datetimepicker'])
+    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap'])
     .filter('html', function ($sce) {
         return function (input) {
             return $sce.trustAsHtml(input);
@@ -46,11 +46,11 @@ paysApp.config(function ($translateProvider) {
         PAY: 'Payment',
         DELIVERY: 'Delivery',
         TOTAL: 'Total',
-        UPDATE_CART : 'Update cart',
-        EMPTY_CART : 'Empty cart',
-        DIALOG_EMPTY_CART_QUESTION : 'Do you want to remove all items from your cart?',
+        UPDATE_CART: 'Update cart',
+        EMPTY_CART: 'Empty cart',
+        DIALOG_EMPTY_CART_QUESTION: 'Do you want to remove all items from your cart?',
         YES: 'Yes',
-        NO : 'No',
+        NO: 'No',
         YOUR_LOCATION: 'Your location',
         CATEGORY: 'Category',
         LOCATION_PLACE: 'Location',
@@ -66,7 +66,7 @@ paysApp.config(function ($translateProvider) {
         ORDER: 'Order',
         ORDER_DATA_SUFFIX: 'information about your delivery',
         WHO: 'Who',
-        NAME_SURNAME: 'Name and surname:',
+        NAME_SURNAME: 'Name and surname',
         WHERE: 'Where',
         CHOOSE_CITY: 'Choose city:',
         CITY: 'City',
@@ -81,7 +81,7 @@ paysApp.config(function ($translateProvider) {
         VALUE: 'Value:',
         CARD_TYPE: 'Card type:',
         NOTE: 'Comment',
-        NOTE_MSG:'Please enter Your comment for delivery',
+        NOTE_MSG: 'Please enter Your comment for delivery',
         ENTER_ACCOUNT: 'Log in to account',
         USERNAME: 'Username',
         PASSWORD: 'Password',
@@ -99,9 +99,14 @@ paysApp.config(function ($translateProvider) {
         POSTAL_CODE: 'Postal code',
         PHONE_NUMBER: 'Telephone number',
         COMPANY_NAME: 'Company name',
-        FARM_NAME: 'Farm name'
-
-
+        FARM_NAME: 'Farm name',
+        LOCATION: 'Location',
+        FARMER_ID:'Farmer ID',
+        ITEM: 'Item',
+        PRICE: 'Price per item',
+        ITEM_AMOUNT:'Item amount',
+        MONEY_AMOUNT: 'Total price',
+        ITEM_ID: 'Item ID: '
     })
         .translations('rs', {
             HOME: 'Početna',
@@ -128,11 +133,11 @@ paysApp.config(function ($translateProvider) {
             PAY: ' Plaćanje',
             DELIVERY: 'Dostava',
             TOTAL: 'Ukupno',
-            UPDATE_CART : 'Nastavi naručivanje',
-            EMPTY_CART : 'Ispravni korpu',
-            DIALOG_EMPTY_CART_QUESTION : 'Da li želite da uklonite sve stavke iz Vaše korpe?',
+            UPDATE_CART: 'Nastavi naručivanje',
+            EMPTY_CART: 'Ispravni korpu',
+            DIALOG_EMPTY_CART_QUESTION: 'Da li želite da uklonite sve stavke iz Vaše korpe?',
             YES: 'Da',
-            NO : 'Ne',
+            NO: 'Ne',
             YOUR_LOCATION: 'Vaša lokacija',
             CATEGORY: 'Kategorija',
             LOCATION_PLACE: 'Mesto',
@@ -148,7 +153,7 @@ paysApp.config(function ($translateProvider) {
             ORDER: 'Narudžbina',
             ORDER_DATA_SUFFIX: 'podaci za Vašu isporuku',
             WHO: 'Kome',
-            NAME_SURNAME: 'Ime i prezime:',
+            NAME_SURNAME: 'Ime i prezime',
             WHERE: 'Gde',
             CHOOSE_CITY: 'Izaberite grad:',
             CITY: 'Grad',
@@ -159,11 +164,11 @@ paysApp.config(function ($translateProvider) {
             ENTRANCE: 'Ulaz:',
             PREDEFINED_LOCATION: 'Predefinisana lokacija:',
             WHEN: 'Kada',
-            AVAILABLE_TERMIN: 'Slobodni termini:',
+            AVAILABLE_TERMIN: 'Vreme dostave:',
             VALUE: 'Vrednost',
             CARD_TYPE: 'Vrsta kartice:',
             NOTE: 'Napomena',
-            NOTE_MSG:'Molimo unesite napomenu za Vašu isporuku',
+            NOTE_MSG: 'Molimo unesite napomenu za Vašu isporuku',
             ENTER_ACCOUNT: 'Pristupi svom nalogu',
             USERNAME: 'Korisničko ime',
             PASSWORD: 'Lozinka',
@@ -181,7 +186,14 @@ paysApp.config(function ($translateProvider) {
             POSTAL_CODE: 'Poštanski broj',
             PHONE_NUMBER: 'Broj telefona',
             COMPANY_NAME: 'Ime kompanije',
-            FARM_NAME: 'Ime farme'
+            FARM_NAME: 'Ime farme',
+            LOCATION: 'Lokacija',
+            FARMER_ID:'ID farmera',
+            ITEM: 'Proizvod',
+            PRICE: 'Cena po jedinici mere',
+            ITEM_AMOUNT:'Količina',
+            MONEY_AMOUNT: 'Ukupna cena',
+            ITEM_ID: 'ID proizvoda: '
         });
     $translateProvider.preferredLanguage('en');
 });
