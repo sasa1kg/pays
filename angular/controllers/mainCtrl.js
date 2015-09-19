@@ -19,6 +19,9 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.foundFarmers = [];
 
 
+        scope.searchPlaceValue = "";
+        scope.locationFound = false;
+
         scope.getCarts = function () {
             scope.cartItems = CartService.getItemsSize();
             scope.wishlistItems = WishlistService.getItemsSize();
@@ -53,8 +56,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
 
         scope.farmersLoaded = SearchService.getFarmers();
 
-        scope.searchPlaceValue = "";
-        scope.locationFound = false;
         scope.searchPlaceBlur = function () {
             if (scope.searchPlaceValue.length > 0) {
                 scope.locationFound = false;
@@ -86,20 +87,19 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
                     categoryName = scope.categories[i].name;
                 }
             }
-            ;
 
             for (var j = scope.subcategories.length - 1; j >= 0; j--) {
                 if (scope.subcategories[j].id == subcategory) {
                     subCategoryName = scope.subcategories[j].name;
                 }
             }
-            ;
+
             for (var k = scope.subcatproducts.length - 1; k >= 0; k--) {
                 if (scope.subcatproducts[k].id == product) {
                     productName = scope.subcatproducts[k].name;
                 }
             }
-            ;
+
 
             alert(counter + "   " + categoryName + "   " + subCategoryName + "  " + productName);
             var criteria = {

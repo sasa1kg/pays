@@ -81,7 +81,26 @@ paysApp.config(function ($translateProvider) {
         VALUE: 'Value:',
         CARD_TYPE: 'Card type:',
         NOTE: 'Comment',
-        NOTE_MSG:'Please enter Your comment for delivery'
+        NOTE_MSG:'Please enter Your comment for delivery',
+        ENTER_ACCOUNT: 'Log in to account',
+        USERNAME: 'Username',
+        PASSWORD: 'Password',
+        ENTER: 'Log in',
+        OR: 'or',
+        NEW_ACCOUNT: 'Create new account',
+        REGISTER: 'Register',
+        USER_TYPE: 'Account type',
+        BUYER: 'Buyer',
+        DISTRIBUTOR: 'Distributor',
+        FARMER: 'Farmer',
+        EMAIL: 'E-Mail address',
+        CONFIRM_PASSWORD: 'Confirm password',
+        STREET_AND_NUMBER: 'Street and number',
+        POSTAL_CODE: 'Postal code',
+        PHONE_NUMBER: 'Telephone number',
+        COMPANY_NAME: 'Company name',
+        FARM_NAME: 'Farm name'
+
 
     })
         .translations('rs', {
@@ -99,7 +118,7 @@ paysApp.config(function ($translateProvider) {
             WISHLIST: 'Lista želja',
             SHOPPING: 'Kupovina',
             CART: 'Pregled korpe',
-            LOGIN: 'Ulaz',
+            LOGIN: 'Prijava',
             CONTACT: 'Kontaktirajte nas',
             PRODUCTS: 'Proizvodi',
             PRODUCT_DETAILS: 'Detalji proizvoda',
@@ -144,7 +163,25 @@ paysApp.config(function ($translateProvider) {
             VALUE: 'Vrednost',
             CARD_TYPE: 'Vrsta kartice:',
             NOTE: 'Napomena',
-            NOTE_MSG:'Molimo unesite napomenu za Vašu isporuku'
+            NOTE_MSG:'Molimo unesite napomenu za Vašu isporuku',
+            ENTER_ACCOUNT: 'Pristupi svom nalogu',
+            USERNAME: 'Korisničko ime',
+            PASSWORD: 'Lozinka',
+            ENTER: 'Prijavi se',
+            OR: 'ili',
+            NEW_ACCOUNT: 'Postani novi korisnik',
+            REGISTER: 'Registruj se',
+            USER_TYPE: 'Tip korisnika',
+            BUYER: 'Kupac',
+            DISTRIBUTOR: 'Dostavljač',
+            FARMER: 'Farmer',
+            EMAIL: 'E-Mail adresa',
+            CONFIRM_PASSWORD: 'Potvrdi lozinku',
+            STREET_AND_NUMBER: 'Ulica i broj',
+            POSTAL_CODE: 'Poštanski broj',
+            PHONE_NUMBER: 'Broj telefona',
+            COMPANY_NAME: 'Ime kompanije',
+            FARM_NAME: 'Ime farme'
         });
     $translateProvider.preferredLanguage('en');
 });

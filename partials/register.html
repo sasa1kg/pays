@@ -123,28 +123,54 @@
 <section id="form"><!--form-->
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 col-sm-offset-1">
-                <div class="login-form"><!--login form -->
-                    <h2>{{ 'ENTER_ACCOUNT' | translate}}</h2>
-
-                    <form action="#">
-                        <input type="text" placeholder="{{'USERNAME' | translate}}"/>
-                        <input type="password" placeholder="{{'PASSWORD' | translate}}"/>
-                        <button type="submit" class="btn btn-default">{{ 'ENTER' | translate}}</button>
-                    </form>
-                </div>
-                <!--/login form-->
-            </div>
-            <div class="col-sm-1">
-                <h2 class="or">{{ 'OR' | translate}}</h2>
-            </div>
-            <div class="col-sm-4">
-                <div class="signup-form"><!--sign up form-->
+            <div class="col-sm-6">
+                <div class="signup-form"><!--sign up form Postani novi kupac-->
                     <h2>{{ 'NEW_ACCOUNT' | translate }}</h2>
 
-                    <form action="#/register">
-                        <button type="submit" class="btn btn-default">{{ ' REGISTER' | translate}} <i
-                                class="fa fa-angle-double-right"></i></button>
+                    <form>
+                        <label>{{ 'USER_TYPE' | translate}}</label>
+                        <select ng-model="userType" class="cursorhover">
+                            <option ng-repeat="type in userTypes" value="{{type.id}}">{{type.name | translate | html}}
+                            </option>
+                        </select>
+                        <hr>
+                        <div ng-if="userType == 1">
+                            <input type="email" ng-model="buyer.email" ng-change="copyEmail()" placeholder="{{ 'EMAIL' | translate}}"/>
+                            <input type="password" ng-model="buyer.password" placeholder="{{ 'PASSWORD' | translate}}"/>
+                            <input type="password" ng-model="buyer.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
+                            <input type="text" ng-model="buyer.username" placeholder="{{ 'USERNAME' | translate}}">
+                            <hr>
+                            <input type="text" ng-model="buyer.nameSurname" placeholder="{{ 'NAME_SURNAME' | translate}}"/>
+                            <input type="text" ng-model="buyer.streetAndNr" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="buyer.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input type="text" ng-model="buyer.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="buyer.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                        </div>
+                        <div ng-if="userType == 2">
+                            <input type="email" ng-model="distributor.email"ng-change="copyEmail()"  placeholder="{{ 'EMAIL' | translate}}"/>
+                            <input type="password" ng-model="distributor.password" placeholder="{{ 'PASSWORD' | translate}}"/>
+                            <input type="password" ng-model="distributor.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
+                            <input type="text" ng-model="distributor.username" placeholder="{{ 'USERNAME' | translate}}"/>
+                            <hr>
+                            <input type="text" ng-model="distributor.companyName" placeholder="{{ 'COMPANY_NAME' | translate}}"/>
+                            <input type="text" ng-model="distributor.streetAndNr" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="distributor.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input type="text" ng-model="distributor.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="distributor.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                        </div>
+                        <div ng-if="userType == 3">
+                            <input type="email" ng-model="farmer.email" ng-change="copyEmail()" placeholder="{{ 'EMAIL' | translate}}"/>
+                            <input type="password" ng-model="farmer.password" placeholder="{{ 'PASSWORD' | translate}}"/>
+                            <input type="password" ng-model="farmer.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
+                            <input type="text" ng-model="farmer.username" placeholder="{{ 'USERNAME' | translate}}"/>
+                            <hr>
+                            <input type="text" ng-model="farmer.farmName" placeholder="{{ 'FARM_NAME' | translate}}"/>
+                            <input type="text" ng-model="farmer.streetAndNr" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="farmer.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input type="text" ng-model="farmer.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="farmer.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                        </div>
+                        <button ng-if="userType != 0" class="btn btn-default" ng-click="register()">{{'REGISTER' | translate}}</button>
                     </form>
                 </div>
                 <!--/sign up form-->
