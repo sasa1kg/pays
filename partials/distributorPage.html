@@ -13,8 +13,9 @@
                 <div class="col-sm-6">
                     <div class="social-icons pull-right">
                         <ul class="nav navbar-nav">
-                                <li><a ng-click="translate('rs')" class="hover"><img src="images/flag_serbian.gif"></img></a></li>
-                                <li><a ng-click="translate('en')" class="hover"><img src="images/uk.png"></img></a></li>
+                            <li><a ng-click="translate('rs')" class="hover"><img
+                                    src="images/flag_serbian.gif"></img></a></li>
+                            <li><a ng-click="translate('en')" class="hover"><img src="images/uk.png"></img></a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,27 +30,6 @@
                 <div class="col-sm-4">
                     <div class="logo pull-left">
                         <a href="#/"><img src="images/home/logo.png" alt=""/></a>
-                    </div>
-                    <div class="btn-group pull-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                {{selectedCountry}}
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li ng-repeat="country in countries"><a href="#">{{country}}</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                {{selectedCurrency}}
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li ng-repeat="currency in currencies"><a href="#">{{currency}}</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -87,25 +67,25 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html" class="active">Početna</a></li>
-                            <li class="dropdown"><a href="#">Prodavnica<i class="fa fa-angle-down"></i></a>
+                            <li><a href="index.html" class="active">{{ 'HOME' | translate}}</a></li>
+                            <li class="dropdown"><a href="#">{{ 'SHOP' | translate}}<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Proizvodi</a></li>
-                                    <li><a href="product-details.html">Detalji proizvoda</a></li>
-                                    <li><a href="checkout.html">Kupovina</a></li>
-                                    <li><a href="cart.html">Korpa</a></li>
-                                    <li><a href="login.html">Ulaz</a></li>
+                                    <li><a href="shop.html">{{ 'PRODUCTS' | translate}}</a></li>
+                                    <li><a href="product-details.html">{{ 'PRODUCT_DETAILS' | translate}}</a></li>
+                                    <li><a href="checkout.html">{{ 'SHOPPING' | translate}}</a></li>
+                                    <li><a href="cart.html">{{ 'CART' | translate}}</a></li>
+                                    <li><a href="login.html">{{ 'LOGIN' | translate}}</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                            <li class="dropdown"><a href="#">{{ 'BLOG' | translate}}<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">Lista blogova</a></li>
-                                    <li><a href="blog-single.html">Jedan blog</a></li>
+                                    <li><a href="blog.html">{{ 'BLOG_LIST' | translate}}</a></li>
+                                    <li><a href="blog-single.html">{{ 'ONE_BLOG' | translate}}</a></li>
                                 </ul>
                             </li>
-                            <li><a href="404.html">Za prodavce</a></li>
-                            <li><a href="#/distributor/1/">Za distributere</a></li>
-                            <li><a href="contact-us.html">Kontaktirajte nas</a></li>
+                            <li><a href="404.html">{{ 'FOR_FARMERS' | translate}}</a></li>
+                            <li><a href="#/distributor/1">{{ 'FOR_DISTRIBUTORS' | translate}}</a></li>
+                            <li><a href="contact-us.html">{{ 'CONTACT' | translate}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -132,7 +112,7 @@
 
                         <h2 ng-bind-html="distributor.location | html"></h2>
 
-                        <h3>Prevoz svakodnevnih namirnica</h3>
+                        <h3>{{'DISTRIBUTOR_TITLE' | translate}}</h3>
 
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua. </p>
@@ -175,19 +155,23 @@
 <section>
     <div class="container">
         <div class="row">
-            <h2 class="title text-center">Vozni park</h2>
+            <h2 class="title text-center">{{ 'VEHICLES' | translate}}</h2>
+
             <div class="product-details">
                 <div class="col-sm-4" ng-repeat="vehicle in distributorVehicles">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
-                                    <img src="{{vehicle.img}}" height="200px" width="128px" class="cursorhover"/>
+                                <img src="{{vehicle.img}}" height="200px" width="128px" class="cursorhover"/>
                             </div>
 
-                            <h4>Broj vozila : {{vehicle.number}}</h4>
-                            <h4>Rashladjen prevoz: {{vehicle.cooled == true ? "Da" : "Ne"}}</h4>
-                            <h4>Gabariti za prevoz[cm]: {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}</h4>
-                            <h4>Količina za prevoz: {{vehicle.amount}} kg</h4>
+                            <h4>{{ 'NUMBER_OF_VEHICLES' | translate}} : {{vehicle.number}}</h4>
+                            <h4>{{ 'COOLED_TRANSPORT' | translate}} : <span ng-if="vehicle.cooled == true">{{'YES' | translate }}</span>
+                                <span ng-if="vehicle.cooled == false">{{'NO' | translate }}</span>
+                            </h4>
+                            <h4>{{ 'TRANSPORT_VOLUME' | translate}}[cm]:
+                                {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}</h4>
+                            <h4>{{ 'TRANSPORT_WEIGHT' | translate}} : {{vehicle.amount}} kg</h4>
                         </div>
                     </div>
                 </div>
@@ -197,96 +181,6 @@
 </section>
 
 <footer id="footer"><!--Footer-->
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="companyinfo">
-                        <h2><span>e</span>-shopper</h2>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                    <div class="col-sm-3">
-                        <div class="video-gallery text-center">
-                            <a href="#">
-                                <div class="iframe-img">
-                                    <img src="images/home/iframe1.png" alt=""/>
-                                </div>
-                                <div class="overlay-icon">
-                                    <i class="fa fa-play-circle-o"></i>
-                                </div>
-                            </a>
-
-                            <p>Circle of Hands</p>
-
-                            <h2>24 DEC 2014</h2>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="video-gallery text-center">
-                            <a href="#">
-                                <div class="iframe-img">
-                                    <img src="images/home/iframe2.png" alt=""/>
-                                </div>
-                                <div class="overlay-icon">
-                                    <i class="fa fa-play-circle-o"></i>
-                                </div>
-                            </a>
-
-                            <p>Circle of Hands</p>
-
-                            <h2>24 DEC 2014</h2>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="video-gallery text-center">
-                            <a href="#">
-                                <div class="iframe-img">
-                                    <img src="images/home/iframe3.png" alt=""/>
-                                </div>
-                                <div class="overlay-icon">
-                                    <i class="fa fa-play-circle-o"></i>
-                                </div>
-                            </a>
-
-                            <p>Circle of Hands</p>
-
-                            <h2>24 DEC 2014</h2>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="video-gallery text-center">
-                            <a href="#">
-                                <div class="iframe-img">
-                                    <img src="images/home/iframe4.png" alt=""/>
-                                </div>
-                                <div class="overlay-icon">
-                                    <i class="fa fa-play-circle-o"></i>
-                                </div>
-                            </a>
-
-                            <p>Circle of Hands</p>
-
-                            <h2>24 DEC 2014</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="address">
-                        <img src="images/home/map.png" alt=""/>
-
-                        <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="footer-widget">
         <div class="container">
             <div class="row">

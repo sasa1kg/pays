@@ -41,7 +41,7 @@ paysApp.config(function ($translateProvider) {
         PRODUCTS: 'Products',
         PRODUCT_DETAILS: 'Product details',
         BLOG_LIST: 'Blog list',
-        BLOG_ONE: 'One blog',
+        ONE_BLOG: 'One blog',
         SEARCH_RESET: 'Reset search parameters',
         PAY: 'Payment',
         DELIVERY: 'Delivery',
@@ -106,7 +106,18 @@ paysApp.config(function ($translateProvider) {
         PRICE: 'Price per item',
         ITEM_AMOUNT:'Item amount',
         MONEY_AMOUNT: 'Total price',
-        ITEM_ID: 'Item ID: '
+        ITEM_ID: 'Item ID: ',
+        SEARCHED_PRODUCTS: 'Searched products',
+        ALL_PRODUCTS: 'All products',
+        ADD_TO_CART: 'Add to cart',
+        DISTRIBUTOR_TITLE: 'Everyday items transport',
+        VEHICLES: 'VEHICLES',
+        NUMBER_OF_VEHICLES: 'Vehicles number',
+        COOLED_TRANSPORT: 'Cooled transport',
+        TRANSPORT_VOLUME: 'Volume for transport',
+        TRANSPORT_WEIGHT: 'Weight for transport',
+        MAX_PRICE: 'Maximum price',
+        MIN_AMOUNT: 'Minimal amount'
     })
         .translations('rs', {
             HOME: 'Početna',
@@ -128,7 +139,7 @@ paysApp.config(function ($translateProvider) {
             PRODUCTS: 'Proizvodi',
             PRODUCT_DETAILS: 'Detalji proizvoda',
             BLOG_LIST: 'Lista blogova',
-            BLOG_ONE: 'Jedan blog',
+            ONE_BLOG: 'Jedan blog',
             SEARCH_RESET: 'Poništi izbor za pretragu',
             PAY: ' Plaćanje',
             DELIVERY: 'Dostava',
@@ -193,7 +204,18 @@ paysApp.config(function ($translateProvider) {
             PRICE: 'Cena po jedinici mere',
             ITEM_AMOUNT:'Količina',
             MONEY_AMOUNT: 'Ukupna cena',
-            ITEM_ID: 'ID proizvoda: '
+            ITEM_ID: 'ID proizvoda: ',
+            SEARCHED_PRODUCTS: 'Traženi proizvodi',
+            ALL_PRODUCTS: 'Svi proizvodi',
+            ADD_TO_CART: 'Dodaj u korpu',
+            DISTRIBUTOR_TITLE: 'Prevoz svakodnevnih namirnica',
+            VEHICLES: 'Vozni park',
+            NUMBER_OF_VEHICLES: 'Broj vozila',
+            COOLED_TRANSPORT: 'Rashlađen prevoz',
+            TRANSPORT_VOLUME: 'Gabariti za prevoz',
+            TRANSPORT_WEIGHT: 'Težina za prevoz',
+            MAX_PRICE: 'Maksimalna cena',
+            MIN_AMOUNT: 'Minimalna količina'
         });
     $translateProvider.preferredLanguage('en');
 });
