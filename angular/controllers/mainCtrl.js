@@ -257,35 +257,53 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             return typeof scope.foundFarmers[0] === 'undefined' || scope.foundFarmers.length == 0;
         }
 
-        scope.check = function (value,checked) {
+        scope.check = function (value, checked) {
             var idx = scope.selectedCategories.indexOf(value);
             if (idx >= 0 && !checked) {
                 scope.selectedCategories.splice(idx, 1);
+                var products = SearchService.getProductsInCategory(value);
+                for (var j = products.length - 1; j >= 0; j--) {
+                    for (var k = scope.foundProducts.length - 1; k >= 0; k--) {
+                        if (scope.foundProducts[k].id == products[j].id) {
+                            scope.foundProducts.splice(k, 1);
+                            break;
+                        }
+                    }
+                }
+
+
             }
             if (idx < 0 && checked) {
                 scope.selectedCategories.push(value);
-            }
 
-            scope.foundProducts = [];
-            for (var cat in scope.selectedCategories) {
-                var products = SearchService.getProductsInCategory(scope.selectedCategories[cat]);
-                for (var prod in products) {
-                    scope.foundProducts.push(products[prod]);
+                var products = SearchService.getProductsInCategory(value);
+                for (var j = products.length - 1; j >= 0; j--) {
+                    products[j].checked = false;
+                    if (products[j].checked == false) {
+                        for (var k = scope.searchWishlistItems.length - 1; k >= 0; k--) {
+                            if (scope.searchWishlistItems[k].id == products[j].id) {
+                                products[j].checked = true;
+                            }
+                        }
+                    }
+
+                    scope.foundProducts.push(products[j]);
                 }
-            }
 
+
+            }
         }
 
         scope.getProducts = function () {
             return scope.foundProducts;
         }
 
-        scope.addOrRemoveSearchWishlistItem = function (product,checked) {
+        scope.addOrRemoveSearchWishlistItem = function (product) {
 
-            if(checked) {
+            if (product.checked) {
                 var prodFound = false;
                 for (var prod in scope.searchWishlistItems) {
-                    if (prod == product.id) {
+                    if (prod.id == product.id) {
                         prodFound = true;
                     }
                 }
@@ -304,9 +322,9 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         }
 
         scope.clearSelectedSearchProducts = function () {
-            console.log("AAAAA")
             scope.searchWishlistItems = [];
             scope.selectedCategories = [];
+            scope.foundProducts = [];
         }
         scope.distance = "";
 
@@ -340,6 +358,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.getCategories();
         scope.getCarts();
 
-        scope.price = CartService.getTotalCartAmount()+"";
+        scope.price = CartService.getTotalCartAmount() + "";
     }])
 ;

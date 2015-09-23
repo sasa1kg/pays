@@ -182,7 +182,7 @@
                                                ng-checked="selectedCategories.indexOf(cat.id) > -1"
                                                ng-model="checkedValue"
                                                ng-click="check(cat.id,checkedValue)">
-                                        {{cat.name}}
+                                        {{cat.name | translate}}
                                     </label>
                                 </row>
 
@@ -195,7 +195,7 @@
                                 <button type="button" class="btn btn-fefault cart actionbar"
                                         ng-click="cancelSearch()">
                                     <i class="fa fa-times"></i>
-                                    {{ 'SEARCH_RESET' | translate}}
+                                    {{ 'CANCEL_SEARCH' | translate}}
                                 </button>
 
                             </form>
@@ -275,12 +275,12 @@
                 <row class="col-sm-12" ng-repeat="product in getProducts()">
 
                     <div class="col-sm-1"><input type="checkbox" class="zoom-checkbox"
-                                                 ng-model="checkedProductValue"
-                                                 ng-change="addOrRemoveSearchWishlistItem(product, checkedProductValue)">
+                                                 ng-model="product.checked"
+                                                 ng-change="addOrRemoveSearchWishlistItem(product)">
 
                     </div>
 
-                    <h4 class="title text-left col-sm-3">{{product.name}}</h4>
+                    <h4 class="title text-left col-sm-3">{{product.name | html}}</h4>
                     <h6 class="col-sm-2">{{ 'MIN_AMOUNT' | translate}}:</h6>
 
                     <div class="col-sm-2">

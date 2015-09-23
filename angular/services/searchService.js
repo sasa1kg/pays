@@ -392,79 +392,83 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             var categories = [
                 {
                     "id": 0,
-                    "name": "Povrce"
+                    "name": "VEGETABLES"
                 },
                 {
                     "id": 1,
-                    "name": "Voce"
+                    "name": "FRUIT"
                 },
                 {
                     "id": 2,
-                    "name": "Meso i mesne preradjevine"
+                    "name": "MEAT_AND_MEAT_PRODUCTS"
                 },
                 {
                     "id": 3,
-                    "name": "Mleko i mlecni proizvodi"
+                    "name": "MILK_AND_DAIRES"
                 },
                 {
                     "id": 4,
-                    "name": "Med i pcelinji proizvodi"
+                    "name": "HONEY_PRODUCTS"
                 },
                 {
                     "id": 5,
-                    "name": "Jaja"
+                    "name": "EGGS"
                 },
                 {
                     "id": 6,
-                    "name": "Zitarice i brasno"
+                    "name": "GRAINS_AND_FLOUR"
                 },
                 {
                     "id": 7,
-                    "name": "Gljive"
+                    "name": "MUSHROUMS"
                 },
                 {
                     "id": 8,
-                    "name": "Suseno voce i orasasti plodovi"
+                    "name": "DRIED_FRUIT_AND_NUTS"
                 },
                 {
                     "id": 9,
-                    "name": "Suseno povrce"
+                    "name": "DRIED_VEGETABLES"
                 },
                 {
                     "id": 10,
-                    "name": "Zimnica"
+                    "name": "WINTER_STORES"
                 },
                 {
                     "id": 11,
-                    "name": "Bezalkoholna pica i sirupi"
+                    "name": "NON_ALCOHOL_AND_SIRUPS"
                 },
                 {
                     "id": 12,
-                    "name": "Alkoholna pica"
+                    "name": "ALCOHOL_DRINKS"
                 },
                 {
                     "id": 13,
-                    "name": "Slatkisi"
+                    "name": "SWEETS"
                 },
                 {
                     "id": 14,
-                    "name": "Peciva"
+                    "name": "BAGELS"
                 },
                 {
                     "id": 15,
-                    "name": "Kozmetika i higijena"
+                    "name": "COSMETICS_AND_HYGIENE"
                 },
                 {
                     "id": 16,
-                    "name": "Organski proizvodi"
+                    "name": "ORGANIC_PRODUCTS"
                 },
                 {
                     "id": 17,
-                    "name": "Gotove korpe"
+                    "name": "BASKETS"
                 },
                 {
                     "id": 18,
-                    "name": "Cvece i sadnice"
+                    "name": "FLOWERS_AND_SEEDLINGS"
+                },
+                {
+                    "id": 19,
+                    "name": "FISH_PRODUCTS"
                 }
             ];
             return categories;
@@ -1151,6 +1155,13 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                         "id": 43,
                         "name": "Hrizanteme"
                     },
+                ]
+            }else if (category == 19) {
+                products = [
+                    {
+                        "id": 44,
+                        "name": "Pastrmka"
+                    }
                 ]
             }
 
