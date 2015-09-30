@@ -13,9 +13,8 @@
                 <div class="col-sm-6">
                     <div class="social-icons pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a ng-click="translate('rs')" class="hover"><img
-                                    src="images/flag_serbian.gif"></img></a></li>
-                            <li><a ng-click="translate('en')" class="hover"><img src="images/uk.png"></img></a></li>
+                            <li><a ng-click="translate('rs')" class="hover"><img src="images/sr.jpg"></a></li>
+                            <li><a ng-click="translate('en')" class="hover"><img src="images/uk.jpg"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -189,7 +188,7 @@
 
                     <script type="text/ng-template" id="emptyCartModal.html">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <button type="button" class="close" ng-click="cancelModal()">&times;</button>
                             <h4 class="modal-title">{{ 'EMPTY_CART' | translate}}</h4>
                         </div>
                         <div class="modal-body">

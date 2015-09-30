@@ -21,63 +21,63 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "Jovan Jovanovic",
                 "location": "Novi Sad",
-                "img": "images/home/product1.jpg",
+                "img": "images/home/farm1.jpg",
                 "items": 10,
                 "id": 145
             },
             {
                 "name": 'Doma&#263;a pijaca',
                 "location": "Novi Sad",
-                "img": "images/home/healthy-logo2.jpg",
+                "img": "images/home/farm2.jpg",
                 "items": 10,
                 "id": 147
             },
             {
                 "name": "Dejan Dejanovi&#263;",
                 "location": "Budisava",
-                "img": "images/home/product2.jpg",
+                "img": "images/home/farm3.jpg",
                 "items": 8,
                 "id": 155
             },
             {
                 "name": "Milan Milanovi&#263;",
                 "location": "&#269;urug",
-                "img": "images/home/product3.jpg",
+                "img": "images/home/farm4.jpg",
                 "items": 4,
                 "id": 165
             },
             {
                 "name": "Zdrav o i fit d.o.o",
                 "location": "Be&scaron;ka",
-                "img": "images/home/healthy-logo.jpg",
+                "img": "images/home/farm5.jpg",
                 "items": 22,
                 "id": 301
             },
             {
                 "name": "Stevan Stevanovi&#263;",
                 "location": "Bege&#269;",
-                "img": "images/home/product4.jpg",
+                "img": "images/home/farm5.jpg",
                 "items": 2,
                 "id": 175
             },
             {
                 "name": "Marko Markovi&#263;",
                 "location": "Crvenka",
-                "img": "images/home/product1.jpg",
+                "img": "images/home/farm6.jpg",
                 "items": 22,
                 "id": 185
             },
             {
                 "name": "An&#273;ela Jovovi&#263;",
                 "location": "Ba&#269;ka Topola",
-                "img": "images/home/product5.jpg",
+                "img": "images/home/farm7.jpg",
                 "items": 4,
                 "id": 195
             },
             {
                 "name": "Marina Marovi&#263;",
                 "location": "Kovilj",
-                "img": "images/home/product6.jpg",
+                "img": "images/home/farm8.jpg",
                 "items": 2,
                 "id": 208
             }
@@ -927,240 +927,240 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 products = [
                     {
                         "id": 0,
-                        "name": "Paradajz"
+                        "name": "TOMATO"
                     },
                     {
                         "id": 1,
-                        "name": "Krastavac"
+                        "name": "CUCUMBER"
                     },
                     {
                         "id": 2,
-                        "name": "Mladi luk"
+                        "name": "SPRING_ONION"
                     }
                 ]
             } else if (category == 1) {
                 products = [
                     {
                         "id": 3,
-                        "name": "Jabuke"
+                        "name": "APPLE"
                     },
                     {
                         "id": 4,
-                        "name": "Kruske"
+                        "name": "PEAR"
                     },
                     {
                         "id": 5,
-                        "name": "Jagode"
+                        "name": "STRAWBERRY"
                     }
                 ]
             } else if (category == 2) {
                 products = [
                     {
                         "id": 6,
-                        "name": "Jagnjetina"
+                        "name": "LAMB"
                     },
                     {
                         "id": 7,
-                        "name": "Kobasica"
+                        "name": "SAUSAGE"
                     },
                     {
                         "id": 8,
-                        "name": "Piletina"
+                        "name": "CHICKEN"
                     }
                 ]
             } else if (category == 3) {
                 products = [
                     {
                         "id": 9,
-                        "name": "Mleko"
+                        "name": "MILK"
                     },
                     {
                         "id": 10,
-                        "name": "Jogurt"
+                        "name": "YOGHURT"
                     },
                     {
                         "id": 11,
-                        "name": "Sir"
+                        "name": "CHEESE"
                     }
                 ]
             } else if (category == 4) {
                 products = [
                     {
                         "id": 12,
-                        "name": "Bagremov med"
+                        "name": "ACACIA_HONEY"
                     },
                     {
                         "id": 13,
-                        "name": "Livadski med"
+                        "name": "MEADOW_HONEY"
                     },
                 ]
             } else if (category == 5) {
                 products = [
                     {
                         "id": 14,
-                        "name": "Kokosija jaja"
+                        "name": "CHICKEN_EGGS"
                     },
                 ]
             } else if (category == 6) {
                 products = [
                     {
                         "id": 15,
-                        "name": "Ovas"
+                        "name": "OATS"
                     },
                     {
                         "id": 16,
-                        "name": "Raz"
+                        "name": "BARLEY"
                     },
                     {
                         "id": 17,
-                        "name": "Brasno"
+                        "name": "FLOUR"
                     }
                 ]
             } else if (category == 7) {
                 products = [
                     {
                         "id": 18,
-                        "name": "Sampinjoni"
+                        "name": "CHAMPIGNIONS"
                     },
                 ]
             } else if (category == 8) {
                 products = [
                     {
                         "id": 19,
-                        "name": "Orah"
+                        "name": "WALNUT"
                     },
                     {
                         "id": 20,
-                        "name": "Lesnik"
+                        "name": "NUT"
                     },
                     {
                         "id": 21,
-                        "name": "Suve smokve"
+                        "name": "DRY_FIGS"
                     }
                 ]
             } else if (category == 9) {
                 products = [
                     {
                         "id": 22,
-                        "name": "Suva paprika"
+                        "name": "DRY_PAPRIKA"
                     },
                 ]
             } else if (category == 10) {
                 products = [
                     {
                         "id": 23,
-                        "name": "Kornisoni"
+                        "name": "PICKLES"
                     },
                     {
                         "id": 24,
-                        "name": "Tursija"
+                        "name": "BRINE"
                     },
                 ]
             } else if (category == 11) {
                 products = [
                     {
                         "id": 25,
-                        "name": "Domaci sok"
+                        "name": "HOMEMADE_JUICE"
                     },
                     {
                         "id": 26,
-                        "name": "Kabeza"
+                        "name": "GRAPE_JUICE"
                     },
                     {
                         "id": 27,
-                        "name": "Sirup"
+                        "name": "SIRYP"
                     }
                 ]
             } else if (category == 12) {
                 products = [
                     {
                         "id": 28,
-                        "name": "Rakija"
+                        "name": "SCHNAPS"
                     },
                     {
                         "id": 29,
-                        "name": "Vino"
+                        "name": "WINE"
                     },
                     {
                         "id": 30,
-                        "name": "Pivo"
+                        "name": "BEER"
                     }
                 ]
             } else if (category == 13) {
                 products = [
                     {
                         "id": 31,
-                        "name": "Cokolada"
+                        "name": "CHOCOLATE"
                     },
                     {
                         "id": 32,
-                        "name": "Bombone"
+                        "name": "CANDY"
                     },
                 ]
             } else if (category == 14) {
                 products = [
                     {
                         "id": 33,
-                        "name": "Hleb"
+                        "name": "BREAD"
                     },
                     {
                         "id": 34,
-                        "name": "Kifle"
+                        "name": "ROOL"
                     },
                 ]
             } else if (category == 15) {
                 products = [
                     {
                         "id": 35,
-                        "name": "Sapun"
+                        "name": "SOAP"
                     },
                     {
                         "id": 36,
-                        "name": "Sampon"
+                        "name": "SHAMPOO"
                     },
                 ]
             } else if (category == 16) {
                 products = [
                     {
                         "id": 37,
-                        "name": "Organske jabuke"
+                        "name": "ORGANIC_APPLE"
                     },
                     {
                         "id": 38,
-                        "name": "Organska zelena salata"
+                        "name": "ORGANIC_CABBAGE"
                     },
                     {
                         "id": 39,
-                        "name": "Organske Jagode"
+                        "name": "OGRANIC_STRAWBERRY"
                     }
                 ]
             } else if (category == 17) {
                 products = [
                     {
                         "id": 40,
-                        "name": "Korpa"
+                        "name": "BASKET"
                     },
                     {
                         "id": 41,
-                        "name": "Ceger"
+                        "name": "HANDBAG"
                     }
                 ]
             } else if (category == 18) {
                 products = [
                     {
                         "id": 42,
-                        "name": "Petunije"
+                        "name": "PETUNIA"
                     },
                     {
                         "id": 43,
-                        "name": "Hrizanteme"
+                        "name": "ROSE"
                     },
                 ]
             }else if (category == 19) {
                 products = [
                     {
                         "id": 44,
-                        "name": "Pastrmka"
+                        "name": "TROUT"
                     }
                 ]
             }
