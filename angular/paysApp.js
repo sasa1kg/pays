@@ -187,7 +187,8 @@ paysApp.config(function ($translateProvider) {
         HANDBAG: 'Handbag',
         PETUNIA: 'Petunia',
         ROSE: 'Rose',
-        TROUT: 'Trout'
+        TROUT: 'Trout',
+        SEARCH_PRODUCTS: 'Search products'
     })
         .translations('rs', {
             HOME: 'Početna',
@@ -351,7 +352,8 @@ paysApp.config(function ($translateProvider) {
             HANDBAG: 'Tašna',
             PETUNIA: 'Petunije',
             ROSE: 'Ruže',
-            TROUT: 'Pastrmka'
+            TROUT: 'Pastrmka',
+            SEARCH_PRODUCTS: 'Proizvodi za pretragu'
         })
     $translateProvider.preferredLanguage('en');
 });

@@ -334,10 +334,10 @@
                 </div>
             </div>
             <div ng-if="!isWishListEmpty() || !noSelectedCategory()">
-                <h5 class="title text-center">Proizvodi za pretragu:</h5>
+                <h5 class="title text-center">{{ 'SEARCH_PRODUCTS' | translate}}:</h5>
 
                 <p class="text-left" ng-repeat=" item in searchWishlistItems">
-                    {{item.name}}</p>
+                    {{item.name | translate}}</p>
             </div>
         </div>
     </div>
