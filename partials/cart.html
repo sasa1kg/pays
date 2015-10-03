@@ -108,7 +108,7 @@
                 <tr class="cart_menu">
                     <td class="image">{{ 'FARMER' | translate}}</td>
                     <td class="price">{{ 'LOCATION' | translate}}</td>
-                    <td class="quantity">{{' FARMER_ID' | translate}}</td>
+                    <td class="quantity">{{' EMAIL' | translate}}</td>
                     <td></td>
                 </tr>
                 </thead>
@@ -121,7 +121,7 @@
                         <p ng-bind-html="farmerLocation | html"></p>
                     </td>
                     <td class="cart_quantity">
-                        <p>{{farmerId}}</p>
+                        <p>farm@gmail.com</p>
                     </td>
                 </tr>
                 </tbody>
@@ -145,9 +145,9 @@
                         <a href=""><img src="{{item.image}}" alt="{{item.itemName}}" style="width:128px;height:128px;"></a>
                     </td>
                     <td class="cart_description">
-                        <h4><a href="">{{item.itemName}}</a></h4>
+                        <h4><a href="">{{item.itemName | translate}}</a></h4>
 
-                        <p>{{ 'ITEM_ID' | translate}}{{item.itemId}}</p>
+                        <p>{{'NON_ORGANIC' | translate}}</p>
                     </td>
                     <td class="cart_price">
                         <p>{{item.itemPrice}} RSD / {{item.itemMeasure}}</p>

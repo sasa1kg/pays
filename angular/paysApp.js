@@ -58,7 +58,8 @@ paysApp.config(function ($translateProvider) {
         YOUR_LOCATION: 'Your location',
         CATEGORY: 'Category',
         LOCATION_PLACE: 'Location',
-        MARKETING_SPACE: 'Advertising space',
+        LOCATION_FOUND: 'Location found',
+        MARKETING_SPACE: 'Top picks',
         ADVERTISING: 'Advertising',
         MOST_IN_YEAR: 'The most sales in a year',
         MOST_DIFFERENT: 'The most different products',
@@ -188,7 +189,9 @@ paysApp.config(function ($translateProvider) {
         PETUNIA: 'Petunia',
         ROSE: 'Rose',
         TROUT: 'Trout',
-        SEARCH_PRODUCTS: 'Search products'
+        SEARCH_PRODUCTS: 'Search products',
+        ALL_RIGHTS_RESERVED: 'All rights reserved',
+        NON_ORGANIC: 'Non-organic'
     })
         .translations('rs', {
             HOME: 'Početna',
@@ -223,7 +226,8 @@ paysApp.config(function ($translateProvider) {
             YOUR_LOCATION: 'Vaša lokacija',
             CATEGORY: 'Kategorija',
             LOCATION_PLACE: 'Mesto',
-            MARKETING_SPACE: 'Reklamni prostor',
+            LOCATION_FOUND: 'Lokacija pronađena',
+            MARKETING_SPACE: 'Najistaknutiji farmeri',
             ADVERTISING: 'Reklame',
             MOST_IN_YEAR: 'Najviše prodali u toku godine',
             MOST_DIFFERENT: 'Najviše različitih proizvoda',
@@ -353,7 +357,9 @@ paysApp.config(function ($translateProvider) {
             PETUNIA: 'Petunije',
             ROSE: 'Ruže',
             TROUT: 'Pastrmka',
-            SEARCH_PRODUCTS: 'Proizvodi za pretragu'
+            SEARCH_PRODUCTS: 'Proizvodi za pretragu',
+            ALL_RIGHTS_RESERVED: 'Sva prava zadržana',
+            NON_ORGANIC: 'Neorganski'
         })
     $translateProvider.preferredLanguage('en');
 });

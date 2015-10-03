@@ -167,7 +167,7 @@
 
                             <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
 
-                            <p>{{product.name}}</p>
+                            <p>{{product.name | translate}}</p>
                             <a ng-if="!isProductInCart(product.id)" ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate}}</a>
 
@@ -199,7 +199,7 @@
 
                             <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
 
-                            <p>{{product.name}}</p>
+                            <p>{{product.name | translate}}</p>
                             <a ng-if="!isProductInCart(product.id)" ng-click="addToCart(product.id)" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>{{'ADD_TO_CART' | translate}}</a>
 
