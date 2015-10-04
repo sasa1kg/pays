@@ -15,16 +15,6 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
             controller: "wishlistCtrl",
             resolve: {}
         })
-        .when("/blogSingle", {
-            templateUrl: "partials/blog-single.html",
-            controller: "blogSingleCtrl",
-            resolve: {}
-        })
-        .when("/blog", {
-            templateUrl: "partials/blog.html",
-            controller: "blogCtrl",
-            resolve: {}
-        })
         .when("/checkout", {
             templateUrl: "partials/checkout.html",
             controller: "checkoutCtrl",
@@ -52,11 +42,6 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
         .when("/login", {
             templateUrl: "partials/login.html",
             controller: "loginCtrl",
-            resolve: {}
-        })
-        .when("/search", {
-            templateUrl: "partials/search.html",
-            controller: "searchCtrl",
             resolve: {}
         })
         .when("/register", {

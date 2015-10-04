@@ -121,7 +121,7 @@
                         <p ng-bind-html="farmerLocation | html"></p>
                     </td>
                     <td class="cart_quantity">
-                        <p>farm@gmail.com</p>
+                        <p ng-bind-html="farmerEMail | html"></p>
                     </td>
                 </tr>
                 </tbody>
@@ -157,6 +157,7 @@
                         <div class="cart_quantity_button">
                             <a class="cart_quantity_up cursor-pointer" ng-click="addMore(item.itemId)"> + </a>
                             <input class="cart_quantity_input" type="text" name="quantity" ng-model="item.itemNum"
+                                   ng-change="setAmount(item.itemId,item.itemNum)"
                                    autocomplete="off" size="2">
                             <a class="cart_quantity_down cursor-pointer" ng-click="less(item.itemId)"> - </a>
                         </div>
@@ -182,7 +183,9 @@
                 <div class="total_area">
                     <ul>
                         <li>{{ 'CART' | translate}} <span>{{totalPrice}} RSD</span></li>
-                        <li>{{ 'DELIVERY' | translate}} <span>{{shipping}} RSD</span></li>
+                        <li><input type="checkbox"
+                                   ng-model="isShipped" ng-click="changeShipment(isShipped)">{{ 'DELIVERY' | translate}}
+                            ({{ 'DELIVERY_OPTION' | translate}}) <span>{{shipping}} RSD</span></li>
                         <li>{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
                     </ul>
 

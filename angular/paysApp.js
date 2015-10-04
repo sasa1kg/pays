@@ -191,7 +191,8 @@ paysApp.config(function ($translateProvider) {
         TROUT: 'Trout',
         SEARCH_PRODUCTS: 'Search products',
         ALL_RIGHTS_RESERVED: 'All rights reserved',
-        NON_ORGANIC: 'Non-organic'
+        NON_ORGANIC: 'Non-organic',
+        DELIVERY_OPTION: 'If not checked, farmer will consider you will pick up your order'
     })
         .translations('rs', {
             HOME: 'Početna',
@@ -359,7 +360,8 @@ paysApp.config(function ($translateProvider) {
             TROUT: 'Pastrmka',
             SEARCH_PRODUCTS: 'Proizvodi za pretragu',
             ALL_RIGHTS_RESERVED: 'Sva prava zadržana',
-            NON_ORGANIC: 'Neorganski'
+            NON_ORGANIC: 'Neorganski',
+            DELIVERY_OPTION: 'Ukoliko nije odabrana, farmer podrazumeva da ćete sami preuzeti proizvode'
         })
     $translateProvider.preferredLanguage('en');
 });

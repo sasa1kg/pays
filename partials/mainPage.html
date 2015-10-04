@@ -128,15 +128,9 @@
                                     </tr>
                                 </table>
                                 <h4 class="panel-title"><a href="#">{{ 'IN_CIRCLE_OF' | translate}} </a></h4>
-                                <select class="input" ng-model="distance">
-                                    <option selected="true" disabled="disabled" value="">{{ 'CHOOSE_DISTANCE' |
-                                        translate}}
-                                    </option>
-                                    <option value="10">10 km</option>
-                                    <option value="20">20 km</option>
-                                    <option value="50">50 km</option>
-                                    <option value="100">100 km</option>
-                                </select>
+                                <select ng-model="distanceValue" ng-init="distanceValue = distances[0].value"
+                                        ng-options="distance.value as distance.value for distance in distances"
+                                        required></select>
 
                                 <hr class="orangehr">
 
@@ -331,7 +325,7 @@
     <div class="container">
         <h2 class="title text-center">{{ 'MARKETING_SPACE' | translate}}</h2>
 
-        <div cg-busy="{promise:nearByFarmers,message:'Učitavanje | translate' ...',backdrop:true}"></div>
+        <div cg-busy="{promise:nearByFarmers,message:'Učitavanje...,backdrop:true}"></div>
         <div class="row">
             <div class="col-sm-2 padding-right">
                 <h4 class="title text-center vertical-text-center">{{ 'MOST_IN_YEAR' | translate}}</h4>
@@ -448,7 +442,7 @@
     </div>
 </section>
 
-<footer id="footer" ><!--Footer-->
+<footer id="footer"><!--Footer-->
     <div class="footer-widget" ng-if="false">
         <div class="container">
             <div class="row">

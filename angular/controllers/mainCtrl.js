@@ -22,6 +22,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.searchPlaceValue = "";
         scope.locationFound = false;
 
+        scope.distances = SearchService.getDistances();
         scope.getCarts = function () {
             scope.cartItems = CartService.getItemsSize();
             scope.wishlistItems = WishlistService.getItemsSize();

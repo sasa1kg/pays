@@ -3,16 +3,15 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
 
         console.log("Cart Ctrl!");
 
-
-        scope.shipping = 0;
-
+        scope.shippingConst = 200;
+        scope.shipping = scope.shippingConst;
+        scope.isShipped = true;
 
         scope.calculateTotal = function () {
             scope.totalPrice = 0;
             for (var i = scope.cartItems.length - 1; i >= 0; i--) {
                 scope.totalPrice = scope.totalPrice + scope.cartItems[i].itemPrice * scope.cartItems[i].itemNum;
             }
-            ;
             scope.total = scope.totalPrice + scope.shipping;
         }
 
@@ -21,17 +20,20 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
             CartService.remove(itemId, scope.farmerId);
             scope.loadData();
             scope.price = CartService.getTotalCartAmount()+"";
+            scope.calculateTotal();
         };
 
         scope.addMore = function (itemId) {
             CartService.more(itemId, scope.farmerId);
             scope.loadData();
             scope.price = CartService.getTotalCartAmount()+"";
+            scope.calculateTotal();
         }
         scope.less = function (itemId) {
             CartService.less(itemId, scope.farmerId);
             scope.loadData();
             scope.price = CartService.getTotalCartAmount()+"";
+            scope.calculateTotal();
         };
 
 
@@ -43,10 +45,12 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
                 scope.farmerName = scope.cartItems[0].farmer;
                 scope.farmerLocation = scope.cartItems[0].farmerLocation;
                 scope.farmerId = scope.cartItems[0].farmerId;
+                scope.farmerEMail = scope.cartItems[0].farmerEmail;
             } else {
                 scope.farmerName = "";
                 scope.farmerLocation = "";
                 scope.farmerId = "";
+                scope.farmerEMail = "";
             }
             scope.calculateTotal();
         }
@@ -65,6 +69,32 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
                 size: 'sm'
             });
         };
+
+        scope.setAmount = function (productId, amount) {
+
+            if(!isNaN(amount) && (amount >= 0)) {
+                console.log("Amount of " + productId + " = " + amount);
+                for (var i = scope.cartItems.length - 1; i >= 0; i--) {
+                    if (scope.cartItems[i].id == productId) {
+                        scope.cartItems[i].itemNum = parseFloat(amount);
+                    }
+                }
+                CartService.updateProductAmount(productId,scope.farmerId,parseFloat(amount));
+                scope.price = CartService.getTotalCartAmount()+"";
+                scope.calculateTotal();
+            }
+        }
+
+        scope.changeShipment = function (isShipped){
+            scope.isShipped = isShipped;
+
+            if(scope.isShipped == true){
+                scope.shipping = scope.shippingConst;
+            } else {
+                scope.shipping = 0;
+            }
+            scope.calculateTotal();
+        }
 
         scope.loadData();
         scope.price = CartService.getTotalCartAmount() + "";

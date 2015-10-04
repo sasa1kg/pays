@@ -1225,4 +1225,21 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         this.getVehiclesByDistributorId = function(distId){
             return this.vehicles;
         }
+
+        this.getDistances = function(){
+            return [
+                {
+                    value: "10 km"
+                },
+                {
+                    value: "20 km"
+                },
+                {
+                    value: "50 km"
+                },
+                {
+                    value: "100 km"
+                }
+            ]
+        }
     }]);

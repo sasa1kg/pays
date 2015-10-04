@@ -100,10 +100,10 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                 console.log("Amount of " + productId + " = " + amount);
                 for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                     if (scope.farmerProducts[i].id == productId) {
-                        scope.farmerProducts[i].itemNum = amount;
+                        scope.farmerProducts[i].itemNum = parseFloat(amount);
                     }
                 }
-                CartService.updateProductAmount(productId,scope.farmerId,amount);
+                CartService.updateProductAmount(productId,scope.farmerId,parseFloat(amount));
                 scope.price = CartService.getTotalCartAmount()+"";
             }
         }
