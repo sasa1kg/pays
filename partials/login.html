@@ -1,12 +1,12 @@
-<header id="header" data-ng-init="initGeo()"><!--header-->
+<header id="header"><!--header-->
     <div class="header_top"><!--header_top-->
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="contactinfo">
                         <ul class="nav nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i> +381 21 1101100</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> info@pays.rs</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i> {{paysPhone}}</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> {{paysEMail}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -34,11 +34,9 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> {{ 'ACCOUNT' | translate}}</a></li>
-                            <li><a href="#/wishlist"><i class="fa fa-star"></i> {{ 'WISHLIST' | translate}} <span
+                            <li><a href="#/404"><i class="fa fa-user"></i> {{ 'ACCOUNT' | translate}}</a></li>
+                            <li><a href="#/404"><i class="fa fa-star"></i> {{ 'WISHLIST' | translate}} <span
                                     class="badge alert-warning">{{wishlistItems}}</span></a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> {{ 'SHOPPING' | translate}}</a>
-                            </li>
                             <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
                                     class="badge alert-success">{{price}}</span></a></li>
                             <li><a href="#/checkout"> {{ 'PAY' | translate}}</a></li>
@@ -54,7 +52,7 @@
     <div class="header-bottom"><!--header-bottom-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-10">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse"
                                 data-target=".navbar-collapse">
@@ -66,25 +64,9 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html" class="active">Početna</a></li>
-                            <li class="dropdown"><a href="#">Prodavnica<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Proizvodi</a></li>
-                                    <li><a href="product-details.html">Detalji proizvoda</a></li>
-                                    <li><a href="checkout.html">Kupovina</a></li>
-                                    <li><a href="cart.html">Korpa</a></li>
-                                    <li><a href="login.html">Ulaz</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">Lista blogova</a></li>
-                                    <li><a href="blog-single.html">Jedan blog</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="404.html">Za prodavce</a></li>
-                            <li><a href="#/distributor/1/">Za distributere</a></li>
-                            <li><a href="contact-us.html">Kontaktirajte nas</a></li>
+                            <li><a href="#/" class="active">{{ 'SHOP' | translate}}</a></li>
+                            <li><a href="#/404">{{ 'FOR_FARMERS' | translate}}</a></li>
+                            <li><a href="#/distributor/1">{{ 'FOR_DISTRIBUTORS' | translate}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -128,30 +110,18 @@
 
 
 <footer id="footer"><!--Footer-->
-     <div class="footer-widget">
+    <div class="footer-widget" ng-if="showFooter">
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
                     <div class="single-widget">
                         <h2>Service</h2>
                         <ul class="nav nav-pills nav-stacked">
-                            <li><a href="">Online Help</a></li>
-                            <li><a href="">Contact Us</a></li>
-                            <li><a href="">Order Status</a></li>
-                            <li><a href="">Change Location</a></li>
-                            <li><a href="">FAQ’s</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="single-widget">
-                        <h2>Quock Shop</h2>
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="">T-Shirt</a></li>
-                            <li><a href="">Mens</a></li>
-                            <li><a href="">Womens</a></li>
-                            <li><a href="">Gift Cards</a></li>
-                            <li><a href="">Shoes</a></li>
+                            <li><a href="#">Pomoć online</a></li>
+                            <li><a href="#">Kontaktirajte nas</a></li>
+                            <li><a href="#">Status narudžbine</a></li>
+                            <li><a href="#">Promeni lične podatke</a></li>
+                            <li><a href="#">Česta pitanja</a></li>
                         </ul>
                     </div>
                 </div>
@@ -159,35 +129,34 @@
                     <div class="single-widget">
                         <h2>Policies</h2>
                         <ul class="nav nav-pills nav-stacked">
-                            <li><a href="">Terms of Use</a></li>
-                            <li><a href="">Privecy Policy</a></li>
-                            <li><a href="">Refund Policy</a></li>
-                            <li><a href="">Billing System</a></li>
-                            <li><a href="">Ticket System</a></li>
+                            <li><a href="#">Uslovi korišćenja</a></li>
+                            <li><a href="#">Privatnost</a></li>
+                            <li><a href="#">Povrat novca</a></li>
+                            <li><a href="#">Sistem naplate</a></li>
+                            <li><a href="#">Sistem dostave proizvoda</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="single-widget">
-                        <h2>About Shopper</h2>
+                        <h2>O PAYS-u</h2>
                         <ul class="nav nav-pills nav-stacked">
-                            <li><a href="">Company Information</a></li>
-                            <li><a href="">Careers</a></li>
-                            <li><a href="">Store Location</a></li>
-                            <li><a href="">Affillate Program</a></li>
-                            <li><a href="">Copyright</a></li>
+                            <li><a href="#">Ko smo mi?</a></li>
+                            <li><a href="#">Kontaktirajte nas</a></li>
+                            <li><a href="#">Pridružite nam se</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3 col-sm-offset-1">
                     <div class="single-widget">
-                        <h2>About Shopper</h2>
+                        <h2>O PAYS-u</h2>
 
                         <form action="#" class="searchform">
-                            <input type="text" placeholder="Your email address"/>
+                            <input type="text" placeholder="Vaša mejl adresa"/>
                             <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i>
                             </button>
-                            <p>Get the most recent updates from <br/>our site and be updated your self...</p>
+                            <p>Primite najnovije ponude na vašu mejl adresu <br/>i kupujte po najpovoljnijim cenama...
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -199,12 +168,9 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
-                <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-
-                <p class="pull-right">Designed by <span><a target="_blank"
-                                                           href="http://www.themeum.com">Themeum</a></span></p>
+                <p class="pull-left">Copyright © 2015 PAYS. {{'ALL_RIGHTS_RESERVED' | translate}}.</p>
             </div>
         </div>
     </div>
 
-</footer><!--/Footer-->
+</footer>

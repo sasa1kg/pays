@@ -5,8 +5,8 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageMo
         return function (input) {
             return $sce.trustAsHtml(input);
         }
-    }).filter('slice', function() {
-        return function(arr, start, end) {
+    }).filter('slice', function () {
+        return function (arr, start, end) {
             return arr.slice(start, end);
         };
     });
@@ -21,6 +21,10 @@ paysApp.run(function ($rootScope, $translate) {
     $rootScope.translate = function (lang) {
         $translate.use(lang);
     };
+
+    $rootScope.paysEMail = 'office@pays-system.com';
+    $rootScope.paysPhone = '+38121455071';
+    $rootScope.showFooter = false;
 });
 
 paysApp.config(function ($translateProvider) {
@@ -66,8 +70,12 @@ paysApp.config(function ($translateProvider) {
         MOST_ORDERS: 'The most orders',
         ABOUT_US: 'About us',
         TITLE_1: 'Everyday items shop',
-        TITLE_2: 'direct from farmers',
-        TITLE_3: 'Follow our blog',
+        TITLE_11: 'Only marketplace for selling and buying fresh goods firectly from farmers',
+        TITLE_2: 'Direct from farmers',
+        TITLE_22: 'Choose among variety of products and find find best price for yourself',
+        TITLE_3: 'Find best farmer',
+        TITLE_33: 'Find best farmer using previous customers opinions and top picks',
+        ADVERTISING_MSG: 'PAYS system is designed to make buying fresh products easier. Users can choose farmer and and set of products they want to buy.Furthermore, obtaining best price and fastest transport is included',
         ORDER: 'Order',
         ORDER_DATA_SUFFIX: 'information about your delivery',
         WHO: 'Who',
@@ -106,16 +114,18 @@ paysApp.config(function ($translateProvider) {
         COMPANY_NAME: 'Company name',
         FARM_NAME: 'Farm name',
         LOCATION: 'Location',
-        FARMER_ID:'Farmer ID',
+        FARMER_ID: 'Farmer ID',
         ITEM: 'Item',
         PRICE: 'Price per item',
-        ITEM_AMOUNT:'Item amount',
+        ITEM_AMOUNT: 'Item amount',
         MONEY_AMOUNT: 'Total price',
         ITEM_ID: 'Item ID: ',
         SEARCHED_PRODUCTS: 'Searched products',
         ALL_PRODUCTS: 'All products',
         ADD_TO_CART: 'Add to cart',
         DISTRIBUTOR_TITLE: 'Everyday items transport',
+        DISTRIBUTOR_MSG: 'Get your products on your address while they are still fresh ',
+        FARMER_MSG: 'Buy fresh products everyday for you and your family ',
         VEHICLES: 'VEHICLES',
         NUMBER_OF_VEHICLES: 'Vehicles number',
         COOLED_TRANSPORT: 'Cooled transport',
@@ -235,8 +245,12 @@ paysApp.config(function ($translateProvider) {
             MOST_ORDERS: 'Najviše porudžbina',
             ABOUT_US: 'O nama',
             TITLE_1: 'Kupovina svakodnevnih namirnica',
+            TITLE_11: 'Jedina online prodavnica svežih proizvoda direktno od farmera',
             TITLE_2: 'direktno od proizvođača',
+            TITLE_22: 'Izaberite između mnoštva proizvoda pod najboljom cenom',
             TITLE_3: 'Pratite naš blog',
+            TITLE_33: 'Nađite najboljeg farmera za Vas koristeći naše preporuke',
+            ADVERTISING_MSG: 'PAYS sistem je osmišljen da olakša kupovinu svežih namirnica. Kupci mogu izabrati farmera iz proizvode koje žele da naruče. Takođe, dobijanje najniže cene i najbržeg transporta se podrazumeva',
             ORDER: 'Narudžbina',
             ORDER_DATA_SUFFIX: 'podaci za Vašu isporuku',
             WHO: 'Kome',
@@ -285,6 +299,8 @@ paysApp.config(function ($translateProvider) {
             ALL_PRODUCTS: 'Svi proizvodi',
             ADD_TO_CART: 'Dodaj u korpu',
             DISTRIBUTOR_TITLE: 'Prevoz svakodnevnih namirnica',
+            DISTRIBUTOR_MSG: 'Dostava Vaših proizvoda na kućnu adresu dok su još sveži',
+            FARMER_MSG: 'Kupujte sveže proizvode svaki dan za Vas i Vašu porodicu',
             VEHICLES: 'Vozni park',
             NUMBER_OF_VEHICLES: 'Broj vozila',
             COOLED_TRANSPORT: 'Rashlađen prevoz',

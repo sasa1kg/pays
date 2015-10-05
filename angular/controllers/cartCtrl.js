@@ -45,7 +45,7 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
                 scope.farmerName = scope.cartItems[0].farmer;
                 scope.farmerLocation = scope.cartItems[0].farmerLocation;
                 scope.farmerId = scope.cartItems[0].farmerId;
-                scope.farmerEMail = scope.cartItems[0].farmerEmail;
+                scope.farmerEMail = scope.cartItems[0].farmerEMail;
             } else {
                 scope.farmerName = "";
                 scope.farmerLocation = "";

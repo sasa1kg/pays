@@ -1,7 +1,7 @@
 var CartService = angular.module('CartService', []).service('CartService', ['localStorageService', function (localStorageService) {
 
 
-	this.putInCart = function (productId, productName, productMeasure, productPrice, productImage, farmerId, farmerName, farmerLocation) {
+	this.putInCart = function (productId, productName, productMeasure, productPrice, productImage, farmerId, farmerName, farmerEMail, farmerLocation) {
 		var keys = localStorageService.keys();
 		var added = false;
 		for (var i = keys.length - 1; i >= 0; i--) {
@@ -24,6 +24,7 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
 			), {
 					"farmer" : farmerName,
 					"farmerLocation" : farmerLocation,
+				    "farmerEMail" : farmerEmail,
 					"farmerId" : farmerId,
 					"itemName" : productName,
 					"itemNum" : 1,
@@ -35,7 +36,7 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
 		}
 	};
 
-	this.putInCartAmmount = function (productId, productName, productMeasure, productPrice, productImage, farmerId, farmerName, farmerLocation, ammount) {
+	this.putInCartAmmount = function (productId, productName, productMeasure, productPrice, productImage, farmerId, farmerName, farmerLocation,farmerEMail, ammount) {
 		var keys = localStorageService.keys();
 		var added = false;
 		for (var i = keys.length - 1; i >= 0; i--) {
@@ -58,6 +59,7 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
 			), {
 					"farmer" : farmerName,
 					"farmerLocation" : farmerLocation,
+					"farmerEMail" : farmerEMail,
 					"farmerId" : farmerId,
 					"itemName" : productName,
 					"itemNum" : ammount,

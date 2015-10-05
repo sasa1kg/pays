@@ -5,8 +5,8 @@
                 <div class="col-sm-6">
                     <div class="contactinfo">
                         <ul class="nav nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i> +381 21 1101100</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> info@pays.rs</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i> {{paysPhone}}</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> {{paysEMail}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -67,7 +67,6 @@
                             <li><a href="#/" class="active">{{ 'SHOP' | translate}}</a></li>
                             <li><a href="#/404">{{ 'FOR_FARMERS' | translate}}</a></li>
                             <li><a href="#/distributor/1">{{ 'FOR_DISTRIBUTORS' | translate}}</a></li>
-                            <li><a href="contact-us.html">{{ 'CONTACT' | translate}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -187,9 +186,7 @@
 
                             <h2>{{ 'TITLE_1' | translate }}</h2>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. </p>
-                            <button type="button" class="btn btn-default get">{{ 'ABOUT_US' | translate}}</button>
+                            <p>{{ 'TITLE_11' | translate }}</p>
                         </div>
                         <div class="col-sm-6">
                             <img src="images/home/veggies.jpg" class="girl img-responsive" alt=""
@@ -202,9 +199,7 @@
 
                             <h2>24/7</h2>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. </p>
-                            <button type="button" class="btn btn-default get">{{ 'SEARCH' | translate }}</button>
+                            <p>{{ 'TITLE_22' | translate }} </p>
                         </div>
                         <div class="col-sm-6">
                             <img src="images/home/fruit-vegetables.jpg" class="girl img-responsive" alt=""
@@ -214,13 +209,10 @@
 
                     <div class="item">
                         <div class="col-sm-6">
-                            <h1><span>E</span>-PAYS</h1>
 
-                            <h2>{{ 'TITLE_3' | translate }}</h2>
+                            <h1><span>PAYS</span> {{ 'TITLE_3' | translate }}</h1>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. </p>
-                            <button type="button" class="btn btn-default get">{{ 'BLOG' | translate }}</button>
+                            <p>{{ 'TITLE_33' | translate }}</p>
                         </div>
                         <div class="col-sm-6">
                             <img src="images/home/sourcherry.jpg" class="girl img-responsive" alt=""/>
@@ -301,13 +293,7 @@
                 <h4 class="title text-center">{{ 'ADVERTISING' | translate}}</h4>
 
                 <div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac nulla aliquam, congue sapien
-                        in,
-                        posuere eros. Nulla facilisi. Aenean in volutpat elit, vitae faucibus sem. Duis ultrices
-                        aliquet
-                        urna ut laoreet. Aliquam vel enim in nisl hendrerit pretium ac nec augue. Mauris justo
-                        lectus,
-                        tempus ut sollicitudin sit amet, imperdiet ac erat. In lacinia posuere suscipit.</p>
+                    <p>{{ 'ADVERTISING_MSG' | translate}}</p>
                 </div>
             </div>
             <div ng-if="!isWishListEmpty() || !noSelectedCategory()">
@@ -443,7 +429,7 @@
 </section>
 
 <footer id="footer"><!--Footer-->
-    <div class="footer-widget" ng-if="false">
+    <div class="footer-widget" ng-if="showFooter">
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">

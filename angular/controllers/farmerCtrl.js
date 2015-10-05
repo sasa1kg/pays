@@ -43,6 +43,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                             scope.farmer.id,
                             scope.farmer.name,
                             scope.farmer.location,
+                            scope.farmer.email,
                             1);
                     }
                 }

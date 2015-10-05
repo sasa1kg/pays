@@ -21,6 +21,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "Jovan Jovanovic",
                 "location": "Novi Sad",
+                "email":"jovan@gmail.com",
                 "img": "images/home/farm1.jpg",
                 "items": 10,
                 "id": 145
@@ -28,6 +29,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": 'Doma&#263;a pijaca',
                 "location": "Novi Sad",
+                "email":"pijaca@gmail.com",
                 "img": "images/home/farm2.jpg",
                 "items": 10,
                 "id": 147
@@ -35,6 +37,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "Dejan Dejanovi&#263;",
                 "location": "Budisava",
+                "email":"dejan@gmail.com",
                 "img": "images/home/farm3.jpg",
                 "items": 8,
                 "id": 155
@@ -42,6 +45,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "Milan Milanovi&#263;",
                 "location": "&#269;urug",
+                "email":"milan@gmail.com",
                 "img": "images/home/farm4.jpg",
                 "items": 4,
                 "id": 165
@@ -49,6 +53,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "Zdrav o i fit d.o.o",
                 "location": "Be&scaron;ka",
+                "email":"zdravo@gmail.com",
                 "img": "images/home/farm5.jpg",
                 "items": 22,
                 "id": 301
@@ -56,6 +61,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "Stevan Stevanovi&#263;",
                 "location": "Bege&#269;",
+                "email":"stevan@gmail.com",
                 "img": "images/home/farm5.jpg",
                 "items": 2,
                 "id": 175
@@ -63,6 +69,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "Marko Markovi&#263;",
                 "location": "Crvenka",
+                "email":"marko@gmail.com",
                 "img": "images/home/farm6.jpg",
                 "items": 22,
                 "id": 185
@@ -70,6 +77,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "An&#273;ela Jovovi&#263;",
                 "location": "Ba&#269;ka Topola",
+                "email":"andjela@gmail.com",
                 "img": "images/home/farm7.jpg",
                 "items": 4,
                 "id": 195
@@ -77,6 +85,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             {
                 "name": "Marina Marovi&#263;",
                 "location": "Kovilj",
+                "email":"marina@gmail.com",
                 "img": "images/home/farm8.jpg",
                 "items": 2,
                 "id": 208
