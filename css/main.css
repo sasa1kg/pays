@@ -1645,6 +1645,22 @@ h2.title {
   color:#696763
 }
 
+.farmer_data {
+  color: #363432;
+  font-family: 'Roboto',sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+}
+.farmer_data_padding {
+  padding-left: 5%;
+}
+
+.amount_data {
+  color: #363432;
+  font-family: 'Roboto',sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+}
 
 #cart_items .cart_info .cart_price p {
   color:#696763;
@@ -1734,6 +1750,14 @@ h2.title {
   margin-bottom: 80px;
 }
 
+#delivery .total_area {
+  border: 1px solid #E6E4DF;
+  color: #696763;
+  padding: 30px 25px 30px 0;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 50px;
+}
 .total_area span {
   float: right;
 }
@@ -1833,9 +1857,6 @@ h2.title {
 }
 .order-row-padding {
   padding-left: 10%;
-}
-.location-checkbox-padding{
- padding-left: 10%;
 }
 .amount-currency-text{
   font-size: 16px;

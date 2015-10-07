@@ -10,50 +10,11 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$http", "$filte
     scope.currency = "RSD";
 
     scope.nameSurname = "";
-    scope.locationType = "";
 
-    scope.predefinedLocationString = "predefinedLocation";
-    scope.cityString = "city";
-
-    scope.city = "";
-    scope.street = "";
-    scope.number = "";
-    scope.appartment = "";
-    scope.floor = "";
-    scope.entrance = "";
-    scope.chosenAddress = "";
-
-    scope.creditCard = "";
     scope.note = "";
 
     scope.dateDropDownInput = "";
-    scope.cities = [
-        {
-            "id": 0,
-            "name": "Novi Sad"
-        },
-        {
-            "id": 1,
-            "name": "Beograd"
-        },
-        {
-            "id": 2,
-            "name": "Kraljevo"
-        }
-    ]
 
-    scope.addresses = [
-        'Dositejeva 2',
-        'Narodnog fronta 100',
-        'Zmaj jovina 4',
-        'Dunavska 63'
-    ]
-
-    scope.cards = [
-        'American express',
-        'Master Card',
-        'Visa Electron'
-    ]
     scope.executePayment = function () {
         console.log("Payment Information!");
         console.log("Name " + scope.nameSurname);

@@ -96,14 +96,14 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="cart_price">
-                        <p ng-bind-html="farmerName | html"></p>
+                    <td>
+                        <h4 class="farmer_data farmer_data_padding" ng-bind-html="farmerName | html"></h4>
                     </td>
-                    <td class="cart_product">
-                        <p ng-bind-html="farmerLocation | html"></p>
+                    <td>
+                        <h4 class="farmer_data" ng-bind-html="farmerLocation | html"></h4>
                     </td>
-                    <td class="cart_quantity">
-                        <p ng-bind-html="farmerEMail | html"></p>
+                    <td>
+                        <h4 class="farmer_data" ng-bind-html="farmerEMail | html"></h4>
                     </td>
                 </tr>
                 </tbody>
@@ -158,17 +158,85 @@
     </div>
 </section> <!--/#cart_items-->
 
+<section id="delivery">
+    <div class="container ">
+        <div class="row total_area">
+            <div class="col-sm-12 order-row">
+                <div class="col-sm-3">
+                    <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType"
+                           ng-value="cityString">
+                    {{ 'CHOOSE_CITY' | translate}}
+                </div>
+                <div class="col-sm-5">
+                    <div class="col-sm-10">
+                        <form>
+                            <select ng-model="city">
+                                <option ng-repeat="city in cities" value="{{city.name}}">{{city.name |
+                                    html}}
+                                </option>
+                            </select>
+                        </form>
+                    </div>
+                    <i class="fa fa-asterisk"></i>
+                </div>
+            </div>
+            <div class="col-sm-12 order-row ">
+                <div class="text-right col-sm-2">{{ 'STREET' | translate}}</div>
+                <input class="col-sm-4" type="text"
+                       autocomplete="off" ng-model="street">
+
+                <div class="text-right col-sm-1">{{ 'HOUSE_NUMBER' | translate}}</div>
+                <input class="col-sm-1" type="text"
+                       autocomplete="off" ng-model="number">
+
+                <div class="text-right col-sm-2">{{ 'APARTMENT' | translate}}</div>
+                <input class="col-sm-1" type="text"
+                       autocomplete="off" ng-model="appartment"><i
+                    class="fa fa-asterisk asterisk-padding"></i>
+            </div>
+
+            <div class="col-sm-12 order-row ">
+                <div class="text-right col-sm-2">{{ 'FLOOR' | translate}}</div>
+                <input class="col-sm-1" type="text"
+                       autocomplete="off" ng-model="floor">
+
+                <div class="text-right col-sm-2">{{ 'ENTRANCE' | translate}}</div>
+                <input class="col-sm-1" type="text"
+                       autocomplete="off" ng-model="entrance">
+            </div>
+
+            <!--predefined location -->
+            <div class="col-sm-12 order-row">
+                <div class="col-sm-3">
+                    <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType"
+                           ng-value="predefinedLocationString">
+                    {{ 'PREDEFINED_LOCATION' | translate}}
+                </div>
+                <div class="col-sm-8">
+                    <div class="col-sm-12" ng-repeat="address in addresses">
+                        <label>
+                            <input type="radio" name="addressRadio" ng-model="chosenAddress"
+                                   ng-change="changed(address)">{{ address |
+                            html}}</label>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 <section id="do_action">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="total_area">
                     <ul>
-                        <li>{{ 'CART' | translate}} <span>{{totalPrice}} RSD</span></li>
-                        <li><input type="checkbox"
-                                   ng-model="isShipped" ng-click="changeShipment(isShipped)">{{ 'DELIVERY' | translate}}
+                        <li class="amount_data">{{ 'CART' | translate}} <span>{{totalPrice}} RSD</span></li>
+                        <li class="amount_data"><input type="checkbox"
+                                   ng-model="isShipped" ng-click="changeShipment(isShipped)" style="width: 20px;height: 20px;">{{ 'DELIVERY' | translate}}
                             ({{ 'DELIVERY_OPTION' | translate}}) <span>{{shipping}} RSD</span></li>
-                        <li>{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
+                        <li class="amount_data" >{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
                     </ul>
 
                     <script type="text/ng-template" id="emptyCartModal.html">

@@ -7,6 +7,19 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
         scope.shipping = scope.shippingConst;
         scope.isShipped = true;
 
+        scope.locationType = "";
+
+        scope.predefinedLocationString = "predefinedLocation";
+        scope.cityString = "city";
+
+        scope.city = "";
+        scope.street = "";
+        scope.number = "";
+        scope.appartment = "";
+        scope.floor = "";
+        scope.entrance = "";
+        scope.chosenAddress = "";
+
         scope.calculateTotal = function () {
             scope.totalPrice = 0;
             for (var i = scope.cartItems.length - 1; i >= 0; i--) {
@@ -95,6 +108,28 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
             }
             scope.calculateTotal();
         }
+
+        scope.cities = [
+            {
+                "id": 0,
+                "name": "Novi Sad"
+            },
+            {
+                "id": 1,
+                "name": "Beograd"
+            },
+            {
+                "id": 2,
+                "name": "Kraljevo"
+            }
+        ]
+
+        scope.addresses = [
+            'Dositejeva 2',
+            'Narodnog fronta 100',
+            'Zmaj jovina 4',
+            'Dunavska 63'
+        ]
 
         scope.loadData();
         scope.price = CartService.getTotalCartAmount() + "";

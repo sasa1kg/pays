@@ -107,75 +107,6 @@
 
         <row class="col-sm-12">
             <div class="col-sm-1">
-                <div class="text-center">{{ 'WHERE' | translate}}</div>
-            </div>
-            <div class="col-sm-11">
-                <row class="col-sm-12 order-row">
-                    <div class="col-sm-3 location-checkbox-padding">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType"
-                               ng-value="cityString">
-                        {{ 'CHOOSE_CITY' | translate}}
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="col-sm-10">
-                            <form>
-                                <select ng-model="city">
-                                    <option ng-repeat="city in cities" value="{{city.name}}">{{city.name | html}}
-                                    </option>
-                                </select>
-                            </form>
-                        </div>
-                        <i class="fa fa-asterisk"></i>
-                    </div>
-                </row>
-                <row class="col-sm-12 order-row order-row-padding">
-                    <div class="text-right col-sm-2">{{ 'STREET' | translate}}</div>
-                    <input class="col-sm-4" type="text"
-                           autocomplete="off" ng-model="street">
-
-                    <div class="text-right col-sm-1">{{ 'HOUSE_NUMBER' | translate}}</div>
-                    <input class="col-sm-1" type="text"
-                           autocomplete="off" ng-model="number">
-
-                    <div class="text-right col-sm-2">{{ 'APARTMENT' | translate}}</div>
-                    <input class="col-sm-1" type="text"
-                           autocomplete="off" ng-model="appartment"><i class="fa fa-asterisk asterisk-padding"></i>
-                </row>
-
-                <row class="col-sm-12 order-row order-row-padding">
-                    <div class="text-right col-sm-2">{{ 'FLOOR' | translate}}</div>
-                    <input class="col-sm-1" type="text"
-                           autocomplete="off" ng-model="floor">
-
-                    <div class="text-right col-sm-2">{{ 'ENTRANCE' | translate}}</div>
-                    <input class="col-sm-1" type="text"
-                           autocomplete="off" ng-model="entrance">
-                </row>
-
-                <!--predefined location -->
-                <div class="col-sm-12">
-                    <div class="col-sm-4 location-checkbox-padding">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType"
-                               ng-value="predefinedLocationString">
-                        {{ 'PREDEFINED_LOCATION' | translate}}
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="col-sm-12" ng-repeat="address in addresses">
-                            <label>
-                            <input type="radio" name="addressRadio" ng-model="chosenAddress"
-                                   ng-change="changed(address)">{{ address |
-                            html}}</label>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </row>
-
-        <hr class="orangehr">
-        <row class="col-sm-12">
-            <div class="col-sm-1">
                 <div class="text-center">{{ 'WHEN' | translate}}</div>
             </div>
             <div class="col-sm-11">
@@ -197,27 +128,11 @@
 
         <hr class="orangehr">
         <row class="col-sm-12">
-            <div class="col-sm-1">
-            </div>
-            <div class="col-sm-11">
-                <div class="text-right col-sm-2">{{ 'VALUE' | translate}}</div>
-                <div class="text-right col-sm-2">
+            <div class="col-sm-offset-1 col-sm-11">
+                <div class="text-right col-sm-3">{{ 'VALUE' | translate}}</div>
+                <div class="text-right col-sm-5">
                     <div class="text-right col-sm-8 amount-currency-text amount-text">{{ amount}}</div>
-                    <div class="text-left col-sm-4 amount-currency-text">{{ currency}}</div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="text-right col-sm-5">{{ 'CARD_TYPE' | translate}}</div>
-
-                    <div class="col-sm-6 form-two">
-                        <form>
-                            <form>
-                                <select ng-model="creditCard">
-                                    <option ng-repeat="card in cards" value="{{card}}">{{card| html}}
-                                    </option>
-                                </select>
-                            </form>
-                        </form>
-                    </div>
+                    <div class="text-left col-sm-3 amount-currency-text">{{ currency}}</div>
                 </div>
                 <a class="btn btn-fefault cart col-sm-2 text-center" ng-click="executePayment()">{{ 'PAY' |
                     translate}}</a>
