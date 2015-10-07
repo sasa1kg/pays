@@ -39,12 +39,12 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
             templateUrl: "404.html",
             resolve: {}
         })
-        .when("/login", {
+        .when("/login/:usertype", {
             templateUrl: "partials/login.html",
             controller: "loginCtrl",
             resolve: {}
         })
-        .when("/register", {
+        .when("/register/:usertype", {
             templateUrl: "partials/register.html",
             controller: "registerCtrl",
             resolve: {}

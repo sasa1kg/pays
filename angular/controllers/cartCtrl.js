@@ -131,6 +131,10 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
             'Dunavska 63'
         ]
 
+        scope.changed = function (adr) {
+            scope.chosenAddress = adr;
+        }
+
         scope.loadData();
         scope.price = CartService.getTotalCartAmount() + "";
     }]);

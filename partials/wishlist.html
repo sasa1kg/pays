@@ -40,7 +40,7 @@
 							<li><a href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
 									class="badge alert-success">{{price}}</span></a></li>
 							<li><a href="#/checkout"> {{ 'PAY' | translate}}</a></li>
-							<li><a href="#/login"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a></li>
+							<li><a href="#/login/{{buyerUserType}}"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a></li>
 						</ul>
 					</div>
 				</div>
@@ -65,8 +65,8 @@
 					<div class="mainmenu pull-left">
 						<ul class="nav navbar-nav collapse navbar-collapse">
 							<li><a href="#/" class="active">{{ 'SHOP' | translate}}</a></li>
-							<li><a href="#/404">{{ 'FOR_FARMERS' | translate}}</a></li>
-							<li><a href="#/distributor/1">{{ 'FOR_DISTRIBUTORS' | translate}}</a></li>
+							<li><a href="#/login/{{farmerUserType}}">{{ 'FOR_FARMERS' | translate}}</a></li>
+							<li><a href="#/login/{{distributorUserType}}">{{ 'FOR_DISTRIBUTORS' | translate}}</a></li>
 						</ul>
 					</div>
 				</div>

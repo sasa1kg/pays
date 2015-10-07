@@ -18,20 +18,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$http", "$filte
     scope.executePayment = function () {
         console.log("Payment Information!");
         console.log("Name " + scope.nameSurname);
-        if (scope.locationType == scope.predefinedLocationString) {
-            console.log("Delivery to predefined address : " + scope.chosenAddress);
-        } else if (scope.locationType == scope.cityString) {
-            console.log("Delivery to city : " + scope.city + " Street: " + scope.street + " Number: " + scope.number +
-                " Appartment: "+ scope.appartment + " Floor: " + scope.floor + " Entrance: " + scope.entrance);
-        } else {
-            console.error("Unsupported location type!");
-        }
         console.log("Delivery time: " + scope.dateDropDownInput);
-        console.log("Credit card: " + scope.creditCard);
         console.log("Note: " + scope.note);
-    }
-
-    scope.changed = function (adr) {
-        scope.chosenAddress = adr;
     }
 }]);

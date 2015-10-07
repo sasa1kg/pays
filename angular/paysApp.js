@@ -25,6 +25,9 @@ paysApp.run(function ($rootScope, $translate) {
     $rootScope.paysEMail = 'office@pays-system.com';
     $rootScope.paysPhone = '+38121455071';
     $rootScope.showFooter = false;
+    $rootScope.buyerUserType = 'buyer';
+    $rootScope.farmerUserType = 'farmer';
+    $rootScope.distributorUserType = 'distributor';
 });
 
 paysApp.config(function ($translateProvider) {
