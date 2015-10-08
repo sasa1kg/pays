@@ -492,7 +492,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Povrce"
+                "category": 0
             },
             {
                 "id": 1,
@@ -502,7 +502,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "55",
-                "category": "Povrce"
+                "category": 0
             },
             {
                 "id": 2,
@@ -512,7 +512,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "44",
-                "category": "Povrce"
+                "category": 0
             },
             {
                 "id": 3,
@@ -522,7 +522,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "22",
-                "category": "Voce"
+                "category": 1
             },
             {
                 "id": 4,
@@ -532,7 +532,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "21",
-                "category": "Voce"
+                "category": 1
             },
             {
                 "id": 5,
@@ -542,7 +542,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "77",
-                "category": "Voce"
+                "category": 1
             },
             {
                 "id": 6,
@@ -552,7 +552,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "66",
-                "category": "Meso i mesne preradjevine"
+                "category": 2
             },
             {
                 "id": 7,
@@ -562,7 +562,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Meso i mesne preradjevine"
+                "category": 2
             },
             {
                 "id": 8,
@@ -572,7 +572,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Meso i mesne preradjevine"
+                "category": 2
             },
             {
                 "id": 9,
@@ -582,7 +582,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "litar",
                 "currency": "RSD",
                 "stock": "18",
-                "category": "Mleko i mlecni proizvodi"
+                "category": 3
             },
             {
                 "id": 10,
@@ -592,7 +592,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "litar",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Mleko i mlecni proizvodi"
+                "category": 3
             },
             {
                 "id": 11,
@@ -602,7 +602,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Mleko i mlecni proizvodi"
+                "category": 3
             },
             {
                 "id": 12,
@@ -612,7 +612,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "48",
-                "category": "Med i pcelinji proizvodi"
+                "category": 4
             },
             {
                 "id": 13,
@@ -622,7 +622,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "66",
-                "category": "Med i pcelinji proizvodi"
+                "category": 4
             },
             {
                 "id": 14,
@@ -632,7 +632,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kom",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Jaja"
+                "category": 5
             },
             {
                 "id": 15,
@@ -642,7 +642,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "73",
-                "category": "Zitarice i brasno"
+                "category": 6
             },
             {
                 "id": 16,
@@ -652,7 +652,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Zitarice i brasno"
+                "category": 6
             },
             {
                 "id": 17,
@@ -662,7 +662,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "780",
-                "category": "Zitarice i brasno"
+                "category": 6
             },
             {
                 "id": 18,
@@ -672,7 +672,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Gljive"
+                "category":7
             },
             {
                 "id": 19,
@@ -682,7 +682,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Suseno voce i orasasti plodovi"
+                "category": 8
             },
             {
                 "id": 20,
@@ -692,7 +692,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "78",
-                "category": "Suseno voce i orasasti plodovi"
+                "category": 8
             },
             {
                 "id": 21,
@@ -702,7 +702,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "100",
-                "category": "Suseno voce i orasasti plodovi"
+                "category": 8
             },
             {
                 "id": 22,
@@ -712,7 +712,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "110",
-                "category": "Suseno povrce"
+                "category": 9
             },
             {
                 "id": 23,
@@ -722,7 +722,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "105",
-                "category": "Zimnica"
+                "category": 10
             },
             {
                 "id": 24,
@@ -732,7 +732,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Zimnica"
+                "category": 10
             },
             {
                 "id": 25,
@@ -742,7 +742,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "litar",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Bezalkoholna pica i sirupi"
+                "category": 11
             },
             {
                 "id": 26,
@@ -752,7 +752,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "litar",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Bezalkoholna pica i sirupi"
+                "category": 11
             },
             {
                 "id": 27,
@@ -762,7 +762,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Bezalkoholna pica i sirupi"
+                "category": 11
             },
             {
                 "id": 28,
@@ -772,7 +772,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "litar",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Alkoholna pica"
+                "category": 12
             },
             {
                 "id": 29,
@@ -782,7 +782,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "litar",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Alkoholna pica"
+                "category": 12
             },
             {
                 "id": 30,
@@ -792,7 +792,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "litar",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Alkoholna pica"
+                "category": 12
             },
             {
                 "id": 31,
@@ -802,7 +802,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Slatkisi"
+                "category": 13
             },
             {
                 "id": 32,
@@ -812,7 +812,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Slatkisi"
+                "category": 13
             },
             {
                 "id": 33,
@@ -822,7 +822,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Peciva"
+                "category": 14
             },
             {
                 "id": 34,
@@ -832,7 +832,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kom",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Peciva"
+                "category": 14
             },
             {
                 "id": 35,
@@ -842,7 +842,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kom",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Kozmetika i higijena"
+                "category": 15
             },
             {
                 "id": 36,
@@ -852,7 +852,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "litar",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Kozmetika i higijena"
+                "category": 15
             },
             {
                 "id": 37,
@@ -862,7 +862,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Organski proizvodi"
+                "category": 16
             },
             {
                 "id": 38,
@@ -872,7 +872,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Organski proizvodi"
+                "category": 16
             },
             {
                 "id": 39,
@@ -882,7 +882,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kg",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Organski proizvodi"
+                "category": 16
             },
             {
                 "id": 40,
@@ -892,7 +892,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kom",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Gotove korpe"
+                "category": 17
             },
             {
                 "id": 41,
@@ -902,7 +902,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kom",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Gotove korpe"
+                "category": 17
             },
             {
                 "id": 42,
@@ -912,7 +912,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kom",
                 "currency": "RSD",
                 "stock": "10",
-                "category": "Cvece i sadnice"
+                "category": 18
             },
             {
                 "id": 43,
@@ -922,7 +922,17 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "measure": "kom",
                 "currency": "RSD",
                 "stock": "101",
-                "category": "Cvece i sadnice"
+                "category": 18
+            },
+            {
+                "id": 44,
+                "name": "TROUT",
+                "image": "images/home/veggies.jpg",
+                "price": "330",
+                "measure": "kom",
+                "currency": "RSD",
+                "stock": "101",
+                "category": 19
             }
         ];
 

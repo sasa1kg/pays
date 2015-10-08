@@ -3,9 +3,9 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$routeP
 
         console.log("RegisterCtrl");
 
-        var userType = routeParams.usertype;
+        scope.userType = routeParams.usertype;
 
-        console.log("Login user type "+ userType);
+        console.log("Register user type "+ scope.userType);
 
         scope.buyer = {
             email: "",
@@ -75,4 +75,5 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$routeP
             }
 
         }
+
     }]);
