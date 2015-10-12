@@ -581,7 +581,9 @@ ul.sub-menu {
   padding-left: 100px;
 }
 
-
+.carousel-inner{
+  height: 400px;
+}
 .pricing {
   position: absolute;
   right: 40%;
@@ -590,6 +592,8 @@ ul.sub-menu {
 
 .girl {
   margin-left: 0;
+  width:  auto;
+  height: auto;
 }
 
 .item h1 {
@@ -645,6 +649,7 @@ ul.sub-menu {
 
 .control-carousel {
   position: absolute;
+  cursor: pointer;
   top: 50%;
   font-size: 60px;
   color: #C2C2C1;
