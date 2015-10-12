@@ -1464,12 +1464,15 @@ h2.title {
   overflow: hidden;
 }
 
+
+
 .login-form {
 
 }
 
-.signup-form {
-
+.register-form {
+  margin-top: 30px;
+  margin-bottom: 185px;
 }
 
 .login-form h2, .signup-form h2 {

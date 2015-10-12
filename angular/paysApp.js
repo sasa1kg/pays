@@ -1,6 +1,6 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageModule',
     'GeoLocationService', 'CartService', 'WishlistService', 'SearchService',
-    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap'])
+    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap','ui-notification'])
     .filter('html', function ($sce) {
         return function (input) {
             return $sce.trustAsHtml(input);
@@ -9,6 +9,16 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageMo
         return function (arr, start, end) {
             return arr.slice(start, end);
         };
+    }).config(function(NotificationProvider) {
+        NotificationProvider.setOptions({
+            delay: 5000,
+            startTop: 20,
+            startRight: 10,
+            verticalSpacing: 20,
+            horizontalSpacing: 20,
+            positionX: 'center',
+            positionY: 'top'
+        });
     });
 
 paysApp.config(function (localStorageServiceProvider) {
@@ -205,7 +215,9 @@ paysApp.config(function ($translateProvider) {
         SEARCH_PRODUCTS: 'Search products',
         ALL_RIGHTS_RESERVED: 'All rights reserved',
         NON_ORGANIC: 'Non-organic',
-        DELIVERY_OPTION: 'If not checked, farmer will consider you will pick up your order'
+        DELIVERY_OPTION: 'If not checked, farmer will consider you will pick up your order',
+        BANK_NUMBER: "Bank account number",
+        PIB_NUMBER: "Company identification number"
     })
         .translations('rs', {
             HOME: 'Početna',
@@ -380,7 +392,9 @@ paysApp.config(function ($translateProvider) {
             SEARCH_PRODUCTS: 'Proizvodi za pretragu',
             ALL_RIGHTS_RESERVED: 'Sva prava zadržana',
             NON_ORGANIC: 'Neorganski',
-            DELIVERY_OPTION: 'Ukoliko nije odabrana, farmer podrazumeva da ćete sami preuzeti proizvode'
+            DELIVERY_OPTION: 'Ukoliko nije odabrana, farmer podrazumeva da ćete sami preuzeti proizvode',
+            BANK_NUMBER: "Žiro račun",
+            PIB_NUMBER: "PIB"
         })
     $translateProvider.preferredLanguage('en');
 });

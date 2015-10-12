@@ -40,7 +40,8 @@
                             <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
                                     class="badge alert-success">{{price}}</span></a></li>
                             <li><a href="#/checkout"> {{ 'PAY' | translate}}</a></li>
-                            <li><a href="#/login/{{buyerUserType}}"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a></li>
+                            <li><a href="#/login/{{buyerUserType}}"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -75,43 +76,49 @@
     </div>
     <!--/header-bottom-->
 </header><!--/header-->
-<section id="form"><!--form-->
+
+<section class="register-form"><!--form-->
     <div class="container">
+        <h4 class="title text-center">{{'EDIT YOUR DATA' | translate}}</h4>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{ active: (page == 'GENERAL_DISTRIBUTOR_DATA')}" class="cursor-pointer"
+                            ng-click="sectionChange('GENERAL_DISTRIBUTOR_DATA')"><a>{{ 'GENERAL_DISTRIBUTOR_DATA' | translate}}</a></li>
+                        <li ng-class="{ active: (page == 'VEHICLES')}" class="cursor-pointer"
+                            ng-click="sectionChange('VEHICLES')"><a>{{'VEHICLES' | translate}}</a>
+                        </li>
+                        <li ng-class="{ active: (page == 'DISTRIBUTOR_MARKETING')}" class="cursor-pointer"
+                            ng-click="sectionChange('DISTRIBUTOR_MARKETING')"><a>{{'DISTRIBUTOR_MARKETING' |
+                            translate}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class="row">
-            <div class="col-sm-4 col-sm-offset-1">
-                <div class="login-form"><!--login form -->
-                    <h2>{{ 'ENTER_ACCOUNT' | translate}}</h2>
-
-                    <form action="#">
-                        <input type="text" placeholder="{{'USERNAME' | translate}}"/>
-                        <input type="password" placeholder="{{'PASSWORD' | translate}}"/>
-                        <a>
-                            <button type="submit" class="btn btn-default" ng-click="wrongLogin(('WRONG_LOGIN1' | translate))">{{ 'ENTER' | translate}}</button>
-                        </a>
-                    </form>
-                </div>
-                <!--/login form-->
-            </div>
-            <div class="col-sm-1">
-                <h2 class="or">{{ 'OR' | translate}}</h2>
-            </div>
-            <div class="col-sm-4">
-                <div class="signup-form"><!--sign up form-->
-                    <h2>{{ 'NEW_ACCOUNT' | translate }}</h2>
-
+            <div ng-if="page == 'GENERAL_DISTRIBUTOR_DATA'" class="col-sm-6">
+                <div class="signup-form">
                     <form>
-                        <a href="#/register/{{userType}}">
-                        <button type="submit" class="btn btn-default">{{ ' REGISTER' | translate}} <i
-                                class="fa fa-angle-double-right"></i></button>
-                        </a>
+                        <input type="text" ng-model="distributorUser.companyName"
+                               placeholder="{{ 'COMPANY_NAME' | translate}}"/>
+                        <input type="text" ng-model="distributorUser.accountNumber"
+                               placeholder="{{ 'BANK_NUMBER' | translate}}"/>
+                        <input type="text" ng-model="distributorUser.pibNumber"
+                               placeholder="{{ 'PIB_NUMBER' | translate}}"/>
+                        <input type="text" ng-model="distributorUser.streetAndNr"
+                               placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
+                        <input type="text" ng-model="distributorUser.postalCode"
+                               placeholder="{{'POSTAL_CODE' | translate}}"/>
+                        <input type="text" ng-model="distributorUser.city" placeholder="{{'CITY' | translate}}"/>
+                        <input type="text" ng-model="distributorUser.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                        <button class="btn btn-default" ng-click="saveChanges()">{{'SAVE_CHANGES' | translate}}</button>
                     </form>
                 </div>
-                <!--/sign up form-->
             </div>
         </div>
     </div>
-</section><!--/form-->
-
+</section>
 
 <footer id="footer"><!--Footer-->
     <div class="footer-widget" ng-if="showFooter">
@@ -178,3 +185,4 @@
     </div>
 
 </footer>
+	

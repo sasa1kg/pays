@@ -355,7 +355,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         };
 
 //INIT FUNCTIONS
-        scope.initGeo();
+//        scope.initGeo();
         scope.getCategories();
         scope.getCarts();
 

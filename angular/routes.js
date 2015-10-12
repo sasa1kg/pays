@@ -30,6 +30,11 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
             controller: "distributorCtrl",
             resolve: {}
         })
+        .when("/distributoredit/:id/", {
+            templateUrl: "partials/editDistributor.html",
+            controller: "editDistributorCtrl",
+            resolve: {}
+        })
         .when("/farmer/:id/product/:productid", {
             templateUrl: "partials/product-details.html",
             controller: "productDetailsCtrl",

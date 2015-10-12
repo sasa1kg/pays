@@ -5,8 +5,8 @@
                 <div class="col-sm-6">
                     <div class="contactinfo">
                         <ul class="nav nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i> {{paysPhone}}</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i> {{paysEMail}}</a></li>
+                            <li><a><i class="fa fa-phone"></i> {{paysPhone}}</a></li>
+                            <li><a><i class="fa fa-envelope"></i> {{paysEMail}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -93,9 +93,9 @@
 
                         <h2 ng-bind-html="distributor.location | html"></h2>
 
-                        <h3>{{'DISTRIBUTOR_TITLE' | translate}}</h3>
+                        <h3 ng-bind-html="distributor.title | translate | html"></h3>
 
-                        <p>{{'DISTRIBUTOR_MSG' | translate}}</p>
+                        <p ng-bind-html="distributor.message | translate | html"></p>
                     </div>
                     <div class="col-sm-6">
                         <img src="{{distributor.img}}" class="girl img-responsive" alt=""

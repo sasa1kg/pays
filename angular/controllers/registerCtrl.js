@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$routeParams", "$filter", "CartService", "WishlistService",
-    function (scope, http, routeParams, filter, CartService, WishlistService) {
+angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootScope","$routeParams", "$filter", "CartService", "WishlistService",
+    function (scope, http, $rootScope, routeParams, filter, CartService, WishlistService) {
 
         console.log("RegisterCtrl");
 
@@ -22,12 +22,13 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$routeP
             email: "",
             password: "",
             confPassword: "",
-            username: "",
             companyName: "",
             streetAndNr: "",
             postalCode: "",
             city: "",
-            phone: ""
+            phone: "",
+            accountNumber: "",
+            pibNumber: "",
         };
         scope.farmer = {
             email: "",
@@ -46,31 +47,28 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$routeP
         scope.price = CartService.getTotalCartAmount() + "";
 
         scope.register = function () {
-            if (scope.userType == 1) {
+            if (scope.userType == $rootScope.buyerUserType) {
                 console.log("Register buyer!");
                 console.log(scope.buyer);
-            } else if (scope.userType == 2) {
+            } else if (scope.userType == $rootScope.distributorUserType) {
                 console.log("Register distributor");
                 console.log(scope.distributor);
             }
-            if (scope.userType == 3) {
+            if (scope.userType == $rootScope.farmerUserType) {
                 console.log("Register farmer");
                 console.log(scope.farmer);
             }
         }
 
         scope.copyEmail = function(){
-            if (scope.userType == 1) {
+            if (scope.userType == $rootScope.buyerUserType) {
                 scope.buyer.username = scope.buyer.email;
-                console.log("aaaaa");
-            } else if (scope.userType == 2) {
+            } else if (scope.userType == $rootScope.distributorUserType) {
                 scope.distributor.username = scope.distributor.email;
-                console.log("bbbbb");
 
             }
-            if (scope.userType == 3) {
+            if (scope.userType == $rootScope.farmerUserType) {
                 scope.farmer.username = scope.farmer.email;
-                console.log("ccccc");
 
             }
 

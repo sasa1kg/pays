@@ -1192,13 +1192,18 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "id": 0,
                 "name": "Kurir d.o.o",
                 "location": "Novi Sad",
-                "img":" images/home/courier1.jpg"
+                "img":" images/home/courier1.jpg",
+                "message": "DISTRIBUTOR_MSG",
+                "title": "DISTRIBUTOR_TITLE"
             },
             {
                 "id": 1,
                 "name": "Kombi prevoz",
                 "location": "Rumenka",
-                "img":" images/home/courier1.jpg"
+                "img":" images/home/courier1.jpg",
+                "message": "DISTRIBUTOR_MSG",
+                "title": "DISTRIBUTOR_TITLE"
+
             }
 
         ];
