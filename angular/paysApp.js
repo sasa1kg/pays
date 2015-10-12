@@ -217,7 +217,8 @@ paysApp.config(function ($translateProvider) {
         NON_ORGANIC: 'Non-organic',
         DELIVERY_OPTION: 'If not checked, farmer will consider you will pick up your order',
         BANK_NUMBER: "Bank account number",
-        PIB_NUMBER: "Company identification number"
+        PIB_NUMBER: "Company identification number",
+        INVALID_CREDENTIALS: "Invalid credentials"
     })
         .translations('rs', {
             HOME: 'Početna',
@@ -394,7 +395,8 @@ paysApp.config(function ($translateProvider) {
             NON_ORGANIC: 'Neorganski',
             DELIVERY_OPTION: 'Ukoliko nije odabrana, farmer podrazumeva da ćete sami preuzeti proizvode',
             BANK_NUMBER: "Žiro račun",
-            PIB_NUMBER: "PIB"
+            PIB_NUMBER: "PIB",
+            INVALID_CREDENTIALS: "Nepostojeći korisnik"
         })
     $translateProvider.preferredLanguage('en');
 });

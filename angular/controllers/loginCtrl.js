@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("loginCtrl", ["$scope","$rootScope", "$http","$routeParams", "$filter", "CartService", "WishlistService","Notification",
-    function (scope,rootScope, http, routeParams, filter, CartService, WishlistService,Notification) {
+angular.module('paysApp').controller("loginCtrl", ["$scope", "$http","$routeParams", "$filter", "CartService", "WishlistService","Notification",
+    function (scope, http, routeParams, filter, CartService, WishlistService,Notification) {
 
         console.log("login Ctrl!");
 
@@ -12,6 +12,6 @@ angular.module('paysApp').controller("loginCtrl", ["$scope","$rootScope", "$http
         scope.price = CartService.getTotalCartAmount() + "";
 
         scope.wrongLogin = function(msg){
-            Notification.error({message: 'Invalid credentials'});
+            Notification.error({message: msg});
         }
     }]);
