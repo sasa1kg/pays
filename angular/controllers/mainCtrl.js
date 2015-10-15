@@ -4,7 +4,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
 
 
         console.log("Main Ctrl!");
-        scope.msg = "Main Ctrl!";
 
         scope.checkedValue = "";
         scope.geoLoc = null;
@@ -22,7 +21,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.searchPlaceValue = "";
         scope.locationFound = false;
 
-        scope.distances = SearchService.getDistances();
         scope.getCarts = function () {
             scope.cartItems = CartService.getItemsSize();
             scope.wishlistItems = WishlistService.getItemsSize();
@@ -54,8 +52,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             scope.cartItems = CartService.getItemsSize();
         };
 
-
-        scope.farmersLoaded = SearchService.getFarmers();
 
         scope.searchPlaceBlur = function () {
             if (scope.searchPlaceValue.length > 0) {
@@ -162,82 +158,29 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
 
         scope.subcategories = [];
         scope.subcatproducts = [];
-        scope.getCategories = function () {
-            scope.categories = SearchService.getCategories();
-        };
-        scope.getSubcategories = function (catId) {
-            scope.subcategories = SearchService.getSubcategories(catId);
-        };
-        scope.getSubCatProducts = function (catId, subcatId) {
-            alert(catId + " " + subcatId);
-            scope.subcatproducts = SearchService.getProductsInSubcategory(catId, subcatId);
-        };
+        scope.getCategories = SearchService.getCategories().then(function (data) {
+            if (data) {
+                scope.categories = data;
+            } else {
+                console.log("Unable to retrieve categories from DB");
+            }
 
-        scope.changedCat = function () {
-            scope.subcategoryId = "";
-            scope.subcatProductId = "";
-            scope.subcatProductId = "";
-            scope.subcatproducts = [];
-            scope.subcatproducts.length = 0;
-            scope.getSubcategories(scope.categoryId);
-            scope.getSubCatProducts(scope.categoryId, scope.subcategoryId);
-        };
-        scope.changedSubCat = function () {
-            scope.getSubCatProducts(scope.categoryId, scope.subcategoryId);
-        }
-        scope.changedSubCatProd = function () {
+        });
 
-        }
 
         scope.setSearchPrepared = function () {
-            /*	if (scope.locationDefined && !scope.locationFound) {
-             var location = {
-             "name" : "YOUR_LOC",
-             "longitude" : scope.geoLoc.lng,
-             "latitude" : scope.geoLoc.lat
-             };
-             } else {
-             if (!scope.locationDefined && scope.locationFound) {
-             var location = {
-             "name" : scope.searchPlaceValue,
-             "longitude" : scope.geoLocSearch.lng,
-             "latitude" : scope.geoLocSearch.lat
-             };
-             } else {
-             var location = {
-             "name" : "",
-             "longitude" : "",
-             "latitude" : ""
-             };
-             }
-             }
-             if (scope.geoLoc != null) {
-             var location = {
-             "name" : "YOUR_LOC",
-             "longitude" : scope.geoLoc.lng,
-             "latitude" : scope.geoLoc.lat
-             };
-             } else if (scope.geoLocSearch != null){
-             var location = {
-             "name" : scope.searchPlaceValue,
-             "longitude" : scope.geoLocSearch.lng,
-             "latitude" : scope.geoLocSearch.lat
-             };
-             } else {
-             var location = {
-             "name" : "",
-             "longitude" : "",
-             "latitude" : ""
-             };
-             }
-             SearchService.setSearchObject(scope.getLocation(), [], true).then(function(data) {
-             if (data) {
-             location.path("/search");
-             }
-             });
-             */
-            scope.foundFarmers = scope.farmersLoaded;
             SearchService.setSearchedItems(scope.searchWishlistItems);
+            SearchService.getFarmers().then(function (data) {
+                if (data) {
+                    scope.foundFarmers = data;
+                    for (var j = scope.farmersLoaded.length - 1; j >= 0; j--) {
+                        scope.farmersLoaded[j].img = "images/home/farm1.jpg";
+                    }
+                }
+                else {
+                    console.log("Unable to load farmers from DB");
+                }
+            });
         };
         scope.cancelSearch = function () {
             console.log("Search configuration canceled.");
@@ -261,43 +204,47 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.check = function (value, checked) {
             var idx = scope.selectedCategories.indexOf(value);
             if (idx >= 0 && !checked) {
-                scope.selectedCategories.splice(idx, 1);
-                var products = SearchService.getProductsInCategory(value);
-                for (var j = products.length - 1; j >= 0; j--) {
-                    for (var k = scope.foundProducts.length - 1; k >= 0; k--) {
-                        if (scope.foundProducts[k].id == products[j].id) {
-                            scope.foundProducts.splice(k, 1);
-                            break;
-                        }
-                    }
-                }
-
-
-            }
-            if (idx < 0 && checked) {
-                scope.selectedCategories.push(value);
-
-                var products = SearchService.getProductsInCategory(value);
-                for (var j = products.length - 1; j >= 0; j--) {
-                    products[j].checked = false;
-                    if (products[j].checked == false) {
-                        for (var k = scope.searchWishlistItems.length - 1; k >= 0; k--) {
-                            if (scope.searchWishlistItems[k].id == products[j].id) {
-                                products[j].checked = true;
+                SearchService.getProductsInCategory(value).then(function (data) {
+                    if (data) {
+                        var products = data.products;
+                        scope.selectedCategories.splice(idx, 1);
+                        for (var j = products.length - 1; j >= 0; j--) {
+                            for (var k = scope.foundProducts.length - 1; k >= 0; k--) {
+                                if (scope.foundProducts[k].id == products[j].id) {
+                                    scope.foundProducts.splice(k, 1);
+                                    break;
+                                }
                             }
                         }
+                    } else {
+                        console.log("Unable to retrieve category products from DB");
                     }
+                });
+            }
+            if (idx < 0 && checked) {
+                SearchService.getProductsInCategory(value).then(function (data) {
+                    if (data) {
+                        scope.selectedCategories.push(value);
+                        var products = data.products;
+                        for (var j = products.length - 1; j >= 0; j--) {
+                            products[j].checked = false;
+                            if (products[j].checked == false) {
+                                for (var k = scope.searchWishlistItems.length - 1; k >= 0; k--) {
+                                    if (scope.searchWishlistItems[k].id == products[j].id) {
+                                        products[j].checked = true;
+                                    }
+                                }
+                            }
 
-                    scope.foundProducts.push(products[j]);
-                }
-
-
+                            scope.foundProducts.push(products[j]);
+                        }
+                    } else {
+                        console.log("Unable to retrieve category products from DB");
+                    }
+                });
             }
         }
 
-        scope.getProducts = function () {
-            return scope.foundProducts;
-        }
 
         scope.addOrRemoveSearchWishlistItem = function (product) {
 
@@ -356,9 +303,20 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
 
 //INIT FUNCTIONS
 //        scope.initGeo();
-        scope.getCategories();
-        scope.getCarts();
+        SearchService.getFarmers().then(function (data) {
+            if (data) {
+                scope.farmersLoaded = data;
+                for (var j = scope.farmersLoaded.length - 1; j >= 0; j--) {
+                    scope.farmersLoaded[j].img = "images/home/farm1.jpg";
+                }
+            }
+            else {
+                console.log("Unable to load farmers from DB");
+            }
+        });
 
+        scope.distances = SearchService.getDistances();
+        scope.getCarts();
         scope.price = CartService.getTotalCartAmount() + "";
     }])
 ;

@@ -228,7 +228,7 @@
                 </a>
             </div>
             <div class="col-sm-12" ng-show="!noSelectedCategory() && noFoundFarmers()">
-                <row class="col-sm-12" ng-repeat="product in getProducts()">
+                <row class="col-sm-12" ng-repeat="product in foundProducts">
 
                     <div class="col-sm-1"><input type="checkbox" class="zoom-checkbox"
                                                  ng-model="product.checked"
