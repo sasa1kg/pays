@@ -136,7 +136,6 @@ a#scrollUp i{
 }
 
 .header-middle .container .row {
-  border-bottom: 1px solid #f5f5f5;
   margin-left: 0;
   margin-right: 0;
   padding-bottom: 20px;
@@ -222,6 +221,7 @@ a#scrollUp i{
 .header-bottom {
   padding-bottom: 30px;
   padding-top: 30px;
+  display: none;
 }
 
 .navbar-collapse.collapse{
@@ -287,7 +287,7 @@ ul.sub-menu {
 	position: absolute;
 	top: 30px;
 	left: 0;
-	background: rgba(0, 0, 0, 0.6);
+	background: rgba(255, 255, 255, 0.9);
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -313,7 +313,7 @@ ul.sub-menu {
 }
 
 .navbar-nav li ul.sub-menu li a{
-  color: #fff;
+  color: #696763;
 }
 
 .navbar-nav li ul.sub-menu li a:hover{
@@ -571,6 +571,11 @@ ul.sub-menu {
 
 .carousel-indicators li {
   background: #C4C4BE;
+}
+
+.pays-carousel-indicators {
+  margin-bottom: 0px;
+  bottom: 0px;
 }
 
 .carousel-indicators li.active {

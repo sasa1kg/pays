@@ -47,7 +47,7 @@ paysApp.config(function ($translateProvider) {
         SHOP: 'Shop',
         BLOG: 'Blog',
         FOR_FARMERS: 'For farmers',
-        FOR_DISTRIBUTORS: 'For distributors',
+        FOR_DISTRIBUTORS: 'Distributors',
         SEARCH: 'Search',
         NEAR_YOU: 'Near you',
         IN_CIRCLE_OF: 'In circle of',
@@ -218,14 +218,17 @@ paysApp.config(function ($translateProvider) {
         DELIVERY_OPTION: 'If not checked, farmer will consider you will pick up your order',
         BANK_NUMBER: "Bank account number",
         PIB_NUMBER: "Company identification number",
-        INVALID_CREDENTIALS: "Invalid credentials"
+        INVALID_CREDENTIALS: "Invalid credentials",
+        HELP: "Help",
+        HELP_CENTER: "Help Center",
+        COMPLAINT: "File a Complaint"
     })
         .translations('rs', {
             HOME: 'Početna',
             SHOP: 'Prodavnica',
             BLOG: 'Blog',
             FOR_FARMERS: 'Za prodavce',
-            FOR_DISTRIBUTORS: 'Za distributere',
+            FOR_DISTRIBUTORS: 'Distributeri',
             SEARCH: 'Pretraga',
             NEAR_YOU: 'U vašoj okolini',
             IN_CIRCLE_OF: 'U krugu od',
@@ -396,7 +399,10 @@ paysApp.config(function ($translateProvider) {
             DELIVERY_OPTION: 'Ukoliko nije odabrana, farmer podrazumeva da ćete sami preuzeti proizvode',
             BANK_NUMBER: "Žiro račun",
             PIB_NUMBER: "PIB",
-            INVALID_CREDENTIALS: "Nepostojeći korisnik"
+            INVALID_CREDENTIALS: "Nepostojeći korisnik",
+            HELP: "Pomoć",
+            HELP_CENTER: "Korisnička podrška",
+            COMPLAINT: "Slanje predloga"
         })
     $translateProvider.preferredLanguage('en');
 });
