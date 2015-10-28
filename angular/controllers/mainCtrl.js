@@ -273,6 +273,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             scope.searchWishlistItems = [];
             scope.selectedCategories = [];
             scope.foundProducts = [];
+            scope.foundFarmers = [];
         }
         scope.distance = "";
 

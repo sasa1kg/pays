@@ -83,7 +83,7 @@
                                     {{ 'SEARCH' | translate}}
                                 </button>
                                 <button type="button" class="btn btn-fefault cart actionbar"
-                                        ng-click="cancelSearch()">
+                                        ng-click="cancelSearch()" ng-if="foundFarmers.length > 0">
                                     <i class="fa fa-times"></i>
                                     {{ 'CANCEL_SEARCH' | translate}}
                                 </button>
