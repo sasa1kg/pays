@@ -10,8 +10,13 @@
                     <h2>{{ 'NEW_ACCOUNT' | translate }}</h2>
 
                     <form>
+                        <label>{{ 'USER_TYPE' | translate}}</label>
+                        <select ng-model="userType" class="cursorhover">
+                            <option ng-repeat="type in userTypes" value="{{type.id}}">{{type.name | translate | html}}
+                            </option>
+                        </select>
                         <hr>
-                        <div ng-if="userType == buyerUserType">
+                        <div ng-if="userType == 1">
                             <input type="email" ng-model="buyer.email" ng-change="copyEmail()" placeholder="{{ 'EMAIL' | translate}}"/>
                             <input type="password" ng-model="buyer.password" placeholder="{{ 'PASSWORD' | translate}}"/>
                             <input type="password" ng-model="buyer.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
@@ -23,7 +28,7 @@
                             <input type="text" ng-model="buyer.city" placeholder="{{'CITY' | translate}}"/>
                             <input type="text" ng-model="buyer.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
                         </div>
-                        <div ng-if="userType == distributorUserType">
+                        <div ng-if="userType == 2">
                             <input type="email" ng-model="distributor.email"ng-change="copyEmail()"  placeholder="{{ 'EMAIL' | translate}}"/>
                             <input type="password" ng-model="distributor.password" placeholder="{{ 'PASSWORD' | translate}}"/>
                             <input type="password" ng-model="distributor.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
@@ -36,7 +41,7 @@
                             <input type="text" ng-model="distributor.city" placeholder="{{'CITY' | translate}}"/>
                             <input type="text" ng-model="distributor.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
                         </div>
-                        <div ng-if="userType == farmerUserType">
+                        <div ng-if="userType == 3">
                             <input type="email" ng-model="farmer.email" ng-change="copyEmail()" placeholder="{{ 'EMAIL' | translate}}"/>
                             <input type="password" ng-model="farmer.password" placeholder="{{ 'PASSWORD' | translate}}"/>
                             <input type="password" ng-model="farmer.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>

@@ -1,11 +1,27 @@
-angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootScope","$routeParams", "$filter", "CartService", "WishlistService",
-    function (scope, http, $rootScope, routeParams, filter, CartService, WishlistService) {
+angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootScope", "$filter", "CartService", "WishlistService",
+    function (scope, http, routeParams, filter, CartService, WishlistService) {
 
         console.log("RegisterCtrl");
 
-        scope.userType = routeParams.usertype;
+        var userType = "";
 
         console.log("Register user type "+ scope.userType);
+
+        scope.userTypes = [
+            {
+                name: "BUYER",
+                id: 1
+            },
+            {
+                name: "DISTRIBUTOR",
+                id: 2
+            },
+            {
+                name: "FARMER",
+                id: 3
+            }
+
+        ]
 
         scope.buyer = {
             email: "",

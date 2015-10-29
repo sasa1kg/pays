@@ -116,10 +116,35 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         }
 
 
+        this.getDistributorById = function (distributorId) {
+            console.log(this.distributors[distributorId]);
+            return this.distributors[distributorId];
+        }
 
         this.getVehiclesByDistributorId = function (distId) {
             return this.vehicles;
         }
+
+        this.distributors = [
+            {
+                "id": 0,
+                "name": "Kurir d.o.o",
+                "location": "Novi Sad",
+                "img":" images/home/courier1.jpg",
+                "message": "DISTRIBUTOR_MSG",
+                "title": "DISTRIBUTOR_TITLE"
+            },
+            {
+                "id": 1,
+                "name": "Kombi prevoz",
+                "location": "Rumenka",
+                "img":" images/home/courier1.jpg",
+                "message": "DISTRIBUTOR_MSG",
+                "title": "DISTRIBUTOR_TITLE"
+
+            }
+
+        ];
 
         this.vehicles = [
             {

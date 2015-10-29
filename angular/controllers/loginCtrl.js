@@ -1,9 +1,9 @@
-angular.module('paysApp').controller("loginCtrl", ["$scope", "$http","$routeParams", "$filter", "CartService", "WishlistService","Notification",
-    function (scope, http, routeParams, filter, CartService, WishlistService,Notification) {
+angular.module('paysApp').controller("loginCtrl", ["$scope", "$http", "$filter", "CartService", "WishlistService","Notification",
+    function (scope, http, filter, CartService, WishlistService,Notification) {
 
         console.log("login Ctrl!");
 
-        scope.userType = routeParams.usertype;
+        scope.userType = "";
 
         console.log("Login user type "+ scope.userType);
 

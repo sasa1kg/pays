@@ -4,7 +4,7 @@
 
 <section class="register-form"><!--form-->
     <div class="container">
-        <h4 class="title text-center">{{'EDIT YOUR DATA' | translate}}</h4>
+        <h4 class="title text-center">{{'EDIT_DISTRIBUTOR_DATA' | translate}}</h4>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
@@ -16,6 +16,9 @@
                         </li>
                         <li ng-class="{ active: (page == 'DISTRIBUTOR_MARKETING')}" class="cursor-pointer"
                             ng-click="sectionChange('DISTRIBUTOR_MARKETING')"><a>{{'DISTRIBUTOR_MARKETING' |
+                            translate}}</a></li>
+                        <li ng-class="{ active: (page == 'DISTRIBUTOR_PRICES')}" class="cursor-pointer"
+                            ng-click="sectionChange('DISTRIBUTOR_PRICES')"><a>{{'DISTRIBUTOR_PRICES' |
                             translate}}</a></li>
                     </ul>
                 </div>
