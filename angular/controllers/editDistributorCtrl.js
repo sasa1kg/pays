@@ -1,8 +1,8 @@
 /**
  * Created by nignjatov on 10.10.2015.
  */
-angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", "$filter","$modal", "$routeParams", "CartService", "WishlistService", "SearchService",
-    function (scope, http, filter,modal, routeParams, CartService, WishlistService, SearchService) {
+angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService",
+    function (scope, http, filter, modal, routeParams, CartService, WishlistService, SearchService) {
 
         console.log("edit Distributor:  " + routeParams.id);
 
@@ -12,28 +12,29 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", 
 
         scope.vehicles = SearchService.getVehiclesByDistributorId(routeParams.id);
 
-        scope.price = CartService.getTotalCartAmount()+"";
+        scope.price = CartService.getTotalCartAmount() + "";
 
-        scope.sectionChange = function(sectionName){
+        scope.sectionChange = function (sectionName) {
             scope.page = sectionName;
         }
 
-        scope.saveChanges = function(){
+        scope.saveChanges = function () {
             console.log("Saving changes!");
         }
 
-        scope.deleteVehicle = function(vehicle){
+        scope.deleteVehicle = function (vehicle) {
+            filter('stringtoboolean')($scope.vehicleNew.cooled);
             var idx = scope.vehicles.indexOf(vehicle);
             if (idx >= 0) {
                 scope.vehicles.splice(idx, 1);
             }
         }
 
-        scope.updateVehicle = function(vehicle){
+        scope.updateVehicle = function (vehicle) {
             scope.openVehicleModal(vehicle)
         }
 
-        scope.addVehicle = function(){
+        scope.addVehicle = function () {
             scope.openVehicleModal()
         }
 
@@ -66,17 +67,18 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", 
         };
     }]);
 
-angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance,vehicles,vehicle) {
+angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $filter, $modalInstance, vehicles, vehicle) {
 
     var newVehicle = false
-    $scope.vehicleNew = $.extend( {}, vehicle);
-    if(typeof vehicle === 'undefined'){
+    $scope.vehicleNew = $.extend({}, vehicle);
+    if (typeof vehicle === 'undefined') {
         newVehicle = true;
     }
 
-    $scope.saveChanges = function(){
+    $scope.saveChanges = function () {
         console.log($scope.vehicleNew);
-        if(newVehicle == true) {
+        $scope.vehicleNew.cooled = stringToBoolean($scope.vehicleNew.cooled);
+        if (newVehicle == true) {
             vehicles.push($scope.vehicleNew);
             $modalInstance.close();
         }
@@ -87,10 +89,31 @@ angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($sc
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.isCooled = function (value){
-        if($scope.vehicleNew.cooled == value){
+    $scope.isCooled = function (value) {
+        if ($scope.vehicleNew.cooled == value) {
             return true;
         }
         return false;
     }
-});
+
+    stringToBoolean = function (string) {
+        if (typeof string === 'string') {
+
+            switch (string.toLowerCase().trim()) {
+                case "true":
+                case "yes":
+                case "1":
+                    return true;
+                case "false":
+                case "no":
+                case "0":
+                case null:
+                    return false;
+                default:
+                    return Boolean(string);
+            }
+        }
+        return string;
+    }
+})
+;

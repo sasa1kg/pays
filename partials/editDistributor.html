@@ -140,11 +140,15 @@
                                             <td class="col-sm-9">
                                                 <form>
                                                     <div class="col-sm-5">
-                                                        <input type="radio" name="cooled" class="col-sm-3 vehicle-radio" ng-checked="isCooled(true)"/>{{'YES' |
+                                                        <input type="radio" name="cooled" class="col-sm-3 vehicle-radio"
+                                                               value=true ng-model="vehicleNew.cooled"
+                                                               ng-checked="isCooled(true)"/>{{'YES' |
                                                         translate}}
                                                     </div>
                                                     <div class="col-sm-5">
-                                                        <input type="radio" name="cooled" class="col-sm-3 vehicle-radio" ng-checked="isCooled(false)"/>{{'NO' |
+                                                        <input type="radio" name="cooled" class="col-sm-3 vehicle-radio"
+                                                               value=false ng-model="vehicleNew.cooled"
+                                                               ng-checked="isCooled(false)"/>{{'NO' |
                                                         translate}}
                                                     </div>
                                                 </form>
