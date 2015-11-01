@@ -419,6 +419,40 @@
                     </div>
                 </div>
             </div>
+            <div ng-if="page == 'DISTRIBUTOR_PRICES'" class="col-sm-12">
+                <h4 class = "text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}}</h4>
+                <hr/>
+                <h5 class="text-center">{{ 'DISTANCE' | translate}} [km]</h5>
+                <div class="col-sm-12 text-center">
+                    <div class="col-sm-1 text-center">
+                        <h5 class="side-caption">{{ 'WEIGHT' | translate}} [kg]</h5>
+                    </div>
+                    <div class="col-sm-11 text-center">
+                        <table class="table table-responsive table-bordered" id="priceTable">
+                            <tr>
+                                <td>
+                                </td>
+                                <td ng-repeat="dist in transportDistances">
+                                   <h5>{{dist}} km</h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="weight in transportWeights">
+                                <td>
+                                    <h5>{{weight}} kg</h5>
+                                </td>
+                                <td ng-repeat="dist in transportDistances">
+                                    <input type="text" placeholder="{{prices[dist][weight]}}" ng-model="prices[dist][weight]"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr/>
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-default apply-changes-btn" ng-click="updatePrices()">{{'SAVE_CHANGES' | translate}}
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </section>

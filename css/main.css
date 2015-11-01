@@ -2773,3 +2773,43 @@ h2.title {
 .banner-preview img{
   height: 200px;
 }
+
+.side-caption {
+  margin-top: 300%;
+  -webkit-transform: rotate(270deg);
+}
+.apply-changes-btn {
+  background: #FE980F;
+  border: medium none;
+  border-radius: 0;
+  color: #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+}
+
+#priceTable input {
+  background: #FFFFFF;
+  border: medium none;
+  color: #696763;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+
+  margin-top: 6%;
+
+}
+
+#priceTable tr:first-child td{
+  background-color: #FE980F;
+  color: #FFFFFF;
+}
+#priceTable tr td:first-child{
+  background-color: #FE980F;
+  color: #FFFFFF;
+}
+#priceTable td {
+  width: 15px;
+  text-align: center;
+  margin-right: 0px;
+}

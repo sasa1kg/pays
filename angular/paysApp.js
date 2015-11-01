@@ -52,6 +52,12 @@ paysApp.run(function ($rootScope, $translate) {
     $rootScope.buyerUserType = 'buyer';
     $rootScope.farmerUserType = 'farmer';
     $rootScope.distributorUserType = 'distributor';
+    $rootScope.transportDistances = [
+        10,20,50,100,200,300
+    ];
+    $rootScope.transportWeights = [
+        5,10,20,50,100,200
+    ]
 });
 
 paysApp.config(function ($translateProvider) {
@@ -256,7 +262,12 @@ paysApp.config(function ($translateProvider) {
         DEPTH: "Depth",
         SELECT_IMAGE: "Select image",
         DISTRIBUTOR_ADVERTISING_TITLE: "Advertising title",
-        DISTRIBUTOR_ADVERTISING_MSG: "Advertising message"
+        DISTRIBUTOR_ADVERTISING_MSG: "Advertising message",
+        BANNER_PICTURES: "Pictures for banner",
+        DISTRIBUTOR_PRICE_LIST: "Distributor price list",
+        DISTANCE: "Distance",
+        WEIGHT: "Weight"
+
 
     })
         .translations('rs', {
@@ -459,7 +470,11 @@ paysApp.config(function ($translateProvider) {
             DEPTH: "Dubina",
             SELECT_IMAGE: "Odaberi sliku",
             DISTRIBUTOR_ADVERTISING_TITLE: "Reklamni naslov",
-            DISTRIBUTOR_ADVERTISING_MSG: "Reklamna poruka"
+            DISTRIBUTOR_ADVERTISING_MSG: "Reklamna poruka",
+            BANNER_PICTURES: "Silke za baner",
+            DISTRIBUTOR_PRICE_LIST: "Cenovnik dostave",
+            DISTANCE: "Udaljenost",
+            WEIGHT: "Težina"
         })
     $translateProvider.preferredLanguage('en');
 });

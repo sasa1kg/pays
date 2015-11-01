@@ -1,12 +1,12 @@
 /**
  * Created by nignjatov on 10.10.2015.
  */
-angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService",
-    function (scope, http, filter, modal, routeParams, CartService, WishlistService, SearchService) {
+angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootScope","$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService",
+    function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService) {
 
         console.log("edit Distributor:  " + routeParams.id);
 
-        scope.page = 'DISTRIBUTOR_MARKETING';
+        scope.page = 'GENERAL_DISTRIBUTOR_DATA';
 
         scope.distributor = SearchService.getDistributorById(routeParams.id);
 
@@ -14,10 +14,17 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", 
 
         scope.price = CartService.getTotalCartAmount() + "";
 
+        scope.prices = [];
+//dummy load
+        for (var i in rootScope.transportDistances){
+            scope.prices[rootScope.transportDistances[i]] = [];
+            for(var j in rootScope.transportWeights){
+                scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = rootScope.transportDistances[i] * rootScope.transportWeights[j];
+            }
+        }
         scope.sectionChange = function (sectionName) {
             scope.page = sectionName;
         }
-
         scope.saveChanges = function () {
             console.log("Saving changes!");
         }
@@ -37,6 +44,9 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", 
             scope.openVehicleModal()
         }
 
+        scope. updatePrices = function(){
+            console.log(scope.prices);
+        }
         scope.openVehicleModal = function (vehicle) {
 
             var modalInstance = modal.open({
