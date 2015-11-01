@@ -1,6 +1,6 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageModule',
     'GeoLocationService', 'CartService', 'WishlistService', 'SearchService',
-    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap','ui-notification'])
+    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap','ui-notification','flow'])
     .filter('html', function ($sce) {
         return function (input) {
             return $sce.trustAsHtml(input);
@@ -9,7 +9,21 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageMo
         return function (arr, start, end) {
             return arr.slice(start, end);
         };
-    }).config(function(NotificationProvider) {
+    }).config(['flowFactoryProvider', function (flowFactoryProvider) {
+        flowFactoryProvider.defaults = {
+            target: 'upload.php',
+            permanentErrors: [404, 500, 501],
+            maxChunkRetries: 1,
+            chunkRetryInterval: 5000,
+            simultaneousUploads: 4,
+            singleFile: true
+        };
+        flowFactoryProvider.on('catchAll', function (event) {
+            console.log('catchAll', arguments);
+        });
+        // Can be used with different implementations of Flow.js
+        // flowFactoryProvider.factory = fustyFlowFactory;
+    }]).config(function(NotificationProvider) {
         NotificationProvider.setOptions({
             delay: 5000,
             startTop: 20,
@@ -240,6 +254,9 @@ paysApp.config(function ($translateProvider) {
         HEIGHT: "Height",
         WIDTH: "Width",
         DEPTH: "Depth",
+        SELECT_IMAGE: "Select image",
+        DISTRIBUTOR_ADVERTISING_TITLE: "Advertising title",
+        DISTRIBUTOR_ADVERTISING_MSG: "Advertising message"
 
     })
         .translations('rs', {
@@ -440,6 +457,9 @@ paysApp.config(function ($translateProvider) {
             HEIGHT: "Visina",
             WIDTH: "Širina",
             DEPTH: "Dubina",
+            SELECT_IMAGE: "Odaberi sliku",
+            DISTRIBUTOR_ADVERTISING_TITLE: "Reklamni naslov",
+            DISTRIBUTOR_ADVERTISING_MSG: "Reklamna poruka"
         })
     $translateProvider.preferredLanguage('en');
 });

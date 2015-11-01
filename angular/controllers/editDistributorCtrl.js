@@ -6,7 +6,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", 
 
         console.log("edit Distributor:  " + routeParams.id);
 
-        scope.page = 'VEHICLES';
+        scope.page = 'DISTRIBUTOR_MARKETING';
 
         scope.distributor = SearchService.getDistributorById(routeParams.id);
 
@@ -23,7 +23,6 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$http", 
         }
 
         scope.deleteVehicle = function (vehicle) {
-            filter('stringtoboolean')($scope.vehicleNew.cooled);
             var idx = scope.vehicles.indexOf(vehicle);
             if (idx >= 0) {
                 scope.vehicles.splice(idx, 1);

@@ -153,12 +153,19 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                     "city": "Rumenka",
                     "phone": "+381626667194",
                 },
-                "img":" images/home/courier1.jpg",
-                "message": "DISTRIBUTOR_MSG",
-                "title": "DISTRIBUTOR_TITLE"
-
+                advertising: {
+                    "img":" images/home/courier1.jpg",
+                    "message": "DISTRIBUTOR_MSG",
+                    "title": "DISTRIBUTOR_TITLE",
+                    banner: [
+                        "images/home/courier1.jpg",
+                        "images/home/courier2.jpg",
+                        "images/home/courier3.jpg",
+                        "images/home/courier4.jpg",
+                        "images/home/courier5.jpg"
+                    ]
+                }
             }
-
         ];
 
         this.vehicles = [
@@ -171,7 +178,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "width": 150,
                 "depth": 200,
                 "amount": 500,
-                "img":" images/home/vehicle1.jpg"
+                "img":"images/home/vehicle1.jpg"
             },
             {
                 "id": 1,
@@ -182,7 +189,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "width": 140,
                 "depth": 220,
                 "amount": 730,
-                "img":" images/home/vehicle2.jpg"
+                "img":"images/home/vehicle2.jpg"
             },
             {
                 "id": 2,
@@ -193,7 +200,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 "width": 155,
                 "depth": 250,
                 "amount": 650,
-                "img":" images/home/vehicle1.jpg"
+                "img":"images/home/vehicle1.jpg"
             }
         ]
 
