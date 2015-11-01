@@ -128,16 +128,31 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         this.distributors = [
             {
                 "id": 0,
-                "name": "Kurir d.o.o",
-                "location": "Novi Sad",
+                generalInfo : {
+                    "companyName": "Kurir d.o.o",
+                    "accountNumber": "123213-546212",
+                    "pibNumber": "12471952",
+                    "streetAndNr": "Novosadska 13",
+                    "postalCode": "21000",
+                    "city": "Novi Sad",
+                    "phone": "+38162957194",
+                },
+
                 "img":" images/home/courier1.jpg",
                 "message": "DISTRIBUTOR_MSG",
                 "title": "DISTRIBUTOR_TITLE"
             },
             {
                 "id": 1,
-                "name": "Kombi prevoz",
-                "location": "Rumenka",
+                generalInfo : {
+                    "companyName": "Kombi prevoz",
+                    "accountNumber": "1233263-99912",
+                    "pibNumber": "19381952",
+                    "streetAndNr": "Dunavska 55",
+                    "postalCode": "33000",
+                    "city": "Rumenka",
+                    "phone": "+381626667194",
+                },
                 "img":" images/home/courier1.jpg",
                 "message": "DISTRIBUTOR_MSG",
                 "title": "DISTRIBUTOR_TITLE"
@@ -149,6 +164,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         this.vehicles = [
             {
                 "id": 0,
+                "model": "Ford Transit",
                 "number": 2,
                 "cooled": true,
                 "height": 120,
@@ -159,6 +175,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             },
             {
                 "id": 1,
+                "model": "Renault Courier",
                 "number": 6,
                 "cooled": false,
                 "height": 160,
@@ -169,6 +186,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             },
             {
                 "id": 2,
+                "model": "Mercedes Transporter",
                 "number": 9,
                 "cooled": true,
                 "height": 110,

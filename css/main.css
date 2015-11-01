@@ -2618,3 +2618,87 @@ h2.title {
   white-space: normal;
   width:11em;
 }
+
+/*************************
+*******Distributor profile******
+**************************/
+
+.general-info-form-margin {
+  margin-bottom:40px;
+}
+
+.add-vehicle-btn {
+  height: 70px;
+  background-color: #FE980F;
+  color: #FFFFFF;
+  border: 15px;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+#vehicles_data .vehicles_info {
+  border: 1px solid #E6E4DF;
+  margin-bottom: 50px
+}
+
+
+#vehicles_data .vehicles_info .vehicles_menu {
+  background: #FE980F;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+}
+
+#vehicles_data .vehicles_info .table.table-condensed thead tr {
+  height: 51px;
+}
+
+
+#vehicles_data .vehicles_info .table.table-condensed tr {
+  border-bottom: 1px solid#F7F7F0
+}
+
+#vehicles_data .vehicles_info .table.table-condensed tr:last-child {
+  border-bottom: 0
+}
+
+.vehicles_data table tr td {
+  border-top: 0 none;
+  vertical-align: inherit;
+}
+
+#vehicles_data .vehicles_info .image {
+  padding-left: 30px;
+}
+
+#vehicles_data .vehicles_info .btn-default {
+  background: #FE980F;
+  border: medium none;
+  border-radius: 0;
+  color: #FFFFFF;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  padding: 6px 25px;
+  margin-top: 15px;
+  width: 150px
+}
+
+#vehicle-modal-footer {
+  border: none;
+}
+
+#vehicle-modal-footer .btn{
+  background: #FE980F;
+  border-radius: 0;
+  color: #FFFFFF;
+  margin-top: 18px;
+  border: none;
+  padding: 5px 15px;
+}
+
+.vehicle-radio
+{
+  display:inline
+}

@@ -10,7 +10,8 @@
                 <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li ng-class="{ active: (page == 'GENERAL_DISTRIBUTOR_DATA')}" class="cursor-pointer"
-                            ng-click="sectionChange('GENERAL_DISTRIBUTOR_DATA')"><a>{{ 'GENERAL_DISTRIBUTOR_DATA' | translate}}</a></li>
+                            ng-click="sectionChange('GENERAL_DISTRIBUTOR_DATA')"><a>{{ 'GENERAL_DISTRIBUTOR_DATA' |
+                            translate}}</a></li>
                         <li ng-class="{ active: (page == 'VEHICLES')}" class="cursor-pointer"
                             ng-click="sectionChange('VEHICLES')"><a>{{'VEHICLES' | translate}}</a>
                         </li>
@@ -28,21 +29,184 @@
             <div ng-if="page == 'GENERAL_DISTRIBUTOR_DATA'" class="col-sm-6">
                 <div class="signup-form">
                     <form>
-                        <input type="text" ng-model="distributorUser.companyName"
-                               placeholder="{{ 'COMPANY_NAME' | translate}}"/>
-                        <input type="text" ng-model="distributorUser.accountNumber"
-                               placeholder="{{ 'BANK_NUMBER' | translate}}"/>
-                        <input type="text" ng-model="distributorUser.pibNumber"
-                               placeholder="{{ 'PIB_NUMBER' | translate}}"/>
-                        <input type="text" ng-model="distributorUser.streetAndNr"
-                               placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
-                        <input type="text" ng-model="distributorUser.postalCode"
-                               placeholder="{{'POSTAL_CODE' | translate}}"/>
-                        <input type="text" ng-model="distributorUser.city" placeholder="{{'CITY' | translate}}"/>
-                        <input type="text" ng-model="distributorUser.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                        <table class="col-sm-12 general-info-form-margin">
+                            <tr>
+                                <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
+                                <td class="col-sm-9"><input type="text" ng-model="distributor.generalInfo.companyName"
+                                                            placeholder="{{distributor.generalInfo.companyName}}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
+                                <td class="col-sm-9"><input type="text" ng-model="distributor.generalInfo.accountNumber"
+                                                            placeholder="{{distributor.generalInfo.accountNumber}}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
+                                <td class="col-sm-9"><input type="text" ng-model="distributor.generalInfo.pibNumber"
+                                                            placeholder="{{distributor.generalInfo.pibNumber}}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-3"><h5 class="text-left">{{ 'STREET_AND_NUMBER' | translate}}</h5>
+                                </td>
+                                <td class="col-sm-9"><input type="text" ng-model="distributor.generalInfo.streetAndNr"
+                                                            placeholder="{{distributor.generalInfo.streetAndNr}}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-3"><h5 class="text-left">{{ 'POSTAL_CODE' | translate}}</h5></td>
+                                <td class="col-sm-9"><input type="text" ng-model="distributor.generalInfo.postalCode"
+                                                            placeholder="{{distributor.generalInfo.postalCode}}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-3"><h5 class="text-left">{{ 'CITY' | translate}}</h5></td>
+                                <td class="col-sm-9"><input type="text" ng-model="distributor.generalInfo.city"
+                                                            placeholder="{{distributor.generalInfo.city}}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5></td>
+                                <td class="col-sm-9"><input type="text" ng-model="distributor.generalInfo.phone"
+                                                            placeholder="{{distributor.generalInfo.phone}}"/></td>
+                            </tr>
+                        </table>
                         <button class="btn btn-default" ng-click="saveChanges()">{{'SAVE_CHANGES' | translate}}</button>
                     </form>
                 </div>
+            </div>
+            <div ng-if="page == 'VEHICLES'" class="col-sm-12" id="vehicles_data">
+                <div class="table-responsive vehicles_info">
+                    <script type="text/ng-template" id="vehicleEditModal.html">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+                            <h4 class="modal-title">{{ 'VEHICLE_EDIT' | translate}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="signup-form">
+                                <form>
+                                    <table class="col-sm-12">
+                                        <tr>
+                                            <td class="col-sm-3"><h5 class="text-left">{{ 'VEHICLE_MODEL' |
+                                                translate}}</h5></td>
+                                            <td class="col-sm-9"><input type="text" ng-model="vehicleNew.model"
+                                                                        placeholder="{{vehicle.model}}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3"><h5 class="text-left">{{ 'NUMBER_OF_VEHICLES' |
+                                                translate}}</h5></td>
+                                            <td class="col-sm-9"><input type="text" ng-model="vehicleNew.number"
+                                                                        placeholder="{{vehicle.number}}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3"><h5 class="text-left">{{ 'HEIGHT' |
+                                                translate}}[cm]</h5></td>
+                                            <td class="col-sm-9"><input type="text"
+                                                                        ng-model="vehicleNew.height"
+                                                                        placeholder="{{vehicle.height}}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3"><h5 class="text-left">{{ 'WIDTH' | translate}}[cm]</h5>
+                                            </td>
+                                            <td class="col-sm-9"><input type="text"
+                                                                        ng-model="vehicleNew.width"
+                                                                        placeholder="{{vehicle.width}}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3"><h5 class="text-left">{{ 'DEPTH' | translate}}[cm]</h5>
+                                            </td>
+                                            <td class="col-sm-9"><input type="text"
+                                                                        ng-model="vehicleNew.depth"
+                                                                        placeholder="{{vehicle.depth}}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3"><h5 class="text-left">{{ 'TRANSPORT_WEIGHT' |
+                                                translate}}[kg]</h5></td>
+                                            <td class="col-sm-9"><input type="text"
+                                                                        ng-model="vehicleNew.amount"
+                                                                        placeholder="{{vehicle.amount}}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3"><h5 class="text-left">{{ 'VEHICLE_IMAGE' |
+                                                translate}}</h5></td>
+                                            <td class="col-sm-9">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-3"><h5 class="text-left">{{ 'COOLED_TRANSPORT' |
+                                                translate}}</h5></td>
+                                            <td class="col-sm-9">
+                                                <form>
+                                                    <div class="col-sm-5">
+                                                        <input type="radio" name="cooled" class="col-sm-3 vehicle-radio" ng-checked="isCooled(true)"/>{{'YES' |
+                                                        translate}}
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <input type="radio" name="cooled" class="col-sm-3 vehicle-radio" ng-checked="isCooled(false)"/>{{'NO' |
+                                                        translate}}
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer" id="vehicle-modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="saveChanges()">{{ 'SAVE_CHANGES' |
+                                translate}}
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="cancelModal()">{{ 'DISCARD_CHANGES'
+                                |
+                                translate}}
+                            </button>
+                        </div>
+                    </script>
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr class="vehicles_menu">
+                            <td>{{ 'VEHICLE_MODEL' | translate}}</td>
+                            <td>{{ 'VEHICLE_PROPERTIES' | translate}}</td>
+                            <td>{{' VEHICLE_IMAGE' | translate}}</td>
+                            <td>{{' ACTIONS' | translate}}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="vehicle in vehicles">
+                            <td>
+                                <h4 ng-bind-html="vehicle.model | html"></h4>
+                            </td>
+                            <td>
+                                <h5>{{ 'COOLED_TRANSPORT' | translate}} : <span ng-if="vehicle.cooled == true">{{'YES' | translate }}</span>
+                                    <span ng-if="vehicle.cooled == false">{{'NO' | translate }}</span></h5>
+                                <h5>{{ 'TRANSPORT_VOLUME' | translate}} :
+                                    {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}[cm]</h5>
+                                <h5>{{ 'TRANSPORT_WEIGHT' | translate}} : {{vehicle.amount}}[kg]</h5>
+                                <h5>{{ 'NUMBER_OF_VEHICLES' | translate}} : {{vehicle.number}}</h5>
+                            </td>
+                            <td>
+                                <div class="text-left">
+                                    <img src="{{vehicle.img}}" height="100px" width="128px" class="cursorhover"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-default" ng-click="updateVehicle(vehicle)"><i
+                                        class="fa fa-pencil-square-o"></i> {{ 'UPDATE' | translate}}
+                                </button>
+                                <button class="btn btn-default" ng-click="deleteVehicle(vehicle)"><i
+                                        class="fa fa-times"></i> {{ 'DELETE' | translate}}
+                                </button>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-default btn-lg add-vehicle-btn" ng-click="addVehicle()"><i
+                        class="fa fa-plus"></i> {{'ADD_NEW_VEHICLE' |
+                    translate}}
+                </button>
             </div>
         </div>
     </div>

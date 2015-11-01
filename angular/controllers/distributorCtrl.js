@@ -7,4 +7,5 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope", "$http", "$fi
         scope.distributor = SearchService.getDistributorById(routeParams.id);
         scope.distributorVehicles = SearchService.getVehiclesByDistributorId(routeParams.id);
         scope.price = CartService.getTotalCartAmount()+"";
+
     }]);
