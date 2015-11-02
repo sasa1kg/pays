@@ -162,20 +162,25 @@
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'COOLED_TRANSPORT' |
                                                 translate}}</h5></td>
                                             <td class="col-sm-9">
-                                                <form>
-                                                    <div class="col-sm-5">
-                                                        <input type="radio" name="cooled" class="col-sm-3 vehicle-radio"
-                                                               value=true ng-model="vehicleNew.cooled"
-                                                               ng-checked="isCooled(true)"/>{{'YES' |
-                                                        translate}}
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-3">
+                                                        <label>
+                                                            <input type="radio" name="cooled" class="vehicle-radio"
+                                                                   value=true ng-model="vehicleNew.cooled"
+                                                                   ng-checked="isCooled(true)"/>{{'YES' |
+                                                            translate}}
+                                                        </label>
                                                     </div>
-                                                    <div class="col-sm-5">
-                                                        <input type="radio" name="cooled" class="col-sm-3 vehicle-radio"
-                                                               value=false ng-model="vehicleNew.cooled"
-                                                               ng-checked="isCooled(false)"/>{{'NO' |
-                                                        translate}}
+                                                    <div class="col-sm-3">
+                                                        <label>
+                                                            <input type="radio" name="cooled"
+                                                                   class="vehicle-radio"
+                                                                   value=false ng-model="vehicleNew.cooled"
+                                                                   ng-checked="isCooled(false)"/>
+                                                            {{'NO' | translate}}
+                                                        </label>
                                                     </div>
-                                                </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
@@ -247,8 +252,7 @@
                                             translate}}</h5></td>
                                     </tr>
                                     <tr>
-                                        <td><input type="text" ng-model="distributor.advertising.title"
-                                                   placeholder="{{distributor.advertising.title | translate}}"/>
+                                        <td><input type="text" ng-model="distributor.advertising.title"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -258,8 +262,7 @@
                                     </tr>
                                     <tr>
                                         <td><input type="text" rows="3"
-                                                   ng-model="distributor.advertising.message"
-                                                   placeholder="{{distributor.advertising.message | translate}}"/>
+                                                   ng-model="distributor.advertising.message"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -297,10 +300,10 @@
                     <hr>
                     <div class="col-sm-12 banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[0]}}" />
+                            <img src="{{distributor.advertising.banner[0]}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]" />
+                            <img flow-img="$flow.files[0]"/>
                         </div>
                         <div>
                         <span class="btn btn-primary" ng-show="!$flow.files.length"
@@ -322,10 +325,10 @@
                     <hr>
                     <div class="col-sm-12 banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[1]}}" />
+                            <img src="{{distributor.advertising.banner[1]}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]" />
+                            <img flow-img="$flow.files[0]"/>
                         </div>
                         <div>
                         <span class="btn btn-primary" ng-show="!$flow.files.length"
@@ -347,10 +350,10 @@
                     <hr>
                     <div class="col-sm-12 banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[2]}}" />
+                            <img src="{{distributor.advertising.banner[2]}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]" />
+                            <img flow-img="$flow.files[0]"/>
                         </div>
                         <div>
                         <span class="btn btn-primary" ng-show="!$flow.files.length"
@@ -372,10 +375,10 @@
                     <hr>
                     <div class="col-sm-12 banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[3]}}" />
+                            <img src="{{distributor.advertising.banner[3]}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]" />
+                            <img flow-img="$flow.files[0]"/>
                         </div>
                         <div>
                         <span class="btn btn-primary" ng-show="!$flow.files.length"
@@ -397,10 +400,10 @@
                     <hr>
                     <div class="col-sm-12 banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[4]}}" />
+                            <img src="{{distributor.advertising.banner[4]}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]" />
+                            <img flow-img="$flow.files[0]"/>
                         </div>
                         <div>
                         <span class="btn btn-primary" ng-show="!$flow.files.length"
@@ -420,9 +423,10 @@
                 </div>
             </div>
             <div ng-if="page == 'DISTRIBUTOR_PRICES'" class="col-sm-12">
-                <h4 class = "text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}}</h4>
+                <h4 class="text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}}</h4>
                 <hr/>
                 <h5 class="text-center">{{ 'DISTANCE' | translate}} [km]</h5>
+
                 <div class="col-sm-12 text-center">
                     <div class="col-sm-1 text-center">
                         <h5 class="side-caption">{{ 'WEIGHT' | translate}} [kg]</h5>
@@ -433,7 +437,7 @@
                                 <td>
                                 </td>
                                 <td ng-repeat="dist in transportDistances">
-                                   <h5>{{dist}} km</h5>
+                                    <h5>{{dist}} km</h5>
                                 </td>
                             </tr>
                             <tr ng-repeat="weight in transportWeights">
@@ -441,7 +445,8 @@
                                     <h5>{{weight}} kg</h5>
                                 </td>
                                 <td ng-repeat="dist in transportDistances">
-                                    <input type="text" placeholder="{{prices[dist][weight]}}" ng-model="prices[dist][weight]"/>
+                                    <input type="text" placeholder="{{prices[dist][weight]}}"
+                                           ng-model="prices[dist][weight]"/>
                                 </td>
                             </tr>
                         </table>
@@ -449,7 +454,8 @@
                 </div>
                 <hr/>
                 <div class="col-sm-12 text-center">
-                    <button class="btn btn-default apply-changes-btn" ng-click="updatePrices()">{{'SAVE_CHANGES' | translate}}
+                    <button class="btn btn-default apply-changes-btn" ng-click="updatePrices()">{{'SAVE_CHANGES' |
+                        translate}}
                     </button>
                 </div>
             </div>

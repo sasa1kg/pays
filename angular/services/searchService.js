@@ -155,8 +155,8 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 },
                 advertising: {
                     "img":" images/home/courier1.jpg",
-                    "message": "DISTRIBUTOR_MSG",
-                    "title": "DISTRIBUTOR_TITLE",
+                    "message": "Brza dostava svakog dana u svim velikim gradovima u Srbiji",
+                    "title": "Najbolji distributor za Vas!",
                     banner: [
                         "images/home/courier1.jpg",
                         "images/home/courier2.jpg",
