@@ -1,62 +1,64 @@
 <header id="header"><!--header-->
-	<div ng-include="'partials/navBar.html'"></div>
+    <div ng-include="'partials/navBar.html'"></div>
 </header><!--/header-->
 
-	<section id="cart_items">
-		<div class="container">
-			<div class="breadcrumbs">
-				<ol class="breadcrumb">
-				  <li><a href="#/pays">Home</a></li>
-				  <li class="active">Lista želja</li>
-				</ol>
-			</div>
-			<div class="table-responsive cart_info">
-				<table class="table table-condensed">
-					<thead>
-						<tr class="cart_menu">
-							<td class="image">Proizvod</td>
-							<td class="description"></td>
-							<td class="price">Cena</td>
-							<td class="quantity">Količina</td>
-							<td class="total">Ukupno</td>
-							<td></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat = "item in wishlistItems">
-							<td class="cart_product">
-								<a href=""><img src="{{item.image}}" alt="{{item.itemName}}" style="width:128px;height:128px;"></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">{{item.itemName}}</a></h4>
-								<p>ID proizvoda: {{item.itemId}}</p>
-								<p>Farmer: {{item.farmer}}</p>
-								<p>Lokacija: {{item.farmerLocation}}</p>
-							</td>
-							<td class="cart_price">
-								<p>{{item.itemPrice}} RSD / {{item.itemMeasure}}</p>
-							</td>
-							<td class="cart_quantity">
-							
-										<div class="cart_quantity_button">
-											<a class="cart_quantity_up" ng-click="more(item.itemId, item.farmerId)"> + </a>
-											<input class="cart_quantity_input" type="text" name="quantity" ng-model="item.itemNum" autocomplete="off" size="2">
-											<a class="cart_quantity_down" ng-click="less(item.itemId, item.farmerId)"> - </a>
-										</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">{{item.itemPrice * item.itemNum}} RSD</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" ng-click="remove(item.itemId, item.farmerId)"><i class="fa fa-times"></i></a>
-								<a class="cart_quantity_delete" ng-click="putToCart(item.itemId, item.farmerId)"><i class="fa fa-shopping-cart"></i></a>
-							</td>
-								
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</section> <!--/#cart_items-->
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#/pays">{{ 'HOME' | translate}}</a></li>
+                <li class="active">{{ 'CART' | translate }}</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+
+            <div class="wishlist-farmer "ng-repeat="farmer in farmerProducts">
+                <h3 class="text-center" ng-bind-html=" farmer.farmerName | html"></h3>
+                <h3 class="text-center" ng-bind-html=" farmer.farmerLocation | html"></h3>
+
+
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="cart_menu">
+                        <td class="image">{{ 'ITEM' | translate}}</td>
+                        <td class="description"></td>
+                        <td class="price">{{'PRICE' | translate}}</td>
+                        <td class="total"></td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in farmer.products">
+                        <td class="cart_product">
+                            <a href=""><img src="{{item.image}}" alt="{{item.itemName | translate}}"
+                                            style="width:128px;height:128px;"></a>
+                        </td>
+                        <td class="cart_description">
+                            <h4>{{item.itemName | translate}}</h4>
+                        </td>
+                        <td class="cart_price">
+                            <p>{{item.itemPrice}} RSD / {{item.itemMeasure}}</p>
+                        </td>
+                        <td class="cart_quantity">
+                            <div ng-if="canBeAdded(farmer.farmerId) && !isProductInCart(item.itemId)">
+                                <a ng-click="putToCart(item.itemId,farmer.farmerId,('ITEM_ADDED_TO_CART' | translate))"
+                                   class="btn btn-default add-to-cart"><i
+                                        class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate}}</a>
+                            </div>
+                            <div>
+                                <a ng-click="removeFromWishlist(item.itemId,farmer.farmerId,('REMOVED_FROM_WISHLIST' | translate))" class="btn btn-default add-to-cart">
+                                    <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+                            </div>
+
+
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section> <!--/#cart_items-->
 
 <div ng-include="'partials/footer.html'"></div>

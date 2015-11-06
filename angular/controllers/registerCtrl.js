@@ -58,9 +58,7 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
             phone: ""
         };
 
-        scope.cartItems = CartService.getItemsSize();
-        scope.wishlistItems = WishlistService.getItemsSize();
-        scope.price = CartService.getTotalCartAmount() + "";
+
 
         scope.register = function () {
             if (scope.userType == $rootScope.buyerUserType) {
@@ -89,5 +87,6 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
             }
 
         }
-
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
+        scope.price = CartService.getTotalCartAmount() + "";
     }]);

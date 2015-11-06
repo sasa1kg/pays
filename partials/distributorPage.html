@@ -15,16 +15,16 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="col-sm-6">
-                        <h1 ng-bind-html="distributor.name | html"></h1>
+                        <h1 ng-bind-html="distributor.generalInfo.companyName | html"></h1>
 
-                        <h2 ng-bind-html="distributor.location | html"></h2>
+                        <h2 ng-bind-html="distributor.generalInfo.city | html"></h2>
 
-                        <h3 ng-bind-html="distributor.title | translate | html"></h3>
+                        <h3 ng-bind-html="distributor.advertising.title | translate | html"></h3>
 
-                        <p ng-bind-html="distributor.message | translate | html"></p>
+                        <p ng-bind-html="distributor.advertising.message | translate | html"></p>
                     </div>
                     <div class="col-sm-6">
-                        <img src="{{distributor.img}}" class="girl img-responsive" alt=""
+                        <img src="{{distributor.advertising.img}}" class="girl img-responsive" alt=""
                              style="height: 400px;width: 400px;"/>
                     </div>
                 </div>
@@ -44,7 +44,6 @@
                     <img src="images/home/courier5.jpg" class="girl img-responsive col-sm-12" alt=""
                          style="height: 400px;"/>
                 </div>
-
             </div>
 
             <a class="left control-carousel hidden-xs" ng-non-bindable data-slide="prev" role="button" data-target="#slider-carousel">

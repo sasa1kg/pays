@@ -14,9 +14,9 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 
         scope.addToWishlist = function (productId) {
             for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
-                if (scope.farmerProducts[i].id == productId) {
-                    WishlistService.putInWishlist(scope.farmerProducts[i].id,
-                        scope.farmerProducts[i].name,
+                if (scope.farmerProducts[i].product.id == productId) {
+                    WishlistService.putInWishlist(scope.farmerProducts[i].product.id,
+                        scope.farmerProducts[i].product.name,
                         scope.farmerProducts[i].measure,
                         scope.farmerProducts[i].price,
                         scope.farmerProducts[i].image,
@@ -26,9 +26,17 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                     );
                 }
             }
-            scope.wishlistItems = WishlistService.getItemsSize();
+            scope.wishlistItemsSize = WishlistService.getItemsSize();
         }
 
+        scope.removeFromWishlist = function (productId) {
+            WishlistService.removeFromWishList(productId,scope.farmer.id);
+            scope.wishlistItemsSize = WishlistService.getItemsSize();
+        }
+
+        scope.isProductInWishlist = function(productId){
+            return WishlistService.itemInWishlist(scope.farmerId,productId);
+        }
 
         scope.addToCart = function (productId) {
             if (CartService.canBeAdded(scope.farmer.id)) {
@@ -145,5 +153,10 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
             }
         });
 
+        scope.canBeAdded = function(){
+            return CartService.canBeAdded(scope.farmerId);
+        }
+
         scope.price = CartService.getTotalCartAmount()+"";
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }]);

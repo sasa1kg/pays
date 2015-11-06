@@ -54,5 +54,10 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
             controller: "registerCtrl",
             resolve: {}
         })
+        .when("/distributorSearch", {
+            templateUrl: "partials/distributorSearch.html",
+            controller: "distributorSearchCtrl",
+            resolve: {}
+        })
         .otherwise({redirectTo: '/'});
 }]);

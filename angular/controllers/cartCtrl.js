@@ -137,6 +137,7 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
 
         scope.loadData();
         scope.price = CartService.getTotalCartAmount() + "";
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }]);
 
 angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance,$location,CartService) {

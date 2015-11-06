@@ -1,3 +1,4 @@
+
 var WishlistService = angular.module('WishlistService', []).service('WishlistService', ['localStorageService', function (localStorageService) {
 
 	this.putInWishlist = function (productId, productName, productMeasure, productPrice, productImage, farmerId, farmerName, farmerLocation) {
@@ -24,14 +25,35 @@ var WishlistService = angular.module('WishlistService', []).service('WishlistSer
 					"farmer" : farmerName,
 					"farmerLocation" : farmerLocation,
 					"farmerId" : farmerId,
+					"itemNum": 1,
 					"itemName" : productName,
-					"itemNum" : 1,
 					"itemPrice" : productPrice,
 					"itemMeasure" : productMeasure,
 					"itemId" : productId,
 					"image" : productImage
 			});
 		}
+	}
+
+	this.removeFromWishList = function (productId,farmerId){
+		var keys = localStorageService.keys();
+		for (var i = keys.length - 1; i >= 0; i--) {
+			var identifier = JSON.parse(keys[i]);
+			if (identifier.productId == productId && identifier.farmerId == farmerId && identifier.type == "wishlist") {
+				localStorageService.remove(keys[i]);
+			}
+		}
+	}
+
+	this.itemInWishlist = function (farmerId,productId) {
+		var keys = localStorageService.keys();
+		for (var i = keys.length - 1; i >= 0; i--) {
+			var identifier = JSON.parse(keys[i]);
+			if (identifier.type == "wishlist" && identifier.productId == productId && identifier.farmerId == farmerId) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	this.resetWishlist = function () {
@@ -42,45 +64,6 @@ var WishlistService = angular.module('WishlistService', []).service('WishlistSer
 				localStorageService.remove(keys[i]);
 			}
 		};
-	}
-
-	this.remove = function (productId, farmerId) {
-		var keys = localStorageService.keys();
-		for (var i = keys.length - 1; i >= 0; i--) {
-			var identifier = JSON.parse(keys[i]);
-			if (identifier.type == "wishlist" && identifier.productId == productId && identifier.farmerId == farmerId) {
-				localStorageService.remove(keys[i]);
-			}
-		}
-	}
-
-	this.less = function (productId, farmerId) {
-		var keys = localStorageService.keys();
-		for (var i = keys.length - 1; i >= 0; i--) {
-			var identifier = JSON.parse(keys[i]);
-			if (identifier.type == "wishlist" && identifier.productId == productId && identifier.farmerId == farmerId) {
-				var localItem = localStorageService.get(keys[i]);
-				if (localItem.itemNum > 1) {
-					localItem.itemNum = localItem.itemNum - 1;
-					localStorageService.set(keys[i], localItem);
-				} else {
-					localStorageService.remove(keys[i]);
-				}
-			}
-		}
-	}
-
-	this.more = function (productId, farmerId) {
-		var keys = localStorageService.keys();
-		for (var i = keys.length - 1; i >= 0; i--) {
-			var identifier = JSON.parse(keys[i]);
-			if (identifier.type == "wishlist" && identifier.productId == productId && identifier.farmerId == farmerId) {
-				var localItem = localStorageService.get(keys[i]);
-				localItem.itemNum = localItem.itemNum + 1;
-				localStorageService.set(keys[i], localItem);
-			}
-		}
-
 	}
 
 	this.getItemsSize = function () {

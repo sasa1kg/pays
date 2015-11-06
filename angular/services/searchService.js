@@ -115,7 +115,9 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             this.searchWishListItems = items;
         }
 
-
+        this.getDistributors = function () {
+            return this.distributors;
+        }
         this.getDistributorById = function (distributorId) {
             console.log(this.distributors[distributorId]);
             return this.distributors[distributorId];
@@ -137,10 +139,18 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                     "city": "Novi Sad",
                     "phone": "+38162957194",
                 },
-
-                "img":" images/home/courier1.jpg",
-                "message": "DISTRIBUTOR_MSG",
-                "title": "DISTRIBUTOR_TITLE"
+                advertising: {
+                    "img":" images/home/courier1.jpg",
+                    "message": "Brza dostava svakog dana u svim velikim gradovima u Srbiji",
+                    "title": "Najbolji distributor za Vas!",
+                    banner: [
+                        "images/home/courier1.jpg",
+                        "images/home/courier2.jpg",
+                        "images/home/courier3.jpg",
+                        "images/home/courier4.jpg",
+                        "images/home/courier5.jpg"
+                    ]
+                }
             },
             {
                 "id": 1,

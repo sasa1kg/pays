@@ -13,6 +13,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         scope.vehicles = SearchService.getVehiclesByDistributorId(routeParams.id);
 
         scope.price = CartService.getTotalCartAmount() + "";
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
 
         scope.prices = [];
 //dummy load

@@ -57,6 +57,13 @@ paysApp.run(function ($rootScope, $translate) {
     ];
     $rootScope.transportWeights = [
         5,10,20,50,100,200
+    ];
+    $rootScope.currencies = [
+        {value: "RSD"},
+        {value: "EUR"}
+    ];
+    $rootScope.measures = [
+        {value: "KG"}
     ]
 });
 
@@ -266,7 +273,13 @@ paysApp.config(function ($translateProvider) {
         BANNER_PICTURES: "Pictures for banner",
         DISTRIBUTOR_PRICE_LIST: "Distributor price list",
         DISTANCE: "Distance",
-        WEIGHT: "Weight"
+        WEIGHT: "Weight",
+        PRICE_PER_KM: "Price per km",
+        VEHICLE_MAX_LOAD: "Maximum load weight per vehicle",
+        ADD_TO_WISHLIST: "Add to wishlist",
+        REMOVE_FROM_WISHLIST: "Remove from wishlist",
+        REMOVED_FROM_WISHLIST: "Item removed from wishlist",
+        ITEM_ADDED_TO_CART: "Item added to the cart"
 
 
     })
@@ -474,7 +487,13 @@ paysApp.config(function ($translateProvider) {
             BANNER_PICTURES: "Silke za baner",
             DISTRIBUTOR_PRICE_LIST: "Cenovnik dostave",
             DISTANCE: "Udaljenost",
-            WEIGHT: "Težina"
+            WEIGHT: "Težina",
+            PRICE_PER_KM: "Cena po kilometru",
+            VEHICLE_MAX_LOAD: "Težina tereta po dostavnom vozilu",
+            ADD_TO_WISHLIST: "Dodaj u listu želja",
+            REMOVE_FROM_WISHLIST: "Ukloni iz liste želja",
+            REMOVED_FROM_WISHLIST: "Proizvod uklonjen iz liste želja",
+            ITEM_ADDED_TO_CART: "Proizvod dodat u korpu"
         })
     $translateProvider.preferredLanguage('en');
 });

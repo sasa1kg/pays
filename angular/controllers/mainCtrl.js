@@ -319,5 +319,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.distances = SearchService.getDistances();
         scope.getCarts();
         scope.price = CartService.getTotalCartAmount() + "";
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }])
 ;

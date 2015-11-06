@@ -68,17 +68,24 @@
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <a href="#/farmer/{{farmerId}}/product/{{product.product.id}}">
+                            <a>
                                 <img src="{{product.image}}" alt="{{product.product.name}}" height="128px" width="128px" class="cursorhover"/>
                             </a>
 
                             <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
 
                             <p>{{product.product.name | translate}}</p>
-                            <a ng-if="!isProductInCart(product.product.id)" ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
+
+                            <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)" ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i class="fa fa-star"></i>
+                                {{ 'ADD_TO_WISHLIST' | translate}}</a>
+
+                            <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)" ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
+                                <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+
+                            <a ng-if="canBeAdded() && !isProductInCart(product.product.id)" ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate}}</a>
 
-                            <div ng-if="isProductInCart(product.product.id)" class="cart_quantity_button add-remove-product-aligment">
+                            <div ng-if="canBeAdded () && isProductInCart(product.product.id)" class="cart_quantity_button add-remove-product-aligment">
                                 <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.product.id)"> + </a>
                                 <input class="cart_quantity_input" type="text" name="quantity" ng-model="product.itemNum" ng-change="setAmount(product.product.id,product.itemNum)" autocomplete="off" size="5">
                                 <a class="cart_quantity_down cursor-pointer" ng-click="less(product.product.id)"> - </a>
@@ -100,17 +107,24 @@
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <a href="#/farmer/{{farmerId}}/product/{{product.product.id}}">
+                            <a>
                                 <img src="{{product.image}}" alt="{{product.product.name}}" height="200px" width="128px" class="cursorhover"/>
                             </a>
 
                             <h2>{{product.price}} {{product.currency}}/{{product.measure}}</h2>
 
                             <p>{{product.product.name | translate}}</p>
-                            <a ng-if="!isProductInCart(product.product.id)" ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
+
+                            <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)" ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i class="fa fa-star"></i>
+                                {{ 'ADD_TO_WISHLIST' | translate}}</a>
+
+                            <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)" ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
+                                <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+
+                            <a ng-if="canBeAdded() && !isProductInCart(product.product.id)" ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>{{'ADD_TO_CART' | translate}}</a>
 
-                            <div ng-if="isProductInCart(product.product.id)" class="cart_quantity_button add-remove-product-aligment">
+                            <div ng-if="canBeAdded() && isProductInCart(product.product.id)" class="cart_quantity_button add-remove-product-aligment">
                                 <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.product.id)"> + </a>
                                 <input class="cart_quantity_input" type="text" name="quantity" ng-model="product.itemNum" ng-change="setAmount(product.product.id,product.itemNum)" autocomplete="off" size="5">
                                 <a class="cart_quantity_down cursor-pointer" ng-click="less(product.product.id)"> - </a>

@@ -96,4 +96,5 @@ angular.module('paysApp').controller("productDetailsCtrl", ["$scope", "$http", "
         scope.cartItems = CartService.getItemsSize();
         scope.wishlistItems = WishlistService.getItemsSize();
         scope.price = CartService.getTotalCartAmount() + "";
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }]);

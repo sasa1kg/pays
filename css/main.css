@@ -2813,3 +2813,19 @@ h2.title {
   text-align: center;
   margin-right: 0px;
 }
+
+/*************************
+******* Distributor search CSS ********
+**************************/
+.search_input_height {
+  height: 29px;
+}
+
+/*************************
+******* Distributor search CSS ********
+**************************/
+.wishlist-farmer {
+  margin-bottom:40px;
+  border : 3px;
+  border-color: #000000;
+}
