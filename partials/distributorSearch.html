@@ -1,0 +1,181 @@
+<header id="header"><!--header-->
+    <div ng-include="'partials/navBar.html'"></div>
+</header><!--/header-->
+
+<section id="slider"><!--slider-->
+    <div class="container">
+        <!--<div class="row">-->
+        <div class="col-sm-3">
+            <div class="left-sidebar">
+                <h2>{{ 'SEARCH' | translate}}</h2>
+
+                <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <!--< class="signup-form">-->
+                            <form>
+                                <h4 class="panel-title"><a>{{ 'DISTRIBUTOR_NAME' | translate}} </a></h4>
+                                <input type="text" ng-model="searchName" class="search_input_height" placeholder="{{ 'DISTRIBUTOR_NAME' | translate}}"/>
+                                <hr class="orangehr">
+
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td class="notopborder">
+                                            <input type="text" ng-model="locationValue"
+                                                   class="search_input_height"
+                                                   ng-blur="searchPlaceBlur()"
+                                                   placeholder="{{'LOCATION_PLACE' | translate}}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <h4 class="panel-title"><a>{{ 'IN_CIRCLE_OF' | translate}} </a></h4>
+                                <select ng-model="distanceValue" ng-init="distanceValue = distances[0].value"
+                                        ng-options="distance.value as distance.value for distance in distances"
+                                        required></select>
+
+                                <hr class="orangehr">
+
+                                <h4 class="panel-title"><a>{{ 'PRICE_PER_KM' | translate}} </a></h4>
+
+                                <input type="text" ng-model="pricePerKm" class="col-sm-6 search_input_height"/>
+                                <select class="col-sm-6" ng-model="currencyValue" ng-init="currency = currencies[0].code"
+                                        ng-options="currency.code as currency.code for currency in currencies"
+                                        required></select>
+                                <hr class="orangehr">
+
+                                <h4 class="panel-title"><a>{{ 'VEHICLE_MAX_LOAD' | translate}} </a></h4>
+                                <input type="text" ng-model="maxLoad" class="col-sm-6 search_input_height"/>
+                                <select class="col-sm-6" ng-model="loadMeasure" ng-init="loadMeasure = measures[0].code"
+                                        ng-options="loadMeasure.code as loadMeasure.code for loadMeasure in measures"
+                                        required></select>
+                                <hr class="orangehr">
+
+                                <button type="button" class="btn btn-fefault cart actionbar"
+                                        ng-click="setSearchPrepared()">
+                                    <i class="fa fa-search"></i>
+                                    {{ 'SEARCH' | translate}}
+                                </button>
+                                <button type="button" class="btn btn-fefault cart actionbar"
+                                        ng-click="cancelSearch()" ng-if="foundDistributors.length > 0">
+                                    <i class="fa fa-times"></i>
+                                    {{ 'CANCEL_SEARCH' | translate}}
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/category-products-->
+        </div>
+        <!--</div>-->
+        <div class="col-sm-7">
+            <div id="sliderCarousel" class="carousel slide" data-ride="carousel"
+                 ng-if="foundDistributors.length == 0">
+                <ol class="carousel-indicators pays-carousel-indicators">
+                    <li data-target="#sliderCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#sliderCarousel" data-slide-to="1"></li>
+                    <li data-target="#sliderCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <div class="col-sm-6">
+                            <h1><span>PAYS</span> web shop</h1>
+
+                            <h2>{{ 'TITLE_1' | translate }}</h2>
+
+                            <p>{{ 'TITLE_11' | translate }}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <img src="images/home/veggies.jpg" class="girl img-responsive" alt=""
+                                 style="height: 400px;width: 400px;"/>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-sm-6">
+                            <h1><span>PAYS</span> {{ 'TITLE_2' | translate }}</h1>
+
+                            <h2>24/7</h2>
+
+                            <p>{{ 'TITLE_22' | translate }} </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <img src="images/home/fruit-vegetables.jpg" class="girl img-responsive" alt=""
+                                 style="height: 400px;width: 400px;"/>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="col-sm-6">
+
+                            <h1><span>PAYS</span> {{ 'TITLE_3' | translate }}</h1>
+
+                            <p>{{ 'TITLE_33' | translate }}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <img src="images/home/sourcherry.jpg" class="girl img-responsive" alt=""/>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a class="control-carousel left" ng-non-bindable data-slide="prev" role="button"
+                   data-target="#sliderCarousel">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="control-carousel right" ng-non-bindable data-slide="next" role="button"
+                   data-target="#sliderCarousel">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+            <div class="col-sm-12" ng-show="foundDistributors.length > 0">
+                <div class="features_items col-sm-12"><!--features_items-->
+                    <div class="col-sm-4" ng-repeat="distributor in foundDistributors">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="{{distributor.advertising.img}}" alt="{{distributor.generalInfo.companyName}}"
+                                         style="width: 168px;height: 149px;"/>
+
+                                    <h2 ng-bind-html="distributor.generalInfo.companyName | html"></h2>
+
+                                    <p ng-bind-html="distributor.generalInfo.city | html"></p>
+                                    <a href="#/distributor/{{distributor.id}}" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
+                                </div>
+
+                                <!--<img src="images/home/sale.png" class="new" alt=""></img>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--features_items-->
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-fefault cart actionbar"
+                        ng-click="setSearchPrepared()">
+                    <i class="fa fa-search"></i>
+                    {{ 'SEARCH' | translate}}
+                </button>
+                <button type="button " class="btn btn-fefault cart actionbar new-wrap"
+                        ng-click="clearSelectedSearchProducts()">
+                    <i class="fa fa-times"></i>
+                    {{ 'SEARCH_RESET' | translate}}
+                </button>
+            </div>
+            <div>
+                <h4 class="title text-center">{{ 'ADVERTISING' | translate}}</h4>
+
+                <div>
+                    <p>{{ 'ADVERTISING_MSG' | translate}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section><!--/slider-->
+<div ng-include="'partials/footer.html'"></div>

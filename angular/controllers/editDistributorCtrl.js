@@ -1,16 +1,23 @@
 /**
  * Created by nignjatov on 10.10.2015.
  */
-angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootScope","$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService",
-    function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService) {
+angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootScope","$http", "$filter", "$modal", "$routeParams",
+    "CartService", "WishlistService", "SearchService", "DistributorService","Notification",
+    function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService,DistributorService,Notification) {
 
-        console.log("edit Distributor:  " + routeParams.id);
+
+        var distributorId = routeParams.id;
+        console.log("edit Distributor:  " + distributorId);
 
         scope.page = 'GENERAL_DISTRIBUTOR_DATA';
 
-        scope.distributor = SearchService.getDistributorById(routeParams.id);
+        DistributorService.getDistributorById(distributorId).then(function(data){
+            scope.distributor = data;
+        });
 
-        scope.vehicles = SearchService.getVehiclesByDistributorId(routeParams.id);
+        DistributorService.getVehiclesByDistributorId(distributorId).then(function(data){
+            scope.vehicles = data;
+        });
 
         scope.price = CartService.getTotalCartAmount() + "";
         scope.wishlistItemsSize = WishlistService.getItemsSize();
@@ -67,10 +74,25 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
 
             modalInstance.result.then(function (vehicleNew) {
                 if (typeof vehicleNew !== 'undefined') {
+                    var found = false;
                     for (var v in scope.vehicles) {
                         if (scope.vehicles[v].id == vehicleNew.id) {
-                            scope.vehicles[v] = vehicleNew;
+                            found = true;
+                            DistributorService.updateVehicle(distributorId,vehicleNew).then(function(){
+                                Notification.success({message: "Vehicle updated!"});
+                                scope.vehicles[v] = vehicleNew;
+                            }).catch(function(){
+                                Notification.error({message: "Unable to update vehicle!"});
+                            });
                         }
+                    }
+                    if(found == false){
+                        scope.vehicles.push(vehicleNew);
+                        DistributorService.addNewVehicle(distributorId,vehicleNew).then(function(){
+                            Notification.success({message: "New vehicle added!"});
+                        }).catch(function(){
+                            Notification.error({message: "Unable to add new vehicle!"});
+                        });
                     }
                 }
             });
@@ -89,8 +111,7 @@ angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($sc
         console.log($scope.vehicleNew);
         $scope.vehicleNew.cooled = stringToBoolean($scope.vehicleNew.cooled);
         if (newVehicle == true) {
-            vehicles.push($scope.vehicleNew);
-            $modalInstance.close();
+            $modalInstance.close($scope.vehicleNew);
         }
         $modalInstance.close($scope.vehicleNew);
     }

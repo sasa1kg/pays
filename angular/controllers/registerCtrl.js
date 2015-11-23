@@ -1,91 +1,146 @@
-angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootScope", "$filter", "CartService", "WishlistService",
-    function (scope, http, routeParams, filter, CartService, WishlistService) {
+angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootScope", "$filter","UserService","WishlistService","CartService","Notification",
+    function (scope, http, rootScope, filter, UserService,WishlistService,CartService,Notification) {
 
-        console.log("RegisterCtrl");
+        scope.userType = "";
 
-        var userType = "";
-
-        console.log("Register user type "+ scope.userType);
+        scope.confPassword = "";
 
         scope.userTypes = [
             {
                 name: "BUYER",
-                id: 1
+                id: rootScope.buyerUserType
             },
             {
                 name: "DISTRIBUTOR",
-                id: 2
+                id: rootScope.distributorUserType
             },
             {
                 name: "FARMER",
-                id: 3
+                id: rootScope.farmerUserType
             }
 
         ]
 
         scope.buyer = {
-            email: "",
-            password: "",
-            confPassword: "",
-            username: "",
-            nameSurname: "",
-            streetAndNr: "",
-            postalCode: "",
-            city: "",
-            phone: ""
+            "type": "C",
+            "username": "",
+            "password": "",
+            "email": "",
+            "isPrivateUser": true,
+            "private": {
+                "name": "",
+                "lastName": "",
+                "address": "",
+                "phone": ""
+            }
         };
+
         scope.distributor = {
-            email: "",
-            password: "",
-            confPassword: "",
-            companyName: "",
-            streetAndNr: "",
-            postalCode: "",
-            city: "",
-            phone: "",
-            accountNumber: "",
-            pibNumber: "",
-        };
-        scope.farmer = {
-            email: "",
-            password: "",
-            confPassword: "",
+            type: "T",
             username: "",
-            farmName: "",
-            streetAndNr: "",
-            postalCode: "",
-            city: "",
-            phone: ""
+            password: "",
+            email: "",
+            isPrivateUser: false,
+            company: {
+                name: "",
+                account: "",
+                taxNum: "",
+                companyNum: "",
+                businessActivityCode: "",
+                address: "",
+                phoneNum: "",
+                fax: ""
+            }
+        };
+
+        scope.farmer = {
+            type: "F",
+            username: "",
+            password: "",
+            email: "",
+            isPrivateUser: false,
+            company: {
+                name: "",
+                account: "",
+                taxNum: "",
+                companyNum: "",
+                businessActivityCode: "",
+                address: "",
+                phoneNum: "",
+                fax: ""
+            }
         };
 
 
 
         scope.register = function () {
-            if (scope.userType == $rootScope.buyerUserType) {
-                console.log("Register buyer!");
+            if (scope.userType == rootScope.buyerUserType) {
                 console.log(scope.buyer);
-            } else if (scope.userType == $rootScope.distributorUserType) {
-                console.log("Register distributor");
+                if ((scope.buyer.password.length == 0) || (scope.confPassword.length == 0) || (scope.buyer.password !== scope.confPassword))
+                {
+                    Notification.error({message: "Passwords do not match"});
+                } else {
+                    UserService.registerUser(scope.buyer).then(function (data) {
+                    }).catch(function(error){
+                        Notification.error({message: "Unable to add user"});
+                    });
+                }
+            } else if (scope.userType == rootScope.distributorUserType) {
                 console.log(scope.distributor);
+                if ((scope.distributor.password.length == 0) || (scope.confPassword.length == 0) || (scope.distributor.password !== scope.confPassword))
+                {
+                    Notification.error({message: "Passwords do not match"});
+                } else {
+                    UserService.registerUser(scope.distributor).then(function (data) {
+                    }).catch(function(error){
+                        Notification.error({message: "Unable to add user"});
+                    });
+                }
             }
-            if (scope.userType == $rootScope.farmerUserType) {
-                console.log("Register farmer");
+            else if (scope.userType == rootScope.farmerUserType) {
                 console.log(scope.farmer);
+                if ((scope.farmer.password.length == 0) || (scope.confPassword.length == 0) || (scope.farmer.password !== scope.confPassword))
+                {
+                    Notification.error({message: "Passwords do not match"});
+                } else {
+                    UserService.registerUser(scope.farmer).then(function (data) {
+                    }).catch(function(error){
+                        Notification.error({message: "Unable to add user"});
+                    });
+                }
             }
         }
 
         scope.copyEmail = function(){
-            if (scope.userType == $rootScope.buyerUserType) {
+            if (scope.userType == rootScope.buyerUserType) {
                 scope.buyer.username = scope.buyer.email;
-            } else if (scope.userType == $rootScope.distributorUserType) {
+            } else if (scope.userType == rootScope.distributorUserType) {
                 scope.distributor.username = scope.distributor.email;
-
             }
-            if (scope.userType == $rootScope.farmerUserType) {
+            if (scope.userType == rootScope.farmerUserType) {
                 scope.farmer.username = scope.farmer.email;
 
             }
+        }
 
+        scope.validatePassword = function(conf) {
+            scope.confPassword = conf;
+            if (conf.length > 0) {
+                if (scope.userType == rootScope.buyerUserType) {
+                    if ((scope.buyer.password.length > 0)  && (scope.buyer.password === scope.confPassword))
+                    {
+                        Notification.success({message: "OK"});
+                    }
+                } else if (scope.userType == rootScope.distributorUserType) {
+                    if ((scope.distributor.password.length > 0)  && (scope.distributor.password === scope.confPassword)){
+                        Notification.success({message: "OK"});
+                    }
+                } else if (scope.userType == rootScope.farmerUserType) {
+                    if ((scope.farmer.password.length > 0)  && (scope.farmer.password === scope.confPassword)) {
+                        Notification.success({message: "OK"});
+                    }
+                }
+            }
         }
         scope.wishlistItemsSize = WishlistService.getItemsSize();
         scope.price = CartService.getTotalCartAmount() + "";

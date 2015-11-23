@@ -16,7 +16,13 @@
                             <!--< class="signup-form">-->
                             <form action="#">
 
+                                <h4 class="panel-title"><a>{{ 'FARMER_NAME' | translate}} </a></h4>
+                                <input type="text" ng-model="searchName" class="search_input_height" placeholder="{{ 'FARMER_NAME' | translate}}"/>
+
+                                <hr class="orangehr">
+
                                 <table class="table table-condensed">
+
                                     <tr ng-show="locationDefined()">
                                         <td class="notopborder">
                                             <h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank"
@@ -30,7 +36,9 @@
                                     </tr>
                                     <tr ng-show="!locationDefined()">
                                         <td class="notopborder">
-                                            <input type="text" id="searchPlace" ng-model="searchPlaceValue"
+                                            <input type="text" id="searchPlace"
+                                                   class="search_input_height"
+                                                   ng-model="searchPlaceValue"
                                                    ng-blur="searchPlaceBlur()"
                                                    placeholder="{{'LOCATION_PLACE' | translate}}"
                                                    ng-show="!locationDefined()"/>

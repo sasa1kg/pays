@@ -1,5 +1,5 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageModule',
-    'GeoLocationService', 'CartService', 'WishlistService', 'SearchService',
+    'GeoLocationService', 'CartService', 'WishlistService', 'SearchService','DistributorService','UserService',
     'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap','ui-notification','flow'])
     .filter('html', function ($sce) {
         return function (input) {
@@ -41,7 +41,7 @@ paysApp.config(function (localStorageServiceProvider) {
 });
 
 
-paysApp.run(function ($rootScope, $translate) {
+paysApp.run(function ($rootScope, $translate,SearchService) {
     $rootScope.translate = function (lang) {
         $translate.use(lang);
     };
@@ -49,22 +49,26 @@ paysApp.run(function ($rootScope, $translate) {
     $rootScope.paysEMail = 'office@pays-system.com';
     $rootScope.paysPhone = '+38121455071';
     $rootScope.showFooter = false;
-    $rootScope.buyerUserType = 'buyer';
-    $rootScope.farmerUserType = 'farmer';
-    $rootScope.distributorUserType = 'distributor';
+    $rootScope.buyerUserType = 'C';
+    $rootScope.farmerUserType = 'F';
+    $rootScope.distributorUserType = 'T';
     $rootScope.transportDistances = [
         10,20,50,100,200,300
     ];
     $rootScope.transportWeights = [
         5,10,20,50,100,200
     ];
-    $rootScope.currencies = [
-        {value: "RSD"},
-        {value: "EUR"}
-    ];
-    $rootScope.measures = [
-        {value: "KG"}
-    ]
+
+    $rootScope.serverURL = "http://185.23.171.43/PEP/PaysRest/";
+
+    SearchService.getCurrencies().then(function (data){
+        $rootScope.currencies = data;
+    });
+
+    SearchService.getMeasurementUnits().then(function (data){
+        $rootScope.measures = data;
+    });
+
 });
 
 paysApp.config(function ($translateProvider) {
@@ -279,7 +283,14 @@ paysApp.config(function ($translateProvider) {
         ADD_TO_WISHLIST: "Add to wishlist",
         REMOVE_FROM_WISHLIST: "Remove from wishlist",
         REMOVED_FROM_WISHLIST: "Item removed from wishlist",
-        ITEM_ADDED_TO_CART: "Item added to the cart"
+        ITEM_ADDED_TO_CART: "Item added to the cart",
+        DISTRIBUTOR_NAME: "Distributor name",
+        FARMER_NAME: "Farmer name",
+        NAME: "Name",
+        SURNAME: "Surname",
+        TAX_NUMBER: "Tax number",
+        BUSSINESS_ACT_NUMBER: "Bussiness activity number",
+        FAX_NUMBER: "Fax number"
 
 
     })
@@ -493,7 +504,15 @@ paysApp.config(function ($translateProvider) {
             ADD_TO_WISHLIST: "Dodaj u listu želja",
             REMOVE_FROM_WISHLIST: "Ukloni iz liste želja",
             REMOVED_FROM_WISHLIST: "Proizvod uklonjen iz liste želja",
-            ITEM_ADDED_TO_CART: "Proizvod dodat u korpu"
+            ITEM_ADDED_TO_CART: "Proizvod dodat u korpu",
+            DISTRIBUTOR_NAME: "Naziv distributora",
+            FARMER_NAME: "Naziv farmera",
+            NAME: "Ime",
+            SURNAME: "Prezime",
+            TAX_NUMBER: "Poreski broj",
+            BUSSINESS_ACT_NUMBER: "Broj preduzetnika",
+            FAX_NUMBER: "Broj faksa"
+
         })
     $translateProvider.preferredLanguage('en');
 });

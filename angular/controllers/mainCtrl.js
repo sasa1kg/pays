@@ -17,7 +17,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.foundProducts = [];
         scope.foundFarmers = [];
 
-
+        scope.searchName = "";
         scope.searchPlaceValue = "";
         scope.locationFound = false;
 
@@ -73,59 +73,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
                 });
             }
         }
-
-
-        scope.addCriteria = function (category, subcategory, product, maxPrice, minQuantity) {
-            var categoryName = "";
-            var subCategoryName = "";
-            var productName = "";
-            for (var i = scope.categories.length - 1; i >= 0; i--) {
-                if (scope.categories[i].id == category) {
-                    categoryName = scope.categories[i].name;
-                }
-            }
-
-            for (var j = scope.subcategories.length - 1; j >= 0; j--) {
-                if (scope.subcategories[j].id == subcategory) {
-                    subCategoryName = scope.subcategories[j].name;
-                }
-            }
-
-            for (var k = scope.subcatproducts.length - 1; k >= 0; k--) {
-                if (scope.subcatproducts[k].id == product) {
-                    productName = scope.subcatproducts[k].name;
-                }
-            }
-
-
-            alert(counter + "   " + categoryName + "   " + subCategoryName + "  " + productName);
-            var criteria = {
-                "id": counter,
-                "category": categoryName,
-                "subcategory": subCategoryName,
-                "product": productName,
-                "maxPrice": maxPrice,
-                "minQuantity": minQuantity
-            };
-            scope.searchCriterias.push(criteria);
-            scope.maxPrice = 2500;
-            scope.minQuantity = 250;
-            counter++;
-        }
-        scope.removeCriteria = function (id) {
-            for (var i = scope.searchCriterias.length - 1; i >= 0; i--) {
-                if (scope.searchCriterias[i].id === id) {
-                    var index = scope.searchCriterias.indexOf(scope.searchCriterias[i]);
-                    scope.searchCriterias.splice(index, 1);
-                }
-            }
-            ;
-        }
-
-        scope.searchCriterias = [];
-        scope.maxPrice = 2500;
-        scope.minQuantity = 250;
-
 
         scope.farmers = [];
 

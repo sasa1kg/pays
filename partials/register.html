@@ -16,42 +16,52 @@
                             </option>
                         </select>
                         <hr>
-                        <div ng-if="userType == 1">
+                        <div ng-if="userType == buyerUserType">
                             <input type="email" ng-model="buyer.email" ng-change="copyEmail()" placeholder="{{ 'EMAIL' | translate}}"/>
                             <input type="password" ng-model="buyer.password" placeholder="{{ 'PASSWORD' | translate}}"/>
-                            <input type="password" ng-model="buyer.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
+                            <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword)" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}" />
                             <input type="text" ng-model="buyer.username" placeholder="{{ 'USERNAME' | translate}}">
                             <hr>
-                            <input type="text" ng-model="buyer.nameSurname" placeholder="{{ 'NAME_SURNAME' | translate}}"/>
-                            <input type="text" ng-model="buyer.streetAndNr" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
-                            <input type="text" ng-model="buyer.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
-                            <input type="text" ng-model="buyer.city" placeholder="{{'CITY' | translate}}"/>
-                            <input type="text" ng-model="buyer.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="buyer.private.name" placeholder="{{ 'NAME' | translate}}"/>
+                            <input type="text" ng-model="buyer.private.lastName" placeholder="{{ 'SURNAME' | translate}}"/>
+                            <input type="text" ng-model="buyer.private.address" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
+                            <input ng-if="false" type="text" ng-model="buyer.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input ng-if="false" type="text" ng-model="buyer.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="buyer.private.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
                         </div>
-                        <div ng-if="userType == 2">
+                        <div ng-if="userType == distributorUserType">
                             <input type="email" ng-model="distributor.email"ng-change="copyEmail()"  placeholder="{{ 'EMAIL' | translate}}"/>
                             <input type="password" ng-model="distributor.password" placeholder="{{ 'PASSWORD' | translate}}"/>
-                            <input type="password" ng-model="distributor.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
+                            <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword)" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
+                            <input type="text" ng-model="distributor.username" placeholder="{{ 'USERNAME' | translate}}">
                             <hr>
-                            <input type="text" ng-model="distributor.companyName" placeholder="{{ 'COMPANY_NAME' | translate}}"/>
-                            <input type="text" ng-model="distributor.accountNumber" placeholder="{{ 'BANK_NUMBER' | translate}}"/>
-                            <input type="text" ng-model="distributor.pibNumber" placeholder="{{ 'PIB_NUMBER' | translate}}"/>
-                            <input type="text" ng-model="distributor.streetAndNr" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
-                            <input type="text" ng-model="distributor.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
-                            <input type="text" ng-model="distributor.city" placeholder="{{'CITY' | translate}}"/>
-                            <input type="text" ng-model="distributor.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.name" placeholder="{{ 'COMPANY_NAME' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.account" placeholder="{{ 'BANK_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.taxNum" placeholder="{{ 'TAX_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.companyNum" placeholder="{{ 'PIB_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.businessActivityCode" placeholder="{{ 'BUSSINESS_ACT_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.address" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
+                            <input ng-if="false" type="text" ng-model="distributor.company.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input ng-if="false" type="text" ng-model="distributor.company.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
                         </div>
-                        <div ng-if="userType == 3">
+                        <div ng-if="userType == farmerUserType">
                             <input type="email" ng-model="farmer.email" ng-change="copyEmail()" placeholder="{{ 'EMAIL' | translate}}"/>
                             <input type="password" ng-model="farmer.password" placeholder="{{ 'PASSWORD' | translate}}"/>
-                            <input type="password" ng-model="farmer.confPassword" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
+                            <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword)" placeholder="{{ 'CONFIRM_PASSWORD' | translate}}"/>
                             <input type="text" ng-model="farmer.username" placeholder="{{ 'USERNAME' | translate}}"/>
                             <hr>
-                            <input type="text" ng-model="farmer.farmName" placeholder="{{ 'FARM_NAME' | translate}}"/>
-                            <input type="text" ng-model="farmer.streetAndNr" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
-                            <input type="text" ng-model="farmer.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
-                            <input type="text" ng-model="farmer.city" placeholder="{{'CITY' | translate}}"/>
-                            <input type="text" ng-model="farmer.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.name" placeholder="{{ 'FARM_NAME' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.account" placeholder="{{ 'BANK_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.taxNum" placeholder="{{ 'TAX_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.companyNum" placeholder="{{ 'PIB_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.businessActivityCode" placeholder="{{ 'BUSSINESS_ACT_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.address" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
+                            <input ng-if="false" type="text" ng-model="farmer.company.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input ng-if="false" type="text" ng-model="farmer.company.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
                         </div>
                         <button ng-if="userType.length > 0" class="btn btn-default" ng-click="register()">{{'REGISTER' | translate}}</button>
                     </form>

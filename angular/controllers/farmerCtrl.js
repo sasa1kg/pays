@@ -7,6 +7,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
         scope.cartItems = CartService.getItemsSize();
         scope.wishlistItems = WishlistService.getItemsSize();
 
+
         scope.farmerId = routeParams.id;
         scope.searchedItems = [];
 

@@ -1,11 +1,16 @@
-angular.module('paysApp').controller("distributorCtrl", ["$scope", "$http", "$filter", "$routeParams", "CartService", "WishlistService", "SearchService",
-    function (scope, http, filter, routeParams, CartService, WishlistService, SearchService) {
+angular.module('paysApp').controller("distributorCtrl", ["$scope", "$http", "$filter", "$routeParams", "CartService", "WishlistService", "SearchService","DistributorService",
+    function (scope, http, filter, routeParams, CartService, WishlistService, SearchService,DistributorService) {
 
         console.log("Distributor:  " + (routeParams.id));
 
 
-        scope.distributor = SearchService.getDistributorById(routeParams.id);
-        scope.distributorVehicles = SearchService.getVehiclesByDistributorId(routeParams.id);
+        DistributorService.getDistributorById(routeParams.id).then(function(data){
+            scope.distributor = data;
+        });
+
+        DistributorService.getVehiclesByDistributorId(routeParams.id).then(function(data){
+            scope.distributorVehicles = data;
+        });
         scope.price = CartService.getTotalCartAmount()+"";
 
         scope.wishlistItemsSize = WishlistService.getItemsSize();
