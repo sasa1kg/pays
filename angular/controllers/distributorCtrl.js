@@ -11,6 +11,7 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope", "$http", "$fi
         DistributorService.getVehiclesByDistributorId(routeParams.id).then(function(data){
             scope.distributorVehicles = data;
         });
+
         scope.price = CartService.getTotalCartAmount()+"";
 
         scope.wishlistItemsSize = WishlistService.getItemsSize();

@@ -135,17 +135,15 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="{{distributor.advertising.img}}" alt="{{distributor.generalInfo.companyName}}"
+                                    <img src="{{distributor.advertising.img}}" alt="{{distributor.idmId}}"
                                          style="width: 168px;height: 149px;"/>
 
-                                    <h2 ng-bind-html="distributor.generalInfo.companyName | html"></h2>
+                                    <h2 ng-bind-html="distributor.idmId | html"></h2>
 
-                                    <p ng-bind-html="distributor.generalInfo.city | html"></p>
+                                    <p ng-bind-html="distributor.address | html"></p>
                                     <a href="#/distributor/{{distributor.id}}" class="btn btn-default add-to-cart"><i
                                             class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
                                 </div>
-
-                                <!--<img src="images/home/sale.png" class="new" alt=""></img>-->
                             </div>
                         </div>
                     </div>
