@@ -1,5 +1,5 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageModule',
-    'GeoLocationService', 'CartService', 'WishlistService', 'SearchService','DistributorService','UserService',
+    'GeoLocationService', 'CartService', 'WishlistService', 'SearchService','DistributorService','UserService','OrderService',
     'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap','ui-notification','flow'])
     .filter('html', function ($sce) {
         return function (input) {

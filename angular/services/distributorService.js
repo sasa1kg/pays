@@ -91,7 +91,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.updateVehicle = function (distributorId,vehicle) {
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "transporter/" + distributorId + "/vehicles/"+vehicle.id,vehicle).
+            http.put(rootScope.serverURL + "transporter/" + distributorId + "/vehicles/"+vehicle.id,vehicle).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
