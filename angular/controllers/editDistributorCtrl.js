@@ -10,7 +10,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         console.log("edit Distributor:  " + distributorId);
 
         scope.page = 'GENERAL_DISTRIBUTOR_DATA';
-
+        scope.vehicles = [];
         DistributorService.getDistributorById(distributorId).then(function(data){
             scope.distributor = data;
         });
@@ -87,9 +87,9 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
                         }
                     }
                     if(found == false){
-                        scope.vehicles.push(vehicleNew);
                         DistributorService.addNewVehicle(distributorId,vehicleNew).then(function(){
                             Notification.success({message: "New vehicle added!"});
+                            scope.vehicles.push(vehicleNew);
                         }).catch(function(){
                             Notification.error({message: "Unable to add new vehicle!"});
                         });

@@ -25,8 +25,8 @@
                             <input type="text" ng-model="buyer.private.name" placeholder="{{ 'NAME' | translate}}"/>
                             <input type="text" ng-model="buyer.private.lastName" placeholder="{{ 'SURNAME' | translate}}"/>
                             <input type="text" ng-model="buyer.private.address" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
-                            <input ng-if="false" type="text" ng-model="buyer.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
-                            <input ng-if="false" type="text" ng-model="buyer.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="buyer.private.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input type="text" ng-model="buyer.private.city" placeholder="{{'CITY' | translate}}"/>
                             <input type="text" ng-model="buyer.private.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
                         </div>
                         <div ng-if="userType == distributorUserType">
@@ -41,8 +41,8 @@
                             <input type="text" ng-model="distributor.company.companyNum" placeholder="{{ 'PIB_NUMBER' | translate}}"/>
                             <input type="text" ng-model="distributor.company.businessActivityCode" placeholder="{{ 'BUSSINESS_ACT_NUMBER' | translate}}"/>
                             <input type="text" ng-model="distributor.company.address" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
-                            <input ng-if="false" type="text" ng-model="distributor.company.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
-                            <input ng-if="false" type="text" ng-model="distributor.company.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input type="text" ng-model="distributor.company.city" placeholder="{{'CITY' | translate}}"/>
                             <input type="text" ng-model="distributor.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
                             <input type="text" ng-model="distributor.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
                         </div>
@@ -58,8 +58,8 @@
                             <input type="text" ng-model="farmer.company.companyNum" placeholder="{{ 'PIB_NUMBER' | translate}}"/>
                             <input type="text" ng-model="farmer.company.businessActivityCode" placeholder="{{ 'BUSSINESS_ACT_NUMBER' | translate}}"/>
                             <input type="text" ng-model="farmer.company.address" placeholder="{{'STREET_AND_NUMBER' | translate}}"/>
-                            <input ng-if="false" type="text" ng-model="farmer.company.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
-                            <input ng-if="false" type="text" ng-model="farmer.company.city" placeholder="{{'CITY' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"/>
+                            <input type="text" ng-model="farmer.company.city" placeholder="{{'CITY' | translate}}"/>
                             <input type="text" ng-model="farmer.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}"/>
                             <input type="text" ng-model="farmer.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
                         </div>
@@ -67,6 +67,21 @@
                     </form>
                 </div>
                 <!--/sign up form-->
+                <script type="text/ng-template" id="userActivateModal.html">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+                        <h4 class="modal-title">{{ 'USER_ACTIVATION' | translate}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ 'ACTIVATION_LINK_SENT_MSG' | translate}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default check_out"
+                                ng-click="goToLogin()">{{ 'OK' |
+                            translate}}
+                        </button>
+                    </div>
+                </script>
             </div>
         </div>
     </div>

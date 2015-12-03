@@ -290,8 +290,12 @@ paysApp.config(function ($translateProvider) {
         SURNAME: "Surname",
         TAX_NUMBER: "Tax number",
         BUSSINESS_ACT_NUMBER: "Bussiness activity number",
-        FAX_NUMBER: "Fax number"
-
+        FAX_NUMBER: "Fax number",
+        USER_NOT_ADDED: "Failed to add user",
+        PASSWORD_MATCH: "Passwords are identical",
+        PASSWORD_NOT_MATCH: "Passwords do not match",
+        ACTIVATION_LINK_SENT_MSG : "User has been successfully added! Activation link is sent to your e-mail address.Please activate your profile and try to log in.",
+        USER_ACTIVATION: "Activate profile"
 
     })
         .translations('rs', {
@@ -511,7 +515,12 @@ paysApp.config(function ($translateProvider) {
             SURNAME: "Prezime",
             TAX_NUMBER: "Poreski broj",
             BUSSINESS_ACT_NUMBER: "Broj preduzetnika",
-            FAX_NUMBER: "Broj faksa"
+            FAX_NUMBER: "Broj faksa",
+            USER_NOT_ADDED: "Neuspešno dodavanje korisnika",
+            PASSWORD_MATCH: "Lozinke se poklapaju",
+            PASSWORD_NOT_MATCH: "Lozinke se ne poklapaju",
+            ACTIVATION_LINK_SENT_MSG : "Korisnik je uspešno dodat! Aktivacioni link je poslat na Vašu e-mail adresu. Aktivirajte profil klikom na link i pokušajte da se prijavite.",
+            USER_ACTIVATION: "Aktivacija profila"
 
         })
     $translateProvider.preferredLanguage('en');

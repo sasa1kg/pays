@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootScope", "$filter","UserService","WishlistService","CartService","Notification",
-    function (scope, http, rootScope, filter, UserService,WishlistService,CartService,Notification) {
+angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootScope", "$filter","$modal","UserService","WishlistService","CartService","Notification",
+    function (scope, http, rootScope, filter, modal,UserService,WishlistService,CartService,Notification) {
 
         scope.userType = "";
 
@@ -31,7 +31,9 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
                 "name": "",
                 "lastName": "",
                 "address": "",
-                "phone": ""
+                "phone": "",
+                "city": "",
+                "postalCode": ""
             }
         };
 
@@ -49,7 +51,9 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
                 businessActivityCode: "",
                 address: "",
                 phoneNum: "",
-                fax: ""
+                fax: "",
+                city: "",
+                postalCode: ""
             }
         };
 
@@ -67,7 +71,9 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
                 businessActivityCode: "",
                 address: "",
                 phoneNum: "",
-                fax: ""
+                fax: "",
+                city: "",
+                postalCode: ""
             }
         };
 
@@ -78,22 +84,38 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
                 console.log(scope.buyer);
                 if ((scope.buyer.password.length == 0) || (scope.confPassword.length == 0) || (scope.buyer.password !== scope.confPassword))
                 {
-                    Notification.error({message: "Passwords do not match"});
+                    Notification.error({message: filter('translate')('PASSWORD_NOT_MATCH')});
                 } else {
                     UserService.registerUser(scope.buyer).then(function (data) {
+                        var modalInstance = modal.open({
+                            animation: true,
+                            templateUrl: 'userActivateModal.html',
+                            controller: 'userActivateModalCtrl',
+                            size: 'sm'
+                        });
                     }).catch(function(error){
-                        Notification.error({message: "Unable to add user"});
+                        Notification.error({message: filter('translate')('USER_NOT_ADDED')});
                     });
                 }
             } else if (scope.userType == rootScope.distributorUserType) {
                 console.log(scope.distributor);
                 if ((scope.distributor.password.length == 0) || (scope.confPassword.length == 0) || (scope.distributor.password !== scope.confPassword))
                 {
-                    Notification.error({message: "Passwords do not match"});
+                    Notification.error({message: filter('translate')('PASSWORD_NOT_MATCH')});
                 } else {
                     UserService.registerUser(scope.distributor).then(function (data) {
+                        UserService.registerUser(scope.buyer).then(function (data) {
+                            var modalInstance = modal.open({
+                                animation: true,
+                                templateUrl: 'userActivateModal.html',
+                                controller: 'userActivateModalCtrl',
+                                size: 'sm'
+                            });
+                        }).catch(function(error){
+                            Notification.error({message: filter('translate')('USER_NOT_ADDED')});
+                        });
                     }).catch(function(error){
-                        Notification.error({message: "Unable to add user"});
+                        Notification.error({message: filter('translate')('USER_NOT_ADDED')});
                     });
                 }
             }
@@ -101,11 +123,17 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
                 console.log(scope.farmer);
                 if ((scope.farmer.password.length == 0) || (scope.confPassword.length == 0) || (scope.farmer.password !== scope.confPassword))
                 {
-                    Notification.error({message: "Passwords do not match"});
+                    Notification.error({message: filter('translate')('PASSWORD_NOT_MATCH')});
                 } else {
                     UserService.registerUser(scope.farmer).then(function (data) {
+                        var modalInstance = modal.open({
+                            animation: true,
+                            templateUrl: 'userActivateModal.html',
+                            controller: 'userActivateModalCtrl',
+                            size: 'sm'
+                        });
                     }).catch(function(error){
-                        Notification.error({message: "Unable to add user"});
+                        Notification.error({message: filter('translate')('USER_NOT_ADDED')});
                     });
                 }
             }
@@ -129,15 +157,15 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
                 if (scope.userType == rootScope.buyerUserType) {
                     if ((scope.buyer.password.length > 0)  && (scope.buyer.password === scope.confPassword))
                     {
-                        Notification.success({message: "OK"});
+                        Notification.success({message: filter('translate')('PASSWORD_MATCH')});
                     }
                 } else if (scope.userType == rootScope.distributorUserType) {
                     if ((scope.distributor.password.length > 0)  && (scope.distributor.password === scope.confPassword)){
-                        Notification.success({message: "OK"});
+                        Notification.success({message: filter('translate')('PASSWORD_MATCH')});
                     }
                 } else if (scope.userType == rootScope.farmerUserType) {
                     if ((scope.farmer.password.length > 0)  && (scope.farmer.password === scope.confPassword)) {
-                        Notification.success({message: "OK"});
+                        Notification.success({message: filter('translate')('PASSWORD_MATCH')});
                     }
                 }
             }
@@ -145,3 +173,15 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http","$rootSc
         scope.wishlistItemsSize = WishlistService.getItemsSize();
         scope.price = CartService.getTotalCartAmount() + "";
     }]);
+
+angular.module('paysApp').controller('userActivateModalCtrl', function ($scope, $modalInstance,$location) {
+
+    $scope.goToLogin = function(){
+        $modalInstance.close();
+        $location.path('/login');
+    }
+
+    $scope.cancelModal = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
