@@ -22,6 +22,15 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
         scope.setSearchPrepared = function () {
             DistributorService.getDistributors().then(function(data){
                 scope.foundDistributors = data;
+                for (var j = 0; j < scope.foundDistributors.length; j++) {
+                    DistributorService.getDistributorImage(scope.foundDistributors[j].id, 0).then(function (img) {
+                        for (var i = 0; i < scope.foundDistributors.length; i++) {
+                            if (scope.foundDistributors[i].id === img.index) {
+                                scope.foundDistributors[i].img = img.document_content;
+                            }
+                        }
+                    });
+                }
             });
         };
 

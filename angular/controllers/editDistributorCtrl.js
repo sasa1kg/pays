@@ -38,10 +38,16 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         }
 
         scope.deleteVehicle = function (vehicle) {
-            var idx = scope.vehicles.indexOf(vehicle);
-            if (idx >= 0) {
-                scope.vehicles.splice(idx, 1);
-            }
+            DistributorService.deleteVehicle(distributorId,vehicle.id).then(function (data){
+                Notification.success({message: filter('translate')('VEHICLE_DELETED')});
+                var idx = scope.vehicles.indexOf(vehicle);
+                if (idx >= 0) {
+                    scope.vehicles.splice(idx, 1);
+                }
+            }).catch(function (data){
+                Notification.error({message: filter('translate')('VEHICLE_NOT_DELETED')});
+            });
+
         }
 
         scope.updateVehicle = function (vehicle) {
@@ -52,7 +58,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
             scope.openVehicleModal()
         }
 
-        scope. updatePrices = function(){
+        scope.updatePrices = function(){
             console.log(scope.prices);
         }
         scope.openVehicleModal = function (vehicle) {

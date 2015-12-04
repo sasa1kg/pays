@@ -295,7 +295,9 @@ paysApp.config(function ($translateProvider) {
         PASSWORD_MATCH: "Passwords are identical",
         PASSWORD_NOT_MATCH: "Passwords do not match",
         ACTIVATION_LINK_SENT_MSG : "User has been successfully added! Activation link is sent to your e-mail address.Please activate your profile and try to log in.",
-        USER_ACTIVATION: "Activate profile"
+        USER_ACTIVATION: "Activate profile",
+        VEHICLE_DELETED: "Vehicle successfully deleted",
+        VEHICLE_NOT_DELETED: "Unable to delete vehicle"
 
     })
         .translations('rs', {
@@ -520,7 +522,9 @@ paysApp.config(function ($translateProvider) {
             PASSWORD_MATCH: "Lozinke se poklapaju",
             PASSWORD_NOT_MATCH: "Lozinke se ne poklapaju",
             ACTIVATION_LINK_SENT_MSG : "Korisnik je uspešno dodat! Aktivacioni link je poslat na Vašu e-mail adresu. Aktivirajte profil klikom na link i pokušajte da se prijavite.",
-            USER_ACTIVATION: "Aktivacija profila"
+            USER_ACTIVATION: "Aktivacija profila",
+            VEHICLE_DELETED: "Vozilo uspešno obrisano",
+            VEHICLE_NOT_DELETED: "Neuspešno brisanje vozila"
 
         })
     $translateProvider.preferredLanguage('en');

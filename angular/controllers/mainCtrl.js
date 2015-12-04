@@ -120,8 +120,14 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             SearchService.getFarmers().then(function (data) {
                 if (data) {
                     scope.foundFarmers = data;
-                    for (var j = scope.farmersLoaded.length - 1; j >= 0; j--) {
-                        scope.farmersLoaded[j].img = "images/home/farm1.jpg";
+                    for (var j = 0; j < scope.foundFarmers.length; j++) {
+                        SearchService.getFarmerImage(scope.foundFarmers[j].id, 0).then(function (img) {
+                            for (var i = 0; i < scope.foundFarmers.length; i++) {
+                                if (scope.foundFarmers[i].id === img.index) {
+                                    scope.foundFarmers[i].img = img.document_content;
+                                }
+                            }
+                        });
                     }
                 }
                 else {
@@ -254,8 +260,14 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         SearchService.getFarmers().then(function (data) {
             if (data) {
                 scope.farmersLoaded = data;
-                for (var j = scope.farmersLoaded.length - 1; j >= 0; j--) {
-                    scope.farmersLoaded[j].img = "images/home/farm1.jpg";
+                for (var j = 0; j < scope.farmersLoaded.length; j++) {
+                    SearchService.getFarmerImage(scope.farmersLoaded[j].id, 0).then(function (img) {
+                        for (var i = 0; i < scope.farmersLoaded.length; i++) {
+                            if (scope.farmersLoaded[i].id === img.index) {
+                                scope.farmersLoaded[i].img = img.document_content;
+                            }
+                        }
+                    });
                 }
             }
             else {
