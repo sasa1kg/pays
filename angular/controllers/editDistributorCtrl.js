@@ -1,9 +1,9 @@
 /**
  * Created by nignjatov on 10.10.2015.
  */
-angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootScope","$http", "$filter", "$modal", "$routeParams",
-    "CartService", "WishlistService", "SearchService", "DistributorService","Notification",
-    function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService,DistributorService,Notification) {
+angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootScope", "$http", "$filter", "$modal", "$routeParams",
+    "CartService", "WishlistService", "SearchService", "DistributorService", "Notification",
+    function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService, DistributorService, Notification) {
 
 
         var distributorId = routeParams.id;
@@ -11,12 +11,21 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
 
         scope.page = 'GENERAL_DISTRIBUTOR_DATA';
         scope.vehicles = [];
-        DistributorService.getDistributorById(distributorId).then(function(data){
+        DistributorService.getDistributorById(distributorId).then(function (data) {
             scope.distributor = data;
         });
 
-        DistributorService.getVehiclesByDistributorId(distributorId).then(function(data){
+        DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
             scope.vehicles = data;
+            for (var j = 0; j < scope.vehicles.length; j++) {
+                DistributorService.getVehicleImage(scope.vehicles[j].id, 0).then(function (img) {
+                    for (var i = 0; i < scope.vehicles.length; i++) {
+                        if (scope.vehicles[i].id === img.index) {
+                            scope.vehicles[i].img = img.document_content;
+                        }
+                    }
+                });
+            }
         });
 
         scope.price = CartService.getTotalCartAmount() + "";
@@ -24,27 +33,41 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
 
         scope.prices = [];
 //dummy load
-        for (var i in rootScope.transportDistances){
+        for (var i in rootScope.transportDistances) {
             scope.prices[rootScope.transportDistances[i]] = [];
-            for(var j in rootScope.transportWeights){
+            for (var j in rootScope.transportWeights) {
                 scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = rootScope.transportDistances[i] * rootScope.transportWeights[j];
             }
         }
         scope.sectionChange = function (sectionName) {
             scope.page = sectionName;
         }
-        scope.saveChanges = function () {
-            console.log("Saving changes!");
+        scope.saveGeneralChanges = function () {
+            console.log("Saving general changes!");
         }
 
+        scope.saveAdvertisingChanges = function () {
+            console.log("Saving advertising changes!");
+            DistributorService.updateAdvertisingInfo(scope.distributor.id,{
+                    advertisingTitle: scope.distributor.advertisingTitle,
+                    advertisingText: scope.distributor.advertisingText,
+                }
+            ).then(function (data) {
+                    Notification.success({message: filter('translate')('ADVERTISING_INFO_UPDATED')});
+                }).catch(function (data) {
+                    Notification.error({message: filter('translate')('ADVERTISING_INFO_NOT_UPDATED')});
+                });
+        }
+
+
         scope.deleteVehicle = function (vehicle) {
-            DistributorService.deleteVehicle(distributorId,vehicle.id).then(function (data){
+            DistributorService.deleteVehicle(distributorId, vehicle.id).then(function (data) {
                 Notification.success({message: filter('translate')('VEHICLE_DELETED')});
                 var idx = scope.vehicles.indexOf(vehicle);
                 if (idx >= 0) {
                     scope.vehicles.splice(idx, 1);
                 }
-            }).catch(function (data){
+            }).catch(function (data) {
                 Notification.error({message: filter('translate')('VEHICLE_NOT_DELETED')});
             });
 
@@ -58,7 +81,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
             scope.openVehicleModal()
         }
 
-        scope.updatePrices = function(){
+        scope.updatePrices = function () {
             console.log(scope.prices);
         }
         scope.openVehicleModal = function (vehicle) {
@@ -84,20 +107,20 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
                     for (var v in scope.vehicles) {
                         if (scope.vehicles[v].id == vehicleNew.id) {
                             found = true;
-                            DistributorService.updateVehicle(distributorId,vehicleNew).then(function(){
-                                Notification.success({message: "Vehicle updated!"});
+                            DistributorService.updateVehicle(distributorId, vehicleNew).then(function () {
+                                Notification.success({message: filter('translate')('VEHICLE_UPDATED')});
                                 scope.vehicles[v] = vehicleNew;
-                            }).catch(function(){
-                                Notification.error({message: "Unable to update vehicle!"});
+                            }).catch(function () {
+                                Notification.error({message: filter('translate')('VEHICLE_NOT_UPDATED')});
                             });
                         }
                     }
-                    if(found == false){
-                        DistributorService.addNewVehicle(distributorId,vehicleNew).then(function(){
-                            Notification.success({message: "New vehicle added!"});
+                    if (found == false) {
+                        DistributorService.addNewVehicle(distributorId, vehicleNew).then(function () {
+                            Notification.success({message: filter('translate')('VEHICLE_ADDED')});
                             scope.vehicles.push(vehicleNew);
-                        }).catch(function(){
-                            Notification.error({message: "Unable to add new vehicle!"});
+                        }).catch(function () {
+                            Notification.error({message: filter('translate')('VEHICLE_NOT_ADDED')});
                         });
                     }
                 }

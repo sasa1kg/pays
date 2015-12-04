@@ -1,6 +1,6 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageModule',
-    'GeoLocationService', 'CartService', 'WishlistService', 'SearchService','DistributorService','UserService','OrderService',
-    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap','ui-notification','flow'])
+    'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'UserService', 'OrderService',
+    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap', 'ui-notification', 'flow'])
     .filter('html', function ($sce) {
         return function (input) {
             return $sce.trustAsHtml(input);
@@ -23,7 +23,7 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageMo
         });
         // Can be used with different implementations of Flow.js
         // flowFactoryProvider.factory = fustyFlowFactory;
-    }]).config(function(NotificationProvider) {
+    }]).config(function (NotificationProvider) {
         NotificationProvider.setOptions({
             delay: 5000,
             startTop: 20,
@@ -41,7 +41,7 @@ paysApp.config(function (localStorageServiceProvider) {
 });
 
 
-paysApp.run(function ($rootScope, $translate,SearchService) {
+paysApp.run(function ($rootScope, $translate, SearchService) {
     $rootScope.translate = function (lang) {
         $translate.use(lang);
     };
@@ -53,19 +53,19 @@ paysApp.run(function ($rootScope, $translate,SearchService) {
     $rootScope.farmerUserType = 'F';
     $rootScope.distributorUserType = 'T';
     $rootScope.transportDistances = [
-        10,20,50,100,200,300
+        10, 20, 50, 100, 200, 300
     ];
     $rootScope.transportWeights = [
-        5,10,20,50,100,200
+        5, 10, 20, 50, 100, 200
     ];
 
     $rootScope.serverURL = "http://185.23.171.43/PEP/PaysRest/";
 
-    SearchService.getCurrencies().then(function (data){
+    SearchService.getCurrencies().then(function (data) {
         $rootScope.currencies = data;
     });
 
-    SearchService.getMeasurementUnits().then(function (data){
+    SearchService.getMeasurementUnits().then(function (data) {
         $rootScope.measures = data;
     });
 
@@ -267,7 +267,7 @@ paysApp.config(function ($translateProvider) {
         UPDATE: "Update",
         DELETE: "Delete",
         VEHICLE_EDIT: "Add/Update vehicle",
-        DISCARD_CHANGES : "Discard changes",
+        DISCARD_CHANGES: "Discard changes",
         HEIGHT: "Height",
         WIDTH: "Width",
         DEPTH: "Depth",
@@ -294,10 +294,16 @@ paysApp.config(function ($translateProvider) {
         USER_NOT_ADDED: "Failed to add user",
         PASSWORD_MATCH: "Passwords are identical",
         PASSWORD_NOT_MATCH: "Passwords do not match",
-        ACTIVATION_LINK_SENT_MSG : "User has been successfully added! Activation link is sent to your e-mail address.Please activate your profile and try to log in.",
+        ACTIVATION_LINK_SENT_MSG: "User has been successfully added! Activation link is sent to your e-mail address.Please activate your profile and try to log in.",
         USER_ACTIVATION: "Activate profile",
         VEHICLE_DELETED: "Vehicle successfully deleted",
-        VEHICLE_NOT_DELETED: "Unable to delete vehicle"
+        VEHICLE_NOT_DELETED: "Unable to delete vehicle",
+        VEHICLE_UPDATED: "Vehicle successfully updated",
+        VEHICLE_NOT_UPDATED: "Unable to update vehicle",
+        VEHICLE_ADDED: "Vehicle successfully added",
+        VEHICLE_NOT_ADDED : "Unable to add vehicle",
+        ADVERTISING_INFO_UPDATED : "Advertising information successfully updated",
+        ADVERTISING_INFO_NOT_UPDATED : "Unable to update advertising information successfully"
 
     })
         .translations('rs', {
@@ -494,7 +500,7 @@ paysApp.config(function ($translateProvider) {
             UPDATE: "Izmeni",
             DELETE: "Ukloni",
             VEHICLE_EDIT: "Dodaj/izmeni vozilo",
-            DISCARD_CHANGES : "Ukloni izmene",
+            DISCARD_CHANGES: "Ukloni izmene",
             HEIGHT: "Visina",
             WIDTH: "Širina",
             DEPTH: "Dubina",
@@ -521,11 +527,16 @@ paysApp.config(function ($translateProvider) {
             USER_NOT_ADDED: "Neuspešno dodavanje korisnika",
             PASSWORD_MATCH: "Lozinke se poklapaju",
             PASSWORD_NOT_MATCH: "Lozinke se ne poklapaju",
-            ACTIVATION_LINK_SENT_MSG : "Korisnik je uspešno dodat! Aktivacioni link je poslat na Vašu e-mail adresu. Aktivirajte profil klikom na link i pokušajte da se prijavite.",
+            ACTIVATION_LINK_SENT_MSG: "Korisnik je uspešno dodat! Aktivacioni link je poslat na Vašu e-mail adresu. Aktivirajte profil klikom na link i pokušajte da se prijavite.",
             USER_ACTIVATION: "Aktivacija profila",
             VEHICLE_DELETED: "Vozilo uspešno obrisano",
-            VEHICLE_NOT_DELETED: "Neuspešno brisanje vozila"
-
+            VEHICLE_NOT_DELETED: "Neuspešno brisanje vozila",
+            VEHICLE_UPDATED: "Podaci o vozilu uspešno ažurirani",
+            VEHICLE_NOT_UPDATED: "Neuspešna izmena podataka o vozilu",
+            VEHICLE_ADDED: "Uspešno dodavanje vozila",
+            VEHICLE_NOT_ADDED : "Neuspešno dodavanje vozila",
+            ADVERTISING_INFO_UPDATED : "Reklamni sadržaji uspešno ažurirani",
+            ADVERTISING_INFO_NOT_UPDATED : "Neuspešno ažuriranje reklamnih sadržaja"
         })
     $translateProvider.preferredLanguage('en');
 });

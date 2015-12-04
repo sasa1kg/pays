@@ -120,7 +120,9 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
         SearchService.getFarmerById(scope.farmerId).then(function(data){
             if(data){
                 scope.farmer = data;
-                scope.farmer.img = "images/home/farm1.jpg";
+                SearchService.getFarmerImage(scope.farmer.id,0).then(function (img){
+                    scope.farmer.img = img.document_content;
+                });
             }else{
                 console.log("Unable to load farmer from DB");
             }

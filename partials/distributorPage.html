@@ -15,16 +15,16 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="col-sm-6">
-                        <h1 ng-bind-html="distributor.generalInfo.companyName | html"></h1>
+                        <h1 ng-bind-html="distributor.businessSubject.name | html"></h1>
 
-                        <h2 ng-bind-html="distributor.generalInfo.city | html"></h2>
+                        <h2 ng-bind-html="distributor.businessSubject.city | html"></h2>
 
-                        <h3 ng-bind-html="distributor.advertising.title | translate | html"></h3>
+                        <h3 ng-bind-html="distributor.advertisingTitle | translate | html"></h3>
 
-                        <p ng-bind-html="distributor.advertising.message | translate | html"></p>
+                        <p ng-bind-html="distributor.advertisingText | translate | html"></p>
                     </div>
                     <div class="col-sm-6">
-                        <img src="{{distributor.advertising.img}}" class="girl img-responsive" alt=""
+                        <img src="{{distributor.img}}" class="girl img-responsive" alt=""
                              style="height: 400px;width: 400px;"/>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                             </h4>
                             <h4>{{ 'TRANSPORT_VOLUME' | translate}}[cm]:
                                 {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}</h4>
-                            <h4>{{ 'TRANSPORT_WEIGHT' | translate}} : {{vehicle.amount}} kg</h4>
+                            <h4>{{ 'TRANSPORT_WEIGHT' | translate}} : {{vehicle.maxMass}} kg</h4>
                         </div>
                     </div>
                 </div>
