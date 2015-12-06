@@ -8,11 +8,11 @@
                 <div class="login-form"><!--login form -->
                     <h2>{{ 'ENTER_ACCOUNT' | translate}}</h2>
 
-                    <form action="#">
+                    <form>
                         <input type="text" placeholder="{{'USERNAME' | translate}}"/>
                         <input type="password" placeholder="{{'PASSWORD' | translate}}"/>
                         <a>
-                            <button type="submit" class="btn btn-default" ng-click="wrongLogin(('INVALID_CREDENTIALS' | translate))">{{ 'ENTER' | translate}}</button>
+                            <button type="submit" ng-click="login()" class="btn btn-default">{{ 'ENTER' | translate}}</button>
                         </a>
                     </form>
                 </div>
@@ -26,7 +26,7 @@
                     <h2>{{ 'NEW_ACCOUNT' | translate }}</h2>
 
                     <form>
-                        <a href="#/register/">
+                        <a href="#/distributoredit/1/">
                         <button type="submit" class="btn btn-default">{{ ' REGISTER' | translate}} <i
                                 class="fa fa-angle-double-right"></i></button>
                         </a>
