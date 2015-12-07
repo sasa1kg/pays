@@ -40,7 +40,8 @@
                         <li><a href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
                                 class="badge alert-success">{{price}}</span></a></li>
                         <li><a href="#/checkout"> {{ 'PAY' | translate}}</a></li>
-                        <li><a href="#/login"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a>
+                        <li ng-if="!isLoggedIn()"><a href="#/login"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a>
+                        <li ng-if="isLoggedIn()"><a href="#/" ng-click="logout()"><i class="fa fa-lock"></i> {{ 'LOGOUT' | translate}}</a>
                         </li>
                         <li><a href="#/"><i class="fa fa-question-circle"></i>
                             {{ 'HELP' | translate}}<i class="fa fa-angle-down"></i></a>

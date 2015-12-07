@@ -41,7 +41,7 @@ paysApp.config(function (localStorageServiceProvider) {
 });
 
 
-paysApp.run(function ($rootScope, $translate, SearchService) {
+paysApp.run(function ($rootScope, $translate, SearchService,UserService) {
     $rootScope.translate = function (lang) {
         $translate.use(lang);
     };
@@ -52,12 +52,29 @@ paysApp.run(function ($rootScope, $translate, SearchService) {
     $rootScope.buyerUserType = 'C';
     $rootScope.farmerUserType = 'F';
     $rootScope.distributorUserType = 'T';
+    $rootScope.credentials = UserService.getUserCredentials();
+
     $rootScope.transportDistances = [
         10, 20, 50, 100, 200, 300
     ];
     $rootScope.transportWeights = [
         5, 10, 20, 50, 100, 200
     ];
+
+    $rootScope.logout = function(){
+        UserService.logoutUser();
+    }
+
+    $rootScope.isLoggedIn = function(){
+        $rootScope.credentials = UserService.getUserCredentials();
+        console.log($rootScope.credentials);
+        if($rootScope.credentials.token != null){
+            return true;
+        }
+        return false;
+    }
+
+    $rootScope.paysEMail = 'office@pays-system.com';
 
     $rootScope.serverURL = "http://185.23.171.43/PEP/PaysRest/";
 
@@ -303,7 +320,8 @@ paysApp.config(function ($translateProvider) {
         VEHICLE_ADDED: "Vehicle successfully added",
         VEHICLE_NOT_ADDED : "Unable to add vehicle",
         ADVERTISING_INFO_UPDATED : "Advertising information successfully updated",
-        ADVERTISING_INFO_NOT_UPDATED : "Unable to update advertising information successfully"
+        ADVERTISING_INFO_NOT_UPDATED : "Unable to update advertising information successfully",
+        LOGOUT: "Log out"
 
     })
         .translations('rs', {
@@ -536,7 +554,8 @@ paysApp.config(function ($translateProvider) {
             VEHICLE_ADDED: "Uspešno dodavanje vozila",
             VEHICLE_NOT_ADDED : "Neuspešno dodavanje vozila",
             ADVERTISING_INFO_UPDATED : "Reklamni sadržaji uspešno ažurirani",
-            ADVERTISING_INFO_NOT_UPDATED : "Neuspešno ažuriranje reklamnih sadržaja"
+            ADVERTISING_INFO_NOT_UPDATED : "Neuspešno ažuriranje reklamnih sadržaja",
+            LOGOUT: "Odjava"
         })
     $translateProvider.preferredLanguage('en');
 });

@@ -25,42 +25,34 @@ var UserService = angular.module('UserService', []).service('UserService',
             return deffered.promise;
         }
 
-        this.storeUserData = function (token, id, role) {
-            var keys = localStorageService.keys();
-            for (var i = 0; i < keys.length; i++) {
-                var identifier = JSON.parse(keys[i]);
-                if (identifier.type == "credentials") {
-                    localStorageService.remove(keys[i]);
-                }
+        this.storeUserCredentials = function (token, id, role) {
+            if (localStorageService.cookie.isSupported) {
+                localStorageService.cookie.clearAll();
+                localStorageService.cookie.set("role",role,1);
+                localStorageService.cookie.set("id",id,1);
+                localStorageService.cookie.set("token",token,1);
+            } else {
+                console.error("Cookies not supported in this browser!");
             }
-            localStorageService.set(JSON.stringify(
-                    {
-                        type: "credentials",
-                        role: role
-                    }),
-                {
-                    token: token,
-                    id: id
-                });
         }
 
         this.logoutUser = function () {
-            var keys = localStorageService.keys();
-            for (var i = 0; i < keys.length; i++) {
-                var identifier = JSON.parse(keys[i]);
-                if (identifier.type == "credentials") {
-                    localStorageService.remove(keys[i]);
-                }
+            if (localStorageService.cookie.isSupported) {
+                return localStorageService.cookie.clearAll();
+            } else {
+                console.error("Cookies not supported in this browser!");
             }
         }
 
-        this.getUserCredentials = function() {
-            var keys = localStorageService.keys();
-            for(var i=0;i<keys.length;i++){
-                var identifier = JSON.parse(keys[i]);
-                if (identifier.type == "credentials") {
-                    return localStorageService.get(keys[i]);
+        this.getUserCredentials = function () {
+            if (localStorageService.cookie.isSupported) {
+                return {
+                    role : localStorageService.cookie.get("role"),
+                    id : localStorageService.cookie.get("id"),
+                    token : localStorageService.cookie.get("token")
                 }
+            } else {
+                console.error("Cookies not supported in this browser!");
             }
         }
 

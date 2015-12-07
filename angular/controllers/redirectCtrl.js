@@ -5,14 +5,10 @@ angular.module('paysApp').controller("redirectCtrl", ["$scope", "$http", "$filte
         var token = routeParams.token;
         var id = routeParams.id;
         var role = routeParams.role;
-        console.log("token:  " + token);
-        console.log("id:  " + id);
-        console.log("role:  " + role);
-
 
         location.path('#/');
 
-        UserService.storeUserData(token,id,role);
+        UserService.storeUserCredentials(token,id,role);
 
         scope.cartItems = CartService.getItemsSize();
         scope.wishlistItems = WishlistService.getItemsSize();

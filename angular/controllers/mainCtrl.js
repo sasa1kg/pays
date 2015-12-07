@@ -1,6 +1,6 @@
 angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document", "$http", "$filter", "$location", "localStorageService",
-    "GeoLocationService", "CartService", "WishlistService", "SearchService",
-    function (scope, $sce, $document, http, filter, location, localStorageService, GeoLocationService, CartService, WishlistService, SearchService) {
+    "GeoLocationService", "CartService", "WishlistService", "SearchService","UserService",
+    function (scope, $sce, $document, http, filter, location, localStorageService, GeoLocationService, CartService, WishlistService, SearchService, UserService) {
 
 
         console.log("Main Ctrl!");
@@ -20,11 +20,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.searchName = "";
         scope.searchPlaceValue = "";
         scope.locationFound = false;
-
-        scope.getCarts = function () {
-            scope.cartItems = CartService.getItemsSize();
-            scope.wishlistItems = WishlistService.getItemsSize();
-        }
 
         scope.initGeo = function () {
             GeoLocationService.getLocation().then(function (data) {
@@ -274,6 +269,11 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
                 console.log("Unable to load farmers from DB");
             }
         });
+
+        scope.getCarts = function () {
+            scope.cartItems = CartService.getItemsSize();
+            scope.wishlistItems = WishlistService.getItemsSize();
+        }
 
         scope.distances = SearchService.getDistances();
         scope.getCarts();
