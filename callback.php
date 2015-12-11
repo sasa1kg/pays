@@ -62,13 +62,13 @@
 			header('Location: http://www.' .$domain . '/admin/#redirection?token=' .$access_token . '&id=' .$user_id .'&role=admin');
 			break;
 		} else if ($u_role['name'] === 'pays_buyer') {
-			header('Location: http://www.' .$domain . '/#/redirection/token/' .$access_token . '/id/' .$user_id .'/role/buyer');
+			header('Location: http://www.' .$domain . '/#/redirection/token/' .$access_token . '/id/' .$user_id .'/role/C');
 			break;
 		} else if ($u_role['name'] === 'pays_distributor') {
-			header('Location: http://www.' .$domain . '/#/redirection/token/' .$access_token . '/id/' .$user_id .'/role/distributor');
+			header('Location: http://www.' .$domain . '/#/redirection/token/' .$access_token . '/id/' .$user_id .'/role/T');
 			break;
 		} else if ($u_role['name'] === 'pays_farmer') {
-			header('Location: http://www.' .$domain . '/#/redirection/token=' .$access_token . '/id/' .$user_id .'/role/farmer');
+			header('Location: http://www.' .$domain . '/#/redirection/token=' .$access_token . '/id/' .$user_id .'/role/F');
 			break;
 		} else {
 			continue;

@@ -3,12 +3,15 @@ angular.module('paysApp').controller("redirectCtrl", ["$scope", "$http", "$filte
 
         console.log("redirectCtrl!");
         var token = routeParams.token;
-        var id = routeParams.id;
+        var idmId = routeParams.id;
         var role = routeParams.role;
+
 
         location.path('#/');
 
-        UserService.storeUserCredentials(token,id,role);
+        UserService.getUserIdFromIDMId(idmId,role).then(function (id){
+            UserService.storeUserCredentials(token,id.id,role);
+        });
 
         scope.cartItems = CartService.getItemsSize();
         scope.wishlistItems = WishlistService.getItemsSize();

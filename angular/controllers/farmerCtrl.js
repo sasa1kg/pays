@@ -134,7 +134,14 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                 var items = CartService.getItems();
                 for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                     scope.farmerProducts[i].itemNum = 0;
-                    scope.farmerProducts[i].image = "images/home/fruit-vegetables.jpg";
+                    SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images[0]).then(function (img) {
+                        for (var i = 0; i < scope.farmerProducts.length; i++) {
+                            if (scope.farmerProducts[i].product.id === img.index) {
+                                scope.farmerProducts[i].product.img = "data:"+img.type+";base64,"+img.document_content;
+                                console.log("AAAA");
+                            }
+                        }
+                    });
                     for (var j = items.length - 1; j >= 0; j--) {
                         if (scope.farmerProducts[i].product.id == items[j].itemId) {
                             scope.farmerProducts[i].itemNum = items[j].itemNum;
