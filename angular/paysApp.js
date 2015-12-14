@@ -41,7 +41,7 @@ paysApp.config(function (localStorageServiceProvider) {
 });
 
 
-paysApp.run(function ($rootScope, $translate, SearchService,UserService) {
+paysApp.run(function ($rootScope, $translate,$location, SearchService,UserService) {
     $rootScope.translate = function (lang) {
         $translate.use(lang);
     };
@@ -74,6 +74,16 @@ paysApp.run(function ($rootScope, $translate, SearchService,UserService) {
         return false;
     }
 
+    $rootScope.goToProfile = function(){
+        $rootScope.credentials = UserService.getUserCredentials();
+        if($rootScope.credentials.token != null){
+            if($rootScope.credentials.role == $rootScope.farmerUserType){
+                $location.path("/farmeredit/"+$rootScope.credentials.id);
+            } else if($rootScope.credentials.role == $rootScope.distributorUserType){
+                $location.path('/distributoredit/'+$rootScope.credentials.id);
+            }
+        }
+    }
     $rootScope.paysEMail = 'office@pays-system.com';
 
     $rootScope.serverURL = "http://185.23.171.43/PEP/PaysRest/";

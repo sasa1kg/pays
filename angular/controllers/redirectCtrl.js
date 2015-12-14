@@ -6,12 +6,11 @@ angular.module('paysApp').controller("redirectCtrl", ["$scope", "$http", "$filte
         var idmId = routeParams.id;
         var role = routeParams.role;
 
-
-        location.path('#/');
-
         UserService.getUserIdFromIDMId(idmId,role).then(function (id){
             UserService.storeUserCredentials(token,id.id,role);
         });
+
+        location.path('#/');
 
         scope.cartItems = CartService.getItemsSize();
         scope.wishlistItems = WishlistService.getItemsSize();

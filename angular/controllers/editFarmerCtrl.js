@@ -4,7 +4,7 @@
 angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService", "Notification",
     function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService, Notification) {
 
-        console.log("edit Distributor:  " + routeParams.id);
+        console.log("edit farmer:  " + routeParams.id);
 
         scope.page = 'GENERAL_FARMER_DATA';
         scope.products = [];

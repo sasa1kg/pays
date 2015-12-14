@@ -138,7 +138,6 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                         for (var i = 0; i < scope.farmerProducts.length; i++) {
                             if (scope.farmerProducts[i].product.id === img.index) {
                                 scope.farmerProducts[i].product.img = "data:"+img.type+";base64,"+img.document_content;
-                                console.log("AAAA");
                             }
                         }
                     });
