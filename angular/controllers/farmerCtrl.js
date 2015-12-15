@@ -135,15 +135,15 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                 for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                     scope.farmerProducts[i].itemNum = 0;
                     SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images[0]).then(function (img) {
-                        for (var i = 0; i < scope.farmerProducts.length; i++) {
-                            if (scope.farmerProducts[i].product.id === img.index) {
-                                scope.farmerProducts[i].product.img = "data:"+img.type+";base64,"+img.document_content;
+                        for (var j = 0; j < scope.farmerProducts.length; j++) {
+                            if (scope.farmerProducts[j].product.id === img.index) {
+                                scope.farmerProducts[j].product.img = "data:"+img.type+";base64,"+img.document_content;
                             }
                         }
                     });
-                    for (var j = items.length - 1; j >= 0; j--) {
-                        if (scope.farmerProducts[i].product.id == items[j].itemId) {
-                            scope.farmerProducts[i].itemNum = items[j].itemNum;
+                    for (var k = items.length - 1; k >= 0; k--) {
+                        if (scope.farmerProducts[i].product.id == items[k].itemId) {
+                            scope.farmerProducts[i].itemNum = items[k].itemNum;
                             break;
                         }
                     }

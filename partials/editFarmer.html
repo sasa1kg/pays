@@ -97,16 +97,16 @@
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
                                                 translate}}</h5></td>
-                                            <td class="col-sm-9"><input type="text" ng-model="productNew.price.number"
-                                                                        placeholder="{{productNew.price.number}}"/>
+                                            <td class="col-sm-9"><input type="text" ng-model="productNew.price"
+                                                                        placeholder="{{productNew.price}}"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'CURRENCY' |
                                                 translate}}[cm]</h5></td>
                                             <td class="col-sm-9"><input type="text"
-                                                                        ng-model="productNew.price.currency"
-                                                                        placeholder="{{productNew.price.currency}}"/>
+                                                                        ng-model="productNew.currency"
+                                                                        placeholder="{{productNew.currency}}"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,8 +121,8 @@
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'MEASURE_UNIT' | translate}}</h5>
                                             </td>
                                             <td class="col-sm-9"><input type="text"
-                                                                        ng-model="productNew.unit.code"
-                                                                        placeholder="{{productNew.unit.code}}"/>
+                                                                        ng-model="productNew.measure"
+                                                                        placeholder="{{productNew.measure}}"/>
                                             </td>
                                         </tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_IMAGE' |
@@ -132,7 +132,7 @@
                                                      flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
                                                      class="ng-scope">
                                                     <div class="thumbnail-vehicle" ng-show="!$flow.files.length">
-                                                        <img src="{{productNew.img}}" class="vehicle-image-preview"/>
+                                                        <img src="{{productNew.product.img}}" class="vehicle-image-preview"/>
                                                     </div>
                                                     <div class="thumbnail-vehicle" ng-show="$flow.files.length">
                                                         <img flow-img="$flow.files[0]" class="vehicle-image-preview"/>
@@ -184,12 +184,12 @@
                                 <h4>{{ product.product.name | translate}}</h4>
                             </td>
                             <td>
-                                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [{{product.unit.code}}]</h5>
-                                <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price.number}} {{product.price.currency}}</h5>
+                                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [{{product.measure}}]</h5>
+                                <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price}} {{product.currency}}</h5>
                             </td>
                             <td>
                                 <div class="text-left">
-                                    <img src="{{product.img}}" height="100px" width="128px" class="cursorhover"/>
+                                    <img src="{{product.product.img}}" height="100px" width="128px" class="cursorhover"/>
                                 </div>
                             </td>
                             <td>

@@ -4,7 +4,7 @@
 angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService", "Notification",
     function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService, Notification) {
 
-        console.log("edit farmer:  " + routeParams.id);
+        console.log("edit Distributor:  " + routeParams.id);
 
         scope.page = 'GENERAL_FARMER_DATA';
         scope.products = [];
@@ -35,11 +35,11 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
 
         SearchService.getFarmerProducts(routeParams.id).then(function (data) {
             scope.products = data;
-            for(var i = 0; i < scope.products.length; i++){//TODO Add img id
-                SearchService.getProductImage(scope.products[i].id, 0).then(function imgArrived(data){
-                    for(var j = 0; j < scope.products.length; j++) {
-                        if(scope.products[j].id === data.index) {
-                            scope.products[j].img = data.document_content;
+            for(var i = 0; i < scope.products.length; i++){
+                SearchService.getProductImage(scope.products[i].product.id, scope.products[i].product.images[0]).then(function imgArrived(data){
+                    for (var j = 0; j < scope.products.length; j++) {
+                        if (scope.products[j].product.id === data.index) {
+                            scope.products[j].product.img = "data:"+data.type+";base64,"+data.document_content;
                         }
                     }
                 });
