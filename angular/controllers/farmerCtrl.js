@@ -20,10 +20,10 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                         scope.farmerProducts[i].product.name,
                         scope.farmerProducts[i].measure,
                         scope.farmerProducts[i].price,
-                        scope.farmerProducts[i].image,
+                        scope.farmerProducts[i].product.images[0],
                         scope.farmer.id,
-                        scope.farmer.name,
-                        scope.farmer.address
+                        scope.farmer.businessSubject.name,
+                        scope.farmer.businessSubject.city
                     );
                 }
             }
@@ -47,10 +47,10 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                             scope.farmerProducts[i].product.name,
                             scope.farmerProducts[i].measure,
                             scope.farmerProducts[i].price,
-                            scope.farmerProducts[i].image,
+                            scope.farmerProducts[i].product.images[0],
                             scope.farmer.id,
-                            scope.farmer.name,
-                            scope.farmer.address,
+                            scope.farmer.businessSubject.name,
+                            scope.farmer.businessSubject.city,
                             scope.farmer.email,
                             1);
                     }

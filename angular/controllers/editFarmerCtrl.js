@@ -12,26 +12,6 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
         SearchService.getFarmerById(routeParams.id).then(function (data) {
             scope.farmer = data;
         });
-        //scope.farmer = {
-        //    "id": 1,
-        //    "idmId": "farmer10",
-        //    "type": "a",
-        //    "advertisingText": "nekiTekst",
-        //    "advertisingTitle": "neki naslov",
-        //    "email": "petar.bjeljac@gmail.com",
-        //    "orders": {},
-        //    "businessSubject": {
-        //        "name": "Firma1",
-        //        "account": "840-1710666-12",
-        //        "taxNum": "54435143",
-        //        "companyNum": "454",
-        //        "businessActivityCode": "123",
-        //        "phone": "23423",
-        //        "fax": "234",
-        //        "city": null,
-        //        "postalCode": null,
-        //        "address": null
-        //    }};
 
         SearchService.getFarmerProducts(routeParams.id).then(function (data) {
             scope.products = data;
@@ -72,9 +52,11 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                 scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = rootScope.transportDistances[i] * rootScope.transportWeights[j];
             }
         }
+
         scope.sectionChange = function (sectionName) {
             scope.page = sectionName;
         }
+
         scope.saveChanges = function () {
             console.log("Saving changes!");
         }
@@ -94,9 +76,10 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
             scope.openProductModal()
         }
 
-        scope. updatePrices = function(){
+        scope.updatePrices = function(){
             console.log(scope.prices);
         }
+
         scope.openProductModal = function (product) {
 
             var modalInstance = modal.open({

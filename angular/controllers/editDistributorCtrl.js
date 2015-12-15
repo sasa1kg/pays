@@ -89,7 +89,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
             var modalInstance = modal.open({
                 animation: true,
                 templateUrl: 'vehicleEditModal.html',
-                controller: 'EmptyCartModalInstanceCtrl',
+                controller: 'UpdateVehicleModalCtrl',
                 size: 'sm',
                 resolve: {
                     vehicles: function () {
@@ -128,7 +128,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         };
     }]);
 
-angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $filter, $modalInstance, vehicles, vehicle) {
+angular.module('paysApp').controller('UpdateVehicleModalCtrl', function ($scope, $filter, $modalInstance, vehicles, vehicle) {
 
     var newVehicle = false
     $scope.vehicleNew = $.extend({}, vehicle);

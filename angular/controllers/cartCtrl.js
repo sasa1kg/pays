@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$filter", "$modal", "CartService", "WishlistService",
-    function (scope, http, location, filter, modal, CartService, WishlistService) {
+angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$filter", "$modal", "CartService", "WishlistService","SearchService",
+    function (scope, http, location, filter, modal, CartService, WishlistService,SearchService) {
 
         console.log("Cart Ctrl!");
 
@@ -52,6 +52,15 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
 
         scope.loadData = function () {
             scope.cartItems = CartService.getItems();
+            for(var i=0;i<scope.cartItems.length;i++){
+                SearchService.getProductImage(scope.cartItems[i].itemId,scope.cartItems[i].image).then(function (img) {
+                    for (var j = 0; j < scope.cartItems.length; j++) {
+                        if (scope.cartItems[j].itemId === img.index) {
+                            scope.cartItems[j].img = "data:"+img.type+";base64,"+img.document_content;
+                        }
+                    }
+                });
+            }
             scope.cartItemsSize = CartService.getItemsSize();
             scope.wishlistItemSize = WishlistService.getItemsSize();
             if (scope.cartItems[0] != undefined) {

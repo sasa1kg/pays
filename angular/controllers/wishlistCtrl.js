@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filter", "WishlistService", "CartService", "Notification",
-    function (scope, http, filter, WishlistService, CartService, Notification) {
+angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filter", "WishlistService", "CartService", "Notification","SearchService",
+    function (scope, http, filter, WishlistService, CartService, Notification,SearchService) {
 
         console.log("wishlistCtrl!");
 
@@ -28,6 +28,15 @@ angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filte
         scope.loadData = function () {
             scope.wishlistItemsSize = WishlistService.getItemsSize();
             scope.wishlistItems = WishlistService.getItems();
+            for(var i=0;i<scope.wishlistItems.length;i++){
+                SearchService.getProductImage(scope.wishlistItems[i].itemId,scope.wishlistItems[i].image).then(function (img) {
+                    for (var j = 0; j < scope.wishlistItems.length; j++) {
+                        if (scope.wishlistItems[j].itemId === img.index) {
+                            scope.wishlistItems[j].img = "data:"+img.type+";base64,"+img.document_content;
+                        }
+                    }
+                });
+            }
             scope.farmerProducts = [];
             for (var i = 0; i < scope.wishlistItems.length; i++) {
                 var item = scope.wishlistItems[i];

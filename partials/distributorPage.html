@@ -69,7 +69,7 @@
                             <div class="productinfo text-center">
                                 <img src="{{vehicle.img}}" height="200px" width="128px" class="cursorhover"/>
                             </div>
-
+                            <h4>{{ 'VEHICLE_MODEL' | translate}} : {{vehicle.name}}</h4>
                             <h4>{{ 'NUMBER_OF_VEHICLES' | translate}} : {{vehicle.number}}</h4>
                             <h4>{{ 'COOLED_TRANSPORT' | translate}} : <span ng-if="vehicle.cooled == true">{{'YES' | translate }}</span>
                                 <span ng-if="vehicle.cooled == false">{{'NO' | translate }}</span>
