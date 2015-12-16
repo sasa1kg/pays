@@ -4,56 +4,74 @@
 
 <section>
     <div class="container">
-        <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators pays-carousel-indicators">
-                <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#slider-carousel" data-slide-to="1"></li>
-                <li data-target="#slider-carousel" data-slide-to="2"></li>
-                <li data-target="#slider-carousel" data-slide-to="3"></li>
-                <li data-target="#slider-carousel" data-slide-to="4"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="col-sm-6">
-                        <h1 ng-bind-html="distributor.businessSubject.name | html"></h1>
+        <div class="col-sm-9">
+            <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators pays-carousel-indicators">
+                    <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#slider-carousel" data-slide-to="1"></li>
+                    <li data-target="#slider-carousel" data-slide-to="2"></li>
+                    <li data-target="#slider-carousel" data-slide-to="3"></li>
+                    <li data-target="#slider-carousel" data-slide-to="4"></li>
+                    <li data-target="#slider-carousel" data-slide-to="5"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="col-sm-12 text-center">
+                            <h1 ng-bind-html="distributor.businessSubject.name | html"></h1>
 
-                        <h2 ng-bind-html="distributor.businessSubject.city | html"></h2>
+                            <h2 ng-bind-html="distributor.businessSubject.city | html"></h2>
 
-                        <h3 ng-bind-html="distributor.advertisingTitle | translate | html"></h3>
+                            <h3 ng-bind-html="distributor.advertisingTitle | translate | html"></h3>
 
-                        <p ng-bind-html="distributor.advertisingText | translate | html"></p>
+                            <p ng-bind-html="distributor.advertisingText | translate | html"></p>
+                            <!--TODO add company info from businessSubject-->
+                        </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="item col-sm-12">
                         <img src="{{distributor.img}}" class="girl img-responsive" alt=""
                              style="height: 400px;width: 400px;"/>
                     </div>
+                    <div class="item col-sm-12">
+                        <img src="images/home/courier2.jpg" class="girl img-responsive col-sm-12" alt=""
+                             style="height: 400px;"/>
+                    </div>
+                    <div class="item col-sm-12">
+                        <img src="images/home/courier3.jpg" class="girl img-responsive col-sm-12" alt=""
+                             style="height: 400px;"/>
+                    </div>
+                    <div class="item col-sm-12">
+                        <img src="images/home/courier4.jpg" class="girl img-responsive col-sm-12" alt=""
+                             style="height: 400px;"/>
+                    </div>
+                    <div class="item col-sm-12">
+                        <img src="images/home/courier5.jpg" class="girl img-responsive col-sm-12" alt=""
+                             style="height: 400px;"/>
+                    </div>
                 </div>
-                <div class="item col-sm-12">
-                    <img src="images/home/courier2.jpg" class="girl img-responsive col-sm-12" alt=""
-                         style="height: 400px;"/>
-                </div>
-                <div class="item col-sm-12">
-                    <img src="images/home/courier3.jpg" class="girl img-responsive col-sm-12" alt=""
-                         style="height: 400px;"/>
-                </div>
-                <div class="item col-sm-12">
-                    <img src="images/home/courier4.jpg" class="girl img-responsive col-sm-12" alt=""
-                         style="height: 400px;"/>
-                </div>
-                <div class="item col-sm-12">
-                    <img src="images/home/courier5.jpg" class="girl img-responsive col-sm-12" alt=""
-                         style="height: 400px;"/>
-                </div>
-            </div>
 
-            <a class="left control-carousel hidden-xs" ng-non-bindable data-slide="prev" role="button" data-target="#slider-carousel">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            <a class="right control-carousel hidden-xs" ng-non-bindable data-slide="next" role="button" data-target="#slider-carousel">
-                <i class="fa fa-angle-right"></i>
-            </a>
+                <a class="left control-carousel hidden-xs" ng-non-bindable data-slide="prev" role="button"
+                   data-target="#slider-carousel">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="right control-carousel hidden-xs" ng-non-bindable data-slide="next" role="button"
+                   data-target="#slider-carousel">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
         </div>
-    </div>
+        <div class="col-sm-3 text-center">
+            <h3>CONTACT</h3>
+            <hr/>
+            <h4>{{ 'EMAIL' | translate}}</h4>
+            <h4 ng-bind-html="distributor.email | translate | html"></h4>
+            <hr/>
+            <h4>{{ 'PHONE_NUMBER' | translate}}</h4>
+            <h4 ng-bind-html="distributor.businessSubject.phone | translate | html"></h4>
+            <hr/>
+            <h4>{{ 'FAX_NUMBER' | translate}}</h4>
+            <h4 ng-bind-html="distributor.businessSubject.fax | translate | html"></h4>
+
+        </div>
     </div>
 </section>
 

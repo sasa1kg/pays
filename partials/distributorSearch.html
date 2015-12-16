@@ -16,7 +16,7 @@
                             <!--< class="signup-form">-->
                             <form>
                                 <h4 class="panel-title"><a>{{ 'DISTRIBUTOR_NAME' | translate}} </a></h4>
-                                <input type="text" ng-model="searchName" class="search_input_height" placeholder="{{ 'DISTRIBUTOR_NAME' | translate}}"/>
+                                <input type="text" ng-model="searchName" ng-keypress="searchNameCallback($event)" class="search_input_height" placeholder="{{ 'DISTRIBUTOR_NAME' | translate}}"/>
                                 <hr class="orangehr">
 
                                 <table class="table table-condensed">

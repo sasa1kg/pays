@@ -130,6 +130,27 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             return deffered.promise;
         }
 
+        this.updateGeneralInfo = function (distributorId,info) {
+            var deffered = q.defer();
+
+            http.put(rootScope.serverURL + "transporter/" + distributorId,info).
+                success(function (data, status) {
+                    if (status == 200) {
+                        deffered.resolve(data);
+                    } else {
+                        console.log("updateGeneralInfo | Status not OK " + status);
+                        deffered.reject("Error");
+                    }
+
+                }).
+                error(function (data, status) {
+                    console.log("updateGeneralInfo | Error " + status);
+                    deffered.reject("Error");
+                });
+
+            return deffered.promise;
+        }
+
         this.updateAdvertisingInfo = function (distributorId,info) {
             var deffered = q.defer();
 

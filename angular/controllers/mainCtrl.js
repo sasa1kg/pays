@@ -275,6 +275,12 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             scope.wishlistItems = WishlistService.getItemsSize();
         }
 
+        scope.searchNameCallback = function(keyEvent) {
+            if (keyEvent.which === 13){
+                scope.setSearchPrepared();
+            }
+        }
+
         scope.distances = SearchService.getDistances();
         scope.getCarts();
         scope.price = CartService.getTotalCartAmount() + "";

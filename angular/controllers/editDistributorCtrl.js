@@ -44,6 +44,13 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         }
         scope.saveGeneralChanges = function () {
             console.log("Saving general changes!");
+            console.log(scope.distributor.businessSubject);
+            DistributorService.updateGeneralInfo(scope.distributor.id,scope.distributor.businessSubject).then(function(data){
+                console.log("!!!!");
+                console.log(data);
+            }).catch( function(err){
+                console.error(err);
+            })
         }
 
         scope.saveAdvertisingChanges = function () {

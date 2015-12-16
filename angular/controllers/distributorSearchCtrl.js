@@ -42,6 +42,11 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
             scope.distanceValue = "";
         }
 
+        scope.searchNameCallback = function(keyEvent) {
+            if (keyEvent.which === 13){
+                scope.setSearchPrepared();
+            }
+        }
         scope.price = CartService.getTotalCartAmount() + "";
         scope.wishlistItemsSize = WishlistService.getItemsSize();
     }]);

@@ -26,50 +26,94 @@
             </div>
         </nav>
         <div class="row">
-            <div ng-if="page == 'GENERAL_DISTRIBUTOR_DATA'" class="col-sm-6">
-                <div class="signup-form">
-                    <form>
-                        <table class="col-sm-12 general-info-form-margin">
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.name"
-                                                            placeholder="{{distributor.businessSubject.name}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.account"
-                                                            placeholder="{{distributor.businessSubject.account}}"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.pibNumber"
-                                                            placeholder="{{distributor.businessSubject.pibNumber}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'STREET_AND_NUMBER' | translate}}</h5>
-                                </td>
-                                <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.address"
-                                                            placeholder="{{distributor.businessSubject.address}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'POSTAL_CODE' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.postalCode"
-                                                            placeholder="{{distributor.businessSubject.postalCode}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'CITY' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.city"
-                                                            placeholder="{{distributor.businessSubject.city}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.phone"
-                                                            placeholder="{{distributor.businessSubject.phone}}"/></td>
-                            </tr>
-                        </table>
-                        <button class="btn btn-default" ng-click="saveGeneralChanges()">{{'SAVE_CHANGES' | translate}}</button>
-                    </form>
+            <div ng-if="page == 'GENERAL_DISTRIBUTOR_DATA'">
+                <div class="col-sm-6">
+                    <div class="signup-form">
+                        <form>
+                            <table class="col-sm-12 general-info-form-margin">
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.name"
+                                                                placeholder="{{distributor.businessSubject.name}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text"
+                                                                ng-model="distributor.businessSubject.account"
+                                                                placeholder="{{distributor.businessSubject.account}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'TAX_NUMBER' | translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text"
+                                                                ng-model="distributor.businessSubject.taxNum"
+                                                                placeholder="{{distributor.businessSubject.taxNum}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text"
+                                                                ng-model="distributor.businessSubject.companyNum"
+                                                                placeholder="{{distributor.businessSubject.companyNum}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'BUSSINESS_ACT_NUMBER' |
+                                        translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text"
+                                                                ng-model="distributor.businessSubject.businessActivityCode"
+                                                                placeholder="{{distributor.businessSubject.businessActivityCode}}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="signup-form">
+                        <form>
+                            <table class="col-sm-12 general-info-form-margin">
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'STREET_AND_NUMBER' | translate}}</h5>
+                                    </td>
+                                    <td class="col-sm-9"><input type="text"
+                                                                ng-model="distributor.businessSubject.address"
+                                                                placeholder="{{distributor.businessSubject.address}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'POSTAL_CODE' | translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text"
+                                                                ng-model="distributor.businessSubject.postalCode"
+                                                                placeholder="{{distributor.businessSubject.postalCode}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'CITY' | translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.city"
+                                                                placeholder="{{distributor.businessSubject.city}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.phone"
+                                                                placeholder="{{distributor.businessSubject.phone}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-3"><h5 class="text-left">{{ 'FAX_NUMBER' | translate}}</h5></td>
+                                    <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.fax"
+                                                                placeholder="{{distributor.businessSubject.fax}}"/></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-default apply-changes-btn" ng-click="saveGeneralChanges()">{{'SAVE_CHANGES' |
+                        translate}}
+                    </button>
                 </div>
             </div>
             <div ng-if="page == 'VEHICLES'" class="col-sm-12" id="vehicles_data">
@@ -267,7 +311,8 @@
                                     </tr>
                                 </table>
                             </div>
-                            <button class="btn btn-default" ng-click="saveAdvertisingChanges()">{{'SAVE_CHANGES' | translate}}
+                            <button class="btn btn-default" ng-click="saveAdvertisingChanges()">{{'SAVE_CHANGES' |
+                                translate}}
                             </button>
                         </form>
                     </div>

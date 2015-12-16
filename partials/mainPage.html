@@ -17,7 +17,7 @@
                             <form action="#">
 
                                 <h4 class="panel-title"><a>{{ 'FARMER_NAME' | translate}} </a></h4>
-                                <input type="text" ng-model="searchName" class="search_input_height" placeholder="{{ 'FARMER_NAME' | translate}}"/>
+                                <input type="text" ng-model="searchName" ng-keypress="searchNameCallback($event)" class="search_input_height" placeholder="{{ 'FARMER_NAME' | translate}}"/>
 
                                 <hr class="orangehr">
 
