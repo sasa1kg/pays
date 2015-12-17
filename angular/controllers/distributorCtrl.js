@@ -14,10 +14,10 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope", "$http", "$fi
         DistributorService.getVehiclesByDistributorId(routeParams.id).then(function (data) {
             scope.distributorVehicles = data;
             for (var j = 0; j < scope.distributorVehicles.length; j++) {
-                DistributorService.getVehicleImage(scope.distributorVehicles[j].id, 0).then(function (img) {
+                DistributorService.getVehicleImage(scope.distributorVehicles[j].id, scope.distributorVehicles[j].images[0]).then(function (img) {
                     for (var i = 0; i < scope.distributorVehicles.length; i++) {
                         if (scope.distributorVehicles[i].id === img.index) {
-                            scope.distributorVehicles[i].img = img.document_content;
+                            scope.distributorVehicles[i].img = "data:"+img.type+";base64,"+img.document_content;
                         }
                     }
                 });

@@ -17,13 +17,28 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="col-sm-12 text-center">
-                            <h1 ng-bind-html="distributor.businessSubject.name | html"></h1>
-
-                            <h2 ng-bind-html="distributor.businessSubject.city | html"></h2>
+                            <h2 ng-bind-html="distributor.businessSubject.name | html"></h2>
 
                             <h3 ng-bind-html="distributor.advertisingTitle | translate | html"></h3>
 
                             <p ng-bind-html="distributor.advertisingText | translate | html"></p>
+                            
+                            <h3 ng-bind="(distributor.businessSubject.address | html) +', ' + distributor.businessSubject.postalCode + ', '+ (distributor.businessSubject.city | html)"></h3>
+
+                            <div class="col-sm-12 text-left">
+                                <p class="col-sm-6"><strong>{{ 'TAX_NUMBER' | translate}} : </strong>{{distributor.businessSubject.taxNum}}
+                                </p>
+
+                                <p class="col-sm-6"><strong>{{ 'BANK_NUMBER' | translate}} : </strong>{{distributor.businessSubject.account}}
+                                </p>
+                            </div>
+                            <div class="col-sm-12 text-left">
+                                <p class="col-sm-6"><strong>{{ 'PIB_NUMBER' | translate}} : </strong>{{distributor.businessSubject.companyNum}}
+                                </p>
+
+                                <p class="col-sm-6"><strong>{{ 'BUSSINESS_ACT_NUMBER' | translate}} : </strong>{{distributor.businessSubject.businessActivityCode}}
+                                </p>
+                            </div>
                             <!--TODO add company info from businessSubject-->
                         </div>
                     </div>
