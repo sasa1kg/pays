@@ -47,6 +47,4 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
                 scope.setSearchPrepared();
             }
         }
-        scope.price = CartService.getTotalCartAmount() + "";
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }]);

@@ -11,6 +11,9 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
 
         scope.page = 'GENERAL_DISTRIBUTOR_DATA';
         scope.vehicles = [];
+
+        scope.prices = [];
+
         DistributorService.getDistributorById(distributorId).then(function (data) {
             scope.distributor = data;
         });
@@ -28,10 +31,6 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
             }
         });
 
-        scope.price = CartService.getTotalCartAmount() + "";
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
-
-        scope.prices = [];
 //dummy load
         for (var i in rootScope.transportDistances) {
             scope.prices[rootScope.transportDistances[i]] = [];

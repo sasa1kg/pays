@@ -3,12 +3,6 @@ angular.module('paysApp').controller("loginCtrl", ["$scope", "$http", "$filter",
 
         console.log("login Ctrl!");
 
-
-        scope.cartItems = CartService.getItemsSize();
-        scope.wishlistItems = WishlistService.getItemsSize();
-        scope.price = CartService.getTotalCartAmount() + "";
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
-
         scope.login = function()
         {
             var clientId = "41a888d71e754ee99167eaebecace9c1";

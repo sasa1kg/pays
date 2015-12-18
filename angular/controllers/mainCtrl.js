@@ -270,11 +270,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             }
         });
 
-        scope.getCarts = function () {
-            scope.cartItems = CartService.getItemsSize();
-            scope.wishlistItems = WishlistService.getItemsSize();
-        }
-
         scope.searchNameCallback = function(keyEvent) {
             if (keyEvent.which === 13){
                 scope.setSearchPrepared();
@@ -282,8 +277,5 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         }
 
         scope.distances = SearchService.getDistances();
-        scope.getCarts();
-        scope.price = CartService.getTotalCartAmount() + "";
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }])
 ;

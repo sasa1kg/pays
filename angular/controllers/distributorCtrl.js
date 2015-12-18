@@ -23,8 +23,4 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope", "$http", "$fi
                 });
             }
         });
-
-        scope.price = CartService.getTotalCartAmount() + "";
-
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }]);

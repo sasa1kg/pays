@@ -41,9 +41,6 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
             }
         });
 
-        scope.price = CartService.getTotalCartAmount() + "";
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
-
         scope.prices = [];
 //dummy load
         for (var i in rootScope.transportDistances){

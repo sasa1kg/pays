@@ -165,7 +165,4 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
         scope.canBeAdded = function(){
             return CartService.canBeAdded(scope.farmerId);
         }
-
-        scope.price = CartService.getTotalCartAmount()+"";
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }]);

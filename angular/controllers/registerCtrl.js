@@ -161,8 +161,6 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http", "$rootS
                 }
             }
         }
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
-        scope.price = CartService.getTotalCartAmount() + "";
     }]);
 
 angular.module('paysApp').controller('userActivateModalCtrl', function ($scope, $modalInstance, $location) {
