@@ -18,10 +18,10 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
             scope.vehicles = data;
             for (var j = 0; j < scope.vehicles.length; j++) {
-                DistributorService.getVehicleImage(scope.vehicles[j].id, 0).then(function (img) {
+                DistributorService.getVehicleImage(scope.vehicles[j].id, scope.vehicles[j].images[0]).then(function (img) {
                     for (var i = 0; i < scope.vehicles.length; i++) {
                         if (scope.vehicles[i].id === img.index) {
-                            scope.vehicles[i].img = img.document_content;
+                            scope.vehicles[i].img = "data:"+img.type+";base64,"+img.document_content;
                         }
                     }
                 });
@@ -44,18 +44,22 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         }
         scope.saveGeneralChanges = function () {
             console.log("Saving general changes!");
-            console.log(scope.distributor.businessSubject);
-            DistributorService.updateGeneralInfo(scope.distributor.id,scope.distributor.businessSubject).then(function(data){
-                console.log("!!!!");
-                console.log(data);
-            }).catch( function(err){
-                console.error(err);
-            })
+            DistributorService.updateGeneralInfo(scope.distributor.id,
+                {
+                    businessSubject: scope.distributor.businessSubject
+                }
+            ).then(function (data) {
+                    console.log(data);
+                    Notification.success({message: filter('translate')('GENERAL_INFO_UPDATED')});
+                }).catch(function (err) {
+                    console.error(err);
+                    Notification.error({message: filter('translate')('GENERAL_INFO_NOT_UPDATED')});
+                })
         }
 
         scope.saveAdvertisingChanges = function () {
             console.log("Saving advertising changes!");
-            DistributorService.updateAdvertisingInfo(scope.distributor.id,{
+            DistributorService.updateAdvertisingInfo(scope.distributor.id, {
                     advertisingTitle: scope.distributor.advertisingTitle,
                     advertisingText: scope.distributor.advertisingText,
                 }
