@@ -80,4 +80,6 @@ angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filte
         }
 
         scope.loadData();
+        scope.price = CartService.getTotalCartAmount() + "";
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
     }]);
