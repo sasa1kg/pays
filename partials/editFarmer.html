@@ -97,13 +97,13 @@
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
                                                 translate}}</h5></td>
-                                            <td class="col-sm-9"><input type="text" ng-model="productNew.price"
-                                                                        placeholder="{{productNew.price}}"/>
+                                            <td class="col-sm-9"><input type="text" ng-model="productNew.price.price"
+                                                                        placeholder="{{productNew.price.price}}"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'CURRENCY' |
-                                                translate}}[cm]</h5></td>
+                                                translate}}</h5></td>
                                             <td class="col-sm-9"><input type="text"
                                                                         ng-model="productNew.currency"
                                                                         placeholder="{{productNew.currency}}"/>
@@ -121,8 +121,8 @@
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'MEASURE_UNIT' | translate}}</h5>
                                             </td>
                                             <td class="col-sm-9"><input type="text"
-                                                                        ng-model="productNew.measure"
-                                                                        placeholder="{{productNew.measure}}"/>
+                                                                        ng-model="productNew.measure.code"
+                                                                        placeholder="{{productNew.measure.code}}"/>
                                             </td>
                                         </tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_IMAGE' |
@@ -184,8 +184,8 @@
                                 <h4>{{ product.product.name | translate}}</h4>
                             </td>
                             <td>
-                                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [{{product.measure}}]</h5>
-                                <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price}} {{product.currency}}</h5>
+                                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [{{product.measure.code}}]</h5>
+                                <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price.price}} {{product.currency}}</h5>
                             </td>
                             <td>
                                 <div class="text-left">

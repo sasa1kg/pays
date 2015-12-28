@@ -22,7 +22,8 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                         scope.farmerProducts[i].product.images[0],
                         scope.farmer.id,
                         scope.farmer.businessSubject.name,
-                        scope.farmer.businessSubject.city
+                        scope.farmer.businessSubject.city,
+                        scope.farmer.email
                     );
                 }
             }

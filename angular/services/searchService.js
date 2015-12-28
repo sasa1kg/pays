@@ -155,6 +155,28 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             return deffered.promise;
         }
 
+        this.getWishlistProductImage = function (productId,imageId,wishlistItemId) {
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "product/" + productId + "/images/"+imageId+"/imagefile").
+                success(function (data, status) {
+                    if (status == 200) {
+                        data.index = productId;
+                        data.wishlistIndex = wishlistItemId;
+                        deffered.resolve(data);
+                    } else {
+                        console.log("getFarmerProducts |Status not OK " + status);
+                        deffered.reject("Error");
+                    }
+
+                }).
+                error(function (data, status) {
+                    console.log("Error " + status);
+                    deffered.reject("Error");
+                });
+
+            return deffered.promise;
+        }
+
 
         this.getFarmerOrders = function (farmerId) {
             var deffered = q.defer();

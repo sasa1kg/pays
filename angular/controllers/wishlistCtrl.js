@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filter", "WishlistService", "CartService", "Notification","SearchService",
-    function (scope, http, filter, WishlistService, CartService, Notification,SearchService) {
+angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filter", "WishlistService", "CartService", "Notification", "SearchService",
+    function (scope, http, filter, WishlistService, CartService, Notification, SearchService) {
 
         console.log("wishlistCtrl!");
 
@@ -27,41 +27,18 @@ angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filte
 
         scope.loadData = function () {
             scope.wishlistItemsSize = WishlistService.getItemsSize();
+            scope.price = CartService.getTotalCartAmount() + "";
             scope.wishlistItems = WishlistService.getItems();
-            for(var i=0;i<scope.wishlistItems.length;i++){
-                SearchService.getProductImage(scope.wishlistItems[i].itemId,scope.wishlistItems[i].image).then(function (img) {
-                    for (var j = 0; j < scope.wishlistItems.length; j++) {
-                        if (scope.wishlistItems[j].itemId === img.index) {
-                            scope.wishlistItems[j].img = "data:"+img.type+";base64,"+img.document_content;
-                        }
-                    }
-                });
-            }
-            scope.farmerProducts = [];
             for (var i = 0; i < scope.wishlistItems.length; i++) {
-                var item = scope.wishlistItems[i];
-                item.itemNum = 1;
-                var farmerFound = false;
-                for (j = 0; j < scope.farmerProducts.length; j++) {
-                    if (scope.farmerProducts[j].farmerId == item.farmerId) {
-                        scope.farmerProducts[j].products.push(item);
-                        farmerFound = true;
-                        break;
-                    }
+                for (var j = 0; j < scope.wishlistItems[i].products.items.length; j++) {
+                    SearchService.getWishlistProductImage(scope.wishlistItems[i].products.items[j].itemId, scope.wishlistItems[i].products.items[j].image, i).then(function (img) {
+                        for (var k = 0; k < scope.wishlistItems[img.wishlistIndex].products.items.length; k++) {
+                            if (scope.wishlistItems[img.wishlistIndex].products.items[k].itemId === img.index) {
+                                scope.wishlistItems[img.wishlistIndex].products.items[k].img = "data:" + img.type + ";base64," + img.document_content;
+                            }
+                        }
+                    });
                 }
-                if (farmerFound == false) {
-                    scope.farmerProducts.push(
-                        {
-                            "farmerId": item.farmerId,
-                            "farmerName": item.farmer,
-                            "farmerLocation": item.farmerLocation,
-                            "products": [item]
-                        });
-                }
-            }
-
-            for (var k = 0; k < scope.farmerProducts.length; k++) {
-                console.log(scope.farmerProducts[k]);
             }
         }
 
@@ -70,10 +47,12 @@ angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filte
         }
 
         scope.isProductInCart = function (productId) {
-            var items = CartService.getItems();
-            for (var i = items.length - 1; i >= 0; i--) {
-                if ((items[i].itemId == productId) && (items[i].itemNum > 0)) {
-                    return true;
+            var content = CartService.getItems();
+            if (content != null) {
+                for (var i = content.items.length - 1; i >= 0; i--) {
+                    if ((content.items[i].itemId == productId) && (content.items[i].itemNum > 0)) {
+                        return true;
+                    }
                 }
             }
             return false;

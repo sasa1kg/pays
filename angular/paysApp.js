@@ -337,7 +337,8 @@ paysApp.config(function ($translateProvider) {
         DELIVERY_DATE: "Delivery Date",
         DELIVERY_TIME: "Delivery Time",
         ITEMS: "Items",
-        CLOSE: "Close"
+        CLOSE: "Close",
+        UNABLE_CART_INSERT: "Products of another farmer are present in cart. Please add this farmer's products to wishlist and move them to cart once you finish current order."
 
 
     })
@@ -599,7 +600,9 @@ paysApp.config(function ($translateProvider) {
             DELIVERY_DATE: "Datum isporuke",
             DELIVERY_TIME: "Vreme isporuke",
             ITEMS: "Stavke",
-            CLOSE: "Zatvori"
+            CLOSE: "Zatvori",
+            UNABLE_CART_INSERT: "Proizvodi drugog farmera se nalaze u korpi. Molimo Vas dodajte proizvode ovog farmera u listu želja i premestite ih u korpu kada naručite proizvode iz trenutne korpe."
+
         })
     $translateProvider.preferredLanguage('en');
 });
