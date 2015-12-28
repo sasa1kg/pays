@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$filter", "$modal", "CartService", "WishlistService","SearchService",
-    function (scope, http, location, filter, modal, CartService, WishlistService,SearchService) {
+angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$filter", "$modal", "CartService", "WishlistService", "SearchService",
+    function (scope, http, location, filter, modal, CartService, WishlistService, SearchService) {
 
         console.log("Cart Ctrl!");
 
@@ -22,62 +22,53 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
 
         scope.calculateTotal = function () {
             scope.totalPrice = 0;
-            for (var i = scope.cartItems.length - 1; i >= 0; i--) {
-                scope.totalPrice = scope.totalPrice + scope.cartItems[i].itemPrice * scope.cartItems[i].itemNum;
+            for (var i = scope.cartItems.items.length - 1; i >= 0; i--) {
+                scope.totalPrice = scope.totalPrice + scope.cartItems.items[i].itemPrice * scope.cartItems.items[i].itemNum;
             }
             scope.total = scope.totalPrice + scope.shipping;
         }
 
 
         scope.deleteCartItem = function (itemId) {
-            CartService.remove(itemId, scope.farmerId);
+            CartService.remove(itemId, scope.farmerData.farmerId);
             scope.loadData();
-            scope.price = CartService.getTotalCartAmount()+"";
+            scope.price = CartService.getTotalCartAmount() + "";
             scope.calculateTotal();
         };
 
         scope.addMore = function (itemId) {
-            CartService.more(itemId, scope.farmerId);
+            CartService.more(itemId, scope.farmerData.farmerId);
             scope.loadData();
-            scope.price = CartService.getTotalCartAmount()+"";
+            scope.price = CartService.getTotalCartAmount() + "";
             scope.calculateTotal();
         }
         scope.less = function (itemId) {
-            CartService.less(itemId, scope.farmerId);
+            CartService.less(itemId, scope.farmerData.farmerId);
             scope.loadData();
-            scope.price = CartService.getTotalCartAmount()+"";
+            scope.price = CartService.getTotalCartAmount() + "";
             scope.calculateTotal();
         };
 
 
         scope.loadData = function () {
             scope.cartItems = CartService.getItems();
-            for(var i=0;i<scope.cartItems.length;i++){
-                SearchService.getProductImage(scope.cartItems[i].itemId,scope.cartItems[i].image).then(function (img) {
-                    for (var j = 0; j < scope.cartItems.length; j++) {
-                        if (scope.cartItems[j].itemId === img.index) {
-                            scope.cartItems[j].img = "data:"+img.type+";base64,"+img.document_content;
+            if (scope.cartItems != null) {
+                for (var i = 0; i < scope.cartItems.items.length; i++) {
+                    SearchService.getProductImage(scope.cartItems.items[i].itemId, scope.cartItems.items[i].image).then(function (img) {
+                        for (var j = 0; j < scope.cartItems.items.length; j++) {
+                            if (scope.cartItems.items[j].itemId === img.index) {
+                                scope.cartItems.items[j].img = "data:" + img.type + ";base64," + img.document_content;
+                            }
                         }
-                    }
-                });
+                    });
+                }
+                scope.farmerData = CartService.getCartFarmer();
+                scope.calculateTotal();
             }
-            scope.cartItemsSize = CartService.getItemsSize();
             scope.wishlistItemSize = WishlistService.getItemsSize();
-            if (scope.cartItems[0] != undefined) {
-                scope.farmerName = scope.cartItems[0].farmer;
-                scope.farmerLocation = scope.cartItems[0].farmerLocation;
-                scope.farmerId = scope.cartItems[0].farmerId;
-                scope.farmerEMail = scope.cartItems[0].farmerEMail;
-            } else {
-                scope.farmerName = "";
-                scope.farmerLocation = "";
-                scope.farmerId = "";
-                scope.farmerEMail = "";
-            }
-            scope.calculateTotal();
         }
 
-        scope.goBack = function() {
+        scope.goBack = function () {
             window.history.back();
         }
 
@@ -94,23 +85,23 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
 
         scope.setAmount = function (productId, amount) {
 
-            if(!isNaN(amount) && (amount >= 0)) {
+            if (!isNaN(amount) && (amount >= 0)) {
                 console.log("Amount of " + productId + " = " + amount);
                 for (var i = scope.cartItems.length - 1; i >= 0; i--) {
                     if (scope.cartItems[i].id == productId) {
                         scope.cartItems[i].itemNum = parseFloat(amount);
                     }
                 }
-                CartService.updateProductAmount(productId,scope.farmerId,parseFloat(amount));
-                scope.price = CartService.getTotalCartAmount()+"";
+                CartService.updateProductAmount(productId, scope.farmerId, parseFloat(amount));
+                scope.price = CartService.getTotalCartAmount() + "";
                 scope.calculateTotal();
             }
         }
 
-        scope.changeShipment = function (isShipped){
+        scope.changeShipment = function (isShipped) {
             scope.isShipped = isShipped;
 
-            if(scope.isShipped == true){
+            if (scope.isShipped == true) {
                 scope.shipping = scope.shippingConst;
             } else {
                 scope.shipping = 0;
@@ -147,11 +138,12 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
         scope.loadData();
         scope.price = CartService.getTotalCartAmount() + "";
         scope.wishlistItemsSize = WishlistService.getItemsSize();
-    }]);
+    }])
+;
 
-angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance,$location,CartService) {
+angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance, $location, CartService) {
 
-    $scope.emptyCart = function(){
+    $scope.emptyCart = function () {
         console.log("Empty cart");
         CartService.resetCart();
         $modalInstance.close();

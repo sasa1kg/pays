@@ -3,9 +3,8 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 
 
         console.log("FARM! " + routeParams.id);
-
-        scope.cartItems = CartService.getItemsSize();
-        scope.wishlistItems = WishlistService.getItemsSize();
+        scope.price = CartService.getTotalCartAmount() + "";
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
 
 
         scope.farmerId = routeParams.id;
@@ -31,12 +30,12 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
         }
 
         scope.removeFromWishlist = function (productId) {
-            WishlistService.removeFromWishList(productId,scope.farmer.id);
+            WishlistService.removeFromWishList(productId, scope.farmer.id);
             scope.wishlistItemsSize = WishlistService.getItemsSize();
         }
 
-        scope.isProductInWishlist = function(productId){
-            return WishlistService.itemInWishlist(scope.farmerId,productId);
+        scope.isProductInWishlist = function (productId) {
+            return WishlistService.itemInWishlist(scope.farmerId, productId);
         }
 
         scope.addToCart = function (productId) {
@@ -61,12 +60,9 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                     }
                 }
 
-
-
-                scope.cartItems = CartService.getItemsSize();
                 scope.wishlistItems = WishlistService.getItemsSize();
 
-                scope.price = CartService.getTotalCartAmount()+"";
+                scope.price = CartService.getTotalCartAmount() + "";
             } else {
                 alert("Proizvodi drugog farmera su u kolicima.");
             }
@@ -74,77 +70,81 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 
         scope.isProductInCart = function (productId) {
 
-            var items = CartService.getItems();
-            for (var i = items.length - 1; i >= 0; i--) {
-                if ((items[i].itemId == productId) &&(items[i].itemNum > 0)) {
-                    return true;
+            var content = CartService.getItems(scope.farmerId);
+            if (content != null) {
+                for (var i = content.items.length - 1; i >= 0; i--) {
+                    if ((content.items[i].itemId == productId) && (content.items[i].itemNum > 0)) {
+                        return true;
+                    }
                 }
             }
             return false;
         }
 
         scope.addMore = function (productId) {
-            CartService.more(productId,scope.farmerId);
+            CartService.more(productId, scope.farmerId);
             for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                 if (scope.farmerProducts[i].product.id == productId) {
                     scope.farmerProducts[i].itemNum++;
                 }
             }
-            scope.price = CartService.getTotalCartAmount()+"";
+            scope.price = CartService.getTotalCartAmount() + "";
         }
 
         scope.less = function (productId) {
-            CartService.less(productId,scope.farmerId);
+            CartService.less(productId, scope.farmerId);
             for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                 if (scope.farmerProducts[i].product.id == productId) {
                     scope.farmerProducts[i].itemNum--;
                 }
             }
-            scope.price = CartService.getTotalCartAmount()+"";
+            scope.price = CartService.getTotalCartAmount() + "";
         }
 
         scope.setAmount = function (productId, amount) {
 
-            if(!isNaN(amount) && (amount >= 0)) {
+            if (!isNaN(amount) && (amount >= 0)) {
                 console.log("Amount of " + productId + " = " + amount);
                 for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                     if (scope.farmerProducts[i].product.id == productId) {
                         scope.farmerProducts[i].itemNum = parseFloat(amount);
                     }
                 }
-                CartService.updateProductAmount(productId,scope.farmerId,parseFloat(amount));
-                scope.price = CartService.getTotalCartAmount()+"";
+                CartService.updateProductAmount(productId, scope.farmerId, parseFloat(amount));
+                scope.price = CartService.getTotalCartAmount() + "";
             }
         }
 
-        SearchService.getFarmerById(scope.farmerId).then(function(data){
-            if(data){
+        SearchService.getFarmerById(scope.farmerId).then(function (data) {
+            if (data) {
                 scope.farmer = data;
-                SearchService.getFarmerImage(scope.farmer.id,0).then(function (img){
+                SearchService.getFarmerImage(scope.farmer.id, 0).then(function (img) {
                     scope.farmer.img = img.document_content;
                 });
-            }else{
+            } else {
                 console.log("Unable to load farmer from DB");
             }
         });
 
-        SearchService.getFarmerProducts(scope.farmerId).then(function(data){
-            if(data){
+        SearchService.getFarmerProducts(scope.farmerId).then(function (data) {
+            if (data) {
                 scope.farmerProducts = data;
-                var items = CartService.getItems();
+                var content = CartService.getItems(scope.farmerId);
                 for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                     scope.farmerProducts[i].itemNum = 0;
                     SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images[0]).then(function (img) {
                         for (var j = 0; j < scope.farmerProducts.length; j++) {
                             if (scope.farmerProducts[j].product.id === img.index) {
-                                scope.farmerProducts[j].product.img = "data:"+img.type+";base64,"+img.document_content;
+                                scope.farmerProducts[j].product.img = "data:" + img.type + ";base64," + img.document_content;
                             }
                         }
                     });
-                    for (var k = items.length - 1; k >= 0; k--) {
-                        if (scope.farmerProducts[i].product.id == items[k].itemId) {
-                            scope.farmerProducts[i].itemNum = items[k].itemNum;
-                            break;
+                    if (content != null) {
+                        for (var k = content.items.length - 1; k >= 0; k--) {
+                            if (scope.farmerProducts[i].product.id == content.items[k].itemId) {
+                                scope.farmerProducts[i].itemNum = content.items[k].itemNum;
+                                break;
+                            }
                         }
                     }
                 }
@@ -157,12 +157,12 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                         }
                     }
                 }
-            }else{
+            } else {
                 console.log("Unable to load farmer products from DB");
             }
         });
 
-        scope.canBeAdded = function(){
+        scope.canBeAdded = function () {
             return CartService.canBeAdded(scope.farmerId);
         }
     }]);

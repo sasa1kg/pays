@@ -40,14 +40,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
                 return true;
             }
         }
-
-
-        scope.putInCart = function (key, value) {
-            CartService.putInCart(key, value);
-            scope.cartItems = CartService.getItemsSize();
-        };
-
-
+        
         scope.searchPlaceBlur = function () {
             if (scope.searchPlaceValue.length > 0) {
                 scope.locationFound = false;

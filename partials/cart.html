@@ -23,13 +23,13 @@
                 <tbody>
                 <tr>
                     <td>
-                        <h4 class="farmer_data farmer_data_padding" ng-bind-html="farmerName | html"></h4>
+                        <h4 class="farmer_data farmer_data_padding" ng-bind-html="farmerData.farmer | html"></h4>
                     </td>
                     <td>
-                        <h4 class="farmer_data" ng-bind-html="farmerLocation | html"></h4>
+                        <h4 class="farmer_data" ng-bind-html="farmerData.farmerLocation | html"></h4>
                     </td>
                     <td>
-                        <h4 class="farmer_data" ng-bind-html="farmerEMail | html"></h4>
+                        <h4 class="farmer_data" ng-bind-html="farmerData.farmerEMail | html"></h4>
                     </td>
                 </tr>
                 </tbody>
@@ -48,7 +48,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="item in cartItems">
+                <tr ng-repeat="item in cartItems.items">
                     <td class="cart_product">
                         <a href=""><img src="{{item.img}}" alt="{{item.itemName}}" style="width:128px;height:128px;"></a>
                     </td>
