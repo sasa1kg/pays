@@ -141,7 +141,11 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             });
             flowObj.on('fileError', function (event,err) {
                 console.log('fileError ', err);
-                deferred.reject(err);
+                if(err.length > 0) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(err);
+                }
             });
             flowObj.upload();
             return deferred.promise;
@@ -200,7 +204,11 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             });
             flowObj.on('fileError', function (event,err) {
                 console.log('fileError ', err);
-                deferred.reject(JSON.parse(err));
+                if(err.length > 0) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(err);
+                }
             });
             flowObj.upload();
             return deferred.promise;

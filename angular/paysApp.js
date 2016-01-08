@@ -352,7 +352,8 @@ paysApp.config(function ($translateProvider) {
         ORDER_CREATED : "Order successfully created!",
         ORDER_NOT_CREATED : "Unable to create order!",
         NO_IMAGE_PROVIDED: "No image provided",
-
+        VEHICLE_IMAGE_UPLOADED : "Vehicle image uploaded",
+        VEHICLE_IMAGE_FAILURE : "Failed to upload vehicle image"
 
     })
         .translations('rs', {
@@ -622,7 +623,9 @@ paysApp.config(function ($translateProvider) {
             TO : "Do",
             ORDER_CREATED : "Narudžbina uspešno kreirana!",
             ORDER_NOT_CREATED : "Bezuspešno kreiranje narudžbine!",
-            NO_IMAGE_PROVIDED: "Nepostojeća slika"
+            NO_IMAGE_PROVIDED: "Nepostojeća slika",
+            VEHICLE_IMAGE_UPLOADED : "Postavljena nova slika vozila",
+            VEHICLE_IMAGE_FAILURE : "Neuspešno postavljanje nove slike vozila"
         })
     $translateProvider.preferredLanguage('en');
 });
