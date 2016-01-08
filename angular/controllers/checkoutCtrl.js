@@ -1,22 +1,93 @@
-angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$http", "$filter", "CartService","WishlistService", function (scope, http, filter, CartService,WishlistService) {
+angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$filter","$location", "CartService", "WishlistService",
+    "OrderService", "UserService", "Notification",
+    function (scope, filter,location, CartService, WishlistService, OrderService, UserService, Notification) {
 
-    console.log("checkoutCtrl");
-    scope.msg = "checkoutCtrl";
+        scope.orderData = OrderService.getOrderData();
+        if (scope.orderData != null) {
+            scope.amount = scope.orderData.totalPrice;
+            scope.currency = scope.orderData.currency;
+            if (typeof scope.orderData.address === 'string') {
+                scope.address = scope.orderData.address;
+            } else {
+                scope.address = scope.orderData.address.street + ", " + scope.orderData.address.city;
+            }
+            if (scope.orderData.clientId != null) {
+                UserService.getUserData(scope.orderData.clientId).then(function (data) {
+                    scope.userData = data;
+                }).catch(function (err) {
+                    scope.userData = null;
+                });
+            }
+            else {
+                scope.userData = null;
+            }
+        }
 
-    scope.orderId = "123456";
-    scope.amount = "84555.30";
-    scope.currency = "RSD";
 
-    scope.nameSurname = "";
+        scope.fromTime = {
+            time: ""
+        };
+        scope.toTime = {
+            time: ""
+        };
+        scope.deliveryDate = {
+            date: ""
+        }
 
-    scope.note = "";
+        scope.minDate = new Date();
+        scope.dateFormat = 'dd-MMMM-yyyy';
+        scope.timeFormat = 'HH:mm';
 
-    scope.dateDropDownInput = "";
 
-    scope.executePayment = function () {
-        console.log("Payment Information!");
-        console.log("Name " + scope.nameSurname);
-        console.log("Delivery time: " + scope.dateDropDownInput);
-        console.log("Note: " + scope.note);
-    }
-}]);
+        scope.hstep = 1;
+        scope.mstep = 30;
+        scope.ismeridian = false;
+
+        scope.datePopup = {
+            opened: false
+        };
+
+        scope.note = "";
+
+
+        scope.executePayment = function () {
+            console.log("Payment Information!");
+            console.log(scope.date);
+            var order = {
+                farmerId: scope.orderData.farmerId,
+                clientId: scope.orderData.clientId,
+                transporterId: 15,
+                currencyId: scope.orderData.currency.id,
+                address: scope.address,
+                deliveryDate: filter('date')(scope.deliveryDate.date, scope.dateFormat),
+                deliveryFrom: filter('date')(scope.fromTime.time, scope.timeFormat),
+                deliveryTo: filter('date')(scope.toTime.time, scope.timeFormat),
+                withTransport: scope.orderData.withTransport,
+                totalPrice: scope.orderData.totalPrice,
+                items: []
+            };
+            angular.forEach(scope.orderData.items.items, function (item) {
+                console.log(item);
+                order.items.push({
+                    productId: item.itemId,
+                    amount: item.itemNum,
+                    measurementUnitId: item.itemMeasure.id,
+                    totalPrice: item.itemPrice * item.itemNum
+                });
+            });
+            console.log(order);
+            OrderService.createOrder(order).then(function(data){
+                Notification.success({message: filter('translate')('ORDER_CREATED')});
+                CartService.resetCart();
+                OrderService.clearOrderData();
+                location.path("/");
+            }).catch(function(err){
+                Notification.error({message: filter('translate')('ORDER_NOT_CREATED')});
+            });
+        }
+
+        scope.openDate = function () {
+            scope.datePopup.opened = true;
+        };
+
+    }]);

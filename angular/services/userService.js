@@ -44,6 +44,26 @@ var UserService = angular.module('UserService', []).service('UserService',
 
             return deffered.promise;
         }
+
+        this.getUserData = function(userId){
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "client/"+userId).
+                success(function (data, status) {
+                    if (status == 200) {
+                        deffered.resolve(data);
+                    } else {
+                        console.log("getUserData | Status not OK " + status);
+                        deffered.reject("Error");
+                    }
+
+                }).
+                error(function (data, status) {
+                    console.log("Error " + status);
+                    deffered.reject("Error");
+                });
+
+            return deffered.promise;
+        }
         this.storeUserCredentials = function (token, id, role) {
             if (localStorageService.cookie.isSupported) {
                 localStorageService.cookie.clearAll();
@@ -72,6 +92,7 @@ var UserService = angular.module('UserService', []).service('UserService',
                 }
             } else {
                 console.error("Cookies not supported in this browser!");
+                return null;
             }
         }
 

@@ -6,7 +6,7 @@
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-                <li><a href="#/pays">{{ 'HOME' | translate}}</a></li>
+                <li><a href="#/">{{ 'HOME' | translate}}</a></li>
                 <li class="active">{{ 'CART' | translate }}</li>
             </ol>
         </div>
@@ -58,7 +58,7 @@
                         <p>{{'NON_ORGANIC' | translate}}</p>
                     </td>
                     <td class="cart_price">
-                        <p>{{item.itemPrice}} RSD / {{item.itemMeasure}}</p>
+                        <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code}}</p>
                     </td>
                     <td class="cart_quantity">
 
@@ -89,14 +89,14 @@
         <div class="row total_area">
             <div class="col-sm-12 order-row">
                 <div class="col-sm-3">
-                    <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType"
-                           ng-value="cityString">
+                    <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
+                           value="{{newAddressString}}">
                     {{ 'CHOOSE_CITY' | translate}}
                 </div>
                 <div class="col-sm-5">
                     <div class="col-sm-10">
                         <form>
-                            <select ng-model="city">
+                            <select ng-model="address.newAddress.city">
                                 <option ng-repeat="city in cities" value="{{city.name}}">{{city.name |
                                     html}}
                                 </option>
@@ -109,45 +109,46 @@
             <div class="col-sm-12 order-row ">
                 <div class="text-right col-sm-2">{{ 'STREET' | translate}}</div>
                 <input class="col-sm-4" type="text"
-                       autocomplete="off" ng-model="street">
+                       autocomplete="off" ng-model="address.newAddress.street">
 
                 <div class="text-right col-sm-1">{{ 'HOUSE_NUMBER' | translate}}</div>
                 <input class="col-sm-1" type="text"
-                       autocomplete="off" ng-model="number">
+                       autocomplete="off" ng-model="address.newAddress.number">
 
                 <div class="text-right col-sm-2">{{ 'APARTMENT' | translate}}</div>
                 <input class="col-sm-1" type="text"
-                       autocomplete="off" ng-model="appartment"><i
+                       autocomplete="off" ng-model="address.newAddress.appartment"><i
                     class="fa fa-asterisk asterisk-padding"></i>
             </div>
 
-            <div class="col-sm-12 order-row ">
+            <div class="col-sm-12 order-row">
                 <div class="text-right col-sm-2">{{ 'FLOOR' | translate}}</div>
                 <input class="col-sm-1" type="text"
-                       autocomplete="off" ng-model="floor">
+                       autocomplete="off" ng-model="address.newAddress.floor">
 
                 <div class="text-right col-sm-2">{{ 'ENTRANCE' | translate}}</div>
                 <input class="col-sm-1" type="text"
-                       autocomplete="off" ng-model="entrance">
+                       autocomplete="off" ng-model="address.newAddress.entrance">
             </div>
 
             <!--predefined location -->
-            <div class="col-sm-12 order-row">
+            <div ng-if="credentials.role !== buyerUserType " class="col-sm-12 order-row">
+                <h5 class="text-center" style="color:red;">{{ 'NO_PREDEFINED_LOCATIONS' | translate}}</h5>
+            </div>
+
+            <div ng-if="credentials.role === buyerUserType " class="col-sm-12 order-row">
                 <div class="col-sm-3">
-                    <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType"
-                           ng-value="predefinedLocationString">
+                    <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
+                           value="{{predefinedLocationString}}">
                     {{ 'PREDEFINED_LOCATION' | translate}}
                 </div>
                 <div class="col-sm-8">
-                    <div class="col-sm-12" ng-repeat="address in addresses">
+                    <div class="col-sm-12" ng-repeat="addr in addresses">
                         <label>
-                            <input type="radio" name="addressRadio" ng-model="chosenAddress"
-                                   ng-change="changed(address)">{{ address |
+                            <input type="radio" name="addressRadio" ng-model="address.chosenAddress" ng-value="addr">{{ addr |
                             html}}</label>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -186,9 +187,10 @@
                     </script>
 
                     <a class="btn btn-default update" ng-click="goBack()">{{ 'UPDATE_CART' | translate}}</a>
-                    <a class="btn btn-default check_out" href="#/checkout">{{ 'PAY' | translate}}</a>
                     <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
                         'EMPTY_CART' | translate}}</a>
+                    <a class="btn btn-default check_out" ng-click="goToPayment()">{{ 'PAY' | translate}}</a>
+
                 </div>
             </div>
         </div>

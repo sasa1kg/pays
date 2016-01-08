@@ -1,6 +1,6 @@
-var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'LocalStorageModule',
+var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies','ngAnimate', 'LocalStorageModule',
     'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'UserService', 'OrderService',
-    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap.datetimepicker', 'ui.bootstrap', 'ui-notification', 'flow'])
+    'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow'])
     .filter('html', function ($sce) {
         return function (input) {
             return $sce.trustAsHtml(input);
@@ -69,12 +69,16 @@ paysApp.run(function ($rootScope, $translate,$location, SearchService,UserServic
 
     SearchService.getCurrencies().then(function (data) {
         $rootScope.currencies = data;
+        angular.forEach($rootScope.currencies , function(currency){
+            if(currency.code === "RSD"){
+                $rootScope.defaultCurrency = currency;
+            }
+        })
     });
 
     SearchService.getMeasurementUnits().then(function (data) {
         $rootScope.measures = data;
     });
-
 });
 
 paysApp.config(function ($translateProvider) {
@@ -127,7 +131,7 @@ paysApp.config(function ($translateProvider) {
         TITLE_33: 'Find best farmer using previous customers opinions and top picks',
         ADVERTISING_MSG: 'PAYS system is designed to make buying fresh products easier. Users can choose farmer and and set of products they want to buy.Furthermore, obtaining best price and fastest transport is included',
         ORDER: 'Order',
-        ORDER_DATA_SUFFIX: 'information about your delivery',
+        ORDER_DATA_SUFFIX: 'Information about your order\'s delivery',
         WHO: 'Who',
         NAME_SURNAME: 'Name and surname',
         WHERE: 'Where',
@@ -338,8 +342,14 @@ paysApp.config(function ($translateProvider) {
         DELIVERY_TIME: "Delivery Time",
         ITEMS: "Items",
         CLOSE: "Close",
-        UNABLE_CART_INSERT: "Products of another farmer are present in cart. Please add this farmer's products to wishlist and move them to cart once you finish current order."
-
+        UNABLE_CART_INSERT: "Products of another farmer are present in cart. Please add this farmer's products to wishlist and move them to cart once you finish current order.",
+        NO_PREDEFINED_LOCATIONS: "You are not logged in at the moment. Please log in to see previous delivery locations of your account.",
+        NO_LOGIN_CHECKOUT: "You are not logged in at the moment. Please log in to finish your order.",
+        NO_ORDER_CREATED : "You haven't created your order yet. Please visit Cart overview page and create order.",
+        FROM: "From",
+        TO : "To",
+        ORDER_CREATED : "Order successfully created!",
+        ORDER_NOT_CREATED : "Unable to create order!"
 
     })
         .translations('rs', {
@@ -390,7 +400,7 @@ paysApp.config(function ($translateProvider) {
             TITLE_33: 'Nađite najboljeg farmera za Vas koristeći naše preporuke',
             ADVERTISING_MSG: 'PAYS sistem je osmišljen da olakša kupovinu svežih namirnica. Kupci mogu izabrati farmera iz proizvode koje žele da naruče. Takođe, dobijanje najniže cene i najbržeg transporta se podrazumeva',
             ORDER: 'Narudžbina',
-            ORDER_DATA_SUFFIX: 'podaci za Vašu isporuku',
+            ORDER_DATA_SUFFIX: 'Podaci za dostavu Vaše narudžbine',
             WHO: 'Kome',
             NAME_SURNAME: 'Ime i prezime',
             WHERE: 'Gde',
@@ -601,8 +611,14 @@ paysApp.config(function ($translateProvider) {
             DELIVERY_TIME: "Vreme isporuke",
             ITEMS: "Stavke",
             CLOSE: "Zatvori",
-            UNABLE_CART_INSERT: "Proizvodi drugog farmera se nalaze u korpi. Molimo Vas dodajte proizvode ovog farmera u listu želja i premestite ih u korpu kada naručite proizvode iz trenutne korpe."
-
+            UNABLE_CART_INSERT: "Proizvodi drugog farmera se nalaze u korpi. Molimo Vas dodajte proizvode ovog farmera u listu želja i premestite ih u korpu kada naručite proizvode iz trenutne korpe.",
+            NO_PREDEFINED_LOCATIONS: "Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste videli lokacije prethodnih dostava za Vaš nalog.",
+            NO_LOGIN_CHECKOUT: "Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste naručili željene proizvode.",
+            NO_ORDER_CREATED : "Porudžbina još nije kreirana. Molimo Vas posetite stranicu Pregled korpe i kreiranje porudžbinu.",
+            FROM: "Od",
+            TO : "Do",
+            ORDER_CREATED : "Narudžbina uspešno kreirana!",
+            ORDER_NOT_CREATED : "Bezuspešno kreiranje narudžbine!"
         })
     $translateProvider.preferredLanguage('en');
 });

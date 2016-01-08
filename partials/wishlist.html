@@ -37,7 +37,7 @@
                             <h4>{{item.itemName | translate}}</h4>
                         </td>
                         <td class="cart_price">
-                            <p>{{item.itemPrice}} RSD / {{item.itemMeasure}}</p>
+                            <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code}}</p>
                         </td>
                         <td class="cart_quantity">
                             <div ng-if="canBeAdded(wishlistItem.farmer.farmerId) && !isProductInCart(item.itemId)">

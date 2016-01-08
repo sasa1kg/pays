@@ -1,24 +1,14 @@
-angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$filter", "$modal", "CartService", "WishlistService", "SearchService",
-    function (scope, http, location, filter, modal, CartService, WishlistService, SearchService) {
+angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location", "$rootScope", "$modal", "CartService", "WishlistService",
+    "SearchService", "OrderService",
+    function (scope, http, location, rootScope, modal, CartService, WishlistService, SearchService, OrderService) {
 
         console.log("Cart Ctrl!");
+
+        scope.total = "";
 
         scope.shippingConst = 200;
         scope.shipping = scope.shippingConst;
         scope.isShipped = true;
-
-        scope.locationType = "";
-
-        scope.predefinedLocationString = "predefinedLocation";
-        scope.cityString = "city";
-
-        scope.city = "";
-        scope.street = "";
-        scope.number = "";
-        scope.appartment = "";
-        scope.floor = "";
-        scope.entrance = "";
-        scope.chosenAddress = "";
 
         scope.calculateTotal = function () {
             scope.totalPrice = 0;
@@ -98,6 +88,30 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
             }
         }
 
+        scope.loadData();
+        scope.price = CartService.getTotalCartAmount() + "";
+        scope.wishlistItemsSize = WishlistService.getItemsSize();
+
+        //Checkout data
+
+        scope.predefinedLocationString = "predefinedLocation";
+        scope.newAddressString = "newAddress";
+
+        scope.locationType = {
+            selected: scope.newAddressString,
+        };
+
+        scope.address = {
+            newAddress: {
+                city: "",
+                street: "",
+                number: "",
+                appartment: "",
+                floor: "",
+                entrance: ""
+            },
+            chosenAddress: ""
+        }
         scope.changeShipment = function (isShipped) {
             scope.isShipped = isShipped;
 
@@ -132,14 +146,24 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
         ]
 
         scope.changed = function (adr) {
-            scope.chosenAddress = adr;
+            scope.address.chosenAddress = adr;
         }
 
-        scope.loadData();
-        scope.price = CartService.getTotalCartAmount() + "";
-        scope.wishlistItemsSize = WishlistService.getItemsSize();
-    }])
-;
+        scope.goToPayment = function () {
+            console.log(scope.locationType.selected);
+            console.log(scope.address);
+            OrderService.createOrderItem(scope.farmerData.farmerId, rootScope.credentials.id);
+            var address = "";
+            if (scope.locationType.selected === scope.newAddressString) {
+                address = scope.address.newAddress;
+            } else {
+                address = scope.address.chosenAddress;
+            }
+            OrderService.saveAddress(scope.isShipped, address);
+            OrderService.saveItems(scope.cartItems, scope.total);
+            location.path("/checkout");
+        }
+    }]);
 
 angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance, $location, CartService) {
 
