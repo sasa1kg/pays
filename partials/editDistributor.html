@@ -176,7 +176,7 @@
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'VEHICLE_IMAGE' |
                                                 translate}}</h5></td>
                                             <td class="col-sm-9" height="100px" width="128px">
-                                                <div flow-init="{singleFile:true}"
+                                                <div flow-init flow-files-submitted="" flow-name="vehicleImage.flow"
                                                      flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
                                                      class="ng-scope">
                                                     <div class="thumbnail-vehicle" ng-show="!$flow.files.length">
@@ -254,7 +254,7 @@
                         <tbody>
                         <tr ng-repeat="vehicle in vehicles">
                             <td>
-                                <h4 ng-bind-html="vehicle.model | html"></h4>
+                                <h4 ng-bind-html="vehicle.name | html"></h4>
                             </td>
                             <td>
                                 <h5>{{ 'COOLED_TRANSPORT' | translate}} : <span ng-if="vehicle.cooled == true">{{'YES' | translate }}</span>
@@ -316,9 +316,9 @@
                             </button>
                         </form>
                     </div>
-                    <div class="col-sm-5 advertising-img-form-margin banner-preview">
+                    <div flow-init flow-files-submitted="" flow-name="profilePic.flow" class="col-sm-5 advertising-img-form-margin banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.img}}"/>
+                            <img src="{{distributor.advertising.img}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
                             <img flow-img="$flow.files[0]"/>
@@ -335,6 +335,10 @@
                             <a class="btn btn-primary" ng-show="$flow.files.length"
                                ng-click="$flow.cancel()">
                                 {{'DELETE' | translate}}
+                            </a>
+                            <a class="btn btn-primary" ng-show="$flow.files.length"
+                               ng-click="uploadProfilePicture()">
+                                {{'UPLOAD' | translate}}
                             </a>
                         </div>
                     </div>

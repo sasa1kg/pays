@@ -14,6 +14,10 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
 
         scope.prices = [];
 
+        scope.profilePic = {
+            flow: null
+        };
+
         DistributorService.getDistributorById(distributorId).then(function (data) {
             scope.distributor = data;
         });
@@ -21,13 +25,14 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
             scope.vehicles = data;
             for (var j = 0; j < scope.vehicles.length; j++) {
-                DistributorService.getVehicleImage(scope.vehicles[j].id, scope.vehicles[j].images[0]).then(function (img) {
-                    for (var i = 0; i < scope.vehicles.length; i++) {
-                        if (scope.vehicles[i].id === img.index) {
-                            scope.vehicles[i].img = "data:"+img.type+";base64,"+img.document_content;
+                DistributorService.getVehicleImage(scope.vehicles[j].id, scope.vehicles[j].images[scope.vehicles[j].images.length - 1])
+                    .then(function (img) {
+                        for (var i = 0; i < scope.vehicles.length; i++) {
+                            if (scope.vehicles[i].id === img.index) {
+                                scope.vehicles[i].img = "data:" + img.type + ";base64," + img.document_content;
+                            }
                         }
-                    }
-                });
+                    });
             }
         });
 
@@ -69,7 +74,16 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
                 });
         }
 
+        scope.uploadProfilePicture = function () {
+            if (typeof scope.profilePic.flow.files !== 'undefined') {
+                DistributorService.uploadProfileImage(scope.distributor.id, scope.profilePic.flow).then(function (data) {
+                    console.log("SUCCESS");
+                }).catch(function (err) {
+                    console.log("FAILURE");
+                });
 
+            }
+        }
         scope.deleteVehicle = function (vehicle) {
             DistributorService.deleteVehicle(distributorId, vehicle.id).then(function (data) {
                 Notification.success({message: filter('translate')('VEHICLE_DELETED')});
@@ -94,6 +108,33 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         scope.updatePrices = function () {
             console.log(scope.prices);
         }
+        scope.uploadVehiclePicture = function (vehicleId, flow) {
+            if (typeof flow.files !== 'undefined') {
+                DistributorService.uploadVehicleImage(vehicleId, flow).then(function (data) {
+                    Notification.success({message: filter('translate')('VEHICLE_IMAGE_UPLOADED')});
+                    scope.reloadVehicleImage(vehicleId);
+                }).catch(function (err) {
+                    Notification.error({message: filter('translate')('VEHICLE_IMAGE_FAILURE')});
+                    scope.reloadVehicleImage(vehicleId);
+                });
+            }
+        }
+
+        scope.reloadVehicleImage = function (vehicleId) {
+            DistributorService.getVehicleImages(vehicleId).then(function (data) {
+                if (data.length > 0) {
+                    DistributorService.getVehicleImage(vehicleId, data[data.length - 1])
+                        .then(function (img) {
+                            for (var i = 0; i < scope.vehicles.length; i++) {
+                                if (scope.vehicles[i].id === img.index) {
+                                    scope.vehicles[i].img = "data:" + img.type + ";base64," + img.document_content;
+                                }
+                            }
+                        });
+                }
+            });
+        }
+
         scope.openVehicleModal = function (vehicle) {
 
             var modalInstance = modal.open({
@@ -111,24 +152,43 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
                 }
             });
 
-            modalInstance.result.then(function (vehicleNew) {
-                if (typeof vehicleNew !== 'undefined') {
+            modalInstance.result.then(function (returnJson) {
+                if (typeof returnJson !== 'undefined') {
                     var found = false;
-                    for (var v in scope.vehicles) {
-                        if (scope.vehicles[v].id == vehicleNew.id) {
+                    var newImage = returnJson.image.flow;
+                    var vehicleNew = returnJson.info;
+
+                    angular.forEach(scope.vehicles, function (vehicle) {
+                        if (vehicle.id == vehicleNew.id) {
                             found = true;
                             DistributorService.updateVehicle(distributorId, vehicleNew).then(function () {
                                 Notification.success({message: filter('translate')('VEHICLE_UPDATED')});
-                                scope.vehicles[v] = vehicleNew;
+                                scope.uploadVehiclePicture(vehicleNew.id, newImage);
+                                vehicle = vehicleNew;
+
                             }).catch(function () {
                                 Notification.error({message: filter('translate')('VEHICLE_NOT_UPDATED')});
                             });
                         }
-                    }
+                    });
                     if (found == false) {
                         DistributorService.addNewVehicle(distributorId, vehicleNew).then(function () {
                             Notification.success({message: filter('translate')('VEHICLE_ADDED')});
-                            scope.vehicles.push(vehicleNew);
+                            DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
+                                angular.forEach(data,function (newVeh){
+                                    var exists = false;
+                                    for (var j = 0; j < scope.vehicles.length; j++) {
+                                        if(scope.vehicles[j].id === newVeh.id){
+                                            exists=true;
+                                        }
+                                    }
+                                    if(exists == false){
+                                        scope.vehicles.push(newVeh);
+                                        scope.uploadVehiclePicture(newVeh.id, newImage);
+                                    }
+                                });
+
+                            });
                         }).catch(function () {
                             Notification.error({message: filter('translate')('VEHICLE_NOT_ADDED')});
                         });
@@ -140,6 +200,10 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
 
 angular.module('paysApp').controller('UpdateVehicleModalCtrl', function ($scope, $filter, $modalInstance, vehicles, vehicle) {
 
+    $scope.vehicleImage = {
+        flow: null
+    }
+
     var newVehicle = false
     $scope.vehicleNew = $.extend({}, vehicle);
     if (typeof vehicle === 'undefined') {
@@ -149,10 +213,14 @@ angular.module('paysApp').controller('UpdateVehicleModalCtrl', function ($scope,
     $scope.saveChanges = function () {
         console.log($scope.vehicleNew);
         $scope.vehicleNew.cooled = stringToBoolean($scope.vehicleNew.cooled);
+        var returnJson = {
+            info: $scope.vehicleNew,
+            image: $scope.vehicleImage
+        };
         if (newVehicle == true) {
-            $modalInstance.close($scope.vehicleNew);
+            $modalInstance.close(returnJson);
         }
-        $modalInstance.close($scope.vehicleNew);
+        $modalInstance.close(returnJson);
     }
 
     $scope.cancelModal = function () {

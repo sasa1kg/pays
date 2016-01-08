@@ -66,6 +66,7 @@ paysApp.run(function ($rootScope, $translate,$location, SearchService,UserServic
     $rootScope.paysEMail = 'office@pays-system.com';
 
     $rootScope.serverURL = "http://185.23.171.43/PEP/PaysRest/";
+    $rootScope.serverImagesURL = "http://185.23.171.43/PaysImages/";
 
     SearchService.getCurrencies().then(function (data) {
         $rootScope.currencies = data;
@@ -349,7 +350,9 @@ paysApp.config(function ($translateProvider) {
         FROM: "From",
         TO : "To",
         ORDER_CREATED : "Order successfully created!",
-        ORDER_NOT_CREATED : "Unable to create order!"
+        ORDER_NOT_CREATED : "Unable to create order!",
+        NO_IMAGE_PROVIDED: "No image provided",
+
 
     })
         .translations('rs', {
@@ -618,7 +621,8 @@ paysApp.config(function ($translateProvider) {
             FROM: "Od",
             TO : "Do",
             ORDER_CREATED : "Narudžbina uspešno kreirana!",
-            ORDER_NOT_CREATED : "Bezuspešno kreiranje narudžbine!"
+            ORDER_NOT_CREATED : "Bezuspešno kreiranje narudžbine!",
+            NO_IMAGE_PROVIDED: "Nepostojeća slika"
         })
     $translateProvider.preferredLanguage('en');
 });

@@ -130,6 +130,23 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             return deffered.promise;
         }
 
+        this.uploadVehicleImage = function(vehicleId,flowObj){
+            var deferred = q.defer();
+            flowObj.opts.target = rootScope.serverImagesURL+"vehicle/"+vehicleId+"/imagefile";
+            flowObj.opts.testChunks=false;
+            flowObj.opts.fileParameterName = "file";
+            flowObj.on('fileSuccess', function (event,resp) {
+                console.log('fileSuccess ', resp);
+                deferred.resolve(JSON.parse(resp));
+            });
+            flowObj.on('fileError', function (event,err) {
+                console.log('fileError ', err);
+                deferred.reject(err);
+            });
+            flowObj.upload();
+            return deferred.promise;
+        }
+
         this.updateGeneralInfo = function (distributorId, info) {
             var deffered = q.defer();
 
@@ -172,6 +189,22 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             return deffered.promise;
         }
 
+        this.uploadProfileImage = function(distributorId,flowObj){
+            var deferred = q.defer();
+            flowObj.opts.target = rootScope.serverImagesURL+"transporter/"+distributorId+"/imagetype/P/imagefile";
+            flowObj.opts.testChunks=false;
+            flowObj.opts.fileParameterName = "file";
+            flowObj.on('fileSuccess', function (event,resp) {
+                console.log('fileSuccess ', resp);
+                deferred.resolve(JSON.parse(resp));
+            });
+            flowObj.on('fileError', function (event,err) {
+                console.log('fileError ', err);
+                deferred.reject(JSON.parse(err));
+            });
+            flowObj.upload();
+            return deferred.promise;
+        }
 
         this.getDistributorImage = function (distId, imageId) {
             var deffered = q.defer();
@@ -210,6 +243,27 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
                         deffered.resolve(data);
                     } else {
                         console.log("getVehicleImage |Status not OK " + status);
+                        deffered.reject("Error");
+                    }
+
+                }).
+                error(function (data, status) {
+                    console.log("Error " + status);
+                    deffered.reject("Error");
+                });
+            return deffered.promise;
+        }
+
+        this.getVehicleImages = function(vehicleId){
+            var deffered = q.defer();
+
+            http.get(rootScope.serverURL + "vehicle/" + vehicleId + "/images").
+                success(function (data, status) {
+                    if (status == 200) {
+                        data.index = vehicleId;
+                        deffered.resolve(data);
+                    } else {
+                        console.log("getVehicleImages |Status not OK " + status);
                         deffered.reject("Error");
                     }
 
