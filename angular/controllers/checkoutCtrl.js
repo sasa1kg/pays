@@ -1,6 +1,6 @@
-angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$filter","$location", "CartService", "WishlistService",
+angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$filter", "$location", "CartService", "WishlistService",
     "OrderService", "UserService", "Notification",
-    function (scope, filter,location, CartService, WishlistService, OrderService, UserService, Notification) {
+    function (scope, rootScope, filter, location, CartService, WishlistService, OrderService, UserService, Notification) {
 
         scope.orderData = OrderService.getOrderData();
         if (scope.orderData != null) {
@@ -11,14 +11,22 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$filter","$loca
             } else {
                 scope.address = scope.orderData.address.street + ", " + scope.orderData.address.city;
             }
-            if (scope.orderData.clientId != null) {
-                UserService.getUserData(scope.orderData.clientId).then(function (data) {
-                    scope.userData = data;
-                }).catch(function (err) {
-                    scope.userData = null;
-                });
+
+            if (scope.orderData.clientId == null) {
+                if (rootScope.credentials.id) {
+                    scope.orderData.clientId = rootScope.credentials.id;
+                    OrderService.saveClientId(scope.orderData.clientId);
+                }
             }
-            // TODO check credentials and link user
+            if (scope.orderData.clientId != null) {
+                {
+                    UserService.getUserData(scope.orderData.clientId).then(function (data) {
+                        scope.userData = data;
+                    }).catch(function (err) {
+                        scope.userData = null;
+                    });
+                }
+            }
             else {
                 scope.userData = null;
             }
@@ -77,12 +85,12 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$filter","$loca
                 });
             });
             console.log(order);
-            OrderService.createOrder(order).then(function(data){
+            OrderService.createOrder(order).then(function (data) {
                 Notification.success({message: filter('translate')('ORDER_CREATED')});
                 CartService.resetCart();
                 OrderService.clearOrderData();
                 location.path("/");
-            }).catch(function(err){
+            }).catch(function (err) {
                 Notification.error({message: filter('translate')('ORDER_NOT_CREATED')});
             });
         }
@@ -91,4 +99,6 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$filter","$loca
             scope.datePopup.opened = true;
         };
 
-    }]);
+    }
+])
+;
