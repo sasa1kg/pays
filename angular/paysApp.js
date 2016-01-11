@@ -99,6 +99,18 @@ paysApp.run(function ($rootScope, $translate,$location,$window, $filter,Notifica
     SearchService.getMeasurementUnits().then(function (data) {
         $rootScope.measures = data;
     });
+
+    $rootScope.logout = function(){
+        UserService.logoutUser();
+    }
+
+    $rootScope.isLoggedIn = function(){
+        $rootScope.credentials = UserService.getUserCredentials();
+        if($rootScope.credentials.token != null){
+            return true;
+        }
+        return false;
+    }
 });
 
 paysApp.config(function ($translateProvider) {
