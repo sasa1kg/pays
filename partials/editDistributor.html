@@ -318,7 +318,7 @@
                     </div>
                     <div flow-init flow-files-submitted="" flow-name="profilePic.flow" class="col-sm-5 advertising-img-form-margin banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.img}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
+                            <img src="{{distributor.profilePictureBase64}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
                             <img flow-img="$flow.files[0]"/>
@@ -345,11 +345,11 @@
                 </div>
                 <h4 class="text-center">{{'BANNER_PICTURES' | translate}}</h4>
 
-                <div class="col-sm-12">
+                <div flow-init flow-files-submitted="" flow-name="bannerPics[$index].flow" class="col-sm-12" ng-repeat="bannerIndex in range(bannerPicsLimit) track by $index">
                     <hr>
                     <div class="col-sm-12 banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[0]}}"/>
+                            <img src="{{distributor.bannerImages[$index]}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
                             <img flow-img="$flow.files[0]"/>
@@ -367,105 +367,9 @@
                                ng-click="$flow.cancel()">
                                 {{'DELETE' | translate}}
                             </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[1]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
                             <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[2]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[3]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[4]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
+                               ng-click="uploadBannerPicture($index)">
+                                {{'UPLOAD' | translate}}
                             </a>
                         </div>
                     </div>

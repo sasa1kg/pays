@@ -40,14 +40,14 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
             templateUrl: "partials/editDistributor.html",
             controller: "editDistributorCtrl",
             resolve: {},
-            restricted : true,
+            restricted : false,
             allow: 'T'
         })
         .when("/farmeredit/:id/", {
             templateUrl: "partials/editFarmer.html",
             controller: "editFarmerCtrl",
             resolve: {},
-            restricted : true,
+            restricted : false,
             allow: 'F'
         })
         .when("/404", {

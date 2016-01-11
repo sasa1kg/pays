@@ -1,4 +1,4 @@
-var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies','ngAnimate', 'LocalStorageModule',
+var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'LocalStorageModule',
     'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'UserService', 'OrderService',
     'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow'])
     .filter('html', function ($sce) {
@@ -41,7 +41,7 @@ paysApp.config(function (localStorageServiceProvider) {
 });
 
 
-paysApp.run(function ($rootScope, $translate,$location,$window, $filter,Notification,SearchService,UserService) {
+paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notification, SearchService, UserService) {
     $rootScope.translate = function (lang) {
         $translate.use(lang);
     };
@@ -50,14 +50,14 @@ paysApp.run(function ($rootScope, $translate,$location,$window, $filter,Notifica
     $rootScope.$on('$routeChangeStart', function (event, next) {
         console.log($location.url());
         if (next.restricted) {
-            if($rootScope.credentials.role && ($rootScope.credentials.role === next.allow)){
-                if($rootScope.credentials.role && (next.params.id == $rootScope.credentials.id)){
+            if ($rootScope.credentials.role && ($rootScope.credentials.role === next.allow)) {
+                if ($rootScope.credentials.role && (next.params.id == $rootScope.credentials.id)) {
                     $rootScope.lastPage = "#" + $location.url();
                 } else {
                     Notification.error({message: $filter('translate')('ACCESS_NOT_ALLOWED')});
                     $window.location.href = $rootScope.lastPage;
                 }
-            }else {
+            } else {
                 Notification.error({message: $filter('translate')('ACCESS_NOT_ALLOWED')});
                 $window.location.href = $rootScope.lastPage;
             }
@@ -71,8 +71,11 @@ paysApp.run(function ($rootScope, $translate,$location,$window, $filter,Notifica
     $rootScope.buyerUserType = 'C';
     $rootScope.farmerUserType = 'F';
     $rootScope.distributorUserType = 'T';
+    $rootScope.bannerPicsLimit = 5;
 
-
+    $rootScope.range = function (n) {
+        return new Array(n);
+    };
 
 
     $rootScope.transportDistances = [
@@ -89,8 +92,8 @@ paysApp.run(function ($rootScope, $translate,$location,$window, $filter,Notifica
 
     SearchService.getCurrencies().then(function (data) {
         $rootScope.currencies = data;
-        angular.forEach($rootScope.currencies , function(currency){
-            if(currency.code === "RSD"){
+        angular.forEach($rootScope.currencies, function (currency) {
+            if (currency.code === "RSD") {
                 $rootScope.defaultCurrency = currency;
             }
         })
@@ -100,13 +103,13 @@ paysApp.run(function ($rootScope, $translate,$location,$window, $filter,Notifica
         $rootScope.measures = data;
     });
 
-    $rootScope.logout = function(){
+    $rootScope.logout = function () {
         UserService.logoutUser();
     }
 
-    $rootScope.isLoggedIn = function(){
+    $rootScope.isLoggedIn = function () {
         $rootScope.credentials = UserService.getUserCredentials();
-        if($rootScope.credentials.token != null){
+        if ($rootScope.credentials.token != null) {
             return true;
         }
         return false;
@@ -347,16 +350,16 @@ paysApp.config(function ($translateProvider) {
         VEHICLE_UPDATED: "Vehicle successfully updated",
         VEHICLE_NOT_UPDATED: "Unable to update vehicle",
         VEHICLE_ADDED: "Vehicle successfully added",
-        VEHICLE_NOT_ADDED : "Unable to add vehicle",
-        ADVERTISING_INFO_UPDATED : "Advertising information successfully updated",
-        ADVERTISING_INFO_NOT_UPDATED : "Unable to update advertising information",
-        GENERAL_INFO_UPDATED : "General information successfully updated",
-        GENERAL_INFO_NOT_UPDATED : "Unable to update general information",
+        VEHICLE_NOT_ADDED: "Unable to add vehicle",
+        ADVERTISING_INFO_UPDATED: "Advertising information successfully updated",
+        ADVERTISING_INFO_NOT_UPDATED: "Unable to update advertising information",
+        GENERAL_INFO_UPDATED: "General information successfully updated",
+        GENERAL_INFO_NOT_UPDATED: "Unable to update general information",
         LOGOUT: "Log out",
         GENERAL_FARMER_DATA: "General Information",
         ORDERS: "Orders",
-        FARMER_MARKETING : "Advertising materials",
-        FARMER_PRICES : "Price list",
+        FARMER_MARKETING: "Advertising materials",
+        FARMER_PRICES: "Price list",
         PRODUCT_NAME: "Product name",
         PRODUCT_PROPERTIES: "Product properties",
         PRODUCT_IMAGE: "Product image",
@@ -377,15 +380,19 @@ paysApp.config(function ($translateProvider) {
         UNABLE_CART_INSERT: "Products of another farmer are present in cart. Please add this farmer's products to wishlist and move them to cart once you finish current order.",
         NO_PREDEFINED_LOCATIONS: "You are not logged in at the moment. Please log in to see previous delivery locations of your account.",
         NO_LOGIN_CHECKOUT: "You are not logged in at the moment. Please log in to finish your order.",
-        NO_ORDER_CREATED : "You haven't created your order yet. Please visit Cart overview page and create order.",
+        NO_ORDER_CREATED: "You haven't created your order yet. Please visit Cart overview page and create order.",
         FROM: "From",
-        TO : "To",
-        ORDER_CREATED : "Order successfully created!",
-        ORDER_NOT_CREATED : "Unable to create order!",
+        TO: "To",
+        ORDER_CREATED: "Order successfully created!",
+        ORDER_NOT_CREATED: "Unable to create order!",
         NO_IMAGE_PROVIDED: "No image provided",
-        VEHICLE_IMAGE_UPLOADED : "Vehicle image uploaded",
-        VEHICLE_IMAGE_FAILURE : "Failed to upload vehicle image",
-        ACCESS_NOT_ALLOWED : "You are not allowed to access this page. Please login with valid credentials."
+        VEHICLE_IMAGE_UPLOADED: "Vehicle image uploaded",
+        VEHICLE_IMAGE_FAILURE: "Failed to upload vehicle image",
+        ACCESS_NOT_ALLOWED: "You are not allowed to access this page. Please login with valid credentials.",
+        PROFILE_IMAGE_FAILURE: "Failed to upload profile image",
+        PROFILE_IMAGE_UPLOADED: "Profile image uploaded",
+        BANNER_IMAGE_UPLOADED: "Banner image uploaded",
+        BANNER_IMAGE_FAILURE: "Failed to upload banner image",
 
     })
         .translations('rs', {
@@ -620,16 +627,16 @@ paysApp.config(function ($translateProvider) {
             VEHICLE_UPDATED: "Podaci o vozilu uspešno ažurirani",
             VEHICLE_NOT_UPDATED: "Neuspešna izmena podataka o vozilu",
             VEHICLE_ADDED: "Uspešno dodavanje vozila",
-            VEHICLE_NOT_ADDED : "Neuspešno dodavanje vozila",
-            ADVERTISING_INFO_UPDATED : "Reklamni sadržaji uspešno ažurirani",
-            ADVERTISING_INFO_NOT_UPDATED : "Neuspešno ažuriranje reklamnih sadržaja",
-            GENERAL_INFO_UPDATED : "Generalne informacije uspešno ažurirane",
-            GENERAL_INFO_NOT_UPDATED : "Neuspešno ažuriranje generalnih informacija",
+            VEHICLE_NOT_ADDED: "Neuspešno dodavanje vozila",
+            ADVERTISING_INFO_UPDATED: "Reklamni sadržaji uspešno ažurirani",
+            ADVERTISING_INFO_NOT_UPDATED: "Neuspešno ažuriranje reklamnih sadržaja",
+            GENERAL_INFO_UPDATED: "Generalne informacije uspešno ažurirane",
+            GENERAL_INFO_NOT_UPDATED: "Neuspešno ažuriranje generalnih informacija",
             LOGOUT: "Odjava",
             GENERAL_FARMER_DATA: "Generalne informacije",
             ORDERS: "Porudžbine",
-            FARMER_MARKETING : "Reklamni materijali",
-            FARMER_PRICES : "Cenovnik",
+            FARMER_MARKETING: "Reklamni materijali",
+            FARMER_PRICES: "Cenovnik",
             PRODUCT_NAME: "Naziv proizvoda",
             PRODUCT_PROPERTIES: "Osobine proizvoda",
             PRODUCT_IMAGE: "Slika proizvoda",
@@ -650,15 +657,19 @@ paysApp.config(function ($translateProvider) {
             UNABLE_CART_INSERT: "Proizvodi drugog farmera se nalaze u korpi. Molimo Vas dodajte proizvode ovog farmera u listu želja i premestite ih u korpu kada naručite proizvode iz trenutne korpe.",
             NO_PREDEFINED_LOCATIONS: "Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste videli lokacije prethodnih dostava za Vaš nalog.",
             NO_LOGIN_CHECKOUT: "Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste naručili željene proizvode.",
-            NO_ORDER_CREATED : "Porudžbina još nije kreirana. Molimo Vas posetite stranicu Pregled korpe i kreiranje porudžbinu.",
+            NO_ORDER_CREATED: "Porudžbina još nije kreirana. Molimo Vas posetite stranicu Pregled korpe i kreiranje porudžbinu.",
             FROM: "Od",
-            TO : "Do",
-            ORDER_CREATED : "Narudžbina uspešno kreirana!",
-            ORDER_NOT_CREATED : "Bezuspešno kreiranje narudžbine!",
+            TO: "Do",
+            ORDER_CREATED: "Narudžbina uspešno kreirana!",
+            ORDER_NOT_CREATED: "Bezuspešno kreiranje narudžbine!",
             NO_IMAGE_PROVIDED: "Nepostojeća slika",
-            VEHICLE_IMAGE_UPLOADED : "Postavljena nova slika vozila",
-            VEHICLE_IMAGE_FAILURE : "Neuspešno postavljanje nove slike vozila",
-            ACCESS_NOT_ALLOWED : "Pristup stranici trenutno nije moguć. Molimo prijavite se sa validnim podacima."
+            VEHICLE_IMAGE_UPLOADED: "Postavljena nova slika vozila",
+            VEHICLE_IMAGE_FAILURE: "Neuspešno postavljanje nove slike vozila",
+            ACCESS_NOT_ALLOWED: "Pristup stranici trenutno nije moguć. Molimo prijavite se sa validnim podacima.",
+            PROFILE_IMAGE_FAILURE: "Neuspešno postavljanje nove profilne slike",
+            PROFILE_IMAGE_UPLOADED: "Postavljena nova profilna slika",
+            BANNER_IMAGE_UPLOADED: "Postavljena nova reklamna slika",
+            BANNER_IMAGE_FAILURE: "Neuspešno postavljanje nove reklamne slike",
         })
     $translateProvider.preferredLanguage('en');
 });

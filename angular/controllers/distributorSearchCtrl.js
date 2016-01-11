@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootScope", "$http", "$filter", "$routeParams","CartService","SearchService", "DistributorService","WishlistService",
-    function (scope, rootScope, http, filter, routeParams,CartService,SearchService, DistributorService, WishlistService) {
+angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootScope", "$http", "$filter", "$routeParams", "CartService", "SearchService", "DistributorService", "WishlistService",
+    function (scope, rootScope, http, filter, routeParams, CartService, SearchService, DistributorService, WishlistService) {
 
         scope.distances = SearchService.getDistances();
 
@@ -20,16 +20,19 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
         };
 
         scope.setSearchPrepared = function () {
-            DistributorService.getDistributors().then(function(data){
+            DistributorService.getDistributors().then(function (data) {
                 scope.foundDistributors = data;
                 for (var j = 0; j < scope.foundDistributors.length; j++) {
-                    DistributorService.getDistributorImage(scope.foundDistributors[j].id, 0).then(function (img) {
-                        for (var i = 0; i < scope.foundDistributors.length; i++) {
-                            if (scope.foundDistributors[i].id === img.index) {
-                                scope.foundDistributors[i].img = img.document_content;
+                    var profilePicsLength = scope.foundDistributors[j].images.profile.length;
+                    if (profilePicsLength > 0) {
+                        DistributorService.getDistributorImage(scope.foundDistributors[j].id, scope.foundDistributors[j].images.profile[profilePicsLength - 1]).then(function (img) {
+                            for (var i = 0; i < scope.foundDistributors.length; i++) {
+                                if (scope.foundDistributors[i].id === img.index) {
+                                    scope.foundDistributors[i].img = "data:" + img.type + ";base64," + img.document_content;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             });
         };
@@ -42,8 +45,8 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
             scope.distanceValue = "";
         }
 
-        scope.searchNameCallback = function(keyEvent) {
-            if (keyEvent.which === 13){
+        scope.searchNameCallback = function (keyEvent) {
+            if (keyEvent.which === 13) {
                 scope.setSearchPrepared();
             }
         }

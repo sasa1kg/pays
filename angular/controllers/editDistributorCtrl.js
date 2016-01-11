@@ -17,9 +17,28 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         scope.profilePic = {
             flow: null
         };
+        scope.bannerPics = [];
+        for (var i = 0; i < rootScope.bannerPicsLimit; i++) {
+            scope.bannerPics[i] = {flow: null};
+        }
+        ;
 
         DistributorService.getDistributorById(distributorId).then(function (data) {
             scope.distributor = data;
+            scope.distributor.bannerImages = [];
+            DistributorService.getDistributorImage(distributorId, scope.distributor.images.profile[scope.distributor.images.profile.length - 1])
+                .then(function (img) {
+                    scope.distributor.profilePictureBase64 = "data:" + img.type + ";base64," + img.document_content;
+                });
+            var bannerPicIndex = 0;
+            for(var i = 0; ((i< rootScope.bannerPicsLimit) && (i <scope.distributor.images.banner.length)); i++){
+                DistributorService.getDistributorImage(distributorId, scope.distributor.images.banner[scope.distributor.images.banner.length - i])
+                    .then(function (img) {
+                        scope.distributor.bannerImages[bannerPicIndex++] = "data:" + img.type + ";base64," + img.document_content;
+                    });
+            }
+
+
         });
 
         DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
@@ -77,10 +96,26 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         scope.uploadProfilePicture = function () {
             if (typeof scope.profilePic.flow.files !== 'undefined') {
                 DistributorService.uploadProfileImage(scope.distributor.id, scope.profilePic.flow).then(function (data) {
-                    console.log("SUCCESS");
+                    Notification.success({message: filter('translate')('PROFILE_IMAGE_UPLOADED')});
+                    scope.profilePic.flow.cancel();
                 }).catch(function (err) {
-                    console.log("FAILURE");
+                    Notification.error({message: filter('translate')('PROFILE_IMAGE_FAILURE')});
+                    scope.profilePic.flow.cancel();
                 });
+
+            }
+        }
+
+        scope.uploadBannerPicture = function (bannerPictureIndex) {
+            if (typeof scope.bannerPics[bannerPictureIndex].flow.files !== 'undefined') {
+                DistributorService.uploadBannerImage(scope.distributor.id, scope.bannerPics[bannerPictureIndex].flow).
+                    then(function (data) {
+                        Notification.success({message: filter('translate')('BANNER_IMAGE_UPLOADED')});
+                        scope.bannerPics[bannerPictureIndex].flow.cancel();
+                    }).catch(function (err) {
+                        Notification.error({message: filter('translate')('BANNER_IMAGE_FAILURE')});
+                        scope.bannerPics[bannerPictureIndex].flow.cancel();
+                    });
 
             }
         }
@@ -175,14 +210,14 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
                         DistributorService.addNewVehicle(distributorId, vehicleNew).then(function () {
                             Notification.success({message: filter('translate')('VEHICLE_ADDED')});
                             DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
-                                angular.forEach(data,function (newVeh){
+                                angular.forEach(data, function (newVeh) {
                                     var exists = false;
                                     for (var j = 0; j < scope.vehicles.length; j++) {
-                                        if(scope.vehicles[j].id === newVeh.id){
-                                            exists=true;
+                                        if (scope.vehicles[j].id === newVeh.id) {
+                                            exists = true;
                                         }
                                     }
-                                    if(exists == false){
+                                    if (exists == false) {
                                         scope.vehicles.push(newVeh);
                                         scope.uploadVehiclePicture(newVeh.id, newImage);
                                     }
@@ -196,7 +231,8 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
                 }
             });
         };
-    }]);
+    }])
+;
 
 angular.module('paysApp').controller('UpdateVehicleModalCtrl', function ($scope, $filter, $modalInstance, vehicles, vehicle) {
 
