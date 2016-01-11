@@ -18,6 +18,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$filter","$loca
                     scope.userData = null;
                 });
             }
+            // TODO check credentials and link user
             else {
                 scope.userData = null;
             }

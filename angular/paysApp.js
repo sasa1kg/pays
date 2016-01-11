@@ -41,11 +41,30 @@ paysApp.config(function (localStorageServiceProvider) {
 });
 
 
-paysApp.run(function ($rootScope, $translate,$location, SearchService,UserService) {
+paysApp.run(function ($rootScope, $translate,$location,$window, $filter,Notification,SearchService,UserService) {
     $rootScope.translate = function (lang) {
         $translate.use(lang);
     };
-
+    $rootScope.lastPage = "#/";
+    $rootScope.credentials = UserService.getUserCredentials();
+    $rootScope.$on('$routeChangeStart', function (event, next) {
+        console.log($location.url());
+        if (next.restricted) {
+            if($rootScope.credentials.role && ($rootScope.credentials.role === next.allow)){
+                if($rootScope.credentials.role && (next.params.id == $rootScope.credentials.id)){
+                    $rootScope.lastPage = "#" + $location.url();
+                } else {
+                    Notification.error({message: $filter('translate')('ACCESS_NOT_ALLOWED')});
+                    $window.location.href = $rootScope.lastPage;
+                }
+            }else {
+                Notification.error({message: $filter('translate')('ACCESS_NOT_ALLOWED')});
+                $window.location.href = $rootScope.lastPage;
+            }
+        } else {
+            $rootScope.lastPage = "#" + $location.url();
+        }
+    });
     $rootScope.paysEMail = 'office@pays-system.com';
     $rootScope.paysPhone = '+38121455071';
     $rootScope.showFooter = false;
@@ -54,7 +73,7 @@ paysApp.run(function ($rootScope, $translate,$location, SearchService,UserServic
     $rootScope.distributorUserType = 'T';
 
 
-    $rootScope.credentials = UserService.getUserCredentials();
+
 
     $rootScope.transportDistances = [
         10, 20, 50, 100, 200, 300
@@ -353,7 +372,8 @@ paysApp.config(function ($translateProvider) {
         ORDER_NOT_CREATED : "Unable to create order!",
         NO_IMAGE_PROVIDED: "No image provided",
         VEHICLE_IMAGE_UPLOADED : "Vehicle image uploaded",
-        VEHICLE_IMAGE_FAILURE : "Failed to upload vehicle image"
+        VEHICLE_IMAGE_FAILURE : "Failed to upload vehicle image",
+        ACCESS_NOT_ALLOWED : "You are not allowed to access this page. Please login with valid credentials."
 
     })
         .translations('rs', {
@@ -625,7 +645,8 @@ paysApp.config(function ($translateProvider) {
             ORDER_NOT_CREATED : "Bezuspešno kreiranje narudžbine!",
             NO_IMAGE_PROVIDED: "Nepostojeća slika",
             VEHICLE_IMAGE_UPLOADED : "Postavljena nova slika vozila",
-            VEHICLE_IMAGE_FAILURE : "Neuspešno postavljanje nove slike vozila"
+            VEHICLE_IMAGE_FAILURE : "Neuspešno postavljanje nove slike vozila",
+            ACCESS_NOT_ALLOWED : "Pristup stranici trenutno nije moguć. Molimo prijavite se sa validnim podacima."
         })
     $translateProvider.preferredLanguage('en');
 });

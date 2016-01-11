@@ -3,64 +3,79 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
     routeProvider.when("/", {
         templateUrl: "partials/mainPage.html",
         controller: "mainCtrl",
-        resolve: {}
+        resolve: {},
+        restricted : false
     })
         .when("/cart", {
             templateUrl: "partials/cart.html",
             controller: "cartCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         })
         .when("/wishlist", {
             templateUrl: "partials/wishlist.html",
             controller: "wishlistCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         })
         .when("/checkout", {
             templateUrl: "partials/checkout.html",
             controller: "checkoutCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         })
         .when("/farmer/:id/", {
             templateUrl: "partials/farmerPage.html",
             controller: "farmCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         })
         .when("/distributor/:id/", {
             templateUrl: "partials/distributorPage.html",
             controller: "distributorCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         })
         .when("/distributoredit/:id/", {
             templateUrl: "partials/editDistributor.html",
             controller: "editDistributorCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : true,
+            allow: 'T'
         })
         .when("/farmeredit/:id/", {
             templateUrl: "partials/editFarmer.html",
             controller: "editFarmerCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : true,
+            allow: 'F'
         })
         .when("/404", {
             templateUrl: "404.html",
-            resolve: {}
+            resolve: {},
+            restricted : false
         })
         .when("/login", {
             templateUrl: "partials/login.html",
             controller: "loginCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         })
         .when("/register", {
             templateUrl: "partials/register.html",
             controller: "registerCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         })
         .when("/distributorSearch", {
             templateUrl: "partials/distributorSearch.html",
             controller: "distributorSearchCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         }).when("/redirection/token/:token/id/:id/role/:role", {
             templateUrl: "partials/redirect.html",
             controller: "redirectCtrl",
-            resolve: {}
+            resolve: {},
+            restricted : false
         }).otherwise({redirectTo: '/'});
 }]);
