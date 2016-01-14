@@ -18,9 +18,19 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.foundFarmers = [];
 
         scope.searchName = "";
-        scope.searchPlaceValue = "";
+        scope.searchPlace = "";
         scope.locationFound = false;
 
+        scope.queryParams = {
+            searchName : "",
+            searchPlace : "",
+            distanceValue: "",
+            products : {
+                product : {},
+                minAmount : "",
+                maxPrice: ""
+            }
+        }
         scope.initGeo = function () {
             GeoLocationService.getLocation().then(function (data) {
                 if (data) {

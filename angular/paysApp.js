@@ -103,6 +103,26 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
         $rootScope.measures = data;
     });
 
+    $rootScope.getMeasureUnitObjectFromCode = function( code){
+        var retVal = {};
+        angular.forEach($rootScope.measures, function(measure){
+            if(measure.code === code){
+                retVal = measure;
+            }
+        });
+        return retVal;
+    };
+
+    $rootScope.getCurrencyObjectFromCode = function( code){
+        var retVal = {};
+        angular.forEach($rootScope.currencies, function(currency){
+            if(currency.code === code){
+                retVal = currency;
+            }
+        });
+        return retVal;
+    };
+
     $rootScope.logout = function () {
         UserService.logoutUser();
     }

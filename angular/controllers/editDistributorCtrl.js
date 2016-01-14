@@ -44,14 +44,16 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
             scope.vehicles = data;
             for (var j = 0; j < scope.vehicles.length; j++) {
-                DistributorService.getVehicleImage(scope.vehicles[j].id, scope.vehicles[j].images[scope.vehicles[j].images.length - 1])
-                    .then(function (img) {
-                        for (var i = 0; i < scope.vehicles.length; i++) {
-                            if (scope.vehicles[i].id === img.index) {
-                                scope.vehicles[i].img = "data:" + img.type + ";base64," + img.document_content;
-                            }
-                        }
-                    });
+                if(scope.vehicles[j].images) {
+                    DistributorService.getVehicleImage(scope.vehicles[j].id, scope.vehicles[j].images)
+                      .then(function (img) {
+                          for (var i = 0; i < scope.vehicles.length; i++) {
+                              if (scope.vehicles[i].id === img.index) {
+                                  scope.vehicles[i].img = "data:" + img.type + ";base64," + img.document_content;
+                              }
+                          }
+                      });
+                }
             }
         });
 
