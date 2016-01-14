@@ -345,11 +345,11 @@
                 </div>
                 <h4 class="text-center">{{'BANNER_PICTURES' | translate}}</h4>
 
-                <div flow-init flow-files-submitted="" flow-name="bannerPics[$index].flow" class="col-sm-12" ng-repeat="bannerIndex in range(bannerPicsLimit) track by $index">
+                <div flow-init flow-files-submitted="" flow-name="distributor.bannerImages[$index].flow" class="col-sm-12" ng-repeat="bannerIndex in range(bannerPicsLimit) track by $index">
                     <hr>
                     <div class="col-sm-12 banner-preview">
                         <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.bannerImages[$index]}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
+                            <img src="{{distributor.bannerImages[$index].imgData}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
                         </div>
                         <div ng-show="$flow.files.length">
                             <img flow-img="$flow.files[0]"/>
@@ -368,7 +368,7 @@
                                 {{'DELETE' | translate}}
                             </a>
                             <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="uploadBannerPicture($index)">
+                               ng-click="uploadDistributorBannerImage($index)">
                                 {{'UPLOAD' | translate}}
                             </a>
                         </div>
