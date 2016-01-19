@@ -1,0 +1,39 @@
+<header id="header"><!--header-->
+  <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
+</header><!--/header-->
+<section class="mb100"><!--form-->
+  <script type="text/ng-template" id="passChangedModalCtrl.html">
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+      <h4 class="modal-title">{{ 'PASSWORD_CHANGED' | translate}}</h4>
+    </div>
+    <div class="modal-body">
+      <p>{{ 'PASSWORD_CHANGED_MSG' | translate}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default check_out"
+              ng-click="goToLogin()">{{ 'OK' |
+        translate}}
+      </button>
+    </div>
+  </script>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="signup-form">
+          <h3 class="text-center">{{message | translate}}</h3>
+          <form>
+            <div ng-if="success" class="text-center col-sm-12 mt20">
+              <button type="submit" ng-click="goToLogin()" class="btn btn-default btn-lg col-sm-4 col-sm-offset-4">
+                {{ 'LOGIN' | translate}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!--/form-->
+
+
+<div ng-include="'partials/footer.html'"></div>

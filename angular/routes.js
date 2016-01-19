@@ -82,5 +82,9 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
           controller: "forgotPasswordCtrl",
           resolve: {},
           restricted : false
+      }).when("/activateuser/:token", {
+          templateUrl: "partials/activateUser.html",
+          controller: "activateUserCtrl",
+          restricted : false
       }).otherwise({redirectTo: '/'});
 }]);

@@ -103,6 +103,25 @@ var UserService = angular.module('UserService', []).service('UserService',
             return deffered.promise;
         }
 
+        this.activateUser = function(token){
+            var deffered = q.defer();
+            http.post(rootScope.serverURL + "user/confirmUser"+token).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("activateUser | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+              }).
+              error(function (data, status) {
+                  console.log("activateUser | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
         this.storeUserCredentials = function (token, id, role) {
             if (localStorageService.cookie.isSupported) {
                 localStorageService.cookie.clearAll();

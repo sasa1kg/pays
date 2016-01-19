@@ -424,7 +424,10 @@ paysApp.config(function ($translateProvider) {
     PASSWORD_CHANGED : 'Password successfully changed',
     PASSWORD_NOT_CHANGED : 'Failed to change password',
     ENTER_NEW_PASSWORD : 'Please enter you new password',
-    PASSWORD_CHANGED_MSG : 'You have successfully chaned your password. By clicking on OK you will be redirected to login page where you can access your profile.'
+    PASSWORD_CHANGED_MSG : 'You have successfully chaned your password. By clicking on OK you will be redirected to login page where you can access your profile.',
+    ACTIVATED_USER_MSG : 'You have successfully activated your account. Please visit login page where you can access your profile.',
+    NOT_ACTIVATED_USER_MSG : 'Account activation failed. Please contact our support team to resolve this issue.'
+
   })
     .translations('rs', {
       HOME: 'Početna',
@@ -710,7 +713,9 @@ paysApp.config(function ($translateProvider) {
       PASSWORD_CHANGED : 'Lozinka uspešno promenljena',
       PASSWORD_NOT_CHANGED : 'Neuspešna promena lozinke',
       ENTER_NEW_PASSWORD : 'Molimo unesite novu lozinku',
-      PASSWORD_CHANGED_MSG : 'Uspešno ste promenili Vašu lozinku. Klikom na OK bićete prebačeni na stranicu za prijavu gde možete pristupiti Vašem profilu'
+      PASSWORD_CHANGED_MSG : 'Uspešno ste promenili Vašu lozinku. Klikom na OK bićete prebačeni na stranicu za prijavu gde možete pristupiti Vašem profilu',
+      ACTIVATED_USER_MSG : 'Uspešno ste aktivirali Vaš nalog. Posetite stranicu za prijavu gde možete pristupiti Vašem profilu',
+      NOT_ACTIVATED_USER_MSG : 'Neuspešna aktivacija naloga. Molimo Vas da kontaktirate našu tehničku podršku radi rešavanja ovog problema.'
     })
   $translateProvider.preferredLanguage('en');
 });
