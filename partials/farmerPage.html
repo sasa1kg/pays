@@ -143,13 +143,13 @@
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <a>
-                                <img src="{{product.product.img}}" alt="{{product.product.name}}" height="200px"
+                                <img src="{{product.product.img}}" alt="{{product.product.name.default}}" height="200px"
                                      width="128px" class="cursorhover"/>
                             </a>
 
                             <h2>{{product.price.price}} {{product.price.currency.code}}/{{product.measure.code}}</h2>
 
-                            <p>{{product.product.name | translate}}</p>
+                            <p>{{product.product.name.default | translate}}</p>
 
                             <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
                                ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i

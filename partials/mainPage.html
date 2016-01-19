@@ -76,11 +76,11 @@
 
                                     <label class="category-item-label checkbox collapsed_checkbox">
                                         <input type="checkbox" class="category-checkbox"
-                                               value="{{cat.name}}"
+                                               value="{{cat.name.default}}"
                                                ng-checked="selectedCategories.indexOf(cat.id) > -1"
                                                ng-model="checkedValue"
                                                ng-click="check(cat.id,checkedValue)">
-                                        {{cat.name | translate}}
+                                        {{cat.name.localization[currentLang]}}
                                     </label>
                                 </row>
 

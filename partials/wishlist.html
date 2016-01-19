@@ -30,11 +30,11 @@
                     <tbody>
                     <tr ng-repeat="item in wishlistItem.products.items">
                         <td class="cart_product">
-                            <a href=""><img src="{{item.img}}" alt="{{item.itemName | translate}}"
+                            <a href=""><img src="{{item.img}}" alt="{{item.itemName.default | translate}}"
                                             style="width:128px;height:128px;"></a>
                         </td>
                         <td class="cart_description">
-                            <h4>{{item.itemName | translate}}</h4>
+                            <h4>{{item.itemName.default | translate}}</h4>
                         </td>
                         <td class="cart_price">
                             <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code}}</p>
