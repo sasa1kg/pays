@@ -415,8 +415,16 @@ paysApp.config(function ($translateProvider) {
     PROFILE_IMAGE_UPLOADED: "Profile image uploaded",
     BANNER_IMAGE_UPLOADED: "Banner image uploaded",
     BANNER_IMAGE_FAILURE: "Failed to upload banner image",
-    UPLOAD: "Upload"
-
+    UPLOAD: "Upload",
+    PASSWORD_EMAIL_SENT : 'E-Mail containing link for your password reset is sent to request e-mail address',
+    PASSWORD_EMAIL_NOT_SENT : 'Failed to send e-mail for password reset',
+    FORGOT_PASS : 'Forgotten password?',
+    SEND_EMAIL : 'Send e-mail',
+    RESET_PASSWORD : 'Reset password',
+    PASSWORD_CHANGED : 'Password successfully changed',
+    PASSWORD_NOT_CHANGED : 'Failed to change password',
+    ENTER_NEW_PASSWORD : 'Please enter you new password',
+    PASSWORD_CHANGED_MSG : 'You have successfully chaned your password. By clicking on OK you will be redirected to login page where you can access your profile.'
   })
     .translations('rs', {
       HOME: 'Početna',
@@ -693,7 +701,16 @@ paysApp.config(function ($translateProvider) {
       PROFILE_IMAGE_UPLOADED: "Postavljena nova profilna slika",
       BANNER_IMAGE_UPLOADED: "Postavljena nova reklamna slika",
       BANNER_IMAGE_FAILURE: "Neuspešno postavljanje nove reklamne slike",
-      UPLOAD: "Postavi"
+      UPLOAD: "Postavi",
+      PASSWORD_EMAIL_SENT : 'E-Mail poruka sa linkom sa promenu Vaše lozinke je poslata na željenu e-mail adresu',
+      PASSWORD_EMAIL_NOT_SENT : 'Neuspešno slanje e-mail poruke za promenu lozinke',
+      FORGOT_PASS : 'Zaboravljena lozinka?',
+      SEND_EMAIL : 'Pošalji e-mail',
+      RESET_PASSWORD : 'Promeni lozinku',
+      PASSWORD_CHANGED : 'Lozinka uspešno promenljena',
+      PASSWORD_NOT_CHANGED : 'Neuspešna promena lozinke',
+      ENTER_NEW_PASSWORD : 'Molimo unesite novu lozinku',
+      PASSWORD_CHANGED_MSG : 'Uspešno ste promenili Vašu lozinku. Klikom na OK bićete prebačeni na stranicu za prijavu gde možete pristupiti Vašem profilu'
     })
   $translateProvider.preferredLanguage('en');
 });

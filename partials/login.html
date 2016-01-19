@@ -1,37 +1,56 @@
 <header id="header"><!--header-->
-    <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
+  <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
 </header><!--/header-->
 <section id="form"><!--form-->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4 col-sm-offset-1">
-                <div class="login-form"><!--login form -->
-                    <h2>{{ 'ENTER_ACCOUNT' | translate}}</h2>
-                    <form>
-                        <a>
-                            <button type="submit" ng-click="login()" class="btn btn-default">{{ 'ENTER' | translate}}</button>
-                        </a>
-                    </form>
-                </div>
-                <!--/login form-->
-            </div>
-            <div class="col-sm-1">
-                <h2 class="or">{{ 'OR' | translate}}</h2>
-            </div>
-            <div class="col-sm-4">
-                <div class="signup-form"><!--sign up form-->
-                    <h2>{{ 'NEW_ACCOUNT' | translate }}</h2>
-                    <form>
-                        <a href="#/register/">
-                        <button type="submit" class="btn btn-default">{{ ' REGISTER' | translate}} <i
-                                class="fa fa-angle-double-right"></i></button>
-                        </a>
-                    </form>
-                </div>
-                <!--/sign up form-->
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <div class="login-form"><!--login form -->
+          <h2>{{ 'ENTER_ACCOUNT' | translate}}</h2>
+
+          <form>
+            <a>
+              <button type="submit" ng-click="login()" class="btn btn-default">{{ 'ENTER' | translate}}</button>
+            </a>
+          </form>
+          <form>
+            <a>
+              <button type="submit" data-toggle="collapse" data-target="#forgotPass" class="btn btn-default">{{
+                'FORGOT_PASS' | translate}}
+              </button>
+            </a>
+          </form>
+          <div id="forgotPass" class="collapse signup-form mt20">
+            <form name="forgotPassForm">
+              <input type="email" name="emailInput" ng-model="forgotPassEmail" placeholder="{{ 'EMAIL' | translate}}" required>
+              <a>
+                <button type="submit" ng-click="forgotPass()" class="btn btn-default"  ng-if="forgotPassForm.emailInput.$valid">
+                  {{ 'SEND_EMAIL' | translate}}
+                </button>
+              </a>
+            </form>
+          </div>
         </div>
+        <!--/login form-->
+      </div>
+      <div class="col-sm-1">
+        <h2 class="or">{{ 'OR' | translate}}</h2>
+      </div>
+      <div class="col-sm-4">
+        <div class="signup-form"><!--sign up form-->
+          <h2>{{ 'NEW_ACCOUNT' | translate }}</h2>
+
+          <form>
+            <a href="#/register/">
+              <button type="submit" class="btn btn-default">{{ ' REGISTER' | translate}} <i
+                class="fa fa-angle-double-right"></i></button>
+            </a>
+          </form>
+        </div>
+        <!--/sign up form-->
+      </div>
     </div>
+  </div>
 </section><!--/form-->
 
 

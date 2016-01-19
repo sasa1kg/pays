@@ -64,6 +64,45 @@ var UserService = angular.module('UserService', []).service('UserService',
 
             return deffered.promise;
         }
+
+        this.sendForgotPasswordEmail = function(destEmailData){
+            var deffered = q.defer();
+            http.post(rootScope.serverURL + "user/passwordChangeToken", destEmailData).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("sendForgotPasswordEmail | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+              }).
+              error(function (data, status) {
+                  console.log("sendForgotPasswordEmail | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
+        this.resetPassword = function(newPassData){
+            var deffered = q.defer();
+            http.post(rootScope.serverURL + "user/resetPassword", newPassData).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("resetPassword | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+              }).
+              error(function (data, status) {
+                  console.log("resetPassword | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
         this.storeUserCredentials = function (token, id, role) {
             if (localStorageService.cookie.isSupported) {
                 localStorageService.cookie.clearAll();

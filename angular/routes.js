@@ -77,5 +77,10 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
             controller: "redirectCtrl",
             resolve: {},
             restricted : false
-        }).otherwise({redirectTo: '/'});
+        }).when("/forgotpass/:token", {
+          templateUrl: "partials/forgotPassword.html",
+          controller: "forgotPasswordCtrl",
+          resolve: {},
+          restricted : false
+      }).otherwise({redirectTo: '/'});
 }]);
