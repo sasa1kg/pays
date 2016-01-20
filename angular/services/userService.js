@@ -67,7 +67,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
         this.sendForgotPasswordEmail = function(destEmailData){
             var deffered = q.defer();
-            http.post(rootScope.serverURL + "user/passwordChangeToken", destEmailData).
+            http.post(rootScope.serverURL + "passwordChangeToken", destEmailData).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
