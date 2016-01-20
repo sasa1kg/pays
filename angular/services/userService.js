@@ -105,7 +105,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
         this.activateUser = function(token){
             var deffered = q.defer();
-            http.post(rootScope.serverURL + "confirmUser"+token).
+            http.get(rootScope.serverURL + "confirmUser/"+token).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
