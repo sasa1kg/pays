@@ -91,8 +91,8 @@
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_NAME' |
                                                 translate}}</h5></td>
-                                            <td class="col-sm-9"><input type="text" ng-model="productNew.product.name.default"
-                                                                        placeholder="{{ productNew.product.name.default}}"/></td>
+                                            <td class="col-sm-9"><input type="text" ng-model="productNew.product.name.localization[currentLang]"
+                                                                        placeholder="{{ productNew.product.product.name.localization[currentLang]}}"/></td>
                                         </tr>
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
@@ -181,7 +181,7 @@
                         <tbody>
                         <tr ng-repeat="product in products">
                             <td>
-                                <h4>{{ product.product.name.default | translate}}</h4>
+                                <h4>{{ product.product.name.localization[currentLang]}}</h4>
                             </td>
                             <td>
                                 <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [{{product.measure.code}}]</h5>
@@ -289,7 +289,7 @@
                                                     <tbody>
                                                     <tr ng-repeat="product in order.items">
                                                         <td>
-                                                            <div>{{ product.product.name.default | translate}}</div>
+                                                            <div>{{product.product.name.localization[currentLang]}}</div>
                                                         </td>
                                                         <td>
                                                             <div>{{product.amount}} [{{product.unit}}]</div>

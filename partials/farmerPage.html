@@ -1,185 +1,189 @@
 <header id="header"><!--header-->
-    <div ng-include="'partials/navBar.html'"></div>
+  <div ng-include="'partials/navBar.html'"></div>
 </header><!--/header-->
 
 <section>
-    <div class="container">
-        <div class="col-sm-9">
-            <div id="farmer-carousel" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators pays-carousel-indicators">
-                    <li data-target="#farmer-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#farmer-carousel" data-slide-to="1"></li>
-                    <li data-target="#farmer-carousel" data-slide-to="2"></li>
-                    <li data-target="#farmer-carousel" data-slide-to="3"></li>
-                    <li data-target="#farmer-carousel" data-slide-to="4"></li>
-                    <li data-target="#farmer-carousel" data-slide-to="5"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="col-sm-12 text-center">
-                            <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
+  <div class="container">
+    <div class="col-sm-9">
+      <div id="farmer-carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators pays-carousel-indicators">
+          <li data-target="#farmer-carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#farmer-carousel" data-slide-to="1"></li>
+          <li data-target="#farmer-carousel" data-slide-to="2"></li>
+          <li data-target="#farmer-carousel" data-slide-to="3"></li>
+          <li data-target="#farmer-carousel" data-slide-to="4"></li>
+          <li data-target="#farmer-carousel" data-slide-to="5"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="col-sm-12 text-center">
+              <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
 
-                            <h3 ng-bind-html="farmer.advertisingTitle | translate | html"></h3>
+              <h3 ng-bind-html="farmer.advertisingTitle | translate | html"></h3>
 
-                            <p ng-bind-html="farmer.advertisingText | translate | html"></p>
+              <p ng-bind-html="farmer.advertisingText | translate | html"></p>
 
-                            <h3 ng-bind="(farmer.businessSubject.address | html) +', ' + farmer.businessSubject.postalCode + ', '+ (farmer.businessSubject.city | html)"></h3>
+              <h3
+                ng-bind="(farmer.businessSubject.address | html) +', ' + farmer.businessSubject.postalCode + ', '+ (farmer.businessSubject.city | html)"></h3>
 
-                            <div class="col-sm-12 text-left">
-                                <p class="col-sm-6"><strong>{{ 'TAX_NUMBER' | translate}} : </strong>{{farmer.businessSubject.taxNum}}
-                                </p>
+              <div class="col-sm-12 text-left">
+                <p class="col-sm-6"><strong>{{ 'TAX_NUMBER' | translate}} : </strong>{{farmer.businessSubject.taxNum}}
+                </p>
 
-                                <p class="col-sm-6"><strong>{{ 'BANK_NUMBER' | translate}} : </strong>{{farmer.businessSubject.account}}
-                                </p>
-                            </div>
-                            <div class="col-sm-12 text-left">
-                                <p class="col-sm-6"><strong>{{ 'PIB_NUMBER' | translate}} : </strong>{{farmer.businessSubject.companyNum}}
-                                </p>
+                <p class="col-sm-6"><strong>{{ 'BANK_NUMBER' | translate}} : </strong>{{farmer.businessSubject.account}}
+                </p>
+              </div>
+              <div class="col-sm-12 text-left">
+                <p class="col-sm-6"><strong>{{ 'PIB_NUMBER' | translate}} : </strong>{{farmer.businessSubject.companyNum}}
+                </p>
 
-                                <p class="col-sm-6"><strong>{{ 'BUSSINESS_ACT_NUMBER' | translate}} : </strong>{{farmer.businessSubject.businessActivityCode}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="{{farmer.img}}" class="girl img-responsive" alt=""
-                             style="height: 400px;width: 400px;"/>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="images/home/vegetables1.jpg" class="girl img-responsive col-sm-12" alt=""
-                             style="height: 400px;"/>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="images/home/vegetables2.jpg" class="girl img-responsive col-sm-12" alt=""
-                             style="height: 400px;"/>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="images/home/vegetables3.jpg" class="girl img-responsive col-sm-12" alt=""
-                             style="height: 400px;"/>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="images/home/vegetables4.jpg" class="girl img-responsive col-sm-12" alt=""
-                             style="height: 400px;"/>
-                    </div>
-
-                </div>
-
-                <a class="left control-carousel hidden-xs" ng-non-bindable data-slide="prev" role="button"
-                   data-target="#farmer-carousel">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                <a class="right control-carousel hidden-xs" ng-non-bindable data-slide="next" role="button"
-                   data-target="#farmer-carousel">
-                    <i class="fa fa-angle-right"></i>
-                </a>
+                <p class="col-sm-6"><strong>{{ 'BUSSINESS_ACT_NUMBER' | translate}} : </strong>{{farmer.businessSubject.businessActivityCode}}
+                </p>
+              </div>
             </div>
+          </div>
+          <div class="item col-sm-12">
+            <img src="{{farmer.img}}" class="girl img-responsive" alt=""
+                 style="height: 400px;width: 400px;"/>
+          </div>
+          <div class="item col-sm-12">
+            <img src="images/home/vegetables1.jpg" class="girl img-responsive col-sm-12" alt=""
+                 style="height: 400px;"/>
+          </div>
+          <div class="item col-sm-12">
+            <img src="images/home/vegetables2.jpg" class="girl img-responsive col-sm-12" alt=""
+                 style="height: 400px;"/>
+          </div>
+          <div class="item col-sm-12">
+            <img src="images/home/vegetables3.jpg" class="girl img-responsive col-sm-12" alt=""
+                 style="height: 400px;"/>
+          </div>
+          <div class="item col-sm-12">
+            <img src="images/home/vegetables4.jpg" class="girl img-responsive col-sm-12" alt=""
+                 style="height: 400px;"/>
+          </div>
+
         </div>
-        <div class="col-sm-3 text-center">
-            <h3>CONTACT</h3>
-            <hr/>
-            <h4>{{ 'EMAIL' | translate}}</h4>
-            <h4 ng-bind-html="farmer.email | translate | html"></h4>
-            <hr/>
-            <h4>{{ 'PHONE_NUMBER' | translate}}</h4>
-            <h4 ng-bind-html="farmer.businessSubject.phone | translate | html"></h4>
-            <hr/>
-            <h4>{{ 'FAX_NUMBER' | translate}}</h4>
-            <h4 ng-bind-html="farmer.businessSubject.fax | translate | html"></h4>
-        </div>
+
+        <a class="left control-carousel hidden-xs" ng-non-bindable data-slide="prev" role="button"
+           data-target="#farmer-carousel">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="right control-carousel hidden-xs" ng-non-bindable data-slide="next" role="button"
+           data-target="#farmer-carousel">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
     </div>
+    <div class="col-sm-3 text-center">
+      <h3>CONTACT</h3>
+      <hr/>
+      <h4>{{ 'EMAIL' | translate}}</h4>
+      <h4 ng-bind-html="farmer.email | translate | html"></h4>
+      <hr/>
+      <h4>{{ 'PHONE_NUMBER' | translate}}</h4>
+      <h4 ng-bind-html="farmer.businessSubject.phone | translate | html"></h4>
+      <hr/>
+      <h4>{{ 'FAX_NUMBER' | translate}}</h4>
+      <h4 ng-bind-html="farmer.businessSubject.fax | translate | html"></h4>
+    </div>
+  </div>
 </section>
 
 <section>
-    <div class="container">
-        <hr class="orangehr">
-        <h5 ng-if="!canBeAdded()" class="text-center" style="color:red;">{{ 'UNABLE_CART_INSERT' | translate}}</h5>
-        <div ng-if="searchedItems.length" class="row">
-            <h2 class="title text-center">{{ 'SEARCHED_PRODUCTS' | translate}}</h2>
-            <div class="col-sm-3" ng-repeat="product in searchedItems">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <a>
-                                <img src="{{product.product.img}}" alt="{{product.product.name}}" height="128px"
-                                     width="128px" class="cursorhover"/>
-                            </a>
+  <div class="container">
+    <hr class="orangehr">
+    <h5 ng-if="!canBeAdded()" class="text-center" style="color:red;">{{ 'UNABLE_CART_INSERT' | translate}}</h5>
 
-                            <h2>{{product.price.price}} {{product.price.currency.code}}/{{product.measure.code}}</h2>
+    <div ng-if="searchedItems.length" class="row">
+      <h2 class="title text-center">{{ 'SEARCHED_PRODUCTS' | translate}}</h2>
 
-                            <p>{{product.product.name | translate}}</p>
+      <div class="col-sm-3" ng-repeat="product in searchedItems">
+        <div class="product-image-wrapper">
+          <div class="single-products">
+            <div class="productinfo text-center">
+              <a>
+                <img src="{{product.product.img}}" alt="{{product.product.name.localization[currentLang]}}" height="128px"
+                     width="128px" class="cursorhover"/>
+              </a>
 
-                            <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
-                               ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-star"></i>
-                                {{ 'ADD_TO_WISHLIST' | translate}}</a>
+              <h2>{{product.price.price}} {{product.price.currency.code}}/{{product.measure.code}}</h2>
 
-                            <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
-                               ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
-                                <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+              <p>{{product.product.name.localization[currentLang]}}</p>
 
-                            <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
-                               ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate}}</a>
+              <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
+                 ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
+                class="fa fa-star"></i>
+                {{ 'ADD_TO_WISHLIST' | translate}}</a>
 
-                            <div ng-if="canBeAdded () && isProductInCart(product.product.id)"
-                                 class="cart_quantity_button add-remove-product-aligment">
-                                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.product.id)">
-                                    + </a>
-                                <input class="cart_quantity_input" type="text" name="quantity"
-                                       ng-model="product.itemNum"
-                                       ng-change="setAmount(product.product.id,product.itemNum)" autocomplete="off"
-                                       size="5">
-                                <a class="cart_quantity_down cursor-pointer" ng-click="less(product.product.id)"> - </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
+                 ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
+                <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+
+              <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
+                 ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
+                class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate}}</a>
+
+              <div ng-if="canBeAdded () && isProductInCart(product.product.id)"
+                   class="cart_quantity_button add-remove-product-aligment">
+                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.product.id)">
+                  + </a>
+                <input class="cart_quantity_input" type="text" name="quantity"
+                       ng-model="product.itemNum"
+                       ng-change="setAmount(product.product.id,product.itemNum)" autocomplete="off"
+                       size="5">
+                <a class="cart_quantity_down cursor-pointer" ng-click="less(product.product.id)"> - </a>
+              </div>
             </div>
+          </div>
         </div>
-        <h2 class="title text-center">{{ 'ALL_PRODUCTS' | translate}}</h2>
-        <div class="product-details">
-            <div class="col-sm-3" ng-repeat="product in farmerProducts">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <a>
-                                <img src="{{product.product.img}}" alt="{{product.product.name.default}}" height="200px"
-                                     width="128px" class="cursorhover"/>
-                            </a>
-
-                            <h2>{{product.price.price}} {{product.price.currency.code}}/{{product.measure.code}}</h2>
-
-                            <p>{{product.product.name.default | translate}}</p>
-
-                            <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
-                               ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-star"></i>
-                                {{ 'ADD_TO_WISHLIST' | translate}}</a>
-
-                            <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
-                               ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
-                                <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
-
-                            <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
-                               ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>{{'ADD_TO_CART' | translate}}</a>
-
-                            <div ng-if="canBeAdded() && isProductInCart(product.product.id)"
-                                 class="cart_quantity_button add-remove-product-aligment">
-                                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.product.id)">
-                                    + </a>
-                                <input class="cart_quantity_input" type="text" name="quantity"
-                                       ng-model="product.itemNum"
-                                       ng-change="setAmount(product.product.id,product.itemNum)" autocomplete="off"
-                                       size="5">
-                                <a class="cart_quantity_down cursor-pointer" ng-click="less(product.product.id)"> - </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <h2 class="title text-center">{{ 'ALL_PRODUCTS' | translate}}</h2>
+
+    <div class="product-details">
+      <div class="col-sm-3" ng-repeat="product in farmerProducts">
+        <div class="product-image-wrapper">
+          <div class="single-products">
+            <div class="productinfo text-center">
+              <a>
+                <img src="{{product.product.img}}" alt="{{product.product.name.localization[currentLang]}}" height="200px"
+                     width="128px" class="cursorhover"/>
+              </a>
+
+              <h2>{{product.price.price}} {{product.price.currency.code}}/{{product.measure.code}}</h2>
+
+              <p>{{product.product.name.localization[currentLang]}}</p>
+
+              <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
+                 ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
+                class="fa fa-star"></i>
+                {{ 'ADD_TO_WISHLIST' | translate}}</a>
+
+              <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
+                 ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
+                <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+
+              <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
+                 ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
+                class="fa fa-shopping-cart"></i>{{'ADD_TO_CART' | translate}}</a>
+
+              <div ng-if="canBeAdded() && isProductInCart(product.product.id)"
+                   class="cart_quantity_button add-remove-product-aligment">
+                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.product.id)">
+                  + </a>
+                <input class="cart_quantity_input" type="text" name="quantity"
+                       ng-model="product.itemNum"
+                       ng-change="setAmount(product.product.id,product.itemNum)" autocomplete="off"
+                       size="5">
+                <a class="cart_quantity_down cursor-pointer" ng-click="less(product.product.id)"> - </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div ng-include="'partials/footer.html'"></div>

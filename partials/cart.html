@@ -50,10 +50,10 @@
                 <tbody>
                 <tr ng-repeat="item in cartItems.items">
                     <td class="cart_product">
-                        <a href=""><img src="{{item.img}}" alt="{{item.itemName.default}}" style="width:128px;height:128px;"></a>
+                        <a href=""><img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}" style="width:128px;height:128px;"></a>
                     </td>
                     <td class="cart_description">
-                        <h4><a href="">{{item.itemName.default | translate}}</a></h4>
+                        <h4><a href="">{{item.itemName.localization[currentLang]}}</a></h4>
 
                         <p>{{'NON_ORGANIC' | translate}}</p>
                     </td>
