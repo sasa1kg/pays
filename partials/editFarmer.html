@@ -73,7 +73,7 @@
                                                             placeholder="{{farmer.businessSubject.phone}}"/></td>
                             </tr>
                         </table>
-                        <button class="btn btn-default" ng-click="saveChanges()">{{'SAVE_CHANGES' | translate}}</button>
+                        <button class="btn btn-default" ng-click="saveGeneralInfoChanges()">{{'SAVE_CHANGES' | translate}}</button>
                     </form>
                 </div>
             </div>
@@ -91,8 +91,14 @@
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_NAME' |
                                                 translate}}</h5></td>
-                                            <td class="col-sm-9"><input type="text" ng-model="productNew.product.name.localization[currentLang]"
-                                                                        placeholder="{{ productNew.product.product.name.localization[currentLang]}}"/></td>
+                                            <!--<td class="col-sm-9"><input type="text" ng-model="productNew.product.name.localization[currentLang]"-->
+                                                                        <!--placeholder="{{ productNew.product.name.localization[currentLang]}}"/></td>-->
+                                            <td class="col-sm-9">
+                                                <input disabled ng-show="!newProduct" type="text" ng-model="productNew.product.name.localization[currentLang]"
+                                                       placeholder="{{ productNew.product.name.localization[currentLang]}}"/>
+                                                <select ng-selected="productNew.product" ng-show="newProduct" name="singleSelectName" ng-model="productNew.product" ng-options="product as product.name.localization[currentLang] for product in allProducts track by product.id">
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
@@ -104,9 +110,9 @@
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'CURRENCY' |
                                                 translate}}</h5></td>
-                                            <td class="col-sm-9"><input type="text"
-                                                                        ng-model="productNew.currency"
-                                                                        placeholder="{{productNew.currency}}"/>
+                                            <td class="col-sm-9">
+                                                <select ng-selected="productNew.price.currency" name="singleSelect" ng-model="productNew.price.currency" ng-options="currency as currency.code for currency in currencies track by currency.id">
+                                                </select><br>
                                             </td>
                                         </tr>
                                         <tr>
@@ -120,24 +126,23 @@
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'MEASURE_UNIT' | translate}}</h5>
                                             </td>
-                                            <td class="col-sm-9"><input type="text"
-                                                                        ng-model="productNew.measure.code"
-                                                                        placeholder="{{productNew.measure.code}}"/>
+                                            <td class="col-sm-9"><select ng-selected="productNew.measure" name="singleSelectMeasure" ng-model="productNew.measure" ng-options="measure as measure.code for measure in measures track by measure.id">
+                                            </select>
                                             </td>
                                         </tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_IMAGE' |
                                                 translate}}</h5></td>
-                                            <td class="col-sm-9" height="100px" width="128px">
-                                                <div flow-init="{singleFile:true}"
-                                                     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
-                                                     class="ng-scope">
-                                                    <div class="thumbnail-vehicle" ng-show="!$flow.files.length">
-                                                        <img src="{{productNew.product.img}}" class="vehicle-image-preview"/>
-                                                    </div>
-                                                    <div class="thumbnail-vehicle" ng-show="$flow.files.length">
-                                                        <img flow-img="$flow.files[0]" class="vehicle-image-preview"/>
-                                                    </div>
-                                                    <div>
+                                        <td class="col-sm-9" height="100px" width="128px">
+                                            <div flow-init flow-files-submitted="" flow-name="productImage.flow"
+                                                 flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+                                                 class="ng-scope">
+                                                <div class="thumbnail-vehicle" ng-show="!$flow.files.length">
+                                                    <img src="{{productNew.product.img}}" class="vehicle-image-preview"/>
+                                                </div>
+                                                <div class="thumbnail-vehicle" ng-show="$flow.files.length">
+                                                    <img flow-img="$flow.files[0]" class="vehicle-image-preview"/>
+                                                </div>
+                                                <div>
                                                         <span class="btn btn-primary" ng-show="!$flow.files.length"
                                                               flow-btn="">{{'SELECT_IMAGE' | translate}}<input
                                                                 type="file"
@@ -146,13 +151,13 @@
                                                               ng-show="$flow.files.length"
                                                               flow-btn="">{{'UPDATE' | translate}}<input type="file"
                                                                                                          style="visibility: hidden; position: absolute;"></span>
-                                                        <a class="btn btn-primary" ng-show="$flow.files.length"
-                                                           ng-click="$flow.cancel()">
-                                                            {{'DELETE' | translate}}
-                                                        </a>
-                                                    </div>
+                                                    <a class="btn btn-primary" ng-show="$flow.files.length"
+                                                       ng-click="$flow.cancel()">
+                                                        {{'DELETE' | translate}}
+                                                    </a>
                                                 </div>
-                                            </td>
+                                            </div>
+                                        </td>
                                         </tr>
                                     </table>
                                 </form>
@@ -184,8 +189,8 @@
                                 <h4>{{ product.product.name.localization[currentLang]}}</h4>
                             </td>
                             <td>
-                                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [{{product.measure.code}}]</h5>
-                                <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price.price}} {{product.currency}}</h5>
+                                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [ {{product.measure.code}} ]</h5>
+                                <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price.price}} {{product.price.currency.code}}</h5>
                             </td>
                             <td>
                                 <div class="text-left">

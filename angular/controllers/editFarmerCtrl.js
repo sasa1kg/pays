@@ -1,8 +1,8 @@
 /**
  * Created by Norbert on 2015-11-01.
  */
-angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService", "Notification",
-    function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService, Notification) {
+angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService", "FarmerService", "Notification",
+    function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService, FarmerService, Notification) {
 
         console.log("edit Distributor:  " + routeParams.id);
 
@@ -16,7 +16,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
         SearchService.getFarmerProducts(routeParams.id).then(function (data) {
             scope.products = data;
             for(var i = 0; i < scope.products.length; i++){
-                SearchService.getProductImage(scope.products[i].product.id, scope.products[i].product.images[0]).then(function imgArrived(data){
+                SearchService.getProductImage(scope.products[i].product.id, scope.products[i].product.images).then(function imgArrived(data){
                     for (var j = 0; j < scope.products.length; j++) {
                         if (scope.products[j].product.id === data.index) {
                             scope.products[j].product.img = "data:"+data.type+";base64,"+data.document_content;
@@ -54,8 +54,20 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
             scope.page = sectionName;
         }
 
-        scope.saveChanges = function () {
-            console.log("Saving changes!");
+        scope.saveGeneralInfoChanges = function () {
+            console.log("Saving general info changes!");
+            FarmerService.updateGeneralInfo(scope.farmer.id,
+                {
+                    businessSubject: scope.farmer.businessSubject
+                }
+            ).then(function (data) {
+                    console.log(data);
+                    Notification.success({message: filter('translate')('GENERAL_INFO_UPDATED')});
+                }).catch(function (err) {
+                    console.error(err);
+                    Notification.error({message: filter('translate')('GENERAL_INFO_NOT_UPDATED')});
+                })
+            console.log("update end");
         }
 
         scope.deleteProduct = function (product) {
@@ -77,6 +89,34 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
             console.log(scope.prices);
         }
 
+        scope.uploadProductPicture = function (productId, imageId, flow) {
+            if (typeof flow.files !== 'undefined') {
+                FarmerService.uploadProductImage(productId, imageId, flow).then(function (data) {
+                    Notification.success({message: filter('translate')('VEHICLE_IMAGE_UPLOADED')});
+                    scope.reloadProductImage(productId);
+                }).catch(function (err) {
+                    Notification.error({message: filter('translate')('VEHICLE_IMAGE_FAILURE')});
+                    scope.reloadProductImage(productId);
+                });
+            }
+        }
+
+        scope.reloadProductImage = function (productId) {
+            FarmerService.getVehicleImages(productId).then(function (data) {
+                if (data.length > 0) {
+                    FarmerService.getVehicleImage(productId, data[data.length - 1])
+                        .then(function (img) {
+                            for (var i = 0; i < scope.products.length; i++) {
+                                if (scope.products[i].id === img.index) {
+                                    scope.products[i].img = "data:" + img.type + ";base64," + img.document_content;
+                                }
+                            }
+                        });
+                }
+            });
+        }
+
+
         scope.openProductModal = function (product) {
 
             var modalInstance = modal.open({
@@ -94,12 +134,46 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                 }
             });
 
-            modalInstance.result.then(function (productNew) {
-                if (typeof productNew !== 'undefined') {
-                    for (var v in scope.products) {
-                        if (scope.products[v].product.id == productNew.product.id) {
-                            scope.products[v] = productNew;
+            modalInstance.result.then(function (returnJson) {
+                if (typeof returnJson !== 'undefined') {
+                    var found      = false;
+                    var newImage   = returnJson.image.flow;
+                    var productNew = returnJson.info;
+
+                    angular.forEach(scope.products, function (product) {
+                        if (product.product.id == productNew.product.id) {
+                            found = true;
+                            FarmerService.updateProduct(routeParams.id, productNew).then(function () {
+                                Notification.success({message: filter('translate')('PRODUCT_UPDATED')});
+                                scope.uploadProductPicture(productNew.id, productNew.images ? productNew.images : rootScope.undefinedImageId, newImage);
+                                product = productNew;
+
+                            }).catch(function () {
+                                Notification.error({message: filter('translate')('PRODUCT_NOT_UPDATED')});
+                            });
                         }
+                    });
+                    if (found == false) {
+                        FarmerService.addNewProduct(routeParams.id, productNew).then(function () {
+                            Notification.success({message: filter('translate')('PRODUCT_ADDED')});
+                            SearchService.getFarmerProducts(routeParams.id).then(function (data) {
+                                angular.forEach(data, function (newProd) {
+                                    var exists = false;
+                                    for (var j = 0; j < scope.products.length; j++) {
+                                        if (scope.products[j].product.id === newProd.product.id) {
+                                            exists = true;
+                                        }
+                                    }
+                                    if (exists == false) {
+                                        scope.products.push(newProd);
+                                        scope.uploadProductPicture(newProd.product.id, rootScope.undefinedImageId, newImage);
+                                    }
+                                });
+
+                            });
+                        }).catch(function () {
+                            Notification.error({message: filter('translate')('PRODUCT_NOT_ADDED')});
+                        });
                     }
                 }
             });
@@ -124,21 +198,26 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
         };
     }]);
 
-angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $filter, $modalInstance, products, product) {
-
-    var newProduct = false
+angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope,$filter, $modalInstance, products, product) {
+    $scope.productImage = {
+        flow: null
+    }
+    $scope.newProduct = false
     $scope.productNew = $.extend({}, product);
     if (typeof product === 'undefined') {
-        newProduct = true;
+        $scope.newProduct = true;
     }
 
     $scope.saveChanges = function () {
         console.log($scope.productNew);
-        if (newProduct == true) {
-            products.push($scope.productNew);
-            $modalInstance.close();
+        var returnJson = {
+            info: $scope.productNew,
+            image: $scope.productImage
+        };
+        if ($scope.newProduct == true) {
+            $modalInstance.close(returnJson);
         }
-            $modalInstance.close($scope.productNew);
+        $modalInstance.close(returnJson);
     }
 
     $scope.cancelModal = function () {

@@ -1,5 +1,5 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'LocalStorageModule',
-  'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'UserService', 'OrderService',
+  'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'FarmerService', 'UserService', 'OrderService',
   'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow'])
   .filter('html', function ($sce) {
     return function (input) {
@@ -48,7 +48,7 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
 
   $rootScope.currentLang = $rootScope.englishLangCode;
 
-  $rootScope.translate           = function (lang) {
+  $rootScope.translate = function (lang) {
     $rootScope.currentLang = lang;
     $translate.use(lang);
   };
@@ -110,6 +110,10 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
       }
     })
   });
+
+    SearchService.getAllProducts().then(function (data){
+        $rootScope.allProducts = data;
+    });
 
   SearchService.getMeasurementUnits().then(function (data) {
     $rootScope.measures = data;
@@ -398,6 +402,12 @@ paysApp.config(function ($translateProvider) {
     PRODUCT_PRICE: "Price",
     PRODUCT_TOTAL_PRICE: "Total Price",
     PRODUCT_QUANTITY: "Quantity",
+    PRODUCT_DELETED: "Product successfully deleted",
+    PRODUCT_NOT_DELETED: "Unable to delete product",
+    PRODUCT_UPDATED: "Product successfully updated",
+    PRODUCT_NOT_UPDATED: "Unable to update product",
+    PRODUCT_ADDED: "Product successfully added",
+    PRODUCT_NOT_ADDED: "Unable to add product",
     CURRENCY: "Currency",
     MEASURE_UNIT: "Measure Unit",
     DETAILS: "Details",
@@ -687,6 +697,12 @@ paysApp.config(function ($translateProvider) {
       PRODUCT_PRICE: "Cena",
       PRODUCT_TOTAL_PRICE: "Ukupna Cena",
       PRODUCT_QUANTITY: "Količina",
+      PRODUCT_DELETED: "Proizvod uspešno obrisano",
+      PRODUCT_NOT_DELETED: "Neuspešno brisanje proizvoda",
+      PRODUCT_UPDATED: "Podaci o proizvodu uspešno ažurirani",
+      PRODUCT_NOT_UPDATED: "Neuspešna izmena podataka o proizvodu",
+      PRODUCT_ADDED: "Uspešno dodavanje proizvoda",
+      PRODUCT_NOT_ADDED: "Neuspešno dodavanje proizvoda",
       CURRENCY: "Valuta",
       MEASURE_UNIT: "Merna jedinica",
       DETAILS: "Detalji",

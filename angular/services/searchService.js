@@ -45,6 +45,26 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             return deffered.promise;
         }
 
+        this.getAllProducts = function () {
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "product").
+                success(function (data, status) {
+                    if (status == 200) {
+                        deffered.resolve(data);
+                    } else {
+                        console.log("getAllProducts|Status not OK " + status);
+                        deffered.reject("Error");
+                    }
+
+                }).
+                error(function (data, status) {
+                    console.log("Error " + status);
+                    deffered.reject("Error");
+                });
+
+            return deffered.promise;
+        }
+
         this.getFarmers = function () {
             var deffered = q.defer();
             http.get(rootScope.serverURL + "merchant").
