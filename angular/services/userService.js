@@ -86,7 +86,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
         this.resetPassword = function(newPassData){
             var deffered = q.defer();
-            http.post(rootScope.serverURL + "user/resetPassword", newPassData).
+            http.post(rootScope.serverURL + "resetPassword", newPassData).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -105,7 +105,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
         this.activateUser = function(token){
             var deffered = q.defer();
-            http.post(rootScope.serverURL + "user/confirmUser"+token).
+            http.post(rootScope.serverURL + "confirmUser"+token).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
