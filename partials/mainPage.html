@@ -234,7 +234,7 @@
                 <h5 class="title text-center">{{ 'SEARCH_PRODUCTS' | translate}}:</h5>
 
                 <p class="text-left" ng-repeat=" item in searchWishlistItems">
-                    {{item.name | translate}}</p>
+                    {{item.name.localization[currentLang] | translate}}</p>
             </div>
         </div>
     </div>
@@ -252,7 +252,7 @@
             </div>
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <div class="col-sm-4" ng-repeat="farmer in farmers | slice:0:3">
+                    <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
@@ -289,7 +289,7 @@
             </div>
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <div class="col-sm-4" ng-repeat="farmer in farmers | slice:0:3">
+                    <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
@@ -326,7 +326,7 @@
             </div>
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <div class="col-sm-4" ng-repeat="farmer in farmers | slice:0:3">
+                    <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
