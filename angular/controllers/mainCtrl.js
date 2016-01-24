@@ -152,13 +152,13 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             return typeof scope.foundFarmers[0] === 'undefined' || scope.foundFarmers.length == 0;
         }
 
-        scope.check = function (value, checked) {
-            var idx = scope.selectedCategories.indexOf(value);
-            if (idx >= 0 && !checked) {
-                SearchService.getProductsInCategory(value).then(function (data) {
+        scope.check = function (category) {
+            console.log(category.checkedValue);
+            if (!category.checkedValue) {
+                SearchService.getProductsInCategory(category.id).then(function (data) {
                     if (data) {
                         var products = data.products;
-                        scope.selectedCategories.splice(idx, 1);
+                        scope.selectedCategories.splice(scope.selectedCategories.indexOf(category), 1);
                         for (var j = products.length - 1; j >= 0; j--) {
                             for (var k = scope.foundProducts.length - 1; k >= 0; k--) {
                                 if (scope.foundProducts[k].id == products[j].id) {
@@ -172,10 +172,10 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
                     }
                 });
             }
-            if (idx < 0 && checked) {
-                SearchService.getProductsInCategory(value).then(function (data) {
+            if (category.checkedValue) {
+                SearchService.getProductsInCategory(category.id).then(function (data) {
                     if (data) {
-                        scope.selectedCategories.push(value);
+                        scope.selectedCategories.push(category);
                         var products = data.products;
                         for (var j = products.length - 1; j >= 0; j--) {
                             products[j].checked = false;
