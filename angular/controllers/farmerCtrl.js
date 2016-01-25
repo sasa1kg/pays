@@ -133,7 +133,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                 var content = CartService.getItems(scope.farmerId);
                 for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                     scope.farmerProducts[i].itemNum = 0;
-                    SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images[0]).then(function (img) {
+                    SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images).then(function (img) {
                         for (var j = 0; j < scope.farmerProducts.length; j++) {
                             if (scope.farmerProducts[j].product.id === img.index) {
                                 scope.farmerProducts[j].product.img = "data:" + img.type + ";base64," + img.document_content;
