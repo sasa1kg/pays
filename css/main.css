@@ -1857,8 +1857,13 @@ h2.title {
 /*************************
 *******checkout CSS******
 **************************/
-.order-row {
-  margin-bottom: 20px;
+
+.mt6 {
+  margin-top : 6px;
+}
+
+.mt20 {
+  margin-top : 20px;
 }
 .asterisk-padding{
   padding-left: 10px;

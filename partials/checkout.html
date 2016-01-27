@@ -1,153 +1,167 @@
 <header id="header"><!--header-->
-    <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
+  <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
 </header><!--/header-->
 
 <section id="cart_items">
-    <div class="container">
-        <div class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li><a href="#/">Home</a></li>
-                <li class="active">Check out</li>
-            </ol>
+  <div class="container">
+    <div class="breadcrumbs">
+      <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li class="active">Check out</li>
+      </ol>
+    </div>
+    <!--/breadcrums-->
+    <div ng-if="userData">
+      <div class="step-one">
+        <h2 class="text-center">{{'ORDER_DATA_SUFFIX' | translate}}</h2>
+      </div>
+
+      <hr class="orangehr">
+
+      <row class="col-sm-12">
+        <div class="col-sm-1">
+          <div class="text-center">{{ 'WHO' | translate}}</div>
         </div>
-        <!--/breadcrums-->
-        <div ng-if="userData">
-            <div class="step-one">
-                <h2 class="text-center">{{'ORDER_DATA_SUFFIX' | translate}}</h2>
+        <div class="col-sm-11 text-center">
+          <div>
+            <strong>{{ 'NAME_SURNAME' | translate}}: </strong>{{userData.privateSubject.name}}
+            {{userData.privateSubject.lastName}}
+          </div>
+          <div>
+            <strong>{{ 'PHONE_NUMBER' | translate}}: </strong>{{userData.privateSubject.phone}}
+          </div>
+          <div>
+            <strong>{{ 'EMAIL' | translate}}: </strong>{{userData.email}}
+          </div>
+        </div>
+      </row>
+
+      <hr class="orangehr">
+
+      <row class="col-sm-12">
+        <div class="col-sm-1">
+          <div class="text-center">{{ 'WHERE' | translate}}</div>
+        </div>
+        <div class="col-sm-11 text-center">
+          <div ng-if="address">
+            <strong>{{ 'CLIENT_ADDRESS' | translate}}: </strong>{{address}}
+          </div>
+          <div ng-if="addressJson">
+            <div>
+              <strong>{{ 'CITY' | translate}}: </strong>{{addressJson.city}} &nbsp;
+              <strong>{{ 'POSTAL_CODE' | translate}}: </strong>{{addressJson.postalCode}}
             </div>
+            <div>
+              <strong>{{ 'STREET' | translate}} </strong>{{addressJson.street}} &nbsp;
+              <strong>{{ 'HOUSE_NUMBER' | translate}} </strong>{{addressJson.houseNumber}}
+            </div>
+            <div>
+              <strong>{{ 'FLOOR' | translate}} </strong>{{addressJson.floor}} &nbsp;
+              <strong>{{ 'APARTMENT' | translate}} </strong>{{addressJson.apartmentNumber}}
+            </div>
+          </div>
+        </div>
+      </row>
 
-            <hr class="orangehr">
+      <hr class="orangehr">
 
-            <row class="col-sm-12">
-                <div class="col-sm-1">
-                    <div class="text-center">{{ 'WHO' | translate}}</div>
-                </div>
-                <div class="col-sm-11 text-center">
-                    <div>
-                        <strong>{{ 'NAME_SURNAME' | translate}}: </strong>{{userData.privateSubject.name}}
-                        {{userData.privateSubject.lastName}}
-                    </div>
-                    <div>
-                        <strong>{{ 'PHONE_NUMBER' | translate}}: </strong>{{userData.privateSubject.phone}}
-                    </div>
-                    <div>
-                        <strong>{{ 'EMAIL' | translate}}: </strong>{{userData.email}}
-                    </div>
-                </div>
-            </row>
-
-            <hr class="orangehr">
-
-            <row class="col-sm-12">
-                <div class="col-sm-1">
-                    <div class="text-center">{{ 'WHERE' | translate}}</div>
-                </div>
-                <div class="col-sm-11 text-center">
-                    <div>
-                        <strong>{{ 'CLIENT_ADDRESS' | translate}}: </strong>{{address}}
-                    </div>
-                </div>
-            </row>
-
-            <hr class="orangehr">
-
-            <row class="col-sm-12">
-                <div class="col-sm-1">
-                    <div class="text-center">{{ 'WHEN' | translate}}</div>
-                </div>
-                <div class="col-sm-11">
-                    <div class="col-sm-12">
-                        <div class="text-right col-sm-3">{{ 'DELIVERY_DATE' | translate}}</div>
-                        <div class="col-sm-9">
-                            <p class="input-group">
-                                <input type="text" class="form-control" datepicker-popup="{{dateFormat}}" ng-model="deliveryDate.date"
-                                       is-open="datePopup.opened" min-date="minDate"
-                                       ng-required="true" close-text="Close"/>
+      <row class="col-sm-12">
+        <div class="col-sm-1">
+          <div class="text-center">{{ 'WHEN' | translate}}</div>
+        </div>
+        <div class="col-sm-11">
+          <div class="col-sm-12">
+            <div class="text-right col-sm-3">{{ 'DELIVERY_DATE' | translate}}</div>
+            <div class="col-sm-9">
+              <p class="input-group">
+                <input type="text" class="form-control" datepicker-popup="{{dateFormat}}" ng-model="deliveryDate.date"
+                       is-open="datePopup.opened" min-date="minDate"
+                       ng-required="true" close-text="Close"/>
                                       <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="openDate()"><i
-                                                class="glyphicon glyphicon-calendar"></i></button>
+                                          class="glyphicon glyphicon-calendar"></i></button>
                                       </span>
-                            </p>
-                        </div>
-                        <div class="text-right col-sm-3">{{ 'DELIVERY_TIME' | translate}}</div>
-                        <div class="col-sm-9">
-                            <div class="col-sm-offset-2 col-sm-3">
-                                <table>
-                                    <tr>
-                                        <div class="left_padding_35px">{{ 'FROM' | translate}}</div>
-                                    </tr>
-                                    <tr>
-                                        <div class="text-center">
-                                            <timepicker ng-model="fromTime.time" hour-step="hstep"
-                                                        minute-step="mstep"
-                                                        show-meridian="ismeridian"></timepicker>
-                                        </div>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-sm-offset-2 col-sm-3">
-                                <table>
-                                    <tr>
-                                        <div class="left_padding_45px">{{ 'TO' | translate}}</div>
-                                    </tr>
-                                    <tr>
-                                        <div class="text-center">
-                                            <timepicker ng-model="toTime.time" hour-step="hstep"
-                                                        minute-step="mstep"
-                                                        show-meridian="ismeridian"></timepicker>
-                                        </div>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-sm-offset-3 col-sm-9 text-center">
-                            <div>
-                                <strong>{{ 'DELIVERY_DATE' | translate}}: </strong>{{deliveryDate.date | date: dateformat}}
-                                <strong>{{ 'FROM' | translate}}: </strong>{{fromTime.time | date: timeFormat}}
-                                <strong>{{ 'TO' | translate}}: </strong>{{toTime.time | date:timeFormat}}
-                            </div>
-                        </div>
+              </p>
+            </div>
+            <div class="text-right col-sm-3">{{ 'DELIVERY_TIME' | translate}}</div>
+            <div class="col-sm-9">
+              <div class="col-sm-offset-2 col-sm-3">
+                <table>
+                  <tr>
+                    <div class="left_padding_35px">{{ 'FROM' | translate}}</div>
+                  </tr>
+                  <tr>
+                    <div class="text-center">
+                      <timepicker ng-model="fromTime.time" hour-step="hstep"
+                                  minute-step="mstep"
+                                  show-meridian="ismeridian"></timepicker>
                     </div>
-                </div>
-            </row>
-
-            <hr class="orangehr">
-            <row class="col-sm-12">
-                <div class="col-sm-offset-1 col-sm-11">
-                    <div class="text-right col-sm-3">{{ 'VALUE' | translate}}</div>
-                    <div class="text-right col-sm-5">
-                        <div class="text-right col-sm-8 amount-currency-text amount-text">{{ orderData.totalPrice}}
-                        </div>
-                        <div class="text-left col-sm-3 amount-currency-text">{{ orderData.currency.code}}</div>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-sm-offset-2 col-sm-3">
+                <table>
+                  <tr>
+                    <div class="left_padding_45px">{{ 'TO' | translate}}</div>
+                  </tr>
+                  <tr>
+                    <div class="text-center">
+                      <timepicker ng-model="toTime.time" hour-step="hstep"
+                                  minute-step="mstep"
+                                  show-meridian="ismeridian"></timepicker>
                     </div>
-                    <a class="btn btn-fefault cart col-sm-2 text-center" ng-click="executePayment()">{{ 'PAY' |
-                        translate}}</a>
-                </div>
-            </row>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="col-sm-offset-3 col-sm-9 text-center">
+              <div>
+                <strong>{{ 'DELIVERY_DATE' | translate}}: </strong>{{deliveryDate.date | date: dateformat}}
+                <strong>{{ 'FROM' | translate}}: </strong>{{fromTime.time | date: timeFormat}}
+                <strong>{{ 'TO' | translate}}: </strong>{{toTime.time | date:timeFormat}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </row>
 
-            <hr class="orangehr">
+      <hr class="orangehr">
+      <row class="col-sm-12">
+        <div class="col-sm-offset-1 col-sm-11">
+          <div class="text-right col-sm-3">{{ 'VALUE' | translate}}</div>
+          <div class="text-right col-sm-5">
+            <div class="text-right col-sm-8 amount-currency-text amount-text">{{ orderData.totalPrice}}
+            </div>
+            <div class="text-left col-sm-3 amount-currency-text">{{ orderData.currency.code}}</div>
+          </div>
+          <a class="btn btn-fefault cart col-sm-2 text-center" ng-click="executePayment()">{{ 'PAY' |
+            translate}}</a>
+        </div>
+      </row>
 
-            <row class="col-sm-12">
-                <div class="col-sm-1">
-                </div>
-                <div class="col-sm-11">
-                    <div class="text-center col-sm-3">{{ 'NOTE' | translate}}</div>
-                    <div class="col-sm-9">
+      <hr class="orangehr">
+
+      <row class="col-sm-12">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-11">
+          <div class="text-center col-sm-3">{{ 'NOTE' | translate}}</div>
+          <div class="col-sm-9">
                     <textarea type="text" rows="4" class="col-sm-12"
                               placeholder="{{ 'NOTE_MSG' | translate}} " ng-model="note"></textarea>
-                    </div>
-                </div>
-            </row>
-            <hr class="orangehr">
+          </div>
         </div>
-        <div ng-if="orderData && !userData">
-            <h3 class="text-center" style="color:red;">{{ 'NO_LOGIN_CHECKOUT' | translate}}</h3>
-        </div>
-        <div ng-if="!orderData">
-            <h3 class="text-center" style="color:red;">{{ 'NO_ORDER_CREATED' | translate}}</h3>
-        </div>
-
+      </row>
+      <hr class="orangehr">
     </div>
+    <div ng-if="orderData && !userData">
+      <h3 class="text-center" style="color:red;">{{ 'NO_LOGIN_CHECKOUT' | translate}}</h3>
+    </div>
+    <div ng-if="!orderData">
+      <h3 class="text-center" style="color:red;">{{ 'NO_ORDER_CREATED' | translate}}</h3>
+    </div>
+
+  </div>
 </section> <!--/#cart_items-->
 
 

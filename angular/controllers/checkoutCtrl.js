@@ -9,7 +9,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
             if (typeof scope.orderData.address === 'string') {
                 scope.address = scope.orderData.address;
             } else {
-                scope.address = scope.orderData.address.street + ", " + scope.orderData.address.city;
+                scope.addressJson = scope.orderData.address;
             }
 
             if (scope.orderData.clientId == null) {
@@ -44,7 +44,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         }
 
         scope.minDate = new Date();
-        scope.dateFormat = 'dd-MMMM-yyyy';
+        scope.dateFormat = 'yyyy-dd-MMMM';
         scope.timeFormat = 'HH:mm';
 
 
@@ -67,13 +67,14 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 clientId: scope.orderData.clientId,
                 transporterId: 15,
                 currencyId: scope.orderData.currency.id,
-                address: scope.address,
+                address: scope.addressJson,
                 deliveryDate: filter('date')(scope.deliveryDate.date, scope.dateFormat),
                 deliveryFrom: filter('date')(scope.fromTime.time, scope.timeFormat),
                 deliveryTo: filter('date')(scope.toTime.time, scope.timeFormat),
                 withTransport: scope.orderData.withTransport,
                 totalPrice: scope.orderData.totalPrice,
-                items: []
+                items: [],
+                comment : scope.note
             };
             angular.forEach(scope.orderData.items.items, function (item) {
                 console.log(item);

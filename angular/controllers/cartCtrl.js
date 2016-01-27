@@ -105,10 +105,10 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
             newAddress: {
                 city: "",
                 street: "",
-                number: "",
-                appartment: "",
+                houseNumber: "",
+                apartmentNumber: "",
                 floor: "",
-                entrance: ""
+                postalCode : ""
             },
             chosenAddress: ""
         }

@@ -235,8 +235,17 @@
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'CLIENT_ADDRESS' |
                                                 translate}}</h5></td>
                                             <td class="col-sm-9">
-                                                <div class="text-left">{{order.client.businessSubject.postalCode}},
-                                                    {{order.client.businessSubject.city}}, {{order.client.businessSubject.address}}
+                                                <div>
+                                                    <strong>{{ 'CITY' | translate}}: </strong>{{order.address.city}} &nbsp;
+                                                    <strong>{{ 'POSTAL_CODE' | translate}}: </strong>{{order.address.postalCode}}
+                                                </div>
+                                                <div>
+                                                    <strong>{{ 'STREET' | translate}} </strong>{{order.address.street}} &nbsp;
+                                                    <strong>{{ 'HOUSE_NUMBER' | translate}} </strong>{{order.address.houseNumber}}
+                                                </div>
+                                                <div>
+                                                    <strong>{{ 'FLOOR' | translate}} </strong>{{order.address.floor}} &nbsp;
+                                                    <strong>{{ 'APARTMENT' | translate}} </strong>{{order.address.apartmentNumber}}
                                                 </div>
                                             </td>
                                         </tr>
