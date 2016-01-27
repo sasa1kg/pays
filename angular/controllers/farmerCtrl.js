@@ -19,7 +19,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                         scope.farmerProducts[i].product.name,
                         scope.farmerProducts[i].measure,
                         scope.farmerProducts[i].price.price,
-                        scope.farmerProducts[i].product.images[0],
+                        scope.farmerProducts[i].product.images,
                         scope.farmer.id,
                         scope.farmer.businessSubject.name,
                         scope.farmer.businessSubject.city,
@@ -47,7 +47,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                             scope.farmerProducts[i].product.name,
                             scope.farmerProducts[i].measure,
                             scope.farmerProducts[i].price.price,
-                            scope.farmerProducts[i].product.images[0],
+                            scope.farmerProducts[i].product.images,
                             scope.farmer.id,
                             scope.farmer.businessSubject.name,
                             scope.farmer.businessSubject.city,
@@ -136,7 +136,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                     SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images).then(function (img) {
                         for (var j = 0; j < scope.farmerProducts.length; j++) {
                             if (scope.farmerProducts[j].product.id === img.index) {
-                                scope.farmerProducts[j].product.img = "data:" + img.type + ";base64," + img.document_content;
+                                scope.farmerProducts[j].product.img = "data:image/jpeg;base64," + img.document_content;
                             }
                         }
                     });

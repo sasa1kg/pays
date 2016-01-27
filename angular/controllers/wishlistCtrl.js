@@ -34,7 +34,7 @@ angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filte
                     SearchService.getWishlistProductImage(scope.wishlistItems[i].products.items[j].itemId, scope.wishlistItems[i].products.items[j].image, i).then(function (img) {
                         for (var k = 0; k < scope.wishlistItems[img.wishlistIndex].products.items.length; k++) {
                             if (scope.wishlistItems[img.wishlistIndex].products.items[k].itemId === img.index) {
-                                scope.wishlistItems[img.wishlistIndex].products.items[k].img = "data:" + img.type + ";base64," + img.document_content;
+                                scope.wishlistItems[img.wishlistIndex].products.items[k].img = "data:image/jpeg;base64," + img.document_content;
                             }
                         }
                     });

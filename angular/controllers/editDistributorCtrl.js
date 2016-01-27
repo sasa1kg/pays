@@ -45,7 +45,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
       if (scope.distributor.images.profile != null) {
         DistributorService.getDistributorImage(distributorId, scope.distributor.images.profile)
           .then(function (img) {
-            scope.distributor.profilePictureBase64 = "data:" + img.type + ";base64," + img.document_content;
+            scope.distributor.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
           });
       }
       var bannerPicIndex = 0;
@@ -53,7 +53,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         DistributorService.getDistributorImage(distributorId, scope.distributor.images.banner[scope.distributor.images.banner.length - (i+1)])
           .then(function (img) {
             if (img.type != 'undefined') {
-              scope.distributor.bannerImages[bannerPicIndex].imgData = "data:" + img.type + ";base64," + img.document_content;
+              scope.distributor.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
               scope.distributor.bannerImages[bannerPicIndex].imageId = img.imageIndex;
               bannerPicIndex++
               console.log(JSON.stringify(scope.distributor.bannerImages,null,4));
@@ -72,7 +72,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
             .then(function (img) {
               for (var i = 0; i < scope.vehicles.length; i++) {
                 if (scope.vehicles[i].id === img.index) {
-                  scope.vehicles[i].img = "data:" + img.type + ";base64," + img.document_content;
+                  scope.vehicles[i].img = "data:image/jpeg;base64," + img.document_content;
                 }
               }
             });
@@ -182,7 +182,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
             .then(function (img) {
               for (var i = 0; i < scope.vehicles.length; i++) {
                 if (scope.vehicles[i].id === img.index) {
-                  scope.vehicles[i].img = "data:" + img.type + ";base64," + img.document_content;
+                  scope.vehicles[i].img = "data:image/jpeg;base64," + img.document_content;
                 }
               }
             });

@@ -30,7 +30,7 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
             DistributorService.getDistributorImage(scope.foundDistributors[j].id, scope.foundDistributors[j].images.profile).then(function (img) {
               for (var i = 0; i < scope.foundDistributors.length; i++) {
                 if (scope.foundDistributors[i].id === img.index) {
-                  scope.foundDistributors[i].img = "data:" + img.type + ";base64," + img.document_content;
+                  scope.foundDistributors[i].img = "data:image/jpeg;base64," + img.document_content;
                 }
               }
             });

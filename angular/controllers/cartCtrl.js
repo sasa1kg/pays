@@ -47,7 +47,7 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$http", "$location"
                     SearchService.getProductImage(scope.cartItems.items[i].itemId, scope.cartItems.items[i].image).then(function (img) {
                         for (var j = 0; j < scope.cartItems.items.length; j++) {
                             if (scope.cartItems.items[j].itemId === img.index) {
-                                scope.cartItems.items[j].img = "data:" + img.type + ";base64," + img.document_content;
+                                scope.cartItems.items[j].img = "data:image/jpeg;base64," + img.document_content;
                             }
                         }
                     });

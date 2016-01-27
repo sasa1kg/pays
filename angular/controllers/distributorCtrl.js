@@ -9,7 +9,7 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope","$rootScope", 
             for(var i = 0; ((i< rootScope.bannerPicsLimit) && (i <scope.distributor.images.banner.length)); i++){
                 DistributorService.getDistributorImage(routeParams.id, scope.distributor.images.banner[scope.distributor.images.banner.length - i])
                     .then(function (img) {
-                        scope.distributor.bannerImages[bannerPicIndex++] = "data:" + img.type + ";base64," + img.document_content;
+                        scope.distributor.bannerImages[bannerPicIndex++] = "data:image/jpeg;base64," + img.document_content;
                     });
             }
 
@@ -22,7 +22,7 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope","$rootScope", 
                     DistributorService.getVehicleImage(scope.distributorVehicles[j].id, scope.distributorVehicles[j].images).then(function (img) {
                         for (var i = 0; i < scope.distributorVehicles.length; i++) {
                             if (scope.distributorVehicles[i].id === img.index) {
-                                scope.distributorVehicles[i].img = "data:" + img.type + ";base64," + img.document_content;
+                                scope.distributorVehicles[i].img = "data:image/jpeg;base64," + img.document_content;
                             }
                         }
                     });

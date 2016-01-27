@@ -253,10 +253,10 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverImagesURL+"vehicle/"+vehicleId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"vehicle/"+vehicleId+"/imagefile";
             } else {
                 // update current picture of vehicle
-                flowObj.opts.target = rootScope.serverImagesURL+"vehicle/"+vehicleId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"vehicle/"+vehicleId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -280,10 +280,10 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverImagesURL+"transporter/"+distributorId+"/imagetype/P/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/imagetype/P/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = rootScope.serverImagesURL+"transporter/"+distributorId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -307,10 +307,10 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverImagesURL+"transporter/"+distributorId+"/imagetype/B/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/imagetype/B/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = rootScope.serverImagesURL+"transporter/"+distributorId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";

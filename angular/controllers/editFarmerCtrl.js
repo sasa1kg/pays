@@ -19,7 +19,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                 SearchService.getProductImage(scope.products[i].product.id, scope.products[i].product.images).then(function imgArrived(data){
                     for (var j = 0; j < scope.products.length; j++) {
                         if (scope.products[j].product.id === data.index) {
-                            scope.products[j].product.img = "data:"+data.type+";base64,"+data.document_content;
+                            scope.products[j].product.img = "data:image/jpeg;base64,"+data.document_content;
                         }
                     }
                 });
@@ -108,7 +108,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                         .then(function (img) {
                             for (var i = 0; i < scope.products.length; i++) {
                                 if (scope.products[i].id === img.index) {
-                                    scope.products[i].img = "data:" + img.type + ";base64," + img.document_content;
+                                    scope.products[i].img = "data:image/jpeg;base64," + img.document_content;
                                 }
                             }
                         });

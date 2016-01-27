@@ -81,8 +81,8 @@
                            ng-model="cat.checkedValue"
                            ng-click="check(cat)">
                     {{cat.name.localization[currentLang]}}
-                    <a ng-if="cat.expanded && cat.children.length" class="cursor-pointer" ng-click="cat.expanded = !cat.expanded"><i class="fa fa-caret-up"></i></a>
-                    <a ng-if="!cat.expanded && cat.children.length" class="cursor-pointer" ng-click="cat.expanded = !cat.expanded"><i class="fa fa-caret-down"></i></a>
+                    <a ng-if="cat.expanded && cat.children.length" class="cursor-pointer" ng-click="cat.expanded = !cat.expanded"><i class="fa fa-caret-up fa-lg"></i></a>
+                    <a ng-if="!cat.expanded && cat.children.length" class="cursor-pointer" ng-click="cat.expanded = !cat.expanded"><i class="fa fa-caret-down fa-lg"></i></a>
                   </label>
 
                   <row ng-if="cat.expanded" class="col-sm-12" ng-repeat="subcat1 in cat.children">
@@ -92,8 +92,8 @@
                              ng-model="subcat1.checkedValue"
                              ng-click="check(subcat1)">
                       {{subcat1.name.localization[currentLang]}}
-                      <a ng-if="subcat1.expanded && subcat1.children.length" class="cursor-pointer" ng-click="subcat1.expanded = !subcat1.expanded"><i class="fa fa-caret-up"></i></a>
-                      <a ng-if="!subcat1.expanded && subcat1.children.length " class="cursor-pointer" ng-click="subcat1.expanded = !subcat1.expanded"><i class="fa fa-caret-down"></i></a>
+                      <a ng-if="subcat1.expanded && subcat1.children.length" class="cursor-pointer" ng-click="subcat1.expanded = !subcat1.expanded"><i class="fa fa-caret-up fa-lg"></i></a>
+                      <a ng-if="!subcat1.expanded && subcat1.children.length" class="cursor-pointer" ng-click="subcat1.expanded = !subcat1.expanded"><i class="fa fa-caret-down fa-lg"></i></a>
                     </label>
 
                     <row ng-if="subcat1.expanded" class="col-sm-12" ng-repeat="subcat2 in subcat1.children">

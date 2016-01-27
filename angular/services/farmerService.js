@@ -70,10 +70,10 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverImagesURL+"product/"+productId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"product/"+productId+"/imagefile";
             } else {
                 // update current picture of vehicle
-                flowObj.opts.target = rootScope.serverImagesURL+"product/"+productId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"product/"+productId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -97,10 +97,10 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverImagesURL+"merchant/"+farmerId+"/imagetype/P/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/imagetype/P/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = rootScope.serverImagesURL+"merchant/"+farmerId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -124,10 +124,10 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverImagesURL+"merchant/"+farmerId+"/imagetype/B/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/imagetype/B/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = rootScope.serverImagesURL+"merchant/"+farmerId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
