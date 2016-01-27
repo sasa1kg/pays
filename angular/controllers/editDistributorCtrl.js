@@ -24,7 +24,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
       }
     }
 
-    scope.sectionChange      = function (sectionName) {
+    scope.sectionChange = function (sectionName) {
       scope.page = sectionName;
     }
 
@@ -49,14 +49,18 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
           });
       }
       var bannerPicIndex = 0;
+      var bannerLoadIndex = 0;
       for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.distributor.images.banner.length)); i++) {
-        DistributorService.getDistributorImage(distributorId, scope.distributor.images.banner[scope.distributor.images.banner.length - (i+1)])
+        scope.distributor.bannerImages[bannerLoadIndex++].imageId = scope.distributor.images.banner[scope.distributor.images.banner.length - (i + 1)];
+        DistributorService.getDistributorImage(distributorId, scope.distributor.images.banner[scope.distributor.images.banner.length - (i + 1)])
           .then(function (img) {
             if (img.type != 'undefined') {
-              scope.distributor.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
-              scope.distributor.bannerImages[bannerPicIndex].imageId = img.imageIndex;
-              bannerPicIndex++
-              console.log(JSON.stringify(scope.distributor.bannerImages,null,4));
+              for(var j =0; j< scope.distributor.bannerImages.length;j++){
+                if(scope.distributor.bannerImages[j].imageId == img.imageIndex){
+                  scope.distributor.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
+                  bannerPicIndex++
+                }
+              }
             }
           }
         )
@@ -115,6 +119,10 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
           scope.profilePic.flow).then(function (data) {
             Notification.success({message: filter('translate')('PROFILE_IMAGE_UPLOADED')});
             scope.profilePic.flow.cancel();
+            DistributorService.getDistributorImage(distributorId, data.image)
+              .then(function (img) {
+                scope.distributor.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
+              });
           }).catch(function (err) {
             Notification.error({message: filter('translate')('PROFILE_IMAGE_FAILURE')});
             scope.profilePic.flow.cancel();
@@ -127,10 +135,15 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
       console.log("uploadDistributorBannerImage" + bannerPictureIndex);
       if (typeof scope.distributor.bannerImages[bannerPictureIndex].flow.files !== 'undefined') {
         DistributorService.uploadDistributorBannerImage(scope.distributor.id,
-          scope.distributor.bannerImages[bannerPictureIndex].imageId,scope.distributor.bannerImages[bannerPictureIndex].flow).
+          scope.distributor.bannerImages[bannerPictureIndex].imageId, scope.distributor.bannerImages[bannerPictureIndex].flow).
           then(function (data) {
             Notification.success({message: filter('translate')('BANNER_IMAGE_UPLOADED')});
             scope.distributor.bannerImages[bannerPictureIndex].flow.cancel();
+            DistributorService.getDistributorImage(distributorId, data.image)
+              .then(function (img) {
+                scope.distributor.bannerImages[bannerPictureIndex].imgData = "data:image/jpeg;base64," + img.document_content;
+                scope.distributor.bannerImages[bannerPictureIndex].imageId = img.imageIndex;
+              });
           }).catch(function (err) {
             Notification.error({message: filter('translate')('BANNER_IMAGE_FAILURE')});
             scope.distributor.bannerImages[bannerPictureIndex].flow.cancel();
@@ -167,27 +180,22 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
       if (typeof flow.files !== 'undefined') {
         DistributorService.uploadVehicleImage(vehicleId, imageId, flow).then(function (data) {
           Notification.success({message: filter('translate')('VEHICLE_IMAGE_UPLOADED')});
-          scope.reloadVehicleImage(vehicleId);
+          scope.reloadVehicleImage(vehicleId,data.image);
         }).catch(function (err) {
           Notification.error({message: filter('translate')('VEHICLE_IMAGE_FAILURE')});
-          scope.reloadVehicleImage(vehicleId);
         });
       }
     }
 
-    scope.reloadVehicleImage = function (vehicleId) {
-      DistributorService.getVehicleImages(vehicleId).then(function (data) {
-        if (data.length > 0) {
-          DistributorService.getVehicleImage(vehicleId, data[data.length - 1])
-            .then(function (img) {
-              for (var i = 0; i < scope.vehicles.length; i++) {
-                if (scope.vehicles[i].id === img.index) {
-                  scope.vehicles[i].img = "data:image/jpeg;base64," + img.document_content;
-                }
-              }
-            });
-        }
-      });
+    scope.reloadVehicleImage = function (vehicleId, imageId) {
+      DistributorService.getVehicleImage(vehicleId, imageId)
+        .then(function (img) {
+          for (var i = 0; i < scope.vehicles.length; i++) {
+            if (scope.vehicles[i].id === img.index) {
+              scope.vehicles[i].img = "data:image/jpeg;base64," + img.document_content;
+            }
+          }
+        });
     }
 
     scope.openVehicleModal = function (vehicle) {
