@@ -70,12 +70,12 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
             console.log("update end");
         }
 
-        scope.deleteProduct = function (product) {
-            var idx = scope.products.indexOf(product);
-            if (idx >= 0) {
-                scope.products.splice(idx, 1);
-            }
-        }
+        //scope.deleteProduct = function (product) {
+        //    var idx = scope.products.indexOf(product);
+        //    if (idx >= 0) {
+        //        scope.products.splice(idx, 1);
+        //    }
+        //}
 
         scope.updateProduct = function (product) {
             scope.openProductModal(product)
@@ -92,19 +92,22 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
         scope.uploadProductPicture = function (productId, imageId, flow) {
             if (typeof flow.files !== 'undefined') {
                 FarmerService.uploadProductImage(productId, imageId, flow).then(function (data) {
-                    Notification.success({message: filter('translate')('VEHICLE_IMAGE_UPLOADED')});
+                    Notification.success({message: filter('translate')('PRODUCT_IMAGE_UPLOADED')});
                     scope.reloadProductImage(productId);
                 }).catch(function (err) {
-                    Notification.error({message: filter('translate')('VEHICLE_IMAGE_FAILURE')});
+                    Notification.error({message: filter('translate')('PRODUCT_IMAGE_FAILURE')});
                     scope.reloadProductImage(productId);
                 });
+            }
+            else{
+                scope.reloadProductImage(productId);
             }
         }
 
         scope.reloadProductImage = function (productId) {
-            FarmerService.getVehicleImages(productId).then(function (data) {
+            FarmerService.getProductImages(productId).then(function (data) {
                 if (data.length > 0) {
-                    FarmerService.getVehicleImage(productId, data[data.length - 1])
+                    FarmerService.getProductImage(productId, data[data.length - 1])
                         .then(function (img) {
                             for (var i = 0; i < scope.products.length; i++) {
                                 if (scope.products[i].id === img.index) {
@@ -114,6 +117,19 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                         });
                 }
             });
+        }
+
+        scope.deleteProduct = function (product) {
+            FarmerService.deleteProduct(scope.farmer.id, product.id).then(function (data) {
+                Notification.success({message: filter('translate')('PRODUCT_DELETED')});
+                var idx = scope.products.indexOf(product);
+                if (idx >= 0) {
+                    scope.products.splice(idx, 1);
+                }
+            }).catch(function (data) {
+                Notification.error({message: filter('translate')('PRODUCT_NOT_DELETED')});
+            });
+
         }
 
 
@@ -192,13 +208,16 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                     },
                     order: function () {
                         return order;
+                    },
+                    SearchService: function () {
+                        return SearchService;
                     }
                 }
             });
         };
     }]);
 
-angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope,$filter, $modalInstance, products, product) {
+angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope, $filter, $modalInstance, products, product, SearchService) {
     $scope.productImage = {
         flow: null
     }
@@ -206,6 +225,18 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
     $scope.productNew = $.extend({}, product);
     if (typeof product === 'undefined') {
         $scope.newProduct = true;
+        $scope.productNew.price ={};
+        $scope.productNew.product ={};
+        $scope.productNew.price.currency = $rootScope.defaultCurrency;
+
+    }
+
+    $scope.onProductNameChanged = function(){
+        SearchService.getProductImage($scope.productNew.product.id, $scope.productNew.product.images).then(function imgArrived(data){
+            if ($scope.productNew.product.id === data.index) {
+                $scope.productNew.product.img = "data:image/jpeg;base64,"+data.document_content;
+            }
+        });
     }
 
     $scope.saveChanges = function () {

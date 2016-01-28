@@ -96,25 +96,25 @@
                                             <td class="col-sm-9">
                                                 <input disabled ng-show="!newProduct" type="text" ng-model="productNew.product.name.localization[currentLang]"
                                                        placeholder="{{ productNew.product.name.localization[currentLang]}}"/>
-                                                <select ng-selected="productNew.product" ng-show="newProduct" name="singleSelectName" ng-model="productNew.product" ng-options="product as product.name.localization[currentLang] for product in allProducts track by product.id">
+                                                <select ng-selected="productNew.product" ng-change="onProductNameChanged()" ng-show="newProduct" name="singleSelectName" ng-model="productNew.product" ng-options="product as product.name.localization[currentLang] for product in allProducts track by product.id">
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
-                                                translate}}</h5></td>
+                                                translate}} [RSD]</h5></td>
                                             <td class="col-sm-9"><input type="text" ng-model="productNew.price.price"
                                                                         placeholder="{{productNew.price.price}}"/>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'CURRENCY' |
-                                                translate}}</h5></td>
-                                            <td class="col-sm-9">
-                                                <select ng-selected="productNew.price.currency" name="singleSelect" ng-model="productNew.price.currency" ng-options="currency as currency.code for currency in currencies track by currency.id">
-                                                </select><br>
-                                            </td>
-                                        </tr>
+                                        <!--<tr>-->
+                                            <!--<td class="col-sm-3"><h5 class="text-left">{{ 'CURRENCY' |-->
+                                                <!--translate}}</h5></td>-->
+                                            <!--<td class="col-sm-9">-->
+                                                <!--<select ng-selected="productNew.price.currency" name="singleSelect" ng-model="productNew.price.currency" ng-options="currency as currency.code for currency in currencies track by currency.id">-->
+                                                <!--</select><br>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
                                         <tr>
                                             <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_QUANTITY' | translate}}</h5>
                                             </td>

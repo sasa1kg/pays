@@ -54,7 +54,28 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
                         data.index = productId;
                         deffered.resolve(data);
                     } else {
-                        console.log("getVehicleImage |Status not OK " + status);
+                        console.log("getProductImage |Status not OK " + status);
+                        deffered.reject("Error");
+                    }
+
+                }).
+                error(function (data, status) {
+                    console.log("Error " + status);
+                    deffered.reject("Error");
+                });
+            return deffered.promise;
+        }
+
+        this.getProductImages = function(productId){
+            var deffered = q.defer();
+
+            http.get(rootScope.serverURL + "product/" + productId + "/images").
+                success(function (data, status) {
+                    if (status == 200) {
+                        data.index = productId;
+                        deffered.resolve(data);
+                    } else {
+                        console.log("getProductImages |Status not OK " + status);
                         deffered.reject("Error");
                     }
 
@@ -221,6 +242,27 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
                 }).
                 error(function (data, status) {
                     console.log("addNewProduct | Error " + status);
+                    deffered.reject("Error");
+                });
+
+            return deffered.promise;
+        }
+
+        this.deleteProduct = function (farmerId, productId) {
+            var deffered = q.defer();
+
+            http.delete(rootScope.serverURL + "merchant/" + farmerId + "/products/" + productId).
+                success(function (data, status) {
+                    if (status == 200) {
+                        deffered.resolve(data);
+                    } else {
+                        console.log("deleteProduct | Status not OK " + status);
+                        deffered.reject("Error");
+                    }
+
+                }).
+                error(function (data, status) {
+                    console.log("deleteProduct | Error " + status);
                     deffered.reject("Error");
                 });
 

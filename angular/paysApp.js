@@ -430,6 +430,8 @@ paysApp.config(function ($translateProvider) {
     NO_IMAGE_PROVIDED: "No image provided",
     VEHICLE_IMAGE_UPLOADED: "Vehicle image uploaded",
     VEHICLE_IMAGE_FAILURE: "Failed to upload vehicle image",
+    PRODUCT_IMAGE_UPLOADED: "Product image uploaded",
+    PRODUCT_IMAGE_FAILURE: "Failed to upload product image",
     ACCESS_NOT_ALLOWED: "You are not allowed to access this page. Please login with valid credentials.",
     PROFILE_IMAGE_FAILURE: "Failed to upload profile image",
     PROFILE_IMAGE_UPLOADED: "Profile image uploaded",
