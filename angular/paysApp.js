@@ -150,6 +150,19 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
     }
     return false;
   }
+
+  $rootScope.goToProfile = function(){
+    $rootScope.credentials = UserService.getUserCredentials();
+    if($rootScope.credentials.token != null){
+      if($rootScope.credentials.role == $rootScope.farmerUserType){
+        $location.path("/farmeredit/"+$rootScope.credentials.id);
+      } else if($rootScope.credentials.role == $rootScope.distributorUserType){
+        $location.path('/distributoredit/'+$rootScope.credentials.id);
+      } else if($rootScope.credentials.role == $rootScope.buyerUserType){
+        $location.path('/buyeredit/'+$rootScope.credentials.id);
+      }
+    }
+  }
 });
 
 paysApp.config(function ($translateProvider) {
@@ -412,7 +425,7 @@ paysApp.config(function ($translateProvider) {
     MEASURE_UNIT: "Measure Unit",
     DETAILS: "Details",
     CLIENT_NAME: "Client",
-    PRODUCT_NUMBER: "Number of Articles",
+    PRODUCT_NUMBER: "Products number",
     STATUS: "Status",
     CLIENT_ADDRESS: "Address",
     DELIVERY_DATE: "Delivery Date",
@@ -448,7 +461,14 @@ paysApp.config(function ($translateProvider) {
     ENTER_NEW_PASSWORD: 'Please enter you new password',
     PASSWORD_CHANGED_MSG: 'You have successfully chaned your password. By clicking on OK you will be redirected to login page where you can access your profile.',
     ACTIVATED_USER_MSG: 'You have successfully activated your account. Please visit login page where you can access your profile.',
-    NOT_ACTIVATED_USER_MSG: 'Account activation failed. Please contact our support team to resolve this issue.'
+    NOT_ACTIVATED_USER_MSG: 'Account activation failed. Please contact our support team to resolve this issue.',
+    GENERAL_BUYER_DATA : 'General buyer information',
+    EDIT_BUYER_DATA : 'Buyer data',
+    LEAVE_REVIEW : 'Leave review',
+    YOUR_RATING : 'Your rating',
+    MAX_250_CHARS_FOR_REVIEW : 'Maximum 250 characters for review',
+    REVIEW_TEXT : 'Please enter your review\'s text...',
+    SUBMIT_REVIEW : 'Submit review'
 
   })
     .translations('rs_RS', {
@@ -709,7 +729,7 @@ paysApp.config(function ($translateProvider) {
       MEASURE_UNIT: "Merna jedinica",
       DETAILS: "Detalji",
       CLIENT_NAME: "Klijent",
-      PRODUCT_NUMBER: "Broj stavki",
+      PRODUCT_NUMBER: "Broj proizvoda",
       STATUS: "Status",
       CLIENT_ADDRESS: "Adresa",
       DELIVERY_DATE: "Datum isporuke",
@@ -743,7 +763,14 @@ paysApp.config(function ($translateProvider) {
       ENTER_NEW_PASSWORD: 'Molimo unesite novu lozinku',
       PASSWORD_CHANGED_MSG: 'Uspešno ste promenili Vašu lozinku. Klikom na OK bićete prebačeni na stranicu za prijavu gde možete pristupiti Vašem profilu',
       ACTIVATED_USER_MSG: 'Uspešno ste aktivirali Vaš nalog. Posetite stranicu za prijavu gde možete pristupiti Vašem profilu',
-      NOT_ACTIVATED_USER_MSG: 'Neuspešna aktivacija naloga. Molimo Vas da kontaktirate našu tehničku podršku radi rešavanja ovog problema.'
+      NOT_ACTIVATED_USER_MSG: 'Neuspešna aktivacija naloga. Molimo Vas da kontaktirate našu tehničku podršku radi rešavanja ovog problema.',
+      GENERAL_BUYER_DATA : 'Generalne informacije o kupcu',
+      EDIT_BUYER_DATA : 'Informacije o kupcu',
+      LEAVE_REVIEW : 'Ostavite komentar',
+      YOUR_RATING : 'Vaša ocena',
+      MAX_250_CHARS_FOR_REVIEW : 'Maksimum 250 karaktera za tekst komentara',
+      REVIEW_TEXT : 'Molimo Vas unesite Vaš komentar...',
+      SUBMIT_REVIEW : 'Postavi komentar'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

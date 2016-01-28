@@ -302,5 +302,25 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
             return deffered.promise;
         }
+
+        this.getBuyerOrders = function (buyerId) {
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "client/" + buyerId + "/orders").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getBuyerOrders |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
     }]);
 

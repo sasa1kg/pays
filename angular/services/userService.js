@@ -122,6 +122,28 @@ var UserService = angular.module('UserService', []).service('UserService',
             return deffered.promise;
         }
 
+        this.updateBuyerGeneralInfo = function (buyerId, info) {
+            var deffered = q.defer();
+
+            http.put(rootScope.serverURL + "client/" + buyerId, info).
+              success(function (data, status) {
+                  if (status == 200) {
+                      console.log("updateBuyerGeneralInfo | Status OK " + status);
+                      deffered.resolve(data);
+                  } else {
+                      console.log("updateBuyerGeneralInfo | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("updateBuyerGeneralInfo | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
         this.storeUserCredentials = function (token, id, role) {
             if (localStorageService.cookie.isSupported) {
                 localStorageService.cookie.clearAll();
@@ -153,5 +175,6 @@ var UserService = angular.module('UserService', []).service('UserService',
                 return null;
             }
         }
+
 
     }]);

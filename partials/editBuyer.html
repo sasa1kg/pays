@@ -1,0 +1,232 @@
+<header id="header"><!--header-->
+  <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
+</header><!--/header-->
+
+<section class="register-form"><!--form-->
+  <div class="container">
+    <h4 class="title text-center">{{'EDIT_BUYER_DATA' | translate}}</h4>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li ng-class="{ active: (page == 'GENERAL_BUYER_DATA')}" class="cursor-pointer"
+                ng-click="sectionChange('GENERAL_BUYER_DATA')"><a>{{ 'GENERAL_BUYER_DATA' |
+              translate}}</a></li>
+            <li ng-class="{ active: (page == 'ORDERS')}" class="cursor-pointer"
+                ng-click="sectionChange('ORDERS')"><a>{{'ORDERS' | translate}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="row">
+      <div ng-if="page == 'GENERAL_BUYER_DATA'" class="col-sm-6">
+        <div class="signup-form">
+          <form>
+            <table class="col-sm-12 general-info-form-margin">
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'NAME' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="buyer.privateSubject.name"
+                                            placeholder="{{buyer.privateSubject.name}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'SURNAME' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="buyer.privateSubject.lastName"
+                                            placeholder="{{buyer.privateSubject.lastName}}"/>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'EMAIL' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="buyer.email"
+                                            placeholder="{{buyer.email}}" ng-disabled="true" ng-blur="true"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="buyer.privateSubject.phone"
+                                            placeholder="{{buyer.privateSubject.phone}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'CLIENT_ADDRESS' | translate}}</h5>
+                </td>
+                <td class="col-sm-9"><input type="text" ng-model="buyer.privateSubject.address"
+                                            placeholder="{{buyer.privateSubject.address}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'POSTAL_CODE' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="buyer.privateSubject.postalCode"
+                                            placeholder="{{buyer.privateSubject.postalCode}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'CITY' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="buyer.privateSubject.city"
+                                            placeholder="{{buyer.privateSubject.city}}"/></td>
+              </tr>
+            </table>
+            <button class="btn btn-default" ng-click="saveGeneralInfoChanges()">{{'SAVE_CHANGES' | translate}}</button>
+          </form>
+        </div>
+      </div>
+      <div ng-if="page == 'ORDERS'" class="col-sm-12" id="orders_data">
+        <table class="table table-condensed">
+          <thead>
+          <tr class="vehicles_menu">
+            <td>{{ 'COMPANY_NAME' | translate}}</td>
+            <td>{{ 'PRODUCT_NUMBER' | translate}}</td>
+            <td>{{ 'PRODUCT_TOTAL_PRICE' | translate}}</td>
+            <td>{{ 'STATUS' | translate}}</td>
+            <td>{{ 'ACTIONS' | translate}}</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat-start="order in orders">
+            <td>
+              <h4>{{order.farmer.businessSubject.name}}</h4>
+            </td>
+            <td>
+              <h5>{{order.items.length}}</h5>
+            </td>
+            <td>
+              <h5>{{order.totalPrice}} DIN</h5>
+            </td>
+            <td>
+              <h5>{{order.status}}</h5>
+            </td>
+            <td>
+              <button class="btn btn-default apply-changes-btn"
+                      ng-click="order.showDetails = !order.showDetails;order.showReview = false;"><i
+                class="fa fa-pencil-square-o"></i> {{ 'DETAILS' | translate}}
+              </button>
+              <button class="btn btn-default apply-changes-btn"
+                      ng-click="order.showReview = !order.showReview;order.showDetails = false;"><i
+                class="fa fa-star-half-o"></i> {{
+                'LEAVE_REVIEW' | translate}}
+              </button>
+            </td>
+          </tr>
+          <tr ng-if="order.showDetails || order.showReview" ng-repeat-end="" style="border-width: 5px">
+            <td ng-if="order.showDetails" colspan="5" style="background-color: antiquewhite;">
+              <h4 class="text-center">{{"DETAILS" |translate}}</h4>
+
+              <div class="col-sm-4 text-center">
+                <h4 class="text-center">{{'EDIT_FARMER_DATA' | translate}}</h4>
+
+                <div class="col-sm-12">
+                  <div class="col-sm-4">
+                    <strong>{{'COMPANY_NAME' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-8">
+                    {{order.farmer.businessSubject.name}}
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="col-sm-4">
+                    <strong>{{'EMAIL' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-8">
+                    {{order.farmer.email}}
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="col-sm-4">
+                    <strong>{{'PHONE_NUMBER' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-8">
+                    {{order.farmer.businessSubject.phone}}
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="col-sm-4">
+                    <strong>{{'CLIENT_ADDRESS' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-8">
+                    {{order.farmer.businessSubject.address}}
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="col-sm-4">
+                    <strong>{{'CITY' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-8">
+                    {{order.farmer.businessSubject.postalCode}}, {{order.farmer.businessSubject.city}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 text-center">
+                <h4 class="text-center">{{'DELIVERY' | translate}}</h4>
+
+                <div class="col-sm-12">
+                  <div class="col-sm-6">
+                    <strong>{{'DELIVERY_DATE' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-6">
+                    {{order.deliveryDate}}
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                    <strong>{{'DELIVERY_TIME' | translate}}</strong>
+                </div>
+                <div class="col-sm-12">
+                  <div class="col-sm-4">
+                    <strong>{{'FROM' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-8">
+                    {{order.deliveryFrom}}
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="col-sm-4">
+                    <strong>{{'TO' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-8">
+                    {{order.deliveryTo}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <h4 class="text-center">{{'PRODUCTS' | translate}}</h4>
+
+                <div ng-repeat="item in order.items">
+                  <div class="col-sm-8">
+                    {{item.product.name.localization[currentLang]}}
+                  </div>
+                  <div class="col-sm-4">
+                    {{item.amount}} {{item.unit}}
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td ng-if="!order.showDetails && order.showReview" colspan="5" style="background-color: azure;">
+              <h4 class="text-center">{{ 'LEAVE_REVIEW' | translate}}</h4>
+              <div class="col-sm-12 mb_10 ">
+                <ul class="star-rating pull-right">
+                  <li ng-repeat="star in order.review.stars" class="star" ng-class="{filled: star.filled, not_filled: !star.filled}"
+                      ng-click="toggle(order,star)">
+                    <i class="fa fa-star fa-lg"></i>
+                  </li>
+                </ul>
+
+                <h4 class="pull-right mr-10">{{ 'YOUR_RATING' | translate}}:</h4>
+                <h4>{{ 'MAX_250_CHARS_FOR_REVIEW' | translate}}</h4>
+              </div>
+              <div class="col-sm-12 mb_10">
+        <textarea class="form-control text-left" rows="3" ng-model="order.review.comment"
+                  placeholder="{{'REVIEW_TEXT' | translate}}" maxlength="250" required>
+        </textarea>
+              </div>
+              <div class="text-center">
+              <button class="btn btn-default btn-lg apply-changes-btn mtb10"
+                      ng-click="submitReview(order)" ng-disabled="!order.review.comment"><i
+                class="fa fa-pencil-square-o"></i> {{ 'SUBMIT_REVIEW' | translate}}
+              </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div ng-include="'partials/footer.html'"></div>
+	
