@@ -322,5 +322,24 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
             return deffered.promise;
         }
+
+        this.getCities = function(){
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "city").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getCities |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+              }).
+              error(function (data, status) {
+                  console.log("getCities | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
     }]);
 

@@ -329,4 +329,46 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             flowObj.upload();
             return deferred.promise;
         }
+
+        this.updatePrices = function(distributorId, pricesData){
+            var deffered = q.defer();
+
+            http.post(rootScope.serverURL + "transporter/" + distributorId + "/pricelist", pricesData).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("updatePrices | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("updatePrices | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
+        this.getPrices = function(distributorId){
+            var deffered = q.defer();
+
+            http.get(rootScope.serverURL + "transporter/" + distributorId + "/pricelist").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getPrices | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("getPrices | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
     }]);

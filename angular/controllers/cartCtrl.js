@@ -114,20 +114,9 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
       scope.calculateTotal();
     }
 
-    scope.cities = [
-      {
-        "id": 0,
-        "name": "Novi Sad"
-      },
-      {
-        "id": 1,
-        "name": "Beograd"
-      },
-      {
-        "id": 2,
-        "name": "Kraljevo"
-      }
-    ]
+    SearchService.getCities().then(function (data) {
+      scope.cities = data;
+    });
 
     scope.goToPayment = function () {
       console.log(scope.locationType.selected);
@@ -147,14 +136,14 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
       postalCode: ""
     }
 
-    scope.prevAddress    = {
+    scope.prevAddress = {
       address: null
     };
 
     scope.$watch('prevAddress.address', function () {
       if (scope.prevAddress.address != null) {
         var addressObj = JSON.parse(scope.prevAddress.address);
-        scope.address = {
+        scope.address  = {
           city: addressObj.city,
           street: addressObj.street,
           houseNumber: addressObj.houseNumber,
@@ -165,6 +154,16 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
       }
     });
 
+    scope.$watch('address.city', function () {
+      if ((scope.address.city != null) && (scope.address.city.length > 0)) {
+        for(var i =0;i<scope.cities.length;i++){
+          if(scope.cities[i].name == scope.address.city){
+            scope.address.postalCode = parseInt(scope.cities[i].postalCode);
+            return true;
+          }
+        }
+      }
+    });
   }]);
 
 angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance, $location, CartService) {

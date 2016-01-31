@@ -2,6 +2,17 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope","$rootScope", 
     function (scope, rootScope, filter, routeParams, CartService, WishlistService, SearchService, DistributorService) {
 
         console.log("Distributor:  " + (routeParams.id));
+
+        scope.prices     = [];
+
+        //dummy load
+        for (var i in rootScope.transportDistances) {
+            scope.prices[rootScope.transportDistances[i]] = [];
+            for (var j in rootScope.transportWeights) {
+                scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = rootScope.transportDistances[i] + rootScope.transportWeights[j];
+            }
+        }
+
         DistributorService.getDistributorById(routeParams.id).then(function (data) {
             scope.distributor = data;
             scope.distributor.bannerImages = [];
@@ -29,4 +40,6 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope","$rootScope", 
                 }
             }
         });
+
+
     }]);

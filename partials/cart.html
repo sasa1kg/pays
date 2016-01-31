@@ -122,7 +122,7 @@
 
             <form class="col-sm-10">
               <select ng-model="address.city" class="form-control">
-                <option ng-repeat="city in cities" value="{{city.name}}">{{city.name |
+                <option ng-repeat="city in cities | orderBy:'name':false" value="{{city.name}}">{{city.name |
                   html}}
                 </option>
               </select>

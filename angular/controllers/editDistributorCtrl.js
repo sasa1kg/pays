@@ -16,14 +16,6 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
       flow: null
     };
 
-    //dummy load
-    for (var i in rootScope.transportDistances) {
-      scope.prices[rootScope.transportDistances[i]] = [];
-      for (var j in rootScope.transportWeights) {
-        scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = rootScope.transportDistances[i] * rootScope.transportWeights[j];
-      }
-    }
-
     scope.sectionChange = function (sectionName) {
       scope.page = sectionName;
     }
@@ -48,15 +40,15 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
             scope.distributor.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
           });
       }
-      var bannerPicIndex = 0;
+      var bannerPicIndex  = 0;
       var bannerLoadIndex = 0;
       for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.distributor.images.banner.length)); i++) {
         scope.distributor.bannerImages[bannerLoadIndex++].imageId = scope.distributor.images.banner[scope.distributor.images.banner.length - (i + 1)];
         DistributorService.getDistributorImage(distributorId, scope.distributor.images.banner[scope.distributor.images.banner.length - (i + 1)])
           .then(function (img) {
             if (img.type != 'undefined') {
-              for(var j =0; j< scope.distributor.bannerImages.length;j++){
-                if(scope.distributor.bannerImages[j].imageId == img.imageIndex){
+              for (var j = 0; j < scope.distributor.bannerImages.length; j++) {
+                if (scope.distributor.bannerImages[j].imageId == img.imageIndex) {
                   scope.distributor.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
                   bannerPicIndex++
                 }
@@ -173,14 +165,45 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
       scope.openVehicleModal()
     }
 
+
+    //dummy load
+    for (var i in rootScope.transportDistances) {
+      scope.prices[rootScope.transportDistances[i]] = [];
+      for (var j in rootScope.transportWeights) {
+        scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = rootScope.transportDistances[i] + rootScope.transportWeights[j];
+      }
+    }
+
     scope.updatePrices         = function () {
-      console.log(scope.prices);
+      var pricesObj = {
+        currency: {"id":1,"code":"RSD","name":"Dinar"},
+        from: "2016-01-31",
+        to: null,
+        prices: []
+      };
+
+      for (var i in rootScope.transportDistances) {
+        for (var j in rootScope.transportWeights) {
+          pricesObj.prices.push({
+            weight : rootScope.transportWeights[j],
+            distance : rootScope.transportDistances[i],
+            price : scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]]
+          });
+        }
+      }
+
+      DistributorService.updatePrices(distributorId,pricesObj).then ( function(data){
+        Notification.success({message: filter('translate')('PRICES_UPDATED')});
+      }).catch(function(){
+        Notification.error({message: filter('translate')('PRICES_NOT_UPDATED')});
+      });
+
     }
     scope.uploadVehiclePicture = function (vehicleId, imageId, flow) {
       if (typeof flow.files !== 'undefined') {
         DistributorService.uploadVehicleImage(vehicleId, imageId, flow).then(function (data) {
           Notification.success({message: filter('translate')('VEHICLE_IMAGE_UPLOADED')});
-          scope.reloadVehicleImage(vehicleId,data.image);
+          scope.reloadVehicleImage(vehicleId, data.image);
         }).catch(function (err) {
           Notification.error({message: filter('translate')('VEHICLE_IMAGE_FAILURE')});
         });

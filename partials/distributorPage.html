@@ -1,119 +1,165 @@
 <header id="header"><!--header-->
-    <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
+  <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
 </header><!--/header-->
 
 <section>
-    <div class="container">
-        <div class="col-sm-9">
-            <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators pays-carousel-indicators">
-                    <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#slider-carousel" data-slide-to="1"></li>
-                    <li data-target="#slider-carousel" data-slide-to="2"></li>
-                    <li data-target="#slider-carousel" data-slide-to="3"></li>
-                    <li data-target="#slider-carousel" data-slide-to="4"></li>
-                    <li data-target="#slider-carousel" data-slide-to="5"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="col-sm-12 text-center">
-                            <h2 ng-bind-html="distributor.businessSubject.name | html"></h2>
+  <div class="container">
+    <div class="col-sm-9">
+      <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators pays-carousel-indicators">
+          <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#slider-carousel" data-slide-to="1"></li>
+          <li data-target="#slider-carousel" data-slide-to="2"></li>
+          <li data-target="#slider-carousel" data-slide-to="3"></li>
+          <li data-target="#slider-carousel" data-slide-to="4"></li>
+          <li data-target="#slider-carousel" data-slide-to="5"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="col-sm-12 text-center">
+              <h2 ng-bind-html="distributor.businessSubject.name | html"></h2>
 
-                            <h3 ng-bind-html="distributor.advertisingTitle | translate | html"></h3>
+              <h3 ng-bind-html="distributor.advertisingTitle | translate | html"></h3>
 
-                            <p ng-bind-html="distributor.advertisingText | translate | html"></p>
-                            
-                            <h3 ng-bind="(distributor.businessSubject.address | html) +', ' + distributor.businessSubject.postalCode + ', '+ (distributor.businessSubject.city | html)"></h3>
+              <p ng-bind-html="distributor.advertisingText | translate | html"></p>
 
-                            <div class="col-sm-12 text-left">
-                                <p class="col-sm-6"><strong>{{ 'TAX_NUMBER' | translate}} : </strong>{{distributor.businessSubject.taxNum}}
-                                </p>
+              <h3
+                ng-bind="(distributor.businessSubject.address | html) +', ' + distributor.businessSubject.postalCode + ', '+ (distributor.businessSubject.city | html)"></h3>
 
-                                <p class="col-sm-6"><strong>{{ 'BANK_NUMBER' | translate}} : </strong>{{distributor.businessSubject.account}}
-                                </p>
-                            </div>
-                            <div class="col-sm-12 text-left">
-                                <p class="col-sm-6"><strong>{{ 'PIB_NUMBER' | translate}} : </strong>{{distributor.businessSubject.companyNum}}
-                                </p>
+              <div class="col-sm-12 text-left">
+                <p class="col-sm-6"><strong>{{ 'TAX_NUMBER' | translate}} : </strong>{{distributor.businessSubject.taxNum}}
+                </p>
 
-                                <p class="col-sm-6"><strong>{{ 'BUSSINESS_ACT_NUMBER' | translate}} : </strong>{{distributor.businessSubject.businessActivityCode}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="{{distributor.bannerImages[0]}}" class="girl img-responsive col-sm-12" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
-                             style="height: 400px;width: 400px;"/>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="{{distributor.bannerImages[1]}}" class="girl img-responsive col-sm-12" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
-                             style="height: 400px;"/>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="{{distributor.bannerImages[2]}}" class="girl img-responsive col-sm-12" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
-                             style="height: 400px;"/>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="{{distributor.bannerImages[3]}}" class="girl img-responsive col-sm-12" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
-                             style="height: 400px;"/>
-                    </div>
-                    <div class="item col-sm-12">
-                        <img src="{{distributor.bannerImages[4]}}" class="girl img-responsive col-sm-12" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
-                             style="height: 400px;"/>
-                    </div>
-                </div>
+                <p class="col-sm-6"><strong>{{ 'BANK_NUMBER' | translate}} : </strong>{{distributor.businessSubject.account}}
+                </p>
+              </div>
+              <div class="col-sm-12 text-left">
+                <p class="col-sm-6"><strong>{{ 'PIB_NUMBER' | translate}} : </strong>{{distributor.businessSubject.companyNum}}
+                </p>
 
-                <a class="left control-carousel hidden-xs" ng-non-bindable data-slide="prev" role="button"
-                   data-target="#slider-carousel">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                <a class="right control-carousel hidden-xs" ng-non-bindable data-slide="next" role="button"
-                   data-target="#slider-carousel">
-                    <i class="fa fa-angle-right"></i>
-                </a>
+                <p class="col-sm-6"><strong>{{ 'BUSSINESS_ACT_NUMBER' | translate}} : </strong>{{distributor.businessSubject.businessActivityCode}}
+                </p>
+              </div>
             </div>
+          </div>
+          <div class="item col-sm-12">
+            <img src="{{distributor.bannerImages[0]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
+                 style="height: 400px;width: 400px;"/>
+          </div>
+          <div class="item col-sm-12">
+            <img src="{{distributor.bannerImages[1]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
+                 style="height: 400px;"/>
+          </div>
+          <div class="item col-sm-12">
+            <img src="{{distributor.bannerImages[2]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
+                 style="height: 400px;"/>
+          </div>
+          <div class="item col-sm-12">
+            <img src="{{distributor.bannerImages[3]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
+                 style="height: 400px;"/>
+          </div>
+          <div class="item col-sm-12">
+            <img src="{{distributor.bannerImages[4]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
+                 style="height: 400px;"/>
+          </div>
         </div>
-        <div class="col-sm-3 text-center">
-            <h3>CONTACT</h3>
-            <hr/>
-            <h4>{{ 'EMAIL' | translate}}</h4>
-            <h4 ng-bind-html="distributor.email | translate | html"></h4>
-            <hr/>
-            <h4>{{ 'PHONE_NUMBER' | translate}}</h4>
-            <h4 ng-bind-html="distributor.businessSubject.phone | translate | html"></h4>
-            <hr/>
-            <h4>{{ 'FAX_NUMBER' | translate}}</h4>
-            <h4 ng-bind-html="distributor.businessSubject.fax | translate | html"></h4>
-        </div>
+
+        <a class="left control-carousel hidden-xs" ng-non-bindable data-slide="prev" role="button"
+           data-target="#slider-carousel">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="right control-carousel hidden-xs" ng-non-bindable data-slide="next" role="button"
+           data-target="#slider-carousel">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
     </div>
+    <div class="col-sm-3 text-center">
+      <h3>CONTACT</h3>
+      <hr/>
+      <h4>{{ 'EMAIL' | translate}}</h4>
+      <h4 ng-bind-html="distributor.email | translate | html"></h4>
+      <hr/>
+      <h4>{{ 'PHONE_NUMBER' | translate}}</h4>
+      <h4 ng-bind-html="distributor.businessSubject.phone | translate | html"></h4>
+      <hr/>
+      <h4>{{ 'FAX_NUMBER' | translate}}</h4>
+      <h4 ng-bind-html="distributor.businessSubject.fax | translate | html"></h4>
+    </div>
+  </div>
 </section>
 
 <section>
-    <div class="container">
-        <div class="row">
-            <h2 class="title text-center">{{ 'VEHICLES' | translate}}</h2>
-
-            <div class="product-details">
-                <div class="col-sm-4" ng-repeat="vehicle in distributorVehicles">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{vehicle.img}}" height="200px" width="128px" class="cursorhover"/>
-                            </div>
-                            <h4>{{ 'VEHICLE_MODEL' | translate}} : {{vehicle.name}}</h4>
-                            <h4>{{ 'NUMBER_OF_VEHICLES' | translate}} : {{vehicle.number}}</h4>
-                            <h4>{{ 'COOLED_TRANSPORT' | translate}} : <span ng-if="vehicle.cooled == true">{{'YES' | translate }}</span>
-                                <span ng-if="vehicle.cooled == false">{{'NO' | translate }}</span>
-                            </h4>
-                            <h4>{{ 'TRANSPORT_VOLUME' | translate}}[cm]:
-                                {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}</h4>
-                            <h4>{{ 'TRANSPORT_WEIGHT' | translate}} : {{vehicle.maxMass}} kg</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row" ng-if="false">
+      <a class="cursor-pointer" data-toggle="collapse" data-target="#prices"><h2 class="title text-center">{{ 'DISTRIBUTOR_PRICES' | translate}} <i
+        class="fa fa-caret-down"></i></h2></a>
+      <div id="prices" class="collapse">
+        <h4 class="text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}} (RSD)</h4>
+        <hr/>
+        <div class="col-sm-1 text-center">
+          <h5 class="side-caption">{{ 'WEIGHT' | translate}} [kg]</h5>
         </div>
+        <div class="col-sm-11">
+          <h5 class="text-center">{{ 'DISTANCE' | translate}} [km]</h5>
+
+          <div class="col-sm-12 text-center">
+            <table class="table table-responsive table-bordered" id="priceTable">
+              <tr>
+                <td>
+                </td>
+                <td ng-repeat="dist in transportDistances track by $index">
+                  <h5 ng-if="$index < (transportDistances.length -1)">{{dist}} - {{transportDistances[$index+1]}}
+                    km</h5>
+                  <h5 ng-if="$index == (transportDistances.length -1)">{{'>'}} {{dist}} km</h5>
+                </td>
+              </tr>
+              <tr ng-repeat="weight in transportWeights">
+                <td>
+                  <h5 ng-if="$index < (transportWeights.length -1)">{{weight}} - {{transportWeights[$index+1]}}
+                    kg</h5>
+                  <h5 ng-if="$index == (transportWeights.length -1)">{{'>'}} {{weight}} kg</h5>
+                </td>
+                <td ng-repeat="dist in transportDistances">
+                  <input type="number" placeholder="{{prices[dist][weight]}}"
+                         ng-model="prices[dist][weight]"/>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="row">
+      <h2 class="title text-center">{{ 'VEHICLES' | translate}}</h2>
+
+      <div class="product-details">
+        <div class="col-sm-4" ng-repeat="vehicle in distributorVehicles">
+          <div class="product-image-wrapper">
+            <div class="single-products">
+              <div class="productinfo text-center">
+                <img src="{{vehicle.img}}" height="200px" width="128px" class="cursorhover"/>
+              </div>
+              <h4>{{ 'VEHICLE_MODEL' | translate}} : {{vehicle.name}}</h4>
+              <h4>{{ 'NUMBER_OF_VEHICLES' | translate}} : {{vehicle.number}}</h4>
+              <h4>{{ 'COOLED_TRANSPORT' | translate}} : <span
+                ng-if="vehicle.cooled == true">{{'YES' | translate }}</span>
+                <span ng-if="vehicle.cooled == false">{{'NO' | translate }}</span>
+              </h4>
+              <h4>{{ 'TRANSPORT_VOLUME' | translate}}[cm]:
+                {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}</h4>
+              <h4>{{ 'TRANSPORT_WEIGHT' | translate}} : {{vehicle.maxMass}} kg</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div ng-include="'partials/footer.html'"></div>

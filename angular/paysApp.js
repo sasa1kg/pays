@@ -89,10 +89,10 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
 
 
   $rootScope.transportDistances = [
-    10, 20, 50, 100, 200, 300
+    0, 25, 50, 100, 200, 400
   ];
   $rootScope.transportWeights   = [
-    5, 10, 20, 50, 100, 200
+    0, 10, 20, 50, 100, 300, 500
   ];
 
   $rootScope.paysEMail = 'office@pays-system.com';
@@ -469,7 +469,9 @@ paysApp.config(function ($translateProvider) {
     MAX_250_CHARS_FOR_REVIEW : 'Maximum 250 characters for review',
     REVIEW_TEXT : 'Please enter your review\'s text...',
     SUBMIT_REVIEW : 'Submit review',
-    NEW_ADDRESS : 'Enter address'
+    NEW_ADDRESS : 'Enter address',
+    PRICES_UPDATED : 'Prices update',
+    PRICES_NOT_UPDATED : 'Failed to update prices'
 
   })
     .translations('rs_RS', {
@@ -772,7 +774,9 @@ paysApp.config(function ($translateProvider) {
       MAX_250_CHARS_FOR_REVIEW : 'Maksimum 250 karaktera za tekst komentara',
       REVIEW_TEXT : 'Molimo Vas unesite Vaš komentar...',
       SUBMIT_REVIEW : 'Postavi komentar',
-      NEW_ADDRESS : 'Unesite adresu'
+      NEW_ADDRESS : 'Unesite adresu',
+      PRICES_UPDATED : 'Cene ažurirane',
+      PRICES_NOT_UPDATED : 'Neuspelo ažuriranje cena'
     })
   $translateProvider.preferredLanguage('en_EN');
 });
