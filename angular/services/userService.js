@@ -65,6 +65,26 @@ var UserService = angular.module('UserService', []).service('UserService',
             return deffered.promise;
         }
 
+        this.getUserPreviousDeliveryAddress = function(userId){
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "client/"+userId+"/previousDelivery").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getUserPreviousDeliveryAddress | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("getUserPreviousDeliveryAddress | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
         this.sendForgotPasswordEmail = function(destEmailData){
             var deffered = q.defer();
             http.post(rootScope.serverURL + "passwordChangeToken", destEmailData).
@@ -150,6 +170,22 @@ var UserService = angular.module('UserService', []).service('UserService',
                 localStorageService.cookie.set("role",role,1);
                 localStorageService.cookie.set("id",id,1);
                 localStorageService.cookie.set("token",token,1);
+            } else {
+                console.error("Cookies not supported in this browser!");
+            }
+        }
+
+        this.storeUserDeliveryAddresses = function (id,address) {
+            if (localStorageService.cookie.isSupported) {
+                localStorageService.cookie.set("addresses"+id,JSON.stringify(address),1);
+            } else {
+                console.error("Cookies not supported in this browser!");
+            }
+        }
+
+        this.getUserDeliveryAddress = function (id) {
+            if (localStorageService.cookie.isSupported) {
+                return localStorageService.cookie.get("addresses"+id);
             } else {
                 console.error("Cookies not supported in this browser!");
             }

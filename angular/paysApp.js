@@ -468,7 +468,8 @@ paysApp.config(function ($translateProvider) {
     YOUR_RATING : 'Your rating',
     MAX_250_CHARS_FOR_REVIEW : 'Maximum 250 characters for review',
     REVIEW_TEXT : 'Please enter your review\'s text...',
-    SUBMIT_REVIEW : 'Submit review'
+    SUBMIT_REVIEW : 'Submit review',
+    NEW_ADDRESS : 'Enter address'
 
   })
     .translations('rs_RS', {
@@ -770,7 +771,8 @@ paysApp.config(function ($translateProvider) {
       YOUR_RATING : 'Vaša ocena',
       MAX_250_CHARS_FOR_REVIEW : 'Maksimum 250 karaktera za tekst komentara',
       REVIEW_TEXT : 'Molimo Vas unesite Vaš komentar...',
-      SUBMIT_REVIEW : 'Postavi komentar'
+      SUBMIT_REVIEW : 'Postavi komentar',
+      NEW_ADDRESS : 'Unesite adresu'
     })
   $translateProvider.preferredLanguage('en_EN');
 });
