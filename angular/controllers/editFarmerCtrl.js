@@ -120,7 +120,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
         }
 
         scope.deleteProduct = function (product) {
-            FarmerService.deleteProduct(scope.farmer.id, product.id).then(function (data) {
+            FarmerService.deleteProduct(scope.farmer.id, product.stockItemId).then(function (data) {
                 Notification.success({message: filter('translate')('PRODUCT_DELETED')});
                 var idx = scope.products.indexOf(product);
                 if (idx >= 0) {
