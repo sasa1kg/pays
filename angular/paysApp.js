@@ -89,10 +89,10 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
 
 
   $rootScope.transportDistances = [
-    0, 25, 50, 100, 200, 400
+    0, 20, 40,60,80, 100,125,150,175, 200, 250, 300,350, 400,450,500
   ];
   $rootScope.transportWeights   = [
-    0, 10, 20, 50, 100, 300, 500
+    0, 5,10,15, 20,30,40, 50,65,80, 100, 150,200, 300, 400, 500
   ];
 
   $rootScope.paysEMail = 'office@pays-system.com';

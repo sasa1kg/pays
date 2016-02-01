@@ -97,3 +97,11 @@
 .not_filled {
     color: #999;
 }
+
+#priceTable tr td {
+    padding:1px;
+}
+
+#priceTable tr td h5 {
+    font-size : 12px
+}

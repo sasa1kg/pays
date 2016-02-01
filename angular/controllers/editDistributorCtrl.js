@@ -166,35 +166,46 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
     }
 
 
-    //dummy load
-    for (var i in rootScope.transportDistances) {
-      scope.prices[rootScope.transportDistances[i]] = [];
-      for (var j in rootScope.transportWeights) {
-        scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = rootScope.transportDistances[i] + rootScope.transportWeights[j];
+    DistributorService.getPrices(routeParams.id).then(function (data) {
+      if (data.prices && data.prices.length > 0) {
+        angular.forEach(data.prices, function (price) {
+          if (!scope.prices[price.distance]) {
+            scope.prices[price.distance]               = new Array();
+            scope.prices[price.distance][price.weight] = price.price;
+          } else {
+            scope.prices[price.distance][price.weight] = price.price;
+          }
+        });
+      } else {
+        for (var i in rootScope.transportDistances) {
+          scope.prices[rootScope.transportDistances[i]] = [];
+          for (var j in rootScope.transportWeights) {
+            scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
+          }
+        }
       }
-    }
+    });
+
 
     scope.updatePrices         = function () {
       var pricesObj = {
-        currency: {"id":1,"code":"RSD","name":"Dinar"},
-        from: "2016-01-31",
-        to: null,
+        currency: rootScope.defaultCurrency.id,
         prices: []
       };
 
       for (var i in rootScope.transportDistances) {
         for (var j in rootScope.transportWeights) {
           pricesObj.prices.push({
-            weight : rootScope.transportWeights[j],
-            distance : rootScope.transportDistances[i],
-            price : scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]]
+            weight: rootScope.transportWeights[j],
+            distance: rootScope.transportDistances[i],
+            price: scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]]
           });
         }
       }
 
-      DistributorService.updatePrices(distributorId,pricesObj).then ( function(data){
+      DistributorService.updatePrices(distributorId, pricesObj).then(function (data) {
         Notification.success({message: filter('translate')('PRICES_UPDATED')});
-      }).catch(function(){
+      }).catch(function () {
         Notification.error({message: filter('translate')('PRICES_NOT_UPDATED')});
       });
 
