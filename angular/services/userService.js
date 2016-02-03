@@ -212,5 +212,26 @@ var UserService = angular.module('UserService', []).service('UserService',
             }
         }
 
+        this.postOrderReview = function (clientId,orderId,reviewData) {
+            var deffered = q.defer();
+            http.post(rootScope.serverURL + "client/"+clientId+"/orders/"+orderId+"/review", reviewData).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("postOrderReview | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+              }).
+              error(function (data, status) {
+                  console.log("postOrderReview | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
+
+
 
     }]);

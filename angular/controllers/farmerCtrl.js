@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", "$routeParams", "CartService", "WishlistService", "SearchService",
-    function (scope, http, filter, routeParams, CartService, WishlistService, SearchService) {
+angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filter", "$routeParams", "CartService", "WishlistService", "SearchService","FarmerService",
+    function (scope, rootScope, filter, routeParams, CartService, WishlistService, SearchService,FarmerService) {
 
 
         console.log("FARM! " + routeParams.id);
@@ -9,7 +9,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
 
         scope.farmerId = routeParams.id;
         scope.searchedItems = [];
-
+        scope.prices = [];
         scope.amount = "";
 
         scope.addToWishlist = function (productId) {
@@ -119,9 +119,14 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
         SearchService.getFarmerById(scope.farmerId).then(function (data) {
             if (data) {
                 scope.farmer = data;
-                SearchService.getFarmerImage(scope.farmer.id, 0).then(function (img) {
-                    scope.farmer.img = img.document_content;
-                });
+                scope.farmer.bannerImages = [];
+                var bannerPicIndex             = 0;
+                for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.farmer.images.banner.length)); i++) {
+                    FarmerService.getFarmerImage(routeParams.id, scope.farmer.images.banner[scope.farmer.images.banner.length - (i+1)])
+                      .then(function (img) {
+                          scope.farmer.bannerImages[bannerPicIndex++] = "data:image/jpeg;base64," + img.document_content;
+                      });
+                }
             } else {
                 console.log("Unable to load farmer from DB");
             }
@@ -162,6 +167,34 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$http", "$filter", 
                 console.log("Unable to load farmer products from DB");
             }
         });
+
+        FarmerService.getPrices(routeParams.id).then(function (data) {
+            if (data.prices && data.prices.length > 0) {
+                angular.forEach(data.prices, function (price) {
+                    if (!scope.prices[price.distance]) {
+                        scope.prices[price.distance]               = new Array();
+                        scope.prices[price.distance][price.weight] = price.price;
+                    } else {
+                        scope.prices[price.distance][price.weight] = price.price;
+                    }
+                });
+            } else {
+                for (var i in rootScope.transportDistances) {
+                    scope.prices[rootScope.transportDistances[i]] = [];
+                    for (var j in rootScope.transportWeights) {
+                        scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
+                    }
+                }
+            }
+        }).catch(function(err){
+            for (var i in rootScope.transportDistances) {
+                scope.prices[rootScope.transportDistances[i]] = [];
+                for (var j in rootScope.transportWeights) {
+                    scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
+                }
+            }
+        });
+
 
         scope.canBeAdded = function () {
             return CartService.canBeAdded(scope.farmerId);

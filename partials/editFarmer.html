@@ -1,588 +1,503 @@
 <header id="header"><!--header-->
-    <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
+  <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
 </header><!--/header-->
 
 <section class="register-form"><!--form-->
-    <div class="container">
-        <h4 class="title text-center">{{'EDIT_FARMER_DATA' | translate}}</h4>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li ng-class="{ active: (page == 'GENERAL_FARMER_DATA')}" class="cursor-pointer"
-                            ng-click="sectionChange('GENERAL_FARMER_DATA')"><a>{{ 'GENERAL_FARMER_DATA' |
-                            translate}}</a></li>
-                        <li ng-class="{ active: (page == 'PRODUCTS')}" class="cursor-pointer"
-                            ng-click="sectionChange('PRODUCTS')"><a>{{'PRODUCTS' | translate}}</a>
-                        </li>
-                        <li ng-class="{ active: (page == 'ORDERS')}" class="cursor-pointer"
-                            ng-click="sectionChange('ORDERS')"><a>{{'ORDERS' | translate}}</a>
-                        </li>
-                        <!--
-                        <li ng-class="{ active: (page == 'DISTRIBUTOR_MARKETING')}" class="cursor-pointer"
-                            ng-click="sectionChange('DISTRIBUTOR_MARKETING')"><a>{{'DISTRIBUTOR_MARKETING' |
-                            translate}}</a></li>
-                        <li ng-class="{ active: (page == 'DISTRIBUTOR_PRICES')}" class="cursor-pointer"
-                            ng-click="sectionChange('DISTRIBUTOR_PRICES')"><a>{{'DISTRIBUTOR_PRICES' |
-                            translate}}</a></li>
-                            -->
-                    </ul>
-                </div>
+  <div class="container">
+    <h4 class="title text-center">{{'EDIT_FARMER_DATA' | translate}}</h4>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li ng-class="{ active: (page == 'GENERAL_FARMER_DATA')}" class="cursor-pointer"
+                ng-click="sectionChange('GENERAL_FARMER_DATA')"><a>{{ 'GENERAL_FARMER_DATA' |
+              translate}}</a></li>
+            <li ng-class="{ active: (page == 'PRODUCTS')}" class="cursor-pointer"
+                ng-click="sectionChange('PRODUCTS')"><a>{{'PRODUCTS' | translate}}</a>
+            </li>
+            <li ng-class="{ active: (page == 'ORDERS')}" class="cursor-pointer"
+                ng-click="sectionChange('ORDERS')"><a>{{'ORDERS' | translate}}</a>
+            </li>
+            <li ng-class="{ active: (page == 'FARMER_MARKETING')}" class="cursor-pointer"
+                ng-click="sectionChange('FARMER_MARKETING')"><a>{{'FARMER_MARKETING' |
+              translate}}</a></li>
+            <li ng-class="{ active: (page == 'FARMER_PRICES')}" class="cursor-pointer"
+                ng-click="sectionChange('FARMER_PRICES')"><a>{{'FARMER_PRICES' |
+              translate}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="row">
+      <div ng-if="page == 'GENERAL_FARMER_DATA'" class="col-sm-6">
+        <div class="signup-form">
+          <form>
+            <table class="col-sm-12 general-info-form-margin">
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.name"
+                                            placeholder="{{farmer.businessSubject.name}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.account"
+                                            placeholder="{{farmer.businessSubject.account}}"/>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.companyNum"
+                                            placeholder="{{farmer.businessSubject.companyNum}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'STREET_AND_NUMBER' | translate}}</h5>
+                </td>
+                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.address"
+                                            placeholder="{{farmer.businessSubject.address}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'POSTAL_CODE' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.postalCode"
+                                            placeholder="{{farmer.businessSubject.postalCode}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'CITY' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.city"
+                                            placeholder="{{farmer.businessSubject.city}}"/></td>
+              </tr>
+              <tr>
+                <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5></td>
+                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.phone"
+                                            placeholder="{{farmer.businessSubject.phone}}"/></td>
+              </tr>
+            </table>
+            <button class="btn btn-default" ng-click="saveGeneralInfoChanges()">{{'SAVE_CHANGES' | translate}}</button>
+          </form>
+        </div>
+      </div>
+      <div ng-if="page == 'PRODUCTS'" class="col-sm-12" id="products_data">
+        <div class="table-responsive vehicles_info">
+          <script type="text/ng-template" id="productEditModal.html">
+            <div class="modal-header">
+              <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+              <h4 class="modal-title">{{ 'PRODUCT_EDIT' | translate}}</h4>
             </div>
-        </nav>
-        <div class="row">
-            <div ng-if="page == 'GENERAL_FARMER_DATA'" class="col-sm-6">
-                <div class="signup-form">
-                    <form>
-                        <table class="col-sm-12 general-info-form-margin">
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.name"
-                                                            placeholder="{{farmer.businessSubject.name}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.account"
-                                                            placeholder="{{farmer.businessSubject.account}}"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.companyNum"
-                                                            placeholder="{{farmer.businessSubject.companyNum}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'STREET_AND_NUMBER' | translate}}</h5>
-                                </td>
-                                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.address"
-                                                            placeholder="{{farmer.businessSubject.address}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'POSTAL_CODE' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.postalCode"
-                                                            placeholder="{{farmer.businessSubject.postalCode}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'CITY' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.city"
-                                                            placeholder="{{farmer.businessSubject.city}}"/></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5></td>
-                                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.phone"
-                                                            placeholder="{{farmer.businessSubject.phone}}"/></td>
-                            </tr>
-                        </table>
-                        <button class="btn btn-default" ng-click="saveGeneralInfoChanges()">{{'SAVE_CHANGES' | translate}}</button>
-                    </form>
-                </div>
-            </div>
-            <div ng-if="page == 'PRODUCTS'" class="col-sm-12" id="products_data">
-                <div class="table-responsive vehicles_info">
-                    <script type="text/ng-template" id="productEditModal.html">
-                        <div class="modal-header">
-                            <button type="button" class="close" ng-click="cancelModal()">&times;</button>
-                            <h4 class="modal-title">{{ 'PRODUCT_EDIT' | translate}}</h4>
+            <div class="modal-body">
+              <div class="signup-form">
+                <form>
+                  <table class="col-sm-12">
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_NAME' |
+                        translate}}</h5></td>
+                      <!--<td class="col-sm-9"><input type="text" ng-model="productNew.product.name.localization[currentLang]"-->
+                      <!--placeholder="{{ productNew.product.name.localization[currentLang]}}"/></td>-->
+                      <td class="col-sm-9">
+                        <input disabled ng-show="!newProduct" type="text"
+                               ng-model="productNew.product.name.localization[currentLang]"
+                               placeholder="{{ productNew.product.name.localization[currentLang]}}"/>
+                        <select ng-selected="productNew.product" ng-change="onProductNameChanged()" ng-show="newProduct"
+                                name="singleSelectName" ng-model="productNew.product"
+                                ng-options="product as product.name.localization[currentLang] for product in allProducts track by product.id">
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
+                        translate}} [RSD]</h5></td>
+                      <td class="col-sm-9"><input type="text" ng-model="productNew.price.price"
+                                                  placeholder="{{productNew.price.price}}"/>
+                      </td>
+                    </tr>
+                    <!--<tr>-->
+                    <!--<td class="col-sm-3"><h5 class="text-left">{{ 'CURRENCY' |-->
+                    <!--translate}}</h5></td>-->
+                    <!--<td class="col-sm-9">-->
+                    <!--<select ng-selected="productNew.price.currency" name="singleSelect" ng-model="productNew.price.currency" ng-options="currency as currency.code for currency in currencies track by currency.id">-->
+                    <!--</select><br>-->
+                    <!--</td>-->
+                    <!--</tr>-->
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_QUANTITY' | translate}}</h5>
+                      </td>
+                      <td class="col-sm-9"><input type="text"
+                                                  ng-model="productNew.amount"
+                                                  placeholder="{{productNew.amount}}"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'MEASURE_UNIT' | translate}}</h5>
+                      </td>
+                      <td class="col-sm-9"><select ng-selected="productNew.measure" name="singleSelectMeasure"
+                                                   ng-model="productNew.measure"
+                                                   ng-options="measure as measure.code for measure in measures track by measure.id">
+                      </select>
+                      </td>
+                    </tr>
+                    <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_IMAGE' |
+                      translate}}</h5></td>
+                    <td class="col-sm-9" height="100px" width="128px">
+                      <div flow-init flow-files-submitted="" flow-name="productImage.flow"
+                           flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+                           class="ng-scope">
+                        <div class="thumbnail-vehicle" ng-show="!$flow.files.length">
+                          <img src="{{productNew.product.img}}" class="vehicle-image-preview"/>
                         </div>
-                        <div class="modal-body">
-                            <div class="signup-form">
-                                <form>
-                                    <table class="col-sm-12">
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_NAME' |
-                                                translate}}</h5></td>
-                                            <!--<td class="col-sm-9"><input type="text" ng-model="productNew.product.name.localization[currentLang]"-->
-                                                                        <!--placeholder="{{ productNew.product.name.localization[currentLang]}}"/></td>-->
-                                            <td class="col-sm-9">
-                                                <input disabled ng-show="!newProduct" type="text" ng-model="productNew.product.name.localization[currentLang]"
-                                                       placeholder="{{ productNew.product.name.localization[currentLang]}}"/>
-                                                <select ng-selected="productNew.product" ng-change="onProductNameChanged()" ng-show="newProduct" name="singleSelectName" ng-model="productNew.product" ng-options="product as product.name.localization[currentLang] for product in allProducts track by product.id">
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
-                                                translate}} [RSD]</h5></td>
-                                            <td class="col-sm-9"><input type="text" ng-model="productNew.price.price"
-                                                                        placeholder="{{productNew.price.price}}"/>
-                                            </td>
-                                        </tr>
-                                        <!--<tr>-->
-                                            <!--<td class="col-sm-3"><h5 class="text-left">{{ 'CURRENCY' |-->
-                                                <!--translate}}</h5></td>-->
-                                            <!--<td class="col-sm-9">-->
-                                                <!--<select ng-selected="productNew.price.currency" name="singleSelect" ng-model="productNew.price.currency" ng-options="currency as currency.code for currency in currencies track by currency.id">-->
-                                                <!--</select><br>-->
-                                            <!--</td>-->
-                                        <!--</tr>-->
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_QUANTITY' | translate}}</h5>
-                                            </td>
-                                            <td class="col-sm-9"><input type="text"
-                                                                        ng-model="productNew.amount"
-                                                                        placeholder="{{productNew.amount}}"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'MEASURE_UNIT' | translate}}</h5>
-                                            </td>
-                                            <td class="col-sm-9"><select ng-selected="productNew.measure" name="singleSelectMeasure" ng-model="productNew.measure" ng-options="measure as measure.code for measure in measures track by measure.id">
-                                            </select>
-                                            </td>
-                                        </tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_IMAGE' |
-                                                translate}}</h5></td>
-                                        <td class="col-sm-9" height="100px" width="128px">
-                                            <div flow-init flow-files-submitted="" flow-name="productImage.flow"
-                                                 flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
-                                                 class="ng-scope">
-                                                <div class="thumbnail-vehicle" ng-show="!$flow.files.length">
-                                                    <img src="{{productNew.product.img}}" class="vehicle-image-preview"/>
-                                                </div>
-                                                <div class="thumbnail-vehicle" ng-show="$flow.files.length">
-                                                    <img flow-img="$flow.files[0]" class="vehicle-image-preview"/>
-                                                </div>
-                                                <div>
+                        <div class="thumbnail-vehicle" ng-show="$flow.files.length">
+                          <img flow-img="$flow.files[0]" class="vehicle-image-preview"/>
+                        </div>
+                        <div>
                                                         <span class="btn btn-primary" ng-show="!$flow.files.length"
                                                               flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                                                type="file"
-                                                                style="visibility: hidden; position: absolute;"></span>
+                                                          type="file"
+                                                          style="visibility: hidden; position: absolute;"></span>
                                                         <span class="btn btn-primary ng-hide"
                                                               ng-show="$flow.files.length"
                                                               flow-btn="">{{'UPDATE' | translate}}<input type="file"
                                                                                                          style="visibility: hidden; position: absolute;"></span>
-                                                    <a class="btn btn-primary" ng-show="$flow.files.length"
-                                                       ng-click="$flow.cancel()">
-                                                        {{'DELETE' | translate}}
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        </tr>
-                                    </table>
-                                </form>
-                            </div>
+                          <a class="btn btn-primary" ng-show="$flow.files.length"
+                             ng-click="$flow.cancel()">
+                            {{'DELETE' | translate}}
+                          </a>
                         </div>
-                        <div class="modal-footer" id="product-modal-footer">
-                            <button type="button" class="btn btn-default"
-                                    ng-click="saveChanges()">{{ 'SAVE_CHANGES' |
-                                translate}}
-                            </button>
-                            <button type="button" class="btn btn-default" ng-click="cancelModal()">{{ 'DISCARD_CHANGES'
-                                |
-                                translate}}
-                            </button>
-                        </div>
-                    </script>
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr class="vehicles_menu">
-                            <td>{{ 'PRODUCT_NAME' | translate}}</td>
-                            <td>{{ 'PRODUCT_PROPERTIES' | translate}}</td>
-                            <td>{{' PRODUCT_IMAGE' | translate}}</td>
-                            <td>{{' ACTIONS' | translate}}</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="product in products">
-                            <td>
-                                <h4>{{ product.product.name.localization[currentLang]}}</h4>
-                            </td>
-                            <td>
-                                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [ {{product.measure.code}} ]</h5>
-                                <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price.price}} {{product.price.currency.code}}</h5>
-                            </td>
-                            <td>
-                                <div class="text-left">
-                                    <img src="{{product.product.img}}" height="100px" width="128px" class="cursorhover"/>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-default" ng-click="updateProduct(product)"><i
-                                        class="fa fa-pencil-square-o"></i> {{ 'UPDATE' | translate}}
-                                </button>
-                                <button class="btn btn-default" ng-click="deleteProduct(product)"><i
-                                        class="fa fa-times"></i> {{ 'DELETE' | translate}}
-                                </button>
-                        </tr>
-                        </tbody>
-                    </table>
+                      </div>
+                    </td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer" id="product-modal-footer">
+              <button type="button" class="btn btn-default"
+                      ng-click="saveChanges()">{{ 'SAVE_CHANGES' |
+                translate}}
+              </button>
+              <button type="button" class="btn btn-default" ng-click="cancelModal()">{{ 'DISCARD_CHANGES'
+                |
+                translate}}
+              </button>
+            </div>
+          </script>
+          <table class="table table-condensed">
+            <thead>
+            <tr class="vehicles_menu">
+              <td>{{ 'PRODUCT_NAME' | translate}}</td>
+              <td>{{ 'PRODUCT_PROPERTIES' | translate}}</td>
+              <td>{{' PRODUCT_IMAGE' | translate}}</td>
+              <td>{{' ACTIONS' | translate}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="product in products">
+              <td>
+                <h4>{{ product.product.name.localization[currentLang]}}</h4>
+              </td>
+              <td>
+                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [ {{product.measure.code}} ]</h5>
+                <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price.price}} {{product.price.currency.code}}</h5>
+              </td>
+              <td>
+                <div class="text-left">
+                  <img src="{{product.product.img}}" height="100px" width="128px" class="cursorhover"/>
                 </div>
-                <button class="btn btn-default btn-lg add-vehicle-btn" ng-click="addProduct()"><i
-                        class="fa fa-plus"></i> {{'ADD_NEW_PRODUCT' |
-                    translate}}
+              </td>
+              <td>
+                <button class="btn btn-default" ng-click="updateProduct(product)"><i
+                  class="fa fa-pencil-square-o"></i> {{ 'UPDATE' | translate}}
                 </button>
-            </div>
-            <div ng-if="page == 'ORDERS'" class="col-sm-12" id="orders_data">
-                <div class="table-responsive vehicles_info">
-                    <script type="text/ng-template" id="orderEditModal.html">
-                        <div class="modal-header">
-                            <button type="button" class="close" ng-click="cancelModal()">&times;</button>
-                            <h4 class="modal-title">{{ 'ORDER_EDIT' | translate}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="signup-form">
-                                <form>
-                                    <table class="col-sm-12">
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'CLIENT_NAME' |
-                                                translate}}</h5></td>
-                                            <td class="col-sm-9">
-                                                <div class="text-left">{{order.client.idmId }} - {{order.client.businessSubject.name}}</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'CLIENT_ADDRESS' |
-                                                translate}}</h5></td>
-                                            <td class="col-sm-9">
-                                                <div>
-                                                    <strong>{{ 'CITY' | translate}}: </strong>{{order.address.city}} &nbsp;
-                                                    <strong>{{ 'POSTAL_CODE' | translate}}: </strong>{{order.address.postalCode}}
-                                                </div>
-                                                <div>
-                                                    <strong>{{ 'STREET' | translate}} </strong>{{order.address.street}} &nbsp;
-                                                    <strong>{{ 'HOUSE_NUMBER' | translate}} </strong>{{order.address.houseNumber}}
-                                                </div>
-                                                <div>
-                                                    <strong>{{ 'FLOOR' | translate}} </strong>{{order.address.floor}} &nbsp;
-                                                    <strong>{{ 'APARTMENT' | translate}} </strong>{{order.address.apartmentNumber}}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'EMAIL' |
-                                                translate}}</h5></td>
-                                            <td class="col-sm-9">
-                                                <div class="text-left">{{order.client.email }}</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5>
-                                            </td>
-                                            <td class="col-sm-9">
-                                                <div class="text-left">{{order.client.businessSubject.phone}}</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'DELIVERY_DATE' | translate}}</h5>
-                                            </td>
-                                            <td class="col-sm-9">
-                                                <div class="text-left">{{order.deliveryDate}}</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'DELIVERY_TIME' | translate}}</h5>
-                                            </td>
-                                            <td class="col-sm-9">
-                                                <div class="text-left">{{order.deliveryFrom}} - {{order.deliveryTo}}</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_TOTAL_PRICE' | translate}}</h5>
-                                            </td>
-                                            <td class="col-sm-9">
-                                                <div class="text-left">{{order.totalPrice}} DIN</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-sm-3"><h3 class="text-left">{{ 'ITEMS' | translate}}:</h3>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <div class="table-responsive vehicles_info">
-
-                                                <table class="table table-condensed">
-                                                    <thead>
-                                                    <tr class="vehicles_menu">
-                                                        <td>{{ 'PRODUCT_NAME' | translate}}</td>
-                                                        <td>{{ 'PRODUCT_QUANTITY' | translate}}</td>
-                                                        <td>{{' PRODUCT_TOTAL_PRICE' | translate}}</td>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr ng-repeat="product in order.items">
-                                                        <td>
-                                                            <div>{{product.product.name.localization[currentLang]}}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div>{{product.amount}} [{{product.unit}}]</div>
-                                                        </td>
-                                                        <td>
-                                                            <div>{{product.totalItemPrice}} DIN</div>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-                                        </tr>
-                                    </table>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer" id="order-modal-footer">
-                            <button type="button" class="btn btn-default" ng-click="cancelModal()">{{ 'CLOSE'
-                                |
-                                translate}}
-                            </button>
-                        </div>
-                    </script>
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr class="vehicles_menu">
-                            <td>{{ 'CLIENT_NAME' | translate}}</td>
-                            <td>{{ 'PRODUCT_NUMBER' | translate}}</td>
-                            <td>{{ 'PRODUCT_TOTAL_PRICE' | translate}}</td>
-                            <td>{{ 'STATUS' | translate}}</td>
-                            <td>{{ 'ACTIONS' | translate}}</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="order in orders">
-                            <td>
-                                <h4>{{order.client.idmId}}</h4>
-                            </td>
-                            <td>
-                                <h5>{{order.items.length}}</h5>
-                            </td>
-                            <td>
-                                <h5>{{order.totalPrice}} DIN</h5>
-                            </td>
-                            <td>
-                                <h5>{{order.status}}</h5>
-                            </td>
-                            <td>
-                                <button class="btn btn-default" ng-click="openOrderModal(order)"><i
-                                        class="fa fa-pencil-square-o"></i> {{ 'DETAILS' | translate}}
-                                </button>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <!-- TODO UNCOMMENT WHEN IMPLEMENTED
-            <div ng-if="page == 'FARMER_MARKETING'" class="col-sm-12">
-                <div class="col-sm-12 advertising-margin">
-                    <div class="advertising-form col-sm-7">
-                        <form>
-                            <div class="col-sm-12 advertising-text-form-margin">
-                                <table class="col-sm-12">
-                                    <tr>
-                                        <td><h5 class="text-center">{{ 'DISTRIBUTOR_ADVERTISING_TITLE' |
-                                            translate}}</h5></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="text" ng-model="distributor.advertising.title"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                        <td><h5 class="text-center">{{ 'DISTRIBUTOR_ADVERTISING_MSG' |
-                                            translate}}</h5></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="text" rows="3"
-                                                   ng-model="distributor.advertising.message"/>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <button class="btn btn-default" ng-click="saveChanges()">{{'SAVE_CHANGES' | translate}}
-                            </button>
-                        </form>
-                    </div>
-                    <div class="col-sm-5 advertising-img-form-margin banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.img}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <h4 class="text-center">{{'BANNER_PICTURES' | translate}}</h4>
-
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[0]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[1]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[2]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[3]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <hr>
-                    <div class="col-sm-12 banner-preview">
-                        <div ng-show="!$flow.files.length">
-                            <img src="{{distributor.advertising.banner[4]}}"/>
-                        </div>
-                        <div ng-show="$flow.files.length">
-                            <img flow-img="$flow.files[0]"/>
-                        </div>
-                        <div>
-                        <span class="btn btn-primary" ng-show="!$flow.files.length"
-                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
-                                type="file"
-                                style="visibility: hidden; position: absolute;"></span>
-                        <span class="btn btn-primary ng-hide"
-                              ng-show="$flow.files.length"
-                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
-                                                                         style="visibility: hidden; position: absolute;"></span>
-                            <a class="btn btn-primary" ng-show="$flow.files.length"
-                               ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div ng-if="page == 'FARMER_PRICES'" class="col-sm-12">
-                <h4 class="text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}}</h4>
-                <hr/>
-                <h5 class="text-center">{{ 'DISTANCE' | translate}} [km]</h5>
-
-                <div class="col-sm-12 text-center">
-                    <div class="col-sm-1 text-center">
-                        <h5 class="side-caption">{{ 'WEIGHT' | translate}} [kg]</h5>
-                    </div>
-                    <div class="col-sm-11 text-center">
-                        <table class="table table-responsive table-bordered" id="priceTable">
-                            <tr>
-                                <td>
-                                </td>
-                                <td ng-repeat="dist in transportDistances">
-                                    <h5>{{dist}} km</h5>
-                                </td>
-                            </tr>
-                            <tr ng-repeat="weight in transportWeights">
-                                <td>
-                                    <h5>{{weight}} kg</h5>
-                                </td>
-                                <td ng-repeat="dist in transportDistances">
-                                    <input type="text" placeholder="{{prices[dist][weight]}}"
-                                           ng-model="prices[dist][weight]"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr/>
-                <div class="col-sm-12 text-center">
-                    <button class="btn btn-default apply-changes-btn" ng-click="updatePrices()">{{'SAVE_CHANGES' |
-                        translate}}
-                    </button>
-                </div>
-            </div>
-            -->
+                <button class="btn btn-default" ng-click="deleteProduct(product)"><i
+                  class="fa fa-times"></i> {{ 'DELETE' | translate}}
+                </button>
+            </tr>
+            </tbody>
+          </table>
         </div>
+        <button class="btn btn-default btn-lg add-vehicle-btn" ng-click="addProduct()"><i
+          class="fa fa-plus"></i> {{'ADD_NEW_PRODUCT' |
+          translate}}
+        </button>
+      </div>
+      <div ng-if="page == 'ORDERS'" class="col-sm-12" id="orders_data">
+        <div class="table-responsive vehicles_info">
+          <script type="text/ng-template" id="orderEditModal.html">
+            <div class="modal-header">
+              <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+              <h4 class="modal-title">{{ 'ORDER_EDIT' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="signup-form">
+                <form>
+                  <table class="col-sm-12">
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'CLIENT_NAME' |
+                        translate}}</h5></td>
+                      <td class="col-sm-9">
+                        <div class="text-left">{{order.client.idmId }} - {{order.client.businessSubject.name}}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'CLIENT_ADDRESS' |
+                        translate}}</h5></td>
+                      <td class="col-sm-9">
+                        <div>
+                          <strong>{{ 'CITY' | translate}}: </strong>{{order.address.city}} &nbsp;
+                          <strong>{{ 'POSTAL_CODE' | translate}}: </strong>{{order.address.postalCode}}
+                        </div>
+                        <div>
+                          <strong>{{ 'STREET' | translate}} </strong>{{order.address.street}} &nbsp;
+                          <strong>{{ 'HOUSE_NUMBER' | translate}} </strong>{{order.address.houseNumber}}
+                        </div>
+                        <div>
+                          <strong>{{ 'FLOOR' | translate}} </strong>{{order.address.floor}} &nbsp;
+                          <strong>{{ 'APARTMENT' | translate}} </strong>{{order.address.apartmentNumber}}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'EMAIL' |
+                        translate}}</h5></td>
+                      <td class="col-sm-9">
+                        <div class="text-left">{{order.client.email }}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5>
+                      </td>
+                      <td class="col-sm-9">
+                        <div class="text-left">{{order.client.businessSubject.phone}}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'DELIVERY_DATE' | translate}}</h5>
+                      </td>
+                      <td class="col-sm-9">
+                        <div class="text-left">{{order.deliveryDate}}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'DELIVERY_TIME' | translate}}</h5>
+                      </td>
+                      <td class="col-sm-9">
+                        <div class="text-left">{{order.deliveryFrom}} - {{order.deliveryTo}}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_TOTAL_PRICE' | translate}}</h5>
+                      </td>
+                      <td class="col-sm-9">
+                        <div class="text-left">{{order.totalPrice}} DIN</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="col-sm-3"><h3 class="text-left">{{ 'ITEMS' | translate}}:</h3>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <div class="table-responsive vehicles_info">
+
+                        <table class="table table-condensed">
+                          <thead>
+                          <tr class="vehicles_menu">
+                            <td>{{ 'PRODUCT_NAME' | translate}}</td>
+                            <td>{{ 'PRODUCT_QUANTITY' | translate}}</td>
+                            <td>{{' PRODUCT_TOTAL_PRICE' | translate}}</td>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr ng-repeat="product in order.items">
+                            <td>
+                              <div>{{product.product.name.localization[currentLang]}}</div>
+                            </td>
+                            <td>
+                              <div>{{product.amount}} [{{product.unit}}]</div>
+                            </td>
+                            <td>
+                              <div>{{product.totalItemPrice}} DIN</div>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer" id="order-modal-footer">
+              <button type="button" class="btn btn-default" ng-click="cancelModal()">{{ 'CLOSE'
+                |
+                translate}}
+              </button>
+            </div>
+          </script>
+          <table class="table table-condensed">
+            <thead>
+            <tr class="vehicles_menu">
+              <td>{{ 'CLIENT_NAME' | translate}}</td>
+              <td>{{ 'PRODUCT_NUMBER' | translate}}</td>
+              <td>{{ 'PRODUCT_TOTAL_PRICE' | translate}}</td>
+              <td>{{ 'STATUS' | translate}}</td>
+              <td>{{ 'ACTIONS' | translate}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="order in orders">
+              <td>
+                <h4>{{order.client.idmId}}</h4>
+              </td>
+              <td>
+                <h5>{{order.items.length}}</h5>
+              </td>
+              <td>
+                <h5>{{order.totalPrice}} DIN</h5>
+              </td>
+              <td>
+                <h5>{{order.status}}</h5>
+              </td>
+              <td>
+                <button class="btn btn-default" ng-click="openOrderModal(order)"><i
+                  class="fa fa-pencil-square-o"></i> {{ 'DETAILS' | translate}}
+                </button>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div ng-if="page == 'FARMER_MARKETING'" class="col-sm-12">
+        <div class="col-sm-12 advertising-margin">
+          <div class="advertising-form col-sm-7">
+            <form>
+              <div class="col-sm-12 advertising-text-form-margin">
+                <table class="col-sm-12">
+                  <tr>
+                    <td><h5 class="text-center">{{ 'FARMER_ADVERTISING_TITLE' |
+                      translate}}</h5></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" ng-model="farmer.advertisingTitle"/>
+                    </td>
+                  </tr>
+                  <tr>
+
+                    <td><h5 class="text-center">{{ 'FARMER_ADVERTISING_MSG' |
+                      translate}}</h5></td>
+                  </tr>
+                  <tr>
+                    <td><textarea type="text" rows="3"
+                               ng-model="farmer.advertisingText"/>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <button class="btn btn-default" ng-click="saveAdvertisingChanges()">{{'SAVE_CHANGES' |
+                translate}}
+              </button>
+            </form>
+          </div>
+          <div flow-init flow-files-submitted="" flow-name="profilePic.flow"
+               class="col-sm-5 advertising-img-form-margin banner-preview">
+            <div ng-show="!$flow.files.length">
+              <img src="{{farmer.profilePictureBase64}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
+            </div>
+            <div ng-show="$flow.files.length">
+              <img flow-img="$flow.files[0]"/>
+            </div>
+            <div>
+                        <span class="btn btn-primary" ng-show="!$flow.files.length"
+                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
+                          type="file"
+                          style="visibility: hidden; position: absolute;"></span>
+                        <span class="btn btn-primary ng-hide"
+                              ng-show="$flow.files.length"
+                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
+                                                                         style="visibility: hidden; position: absolute;"></span>
+              <a class="btn btn-primary" ng-show="$flow.files.length"
+                 ng-click="$flow.cancel()">
+                {{'DELETE' | translate}}
+              </a>
+              <a class="btn btn-primary" ng-show="$flow.files.length"
+                 ng-click="uploadProfilePicture()">
+                {{'UPLOAD' | translate}}
+              </a>
+            </div>
+          </div>
+        </div>
+        <h4 class="text-center">{{'BANNER_PICTURES' | translate}}</h4>
+
+        <div flow-init flow-files-submitted="" flow-name="farmer.bannerImages[$index].flow" class="col-sm-12"
+             ng-repeat="bannerIndex in range(bannerPicsLimit) track by $index">
+          <hr>
+          <div class="col-sm-12 banner-preview">
+            <div ng-show="!$flow.files.length">
+              <img src="{{farmer.bannerImages[$index].imgData}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
+            </div>
+            <div ng-show="$flow.files.length">
+              <img flow-img="$flow.files[0]"/>
+            </div>
+            <div>
+                        <span class="btn btn-primary" ng-show="!$flow.files.length"
+                              flow-btn="">{{'SELECT_IMAGE' | translate}}<input
+                          type="file"
+                          style="visibility: hidden; position: absolute;"></span>
+                        <span class="btn btn-primary ng-hide"
+                              ng-show="$flow.files.length"
+                              flow-btn="">{{'UPDATE' | translate}}<input type="file"
+                                                                         style="visibility: hidden; position: absolute;"></span>
+              <a class="btn btn-primary" ng-show="$flow.files.length"
+                 ng-click="$flow.cancel()">
+                {{'DELETE' | translate}}
+              </a>
+              <a class="btn btn-primary" ng-show="$flow.files.length"
+                 ng-click="uploadFarmerBannerImage($index)">
+                {{'UPLOAD' | translate}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="page == 'FARMER_PRICES'" class="col-sm-12">
+          <h4 class="text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}}</h4>
+          <hr/>
+        <div class="col-sm-1 text-center">
+          <h5 class="side-caption">{{ 'WEIGHT' | translate}} [kg]</h5>
+        </div>
+        <div class="col-sm-11">
+
+          <h5 class="text-center">{{ 'DISTANCE' | translate}} [km]</h5>
+
+          <div class="col-sm-12 text-center">
+            <table class="table table-responsive table-bordered" id="priceTable">
+              <tr>
+                <td >
+                </td>
+                <td ng-repeat="dist in transportDistances track by $index" >
+                  <h5 ng-if="$index < (transportDistances.length -1)">{{dist}} - {{transportDistances[$index+1]}}</h5>
+                  <h5 ng-if="$index == (transportDistances.length -1)">{{'>'}} {{dist}}</h5>
+                </td>
+              </tr>
+              <tr ng-repeat="weight in transportWeights">
+                <td >
+                  <h5 ng-if="$index < (transportWeights.length -1)">{{weight}} - {{transportWeights[$index+1]}}</h5>
+                  <h5 ng-if="$index == (transportWeights.length -1)">{{'>'}} {{weight}}</h5>
+                </td>
+                <td ng-repeat="dist in transportDistances" >
+                  <input type="number" placeholder="{{prices[dist][weight]}}"
+                         ng-model="prices[dist][weight]"/>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <hr/>
+          <div class="col-sm-12 text-center">
+            <button class="btn btn-default apply-changes-btn" ng-click="updatePrices()">{{'SAVE_CHANGES' |
+              translate}}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <div ng-include="'partials/footer.html'"></div>

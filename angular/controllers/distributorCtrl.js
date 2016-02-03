@@ -20,7 +20,7 @@ angular.module('paysApp').controller("distributorCtrl", ["$scope", "$rootScope",
       scope.distributor.bannerImages = [];
       var bannerPicIndex             = 0;
       for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.distributor.images.banner.length)); i++) {
-        DistributorService.getDistributorImage(routeParams.id, scope.distributor.images.banner[scope.distributor.images.banner.length - i])
+        DistributorService.getDistributorImage(routeParams.id, scope.distributor.images.banner[scope.distributor.images.banner.length - (i+1)])
           .then(function (img) {
             scope.distributor.bannerImages[bannerPicIndex++] = "data:image/jpeg;base64," + img.document_content;
           });

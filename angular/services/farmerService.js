@@ -268,4 +268,68 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
             return deffered.promise;
         }
+
+        this.getFarmerImage = function (farmerId, imageId) {
+            var deffered = q.defer();
+            http.get(rootScope.serverURL  + "merchant/" + farmerId+"/images/"+imageId+"/imagefile").
+              success(function (data, status) {
+                  if (status == 200) {
+                      data.index = farmerId;
+                      data.imageIndex = imageId;
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getFarmerImage |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
+        this.updatePrices = function(farmerId, pricesData){
+            var deffered = q.defer();
+
+            http.post(rootScope.serverURL + "merchant/" + farmerId + "/pricelist", pricesData).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("updatePrices | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("updatePrices | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
+        this.getPrices = function(farmerId){
+            var deffered = q.defer();
+
+            http.get(rootScope.serverURL + "merchant/" + farmerId + "/pricelist").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getPrices | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("getPrices | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
     }]);

@@ -9,8 +9,52 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
         scope.page = 'GENERAL_FARMER_DATA';
         scope.products = [];
         scope.orders = [];
+        scope.prices = [];
+        scope.profilePic = {
+            flow: null
+        };
+
+
         SearchService.getFarmerById(routeParams.id).then(function (data) {
             scope.farmer = data;
+            scope.farmer.bannerImages = [];
+
+            //Initialize array for banner images
+            for (var i = 0; i < rootScope.bannerPicsLimit; i++) {
+                scope.farmer.bannerImages[i] = {
+                    flow: null,
+                    imageId: rootScope.undefinedImageId,
+                    imgData: ""
+                };
+            }
+            ;
+
+            if (scope.farmer.images.profile != null) {
+                FarmerService.getFarmerImage( scope.farmer.id, scope.farmer.images.profile)
+                  .then(function (img) {
+                      scope.farmer.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
+                  });
+            }
+            var bannerPicIndex  = 0;
+            var bannerLoadIndex = 0;
+            for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.farmer.images.banner.length)); i++) {
+                scope.farmer.bannerImages[bannerLoadIndex++].imageId = scope.farmer.images.banner[scope.farmer.images.banner.length - (i + 1)];
+                FarmerService.getFarmerImage(scope.farmer.id, scope.farmer.images.banner[scope.farmer.images.banner.length - (i + 1)])
+                  .then(function (img) {
+                      if (img.type != 'undefined') {
+                          console.log("RECEIVED BANNER IMG "+ img.imageIndex);
+                          for (var j = 0; j < scope.farmer.bannerImages.length; j++) {
+                              if (scope.farmer.bannerImages[j].imageId == img.imageIndex) {
+                                  console.log("BANNER IMG MATCHED "+ img.imageIndex);
+                                  scope.farmer.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
+                                  bannerPicIndex++
+                              }
+                          }
+                      }
+                  }
+                )
+                ;
+            }
         });
 
         SearchService.getFarmerProducts(routeParams.id).then(function (data) {
@@ -40,15 +84,6 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                 });
             }
         });
-
-        scope.prices = [];
-//dummy load
-        for (var i in rootScope.transportDistances){
-            scope.prices[rootScope.transportDistances[i]] = [];
-            for(var j in rootScope.transportWeights){
-                scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = rootScope.transportDistances[i] * rootScope.transportWeights[j];
-            }
-        }
 
         scope.sectionChange = function (sectionName) {
             scope.page = sectionName;
@@ -132,6 +167,97 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
 
         }
 
+
+        scope.uploadProfilePicture = function () {
+            if (typeof scope.profilePic.flow.files !== 'undefined') {
+                FarmerService.uploadFarmerProfileImage(scope.farmer.id,
+                  scope.farmer.images.profile ? scope.farmer.images.profile : rootScope.undefinedImageId,
+                  scope.profilePic.flow).then(function (data) {
+                      Notification.success({message: filter('translate')('PROFILE_IMAGE_UPLOADED')});
+                      scope.profilePic.flow.cancel();
+                      FarmerService.getFarmerImage(scope.farmer.id, data.image)
+                        .then(function (img) {
+                            scope.farmer.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
+                        });
+                  }).catch(function (err) {
+                      Notification.error({message: filter('translate')('PROFILE_IMAGE_FAILURE')});
+                      scope.profilePic.flow.cancel();
+                  });
+
+            }
+        }
+
+        scope.uploadFarmerBannerImage = function (bannerPictureIndex) {
+            if (typeof scope.farmer.bannerImages[bannerPictureIndex].flow.files !== 'undefined') {
+                FarmerService.uploadFarmerBannerImage(scope.farmer.id,
+                  scope.farmer.bannerImages[bannerPictureIndex].imageId, scope.farmer.bannerImages[bannerPictureIndex].flow).
+                  then(function (data) {
+                      Notification.success({message: filter('translate')('BANNER_IMAGE_UPLOADED')});
+                      scope.farmer.bannerImages[bannerPictureIndex].flow.cancel();
+                      FarmerService.getFarmerImage(scope.farmer.id, data.image)
+                        .then(function (img) {
+                            scope.farmer.bannerImages[bannerPictureIndex].imgData = "data:image/jpeg;base64," + img.document_content;
+                            scope.farmer.bannerImages[bannerPictureIndex].imageId = img.imageIndex;
+                        });
+                  }).catch(function (err) {
+                      Notification.error({message: filter('translate')('BANNER_IMAGE_FAILURE')});
+                      scope.farmer.bannerImages[bannerPictureIndex].flow.cancel();
+                  });
+
+            }
+        }
+
+        FarmerService.getPrices(routeParams.id).then(function (data) {
+            if (data.prices && data.prices.length > 0) {
+                angular.forEach(data.prices, function (price) {
+                    if (!scope.prices[price.distance]) {
+                        scope.prices[price.distance]               = new Array();
+                        scope.prices[price.distance][price.weight] = price.price;
+                    } else {
+                        scope.prices[price.distance][price.weight] = price.price;
+                    }
+                });
+            } else {
+                for (var i in rootScope.transportDistances) {
+                    scope.prices[rootScope.transportDistances[i]] = [];
+                    for (var j in rootScope.transportWeights) {
+                        scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
+                    }
+                }
+            }
+        }).catch(function(err){
+            for (var i in rootScope.transportDistances) {
+                scope.prices[rootScope.transportDistances[i]] = [];
+                for (var j in rootScope.transportWeights) {
+                    scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
+                }
+            }
+        });
+
+
+        scope.updatePrices         = function () {
+            var pricesObj = {
+                currency: rootScope.defaultCurrency.id,
+                prices: []
+            };
+
+            for (var i in rootScope.transportDistances) {
+                for (var j in rootScope.transportWeights) {
+                    pricesObj.prices.push({
+                        weight: rootScope.transportWeights[j],
+                        distance: rootScope.transportDistances[i],
+                        price: scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]]
+                    });
+                }
+            }
+
+            FarmerService.updatePrices(scope.farmer.id, pricesObj).then(function (data) {
+                Notification.success({message: filter('translate')('PRICES_UPDATED')});
+            }).catch(function () {
+                Notification.error({message: filter('translate')('PRICES_NOT_UPDATED')});
+            });
+
+        }
 
         scope.openProductModal = function (product) {
 

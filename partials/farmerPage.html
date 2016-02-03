@@ -43,23 +43,28 @@
             </div>
           </div>
           <div class="item col-sm-12">
-            <img src="{{farmer.img}}" class="girl img-responsive" alt=""
+            <img src="{{farmer.bannerImages[0]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
                  style="height: 400px;width: 400px;"/>
           </div>
           <div class="item col-sm-12">
-            <img src="images/home/vegetables1.jpg" class="girl img-responsive col-sm-12" alt=""
+            <img src="{{farmer.bannerImages[1]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
                  style="height: 400px;"/>
           </div>
           <div class="item col-sm-12">
-            <img src="images/home/vegetables2.jpg" class="girl img-responsive col-sm-12" alt=""
+            <img src="{{farmer.bannerImages[2]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
                  style="height: 400px;"/>
           </div>
           <div class="item col-sm-12">
-            <img src="images/home/vegetables3.jpg" class="girl img-responsive col-sm-12" alt=""
+            <img src="{{farmer.bannerImages[3]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
                  style="height: 400px;"/>
           </div>
           <div class="item col-sm-12">
-            <img src="images/home/vegetables4.jpg" class="girl img-responsive col-sm-12" alt=""
+            <img src="{{farmer.bannerImages[4]}}" class="girl img-responsive col-sm-12"
+                 alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"
                  style="height: 400px;"/>
           </div>
 
@@ -92,6 +97,42 @@
 
 <section>
   <div class="container">
+    <div class="row">
+      <a class="cursor-pointer" data-toggle="collapse" data-target="#prices"><h2 class="title text-center">{{ 'DISTRIBUTOR_PRICES' | translate}} <i
+        class="fa fa-caret-down"></i></h2></a>
+      <div id="prices" class="collapse">
+        <h4 class="text-center">{{ 'TRANSPORT_PRICE_LIST' | translate}} (RSD)</h4>
+        <hr/>
+        <div class="col-sm-1 text-center">
+          <h5 class="side-caption">{{ 'WEIGHT' | translate}} [kg]</h5>
+        </div>
+        <div class="col-sm-11">
+          <h5 class="text-center">{{ 'DISTANCE' | translate}} [km]</h5>
+
+          <div class="col-sm-12 text-center">
+            <table class="table table-responsive table-bordered" id="priceTable">
+              <tr>
+                <td>
+                </td>
+                <td ng-repeat="dist in transportDistances track by $index">
+                  <h5 ng-if="$index < (transportDistances.length -1)">{{dist}} - {{transportDistances[$index+1]}}</h5>
+                  <h5 ng-if="$index == (transportDistances.length -1)">{{'>'}} {{dist}}</h5>
+                </td>
+              </tr>
+              <tr ng-repeat="weight in transportWeights">
+                <td>
+                  <h5 ng-if="$index < (transportWeights.length -1)">{{weight}} - {{transportWeights[$index+1]}}</h5>
+                  <h5 ng-if="$index == (transportWeights.length -1)">{{'>'}} {{weight}}</h5>
+                </td>
+                <td ng-repeat="dist in transportDistances">
+                  <h5 >{{prices[dist][weight]}}</h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
     <hr class="orangehr">
     <h5 ng-if="!canBeAdded()" class="text-center" style="color:red;">{{ 'UNABLE_CART_INSERT' | translate}}</h5>
 

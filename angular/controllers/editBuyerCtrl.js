@@ -19,11 +19,11 @@ angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "
       var farmerIds = [];
       for (var i = 0; i < scope.orders.length; i++) {
         scope.orders[i].showDetails = false;
-        scope.orders[i].showReview = false;
-        scope.orders[i].review = {
-          stars : [],
-          comment : "",
-          rating : defaultRating,
+        scope.orders[i].showReview  = false;
+        scope.orders[i].review      = {
+          stars: [],
+          comment: "",
+          rating: defaultRating,
         };
         for (var j = 1; j <= defaultRating; j++) {
           scope.orders[i].review.stars.push({index: j, filled: true});
@@ -49,7 +49,7 @@ angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "
     }
 
 
-    scope.toggle = function (order,star) {
+    scope.toggle = function (order, star) {
       for (var i = 0; i < 5; i++) {
         order.review.stars[i].filled = false;
       }
@@ -60,9 +60,16 @@ angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "
       }
     };
 
-    scope.submitReview = function(order){
-      console.log("submitReview");
+    scope.submitReview           = function (order) {
       console.log(order.review);
+      UserService.postOrderReview(routeParams.id, order.id, {
+        comment: order.review.comment,
+        rating: order.review.rating
+      }).then(function (data) {
+        Notification.success({message: filter('translate')('REVIEW_SUBMITED')});
+      }).catch(function () {
+        Notification.error({message: filter('translate')('REVIEW_NOT_SUBMITED')});
+      });
     }
     scope.saveGeneralInfoChanges = function () {
       UserService.updateBuyerGeneralInfo(scope.buyer.id,

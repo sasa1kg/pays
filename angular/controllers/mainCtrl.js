@@ -1,6 +1,6 @@
 angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document", "$http", "$filter", "$location", "localStorageService",
-    "GeoLocationService", "CartService", "WishlistService", "SearchService","UserService",
-    function (scope, $sce, $document, http, filter, location, localStorageService, GeoLocationService, CartService, WishlistService, SearchService, UserService) {
+    "GeoLocationService", "CartService", "WishlistService", "SearchService","FarmerService",
+    function (scope, $sce, $document, http, filter, location, localStorageService, GeoLocationService, CartService, WishlistService, SearchService, FarmerService) {
 
 
         console.log("Main Ctrl!");
@@ -259,13 +259,15 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             if (data) {
                 scope.farmersLoaded = data;
                 for (var j = 0; j < scope.farmersLoaded.length; j++) {
-                    SearchService.getFarmerImage(scope.farmersLoaded[j].id, 0).then(function (img) {
-                        for (var i = 0; i < scope.farmersLoaded.length; i++) {
-                            if (scope.farmersLoaded[i].id === img.index) {
-                                scope.farmersLoaded[i].img = img.document_content;
+                    if (scope.farmersLoaded[j].images.profile != null) {
+                        FarmerService.getFarmerImage(scope.farmersLoaded[j].id, scope.farmersLoaded[j].images.profile).then(function (img) {
+                            for (var i = 0; i < scope.farmersLoaded.length; i++) {
+                                if (scope.farmersLoaded[i].id === img.index) {
+                                    scope.farmersLoaded[i].img = "data:image/jpeg;base64," + img.document_content;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
             else {

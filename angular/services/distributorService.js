@@ -194,7 +194,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
                       data.imageIndex = imageId;
                       deffered.resolve(data);
                   } else {
-                      console.log("getFarmerById |Status not OK " + status);
+                      console.log("getDistributorImage |Status not OK " + status);
                       deffered.reject("Error");
                   }
 

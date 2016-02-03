@@ -471,7 +471,13 @@ paysApp.config(function ($translateProvider) {
     SUBMIT_REVIEW : 'Submit review',
     NEW_ADDRESS : 'Enter address',
     PRICES_UPDATED : 'Prices update',
-    PRICES_NOT_UPDATED : 'Failed to update prices'
+    PRICES_NOT_UPDATED : 'Failed to update prices',
+    REVIEW_SUBMITED : 'Review submited',
+    REVIEW_NOT_SUBMITED : 'Failed to submit review',
+    TRANSPORT_PRICE_LIST : 'Transport price list',
+    FARMER_ADVERTISING_TITLE : 'Farmer ',
+    FARMER_ADVERTISING_TITLE: "Advertising title",
+    FARMER_ADVERTISING_MSG: "Advertising message",
 
   })
     .translations('rs_RS', {
@@ -776,7 +782,12 @@ paysApp.config(function ($translateProvider) {
       SUBMIT_REVIEW : 'Postavi komentar',
       NEW_ADDRESS : 'Unesite adresu',
       PRICES_UPDATED : 'Cene ažurirane',
-      PRICES_NOT_UPDATED : 'Neuspelo ažuriranje cena'
+      PRICES_NOT_UPDATED : 'Neuspelo ažuriranje cena',
+      REVIEW_SUBMITED : 'Komentar postavljen',
+      REVIEW_NOT_SUBMITED : 'Neuspešno postavljanje komentara',
+      TRANSPORT_PRICE_LIST : 'Cenovnik prevoza robe',
+      FARMER_ADVERTISING_TITLE: "Reklamni naslov",
+      FARMER_ADVERTISING_MSG: "Reklamna poruka",
     })
   $translateProvider.preferredLanguage('en_EN');
 });
