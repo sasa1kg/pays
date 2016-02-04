@@ -167,6 +167,18 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
 
         }
 
+        scope.saveAdvertisingChanges = function () {
+            console.log("Saving advertising changes!");
+            FarmerService.updateAdvertisingInfo(scope.farmer.id, {
+                  advertisingTitle: scope.farmer.advertisingTitle,
+                  advertisingText: scope.farmer.advertisingText,
+              }
+            ).then(function (data) {
+                  Notification.success({message: filter('translate')('ADVERTISING_INFO_UPDATED')});
+              }).catch(function (data) {
+                  Notification.error({message: filter('translate')('ADVERTISING_INFO_NOT_UPDATED')});
+              });
+        }
 
         scope.uploadProfilePicture = function () {
             if (typeof scope.profilePic.flow.files !== 'undefined') {

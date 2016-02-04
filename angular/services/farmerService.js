@@ -294,7 +294,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.updatePrices = function(farmerId, pricesData){
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "merchant/" + farmerId + "/pricelist", pricesData).
+            http.post(rootScope.serverURL + "merchant/" + farmerId + "/transportPricelist", pricesData).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -315,7 +315,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.getPrices = function(farmerId){
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "merchant/" + farmerId + "/pricelist").
+            http.get(rootScope.serverURL + "merchant/" + farmerId + "/transportPricelist").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
