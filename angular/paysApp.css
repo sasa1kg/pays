@@ -105,3 +105,13 @@
 #priceTable tr td h5 {
     font-size : 12px
 }
+.login_form {
+    padding: 15px;
+    border: 1px solid #F0F0E9;
+    padding-top: 0px;
+}
+.pays_footer {
+    position: fixed;
+    bottom: 0px !important;
+    width: 100%;
+}

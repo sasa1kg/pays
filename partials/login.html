@@ -5,7 +5,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-4 col-sm-offset-1">
-        <div class="login-form"><!--login form -->
+        <div class="login-form login_form"><!--login form -->
           <h2>{{ 'ENTER_ACCOUNT' | translate}}</h2>
 
           <form>
@@ -37,7 +37,7 @@
         <h2 class="or">{{ 'OR' | translate}}</h2>
       </div>
       <div class="col-sm-4">
-        <div class="signup-form"><!--sign up form-->
+        <div class="signup-form login_form"><!--sign up form-->
           <h2>{{ 'NEW_ACCOUNT' | translate }}</h2>
 
           <form>
@@ -54,4 +54,4 @@
 </section><!--/form-->
 
 
-<div ng-include="'partials/footer.html'"></div>
+<div class="pays_footer" ng-include="'partials/footer.html'"></div>
