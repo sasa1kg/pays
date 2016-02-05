@@ -2932,6 +2932,12 @@ h2.title {
   padding-left: 30px;
 }
 
+#orders_data .qrcode {
+  display: block;
+  margin: 24px auto 16px;
+  max-width: 100%;
+}
+
 #orders_data .vehicles_info .btn-default {
   background: #FE980F;
   border: medium none;

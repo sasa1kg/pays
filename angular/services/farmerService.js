@@ -1,6 +1,8 @@
 var FarmerService = angular.module('FarmerService', []).service('FarmerService',
     ["$rootScope", "$q", "$http", function (rootScope, q, http) {
 
+        this.QRCodeDataSeparator = "*";
+
         this.updateGeneralInfo = function (farmerId, info) {
             var deffered = q.defer();
 
@@ -333,23 +335,55 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             return deffered.promise;
         }
 
-        this.setTransportOrderStatus = function(farmerId,orderId){
+        this.setTransportOrderStatus = function(farmerId,orderId) {
             var deffered = q.defer();
-            http.put(rootScope.serverURL + "merchant/" + farmerId + "/orders/"+orderId+"/startTransport").
-              success(function (data, status) {
-                  if (status == 200) {
-                      deffered.resolve(data);
-                  } else {
-                      console.log("setTransportOrderStatus | Status not OK " + status);
-                      deffered.reject("Error");
-                  }
+            http.put(rootScope.serverURL + "merchant/" + farmerId + "/orders/" + orderId + "/startTransport").
+                success(function (data, status) {
+                    if (status == 200) {
+                        deffered.resolve(data);
+                    } else {
+                        console.log("setTransportOrderStatus | Status not OK " + status);
+                        deffered.reject("Error");
+                    }
 
-              }).
-              error(function (data, status) {
-                  console.log("setTransportOrderStatus | Error " + status);
-                  deffered.reject("Error");
-              });
-
+                }).
+                error(function (data, status) {
+                    console.log("setTransportOrderStatus | Error " + status);
+                    deffered.reject("Error");
+                });
             return deffered.promise;
+        }
+
+        this.generateOrderQRCode = function(order, farmer, packageNumber){
+
+            var qrData = "";
+
+            var temp = order.createdAt.split("-");
+
+            qrData = qrData + "SR" + temp[0] + temp[1] + temp[2] + "999999999" + this.QRCodeDataSeparator; // TODO: Resolve country code and unique number.
+
+            qrData = qrData + farmer.businessSubject.name + this.QRCodeDataSeparator;
+
+            temp = 0;
+            for(var i=0; i < order.items.length; i++){ //TODO: What if product is not measured in KGs?
+                if(order.items[i].unit === "kilogram"){
+                    temp += parseInt(order.items[i].amount);
+                }
+
+                if(i !== 0){
+                    qrData += ";";
+                }
+                qrData += order.items[i].id + ":" + parseInt(order.items[i].amount);
+            }
+
+            qrData += this.QRCodeDataSeparator + temp;
+
+            qrData += this.QRCodeDataSeparator + order.client.privateSubject.name + " " + order.client.privateSubject.lastName +" ";
+            qrData += order.client.privateSubject.address + " " + order.client.privateSubject.city + this.QRCodeDataSeparator;
+            qrData += order.deliveryDate + "," + order.deliveryFrom + "-" + order.deliveryTo + this.QRCodeDataSeparator;
+
+            qrData += packageNumber + this.QRCodeDataSeparator;
+
+            return qrData;
         }
     }]);

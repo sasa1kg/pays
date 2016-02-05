@@ -284,6 +284,9 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                     },
                     product: function () {
                         return product;
+                    },
+                    SearchService: function () {
+                        return SearchService;
                     }
                 }
             });
@@ -341,8 +344,8 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                 controller: 'OrderModalInstanceCtrl',
                 size: 'sm',
                 resolve: {
-                    farmerId: function (){
-                      return scope.farmer.id  ;
+                    farmer: function (){
+                      return scope.farmer  ;
                     },
                     orders: function () {
                         return scope.orders;
@@ -350,8 +353,8 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                     order: function () {
                         return order;
                     },
-                    SearchService: function () {
-                        return SearchService;
+                    FarmerService: function () {
+                        return FarmerService;
                     }
                 }
             });
@@ -398,7 +401,7 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
 
 });
 
-angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope, $filter, $modalInstance,farmerId, orders, order, FarmerService, Notification) {
+angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope, $filter, $modalInstance,farmer, orders, order, FarmerService, Notification) {
 
     $scope.orders = orders;
     $scope.order = order;
@@ -406,14 +409,15 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
     $scope.qr = {};
 
     $scope.generateQr =function(){
-        $scope.qr.img = "images/qr.PNG";
-        FarmerService.setTransportOrderStatus(farmerId,order.id).then( function(data){
+        $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
+        FarmerService.setTransportOrderStatus(farmer.id, order.id).then( function(data){
             Notification.success({message: $filter('translate')('ORDER_STATUS_TRANSPORT')});
             $scope.order.status = "T";
         }).catch(function(){
             Notification.error({message: $filter('translate')('NOT_ORDER_STATUS_TRANSPORT')});
         });
     }
+
     $scope.cancelModal = function () {
         $modalInstance.dismiss('cancel');
     };

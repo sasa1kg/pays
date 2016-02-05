@@ -350,7 +350,7 @@
                           translate}}
                         </button>
                         <div class="col-sm-12 thumbnail-vehicle text-center" ng-if="qr.img">
-                          <img src="{{qr.img}}" class="vehicle-image-preview"/>
+                          <qrcode class="qrcode" version="8" size="150" data="{{qr.img}}" download></qrcode>
                         </div>
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'LocalStorageModule',
   'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'FarmerService', 'UserService', 'OrderService',
-  'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow'])
+  'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow', 'monospaced.qrcode'])
   .filter('html', function ($sce) {
     return function (input) {
       return $sce.trustAsHtml(input);
@@ -447,6 +447,7 @@ paysApp.config(function ($translateProvider) {
     PRODUCT_NOT_UPDATED: "Unable to update product",
     PRODUCT_ADDED: "Product successfully added",
     PRODUCT_NOT_ADDED: "Unable to add product",
+    ORDER_QR_CODE: "Order QR Code",
     CURRENCY: "Currency",
     MEASURE_UNIT: "Measure Unit",
     DETAILS: "Details",
@@ -770,6 +771,7 @@ paysApp.config(function ($translateProvider) {
       PRODUCT_NOT_UPDATED: "Neuspešna izmena podataka o proizvodu",
       PRODUCT_ADDED: "Uspešno dodavanje proizvoda",
       PRODUCT_NOT_ADDED: "Neuspešno dodavanje proizvoda",
+      ORDER_QR_CODE: "QR kod narudžbine",
       CURRENCY: "Valuta",
       MEASURE_UNIT: "Merna jedinica",
       DETAILS: "Detalji",
