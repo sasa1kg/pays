@@ -364,6 +364,8 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
             qrData = qrData + farmer.businessSubject.name + this.QRCodeDataSeparator;
 
+            qrData += packageNumber + this.QRCodeDataSeparator;
+
             temp = 0;
             for(var i=0; i < order.items.length; i++){ //TODO: What if product is not measured in KGs?
                 if(order.items[i].unit === "kilogram"){
@@ -381,8 +383,6 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             qrData += this.QRCodeDataSeparator + order.client.privateSubject.name + " " + order.client.privateSubject.lastName +" ";
             qrData += order.client.privateSubject.address + " " + order.client.privateSubject.city + this.QRCodeDataSeparator;
             qrData += order.deliveryDate + "," + order.deliveryFrom + "-" + order.deliveryTo + this.QRCodeDataSeparator;
-
-            qrData += packageNumber + this.QRCodeDataSeparator;
 
             return qrData;
         }
