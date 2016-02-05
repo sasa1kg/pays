@@ -231,7 +231,9 @@
                       <td class="col-sm-3"><h5 class="text-left">{{ 'CLIENT_NAME' |
                         translate}}</h5></td>
                       <td class="col-sm-9">
-                        <div class="text-left">{{order.client.idmId }} - {{order.client.businessSubject.name}}</div>
+                        <div class="text-left">{{order.client.privateSubject.name}}
+                          {{order.client.privateSubject.lastName}}
+                        </div>
                       </td>
                     </tr>
                     <tr>
@@ -263,7 +265,7 @@
                       <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5>
                       </td>
                       <td class="col-sm-9">
-                        <div class="text-left">{{order.client.businessSubject.phone}}</div>
+                        <div class="text-left">{{order.client.privateSubject.phone}}</div>
                       </td>
                     </tr>
                     <tr>
@@ -288,9 +290,15 @@
                       </td>
                     </tr>
                     <tr>
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'NOTE' | translate}}</h5>
+                      </td>
+                      <td class="col-sm-9">
+                        <div class="text-left">{{order.comment}}</div>
+                      </td>
+                    </tr>
+                    <tr>
                       <td class="col-sm-3"><h3 class="text-left">{{ 'ITEMS' | translate}}:</h3>
                       </td>
-
                     </tr>
                     <tr>
                       <div class="table-responsive vehicles_info">
@@ -317,10 +325,36 @@
                           </tr>
                           </tbody>
                         </table>
-
                       </div>
                     </tr>
                   </table>
+                  <div class="text-center">
+                    <button ng-if="order.status == 'C' || order.status == 'A'"type="button" class="btn btn-default btn-lg apply-changes-btn" data-toggle="collapse"
+                            data-target="#orderQR">{{ 'GENERATE_QR'
+                      |
+                      translate}}
+                    </button>
+                    <div id="orderQR" class="collapse mt20">
+                      <div class="col-sm-12">
+                        <h5 class="col-sm-4"><strong>{{ 'NUMBER_OF_PACKAGES' | translate}}</strong></h5>
+
+                        <div class=" col-sm-8">
+                          <input type="number" min="1" class="form-control col-sm-5 text-left"
+                                 ng-model="qr.packagesNumber"
+                                 placeholder="{{ 'ENTER_NUMBER_OF_PACKAGES' | translate}}"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 mt20">
+                        <button ng-if="!qr.img && qr.packagesNumber > 0"type="button" class="btn btn-default btn-lg apply-changes-btn" ng-click="generateQr()">{{ 'SEND_ORDER'
+                          |
+                          translate}}
+                        </button>
+                        <div class="col-sm-12 thumbnail-vehicle text-center" ng-if="qr.img">
+                          <img src="{{qr.img}}" class="vehicle-image-preview"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>
@@ -344,7 +378,7 @@
             <tbody>
             <tr ng-repeat="order in orders">
               <td>
-                <h4>{{order.client.idmId}}</h4>
+                <h4>{{order.client.privateSubject.name}} {{order.client.privateSubject.lastName}}</h4>
               </td>
               <td>
                 <h5>{{order.items.length}}</h5>
@@ -353,7 +387,7 @@
                 <h5>{{order.totalPrice}} DIN</h5>
               </td>
               <td>
-                <h5>{{order.status}}</h5>
+                <h5>{{order.status | orderStatus | translate}}</h5>
               </td>
               <td>
                 <button class="btn btn-default" ng-click="openOrderModal(order)"><i
@@ -385,7 +419,7 @@
                   </tr>
                   <tr>
                     <td><textarea type="text" rows="3"
-                               ng-model="farmer.advertisingText"/>
+                                  ng-model="farmer.advertisingText"/>
                     </td>
                   </tr>
                 </table>
@@ -457,8 +491,8 @@
         </div>
       </div>
       <div ng-if="page == 'FARMER_PRICES'" class="col-sm-12">
-          <h4 class="text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}}</h4>
-          <hr/>
+        <h4 class="text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}}</h4>
+        <hr/>
         <div class="col-sm-1 text-center">
           <h5 class="side-caption">{{ 'WEIGHT' | translate}} [kg]</h5>
         </div>
@@ -469,19 +503,19 @@
           <div class="col-sm-12 text-center">
             <table class="table table-responsive table-bordered" id="priceTable">
               <tr>
-                <td >
+                <td>
                 </td>
-                <td ng-repeat="dist in transportDistances track by $index" >
+                <td ng-repeat="dist in transportDistances track by $index">
                   <h5 ng-if="$index < (transportDistances.length -1)">{{dist}} - {{transportDistances[$index+1]}}</h5>
                   <h5 ng-if="$index == (transportDistances.length -1)">{{'>'}} {{dist}}</h5>
                 </td>
               </tr>
               <tr ng-repeat="weight in transportWeights">
-                <td >
+                <td>
                   <h5 ng-if="$index < (transportWeights.length -1)">{{weight}} - {{transportWeights[$index+1]}}</h5>
                   <h5 ng-if="$index == (transportWeights.length -1)">{{'>'}} {{weight}}</h5>
                 </td>
-                <td ng-repeat="dist in transportDistances" >
+                <td ng-repeat="dist in transportDistances">
                   <input type="number" placeholder="{{prices[dist][weight]}}"
                          ng-model="prices[dist][weight]"/>
                 </td>

@@ -44,7 +44,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         }
 
         scope.minDate = new Date();
-        scope.dateFormat = 'yyyy-dd-MMMM';
+        scope.dateFormat = 'yyyy-MM-dd';
         scope.timeFormat = 'HH:mm';
 
 
@@ -74,7 +74,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 withTransport: scope.orderData.withTransport,
                 totalPrice: scope.orderData.totalPrice,
                 items: [],
-                comment : scope.note
+                comment : scope.orderData.comment
             };
             angular.forEach(scope.orderData.items.items, function (item) {
                 console.log(item);
@@ -85,7 +85,6 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                     totalPrice: item.itemPrice * item.itemNum
                 });
             });
-            console.log(order);
             OrderService.createOrder(order).then(function (data) {
                 Notification.success({message: filter('translate')('ORDER_CREATED')});
                 CartService.resetCart();

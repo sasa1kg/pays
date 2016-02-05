@@ -9,7 +9,33 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'L
     return function (arr, start, end) {
       return arr.slice(start, end);
     };
-  }).config(['flowFactoryProvider', function (flowFactoryProvider) {
+  }).filter('orderStatus', function () {
+    return function (code) {
+      var ret = code;
+      switch (code) {
+        case 'C':
+          ret = "CREATED";
+          break;
+        case 'A':
+          ret = "ACTIVE";
+          break;
+        case 'T':
+          ret = "TRANSPORT";
+          break;
+        case 'D':
+          ret = "DELIVERED";
+          break;
+        case 'P':
+          ret = "PAID";
+          break;
+        default:
+          ret = code;
+          break;
+      }
+      return ret;
+    }
+  }).
+  config(['flowFactoryProvider', function (flowFactoryProvider) {
     flowFactoryProvider.defaults = {
       target: 'upload.php',
       permanentErrors: [404, 500, 501],
@@ -89,10 +115,10 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
 
 
   $rootScope.transportDistances = [
-    0, 20, 40,60,80, 100,125,150,175, 200, 250, 300,350, 400,450,500
+    0, 20, 40, 60, 80, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500
   ];
   $rootScope.transportWeights   = [
-    0, 5,10,15, 20,30,40, 50,65,80, 100, 150,200, 300, 400, 500
+    0, 5, 10, 15, 20, 30, 40, 50, 65, 80, 100, 150, 200, 300, 400, 500
   ];
 
   $rootScope.paysEMail = 'office@pays-system.com';
@@ -111,9 +137,9 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
     })
   });
 
-    SearchService.getAllProducts().then(function (data){
-        $rootScope.allProducts = data;
-    });
+  SearchService.getAllProducts().then(function (data) {
+    $rootScope.allProducts = data;
+  });
 
   SearchService.getMeasurementUnits().then(function (data) {
     $rootScope.measures = data;
@@ -151,15 +177,15 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
     return false;
   }
 
-  $rootScope.goToProfile = function(){
+  $rootScope.goToProfile = function () {
     $rootScope.credentials = UserService.getUserCredentials();
-    if($rootScope.credentials.token != null){
-      if($rootScope.credentials.role == $rootScope.farmerUserType){
-        $location.path("/farmeredit/"+$rootScope.credentials.id);
-      } else if($rootScope.credentials.role == $rootScope.distributorUserType){
-        $location.path('/distributoredit/'+$rootScope.credentials.id);
-      } else if($rootScope.credentials.role == $rootScope.buyerUserType){
-        $location.path('/buyeredit/'+$rootScope.credentials.id);
+    if ($rootScope.credentials.token != null) {
+      if ($rootScope.credentials.role == $rootScope.farmerUserType) {
+        $location.path("/farmeredit/" + $rootScope.credentials.id);
+      } else if ($rootScope.credentials.role == $rootScope.distributorUserType) {
+        $location.path('/distributoredit/' + $rootScope.credentials.id);
+      } else if ($rootScope.credentials.role == $rootScope.buyerUserType) {
+        $location.path('/buyeredit/' + $rootScope.credentials.id);
       }
     }
   }
@@ -462,23 +488,33 @@ paysApp.config(function ($translateProvider) {
     PASSWORD_CHANGED_MSG: 'You have successfully chaned your password. By clicking on OK you will be redirected to login page where you can access your profile.',
     ACTIVATED_USER_MSG: 'You have successfully activated your account. Please visit login page where you can access your profile.',
     NOT_ACTIVATED_USER_MSG: 'Account activation failed. Please contact our support team to resolve this issue.',
-    GENERAL_BUYER_DATA : 'General buyer information',
-    EDIT_BUYER_DATA : 'Buyer data',
-    LEAVE_REVIEW : 'Leave review',
-    YOUR_RATING : 'Your rating',
-    MAX_250_CHARS_FOR_REVIEW : 'Maximum 250 characters for review',
-    REVIEW_TEXT : 'Please enter your review\'s text...',
-    SUBMIT_REVIEW : 'Submit review',
-    NEW_ADDRESS : 'Enter address',
-    PRICES_UPDATED : 'Prices update',
-    PRICES_NOT_UPDATED : 'Failed to update prices',
-    REVIEW_SUBMITED : 'Review submited',
-    REVIEW_NOT_SUBMITED : 'Failed to submit review',
-    TRANSPORT_PRICE_LIST : 'Transport price list',
-    FARMER_ADVERTISING_TITLE : 'Farmer ',
+    GENERAL_BUYER_DATA: 'General buyer information',
+    EDIT_BUYER_DATA: 'Buyer data',
+    LEAVE_REVIEW: 'Leave review',
+    YOUR_RATING: 'Your rating',
+    MAX_250_CHARS_FOR_REVIEW: 'Maximum 250 characters for review',
+    REVIEW_TEXT: 'Please enter your review\'s text...',
+    SUBMIT_REVIEW: 'Submit review',
+    NEW_ADDRESS: 'Enter address',
+    PRICES_UPDATED: 'Prices update',
+    PRICES_NOT_UPDATED: 'Failed to update prices',
+    REVIEW_SUBMITED: 'Review submited',
+    REVIEW_NOT_SUBMITED: 'Failed to submit review',
+    TRANSPORT_PRICE_LIST: 'Transport price list',
+    FARMER_ADVERTISING_TITLE: 'Farmer ',
     FARMER_ADVERTISING_TITLE: "Advertising title",
     FARMER_ADVERTISING_MSG: "Advertising message",
-
+    CREATED : 'Created',
+    ACTIVE : 'Active',
+    TRANSPORT : 'In transport',
+    DELIVERED : 'Delivered',
+    PAID : 'Paid',
+    GENERATE_QR : 'Generate QR code',
+    NUMBER_OF_PACKAGES : 'Number of packaged',
+    ENTER_NUMBER_OF_PACKAGES : 'Please enter number of packages for order',
+    SEND_ORDER : 'Send order',
+    ORDER_STATUS_TRANSPORT : 'Order status changed to - In transport',
+    NOT_ORDER_STATUS_TRANSPORT : 'Unable to change order status to - In transport'
   })
     .translations('rs_RS', {
       HOME: 'Početna',
@@ -773,21 +809,32 @@ paysApp.config(function ($translateProvider) {
       PASSWORD_CHANGED_MSG: 'Uspešno ste promenili Vašu lozinku. Klikom na OK bićete prebačeni na stranicu za prijavu gde možete pristupiti Vašem profilu',
       ACTIVATED_USER_MSG: 'Uspešno ste aktivirali Vaš nalog. Posetite stranicu za prijavu gde možete pristupiti Vašem profilu',
       NOT_ACTIVATED_USER_MSG: 'Neuspešna aktivacija naloga. Molimo Vas da kontaktirate našu tehničku podršku radi rešavanja ovog problema.',
-      GENERAL_BUYER_DATA : 'Generalne informacije o kupcu',
-      EDIT_BUYER_DATA : 'Informacije o kupcu',
-      LEAVE_REVIEW : 'Ostavite komentar',
-      YOUR_RATING : 'Vaša ocena',
-      MAX_250_CHARS_FOR_REVIEW : 'Maksimum 250 karaktera za tekst komentara',
-      REVIEW_TEXT : 'Molimo Vas unesite Vaš komentar...',
-      SUBMIT_REVIEW : 'Postavi komentar',
-      NEW_ADDRESS : 'Unesite adresu',
-      PRICES_UPDATED : 'Cene ažurirane',
-      PRICES_NOT_UPDATED : 'Neuspelo ažuriranje cena',
-      REVIEW_SUBMITED : 'Komentar postavljen',
-      REVIEW_NOT_SUBMITED : 'Neuspešno postavljanje komentara',
-      TRANSPORT_PRICE_LIST : 'Cenovnik prevoza robe',
+      GENERAL_BUYER_DATA: 'Generalne informacije o kupcu',
+      EDIT_BUYER_DATA: 'Informacije o kupcu',
+      LEAVE_REVIEW: 'Ostavite komentar',
+      YOUR_RATING: 'Vaša ocena',
+      MAX_250_CHARS_FOR_REVIEW: 'Maksimum 250 karaktera za tekst komentara',
+      REVIEW_TEXT: 'Molimo Vas unesite Vaš komentar...',
+      SUBMIT_REVIEW: 'Postavi komentar',
+      NEW_ADDRESS: 'Unesite adresu',
+      PRICES_UPDATED: 'Cene ažurirane',
+      PRICES_NOT_UPDATED: 'Neuspelo ažuriranje cena',
+      REVIEW_SUBMITED: 'Komentar postavljen',
+      REVIEW_NOT_SUBMITED: 'Neuspešno postavljanje komentara',
+      TRANSPORT_PRICE_LIST: 'Cenovnik prevoza robe',
       FARMER_ADVERTISING_TITLE: "Reklamni naslov",
       FARMER_ADVERTISING_MSG: "Reklamna poruka",
+      CREATED : 'Kreirana',
+      ACTIVE : 'Aktivna',
+      TRANSPORT : 'U transportu',
+      DELIVERED : 'Dostavljena',
+      PAID : 'Plaćena',
+      GENERATE_QR : 'Generiši QR kod',
+      NUMBER_OF_PACKAGES : 'Brok paketa',
+      ENTER_NUMBER_OF_PACKAGES : 'Molimo unesite broj paketa u porudžbini',
+      SEND_ORDER : 'Pošalji porudžbinu',
+      ORDER_STATUS_TRANSPORT : 'Stanje narudžbine promenjeno u - U transportu',
+      NOT_ORDER_STATUS_TRANSPORT : 'Neuspela promena stanja narudžbine'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

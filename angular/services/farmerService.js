@@ -332,4 +332,24 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
             return deffered.promise;
         }
+
+        this.setTransportOrderStatus = function(farmerId,orderId){
+            var deffered = q.defer();
+            http.put(rootScope.serverURL + "merchant/" + farmerId + "/orders/"+orderId+"/startTransport").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("setTransportOrderStatus | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("setTransportOrderStatus | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
     }]);

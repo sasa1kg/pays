@@ -341,6 +341,9 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope","
                 controller: 'OrderModalInstanceCtrl',
                 size: 'sm',
                 resolve: {
+                    farmerId: function (){
+                      return scope.farmer.id  ;
+                    },
                     orders: function () {
                         return scope.orders;
                     },
@@ -395,10 +398,22 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
 
 });
 
-angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope, $filter, $modalInstance, orders, order) {
+angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope, $filter, $modalInstance,farmerId, orders, order, FarmerService, Notification) {
 
     $scope.orders = orders;
     $scope.order = order;
+
+    $scope.qr = {};
+
+    $scope.generateQr =function(){
+        $scope.qr.img = "images/qr.PNG";
+        FarmerService.setTransportOrderStatus(farmerId,order.id).then( function(data){
+            Notification.success({message: $filter('translate')('ORDER_STATUS_TRANSPORT')});
+            $scope.order.status = "T";
+        }).catch(function(){
+            Notification.error({message: $filter('translate')('NOT_ORDER_STATUS_TRANSPORT')});
+        });
+    }
     $scope.cancelModal = function () {
         $modalInstance.dismiss('cancel');
     };

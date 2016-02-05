@@ -89,7 +89,7 @@
               <h5>{{order.totalPrice}} DIN</h5>
             </td>
             <td>
-              <h5>{{order.status}}</h5>
+              <h5>{{order.status | orderStatus | translate}}</h5>
             </td>
             <td>
               <button class="btn btn-default apply-changes-btn"
@@ -179,6 +179,17 @@
                   </div>
                   <div class="col-sm-8">
                     {{order.deliveryTo}}
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <br/>
+                </div>
+                <div class="col-sm-12">
+                  <div class="col-sm-4">
+                    <strong>{{'NOTE' | translate}}</strong>
+                  </div>
+                  <div class="col-sm-8">
+                    {{order.comment}}
                   </div>
                 </div>
               </div>
