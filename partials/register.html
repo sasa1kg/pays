@@ -11,7 +11,7 @@
 
           <form>
             <label>{{ 'USER_TYPE' | translate}}</label>
-            <select ng-model="userType" class="cursorhover">
+            <select ng-model="userType" class="cursorhover form-control">
               <option ng-repeat="type in userTypes" value="{{type.id}}">{{type.name | translate | html}}
               </option>
             </select>
