@@ -118,3 +118,10 @@
     bottom: 0px !important;
     width: 100%;
 }
+
+input[required] {
+    background-image: url('../images/asterisk16.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: right !important;
+    background-position-y: top !important;
+}
