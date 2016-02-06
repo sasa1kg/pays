@@ -360,7 +360,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
             var temp = order.createdAt.split("-");
 
-            qrData = qrData + "SR" + temp[0] + temp[1] + temp[2] + "999999999" + this.QRCodeDataSeparator; // TODO: Resolve country code and unique number.
+            qrData = qrData + "SR" + temp[0] + temp[1] + temp[2] + order.id + this.QRCodeDataSeparator; // TODO: Resolve country code and unique number.
 
             qrData = qrData + farmer.businessSubject.name + this.QRCodeDataSeparator;
 
