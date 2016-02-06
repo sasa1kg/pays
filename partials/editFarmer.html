@@ -29,50 +29,94 @@
       </div>
     </nav>
     <div class="row">
-      <div ng-if="page == 'GENERAL_FARMER_DATA'" class="col-sm-6">
-        <div class="signup-form">
-          <form>
-            <table class="col-sm-12 general-info-form-margin">
-              <tr>
-                <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
-                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.name"
-                                            placeholder="{{farmer.businessSubject.name}}"/></td>
-              </tr>
-              <tr>
-                <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
-                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.account"
-                                            placeholder="{{farmer.businessSubject.account}}"/>
-                </td>
-              </tr>
-              <tr>
-                <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
-                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.companyNum"
-                                            placeholder="{{farmer.businessSubject.companyNum}}"/></td>
-              </tr>
-              <tr>
-                <td class="col-sm-3"><h5 class="text-left">{{ 'STREET_AND_NUMBER' | translate}}</h5>
-                </td>
-                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.address"
-                                            placeholder="{{farmer.businessSubject.address}}"/></td>
-              </tr>
-              <tr>
-                <td class="col-sm-3"><h5 class="text-left">{{ 'POSTAL_CODE' | translate}}</h5></td>
-                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.postalCode"
-                                            placeholder="{{farmer.businessSubject.postalCode}}"/></td>
-              </tr>
-              <tr>
-                <td class="col-sm-3"><h5 class="text-left">{{ 'CITY' | translate}}</h5></td>
-                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.city"
-                                            placeholder="{{farmer.businessSubject.city}}"/></td>
-              </tr>
-              <tr>
-                <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5></td>
-                <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.phone"
-                                            placeholder="{{farmer.businessSubject.phone}}"/></td>
-              </tr>
-            </table>
-            <button class="btn btn-default" ng-click="saveGeneralInfoChanges()">{{'SAVE_CHANGES' | translate}}</button>
-          </form>
+      <div ng-if="page == 'GENERAL_FARMER_DATA'">
+        <div class="col-sm-6">
+          <div class="signup-form">
+            <form>
+              <table class="col-sm-12 general-info-form-margin">
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.name"
+                                              placeholder="{{farmer.businessSubject.name}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text"
+                                              ng-model="farmer.businessSubject.account"
+                                              placeholder="{{farmer.businessSubject.account}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'TAX_NUMBER' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text"
+                                              ng-model="farmer.businessSubject.taxNum"
+                                              placeholder="{{farmer.businessSubject.taxNum}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text"
+                                              ng-model="farmer.businessSubject.companyNum"
+                                              placeholder="{{farmer.businessSubject.companyNum}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'BUSSINESS_ACT_NUMBER' |
+                    translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text"
+                                              ng-model="farmer.businessSubject.businessActivityCode"
+                                              placeholder="{{farmer.businessSubject.businessActivityCode}}"/>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="signup-form">
+            <form>
+              <table class="col-sm-12 general-info-form-margin">
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'STREET_AND_NUMBER' | translate}}</h5>
+                  </td>
+                  <td class="col-sm-9"><input type="text"
+                                              ng-model="farmer.businessSubject.address"
+                                              placeholder="{{farmer.businessSubject.address}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'POSTAL_CODE' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text"
+                                              ng-model="farmer.businessSubject.postalCode"
+                                              placeholder="{{farmer.businessSubject.postalCode}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'CITY' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.city"
+                                              placeholder="{{farmer.businessSubject.city}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'PHONE_NUMBER' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.phone"
+                                              placeholder="{{farmer.businessSubject.phone}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'FAX_NUMBER' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.fax"
+                                              placeholder="{{farmer.businessSubject.fax}}"/></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-12 text-center">
+          <button class="btn btn-default apply-changes-btn" ng-click="saveGeneralChanges()">{{'SAVE_CHANGES' |
+            translate}}
+          </button>
         </div>
       </div>
       <div ng-if="page == 'PRODUCTS'" class="col-sm-12" id="products_data">

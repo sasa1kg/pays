@@ -18,50 +18,21 @@
 
                 <h4 class="panel-title"><a>{{ 'FARMER_NAME' | translate}} </a></h4>
                 <input type="text" ng-model="searchName" ng-keypress="searchNameCallback($event)"
-                       class="search_input_height" placeholder="{{ 'FARMER_NAME' | translate}}"/>
+                       class="search_input_height form-control" placeholder="{{ 'FARMER_NAME' | translate}}"/>
 
                 <hr class="orangehr">
 
-                <table class="table table-condensed">
+                <h4 class="panel-title"><a>{{ 'LOCATION_PLACE' | translate}} </a></h4>
+                <input type="text" id="searchPlace"
+                       class="search_input_height form-control"
+                       ng-model="searchPlaceValue"
+                       ng-blur="searchPlaceBlur()"
+                       placeholder="{{'LOCATION_PLACE' | translate}}"
+                       ng-show="!locationDefined()"/>
 
-                  <tr ng-show="locationDefined()">
-                    <td class="notopborder">
-                      <h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank"
-                                                 ng-show="locationDefined()">{{ 'YOUR_LOCATION' |
-                        translate}}</a></h4>
-                    </td>
-                    <td class="cart_delete notopborder">
-                      <a class="cart_quantity_delete pull-right"
-                         ng-click="changeSearchMode()"><i class="fa fa-times"></i></a>
-                    </td>
-                  </tr>
-                  <tr ng-show="!locationDefined()">
-                    <td class="notopborder">
-                      <input type="text" id="searchPlace"
-                             class="search_input_height"
-                             ng-model="searchPlaceValue"
-                             ng-blur="searchPlaceBlur()"
-                             placeholder="{{'LOCATION_PLACE' | translate}}"
-                             ng-show="!locationDefined()"/>
-                    </td>
-                  </tr>
-                  <tr ng-show="!locationDefined() && locationFound">
-                    <td class="notopborder">
-                      <h4 class="panel-title"><a href="{{gmapsLocLink}}" target="_blank"
-                                                 ng-show="!locationDefined() && locationFound">{{
-                        'LOCATION_FOUND' | translate}}</a></h4>
-                      <h4 class="panel-title"><a
-                        ng-show="!locationDefined() && !locationFound">{{ 'ERROR' |
-                        translate}}</a>
-                      </h4>
-                    </td>
-                    <td class="cart_delete notopborder">
-                      <a class="cart_quantity_delete pull-right" ng-click="clearSearch()"><i
-                        class="fa fa-times"></i></a>
-                    </td>
-                  </tr>
-                </table>
-                <h4 class="panel-title"><a href="#">{{ 'IN_CIRCLE_OF' | translate}} </a></h4>
+                </br>
+
+                <h4 class="panel-title"><a>{{ 'IN_CIRCLE_OF' | translate}} </a></h4>
                 <select ng-model="distanceValue" ng-init="distanceValue = distances[0].value"
                         ng-options="distance.value as distance.value for distance in distances"
                         required></select>
@@ -81,8 +52,10 @@
                            ng-model="cat.checkedValue"
                            ng-click="check(cat)">
                     {{cat.name.localization[currentLang]}}
-                    <a ng-if="cat.expanded && cat.children.length" class="cursor-pointer" ng-click="cat.expanded = !cat.expanded"><i class="fa fa-caret-up fa-lg"></i></a>
-                    <a ng-if="!cat.expanded && cat.children.length" class="cursor-pointer" ng-click="cat.expanded = !cat.expanded"><i class="fa fa-caret-down fa-lg"></i></a>
+                    <a ng-if="cat.expanded && cat.children.length" class="cursor-pointer"
+                       ng-click="cat.expanded = !cat.expanded"><i class="fa fa-caret-up fa-lg"></i></a>
+                    <a ng-if="!cat.expanded && cat.children.length" class="cursor-pointer"
+                       ng-click="cat.expanded = !cat.expanded"><i class="fa fa-caret-down fa-lg"></i></a>
                   </label>
 
                   <row ng-if="cat.expanded" class="col-sm-12" ng-repeat="subcat1 in cat.children">
@@ -92,8 +65,10 @@
                              ng-model="subcat1.checkedValue"
                              ng-click="check(subcat1)">
                       {{subcat1.name.localization[currentLang]}}
-                      <a ng-if="subcat1.expanded && subcat1.children.length" class="cursor-pointer" ng-click="subcat1.expanded = !subcat1.expanded"><i class="fa fa-caret-up fa-lg"></i></a>
-                      <a ng-if="!subcat1.expanded && subcat1.children.length" class="cursor-pointer" ng-click="subcat1.expanded = !subcat1.expanded"><i class="fa fa-caret-down fa-lg"></i></a>
+                      <a ng-if="subcat1.expanded && subcat1.children.length" class="cursor-pointer"
+                         ng-click="subcat1.expanded = !subcat1.expanded"><i class="fa fa-caret-up fa-lg"></i></a>
+                      <a ng-if="!subcat1.expanded && subcat1.children.length" class="cursor-pointer"
+                         ng-click="subcat1.expanded = !subcat1.expanded"><i class="fa fa-caret-down fa-lg"></i></a>
                     </label>
 
                     <row ng-if="subcat1.expanded" class="col-sm-12" ng-repeat="subcat2 in subcat1.children">
@@ -265,7 +240,7 @@
   <div class="container">
     <h2 class="title text-center">{{ 'MARKETING_SPACE' | translate}}</h2>
 
-    <div cg-busy="{promise:nearByFarmers,message:'Učitavanje...,backdrop:true}"></div>
+    <div cg-busy="{promise:nearByFarmers,message:'Loading...',backdrop:true}"></div>
     <div class="row">
       <div class="col-sm-2 padding-right">
         <h4 class="title text-center vertical-text-center">{{ 'MOST_IN_YEAR' | translate}}</h4>
