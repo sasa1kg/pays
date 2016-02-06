@@ -22,7 +22,7 @@
               <input type="email" ng-model="buyer.email" ng-change="copyEmail()" placeholder="{{ 'EMAIL' | translate}}"
                      required/>
               <input type="password" ng-model="buyer.password" placeholder="{{ 'PASSWORD' | translate}}" required/>
-              <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword)"
+              <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword,true)"
                      placeholder="{{ 'CONFIRM_PASSWORD' | translate}}" required/>
               <input type="text" ng-model="buyer.username" placeholder="{{ 'USERNAME' | translate}}" required>
               <hr>
@@ -35,7 +35,7 @@
               <input type="text" ng-model="buyer.private.city" placeholder="{{'CITY' | translate}}" required/>
               <input type="text" ng-model="buyer.private.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
             </div>
-            <button class="btn btn-default" ng-disabled="userForm.$invalid" ng-click="register()">{{'REGISTER' |
+            <button class="btn btn-default" ng-disabled="userForm.$invalid || !validatePassword(confPassword,false)" ng-click="register()">{{'REGISTER' |
               translate}}
             </button>
           </form>
@@ -44,7 +44,7 @@
               <input type="email" ng-model="distributor.email" ng-change="copyEmail()"
                      placeholder="{{ 'EMAIL' | translate}}" required/>
               <input type="password" ng-model="distributor.password" placeholder="{{ 'PASSWORD' | translate}}" required/>
-              <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword)"
+              <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword,true)"
                      placeholder="{{ 'CONFIRM_PASSWORD' | translate}}" required/>
               <input type="text" ng-model="distributor.username" placeholder="{{ 'USERNAME' | translate}}" required>
               <hr>
@@ -61,7 +61,7 @@
               <input type="text" ng-model="distributor.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
               <input type="text" ng-model="distributor.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
             </div>
-            <button class="btn btn-default" ng-disabled="distributorForm.$invalid" ng-click="register()">{{'REGISTER' |
+            <button class="btn btn-default" ng-disabled="distributorForm.$invalid || !validatePassword(confPassword,false)" ng-click="register()">{{'REGISTER' |
               translate}}
             </button>
           </form>
@@ -70,7 +70,7 @@
               <input type="email" ng-model="farmer.email" ng-change="copyEmail()"
                      placeholder="{{ 'EMAIL' | translate}}" required/>
               <input type="password" ng-model="farmer.password" placeholder="{{ 'PASSWORD' | translate}}" required/>
-              <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword)"
+              <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword,true)"
                      placeholder="{{ 'CONFIRM_PASSWORD' | translate}}" required/>
               <input type="text" ng-model="farmer.username" placeholder="{{ 'USERNAME' | translate}}" required/>
               <hr>
@@ -86,7 +86,7 @@
               <input type="text" ng-model="farmer.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
               <input type="text" ng-model="farmer.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
             </div>
-            <button class="btn btn-default" ng-disabled="farmerForm.$invalid" ng-click="register()">{{'REGISTER' |
+            <button class="btn btn-default" ng-disabled="farmerForm.$invalid || !validatePassword(confPassword,false)" ng-click="register()">{{'REGISTER' |
               translate}}
             </button>
           </form>

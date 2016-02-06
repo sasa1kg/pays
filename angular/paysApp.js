@@ -515,7 +515,9 @@ paysApp.config(function ($translateProvider) {
     ENTER_NUMBER_OF_PACKAGES : 'Please enter number of packages for order',
     SEND_ORDER : 'Send order',
     ORDER_STATUS_TRANSPORT : 'Order status changed to - In transport',
-    NOT_ORDER_STATUS_TRANSPORT : 'Unable to change order status to - In transport'
+    NOT_ORDER_STATUS_TRANSPORT : 'Unable to change order status to - In transport',
+    FARMER_REVIEWS : 'Farmer reviews',
+    POSTED_ON :'Posted on'
   })
     .translations('rs_RS', {
       HOME: 'Početna',
@@ -836,7 +838,9 @@ paysApp.config(function ($translateProvider) {
       ENTER_NUMBER_OF_PACKAGES : 'Molimo unesite broj paketa u porudžbini',
       SEND_ORDER : 'Pošalji porudžbinu',
       ORDER_STATUS_TRANSPORT : 'Stanje narudžbine promenjeno u - U transportu',
-      NOT_ORDER_STATUS_TRANSPORT : 'Neuspela promena stanja narudžbine'
+      NOT_ORDER_STATUS_TRANSPORT : 'Neuspela promena stanja narudžbine',
+      FARMER_REVIEWS : 'Komentari farmera',
+      POSTED_ON :'Postavljeno'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

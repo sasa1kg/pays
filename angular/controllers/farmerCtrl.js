@@ -199,4 +199,38 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
         scope.canBeAdded = function () {
             return CartService.canBeAdded(scope.farmerId);
         }
+
+        scope.reviews = [{
+            commentBy : "Nemanja Ignjatov",
+            created_at : "06-02-2006",
+            rating : 4,
+            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
+        },{
+            commentBy : "Petar Ignjatov",
+            created_at : "06-02-2006",
+            rating : 3,
+            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
+        },{
+            commentBy : "Nemanja Ignjatov",
+            created_at : "06-02-2005",
+            rating : 5,
+            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
+        },{
+            commentBy : "Nemanja Ignjatov",
+            created_at : "05-02-2006",
+            rating : 1,
+            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
+        },{
+            commentBy : "Nemanja Ignjatov",
+            created_at : "06-02-2006",
+            rating : 2,
+            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
+        }];
+
+        scope.range = function(min, max, step){
+            step = step || 1;
+            var input = [];
+            for (var i = min; i <= max; i += step) input.push(i);
+            return input;
+        };
     }]);

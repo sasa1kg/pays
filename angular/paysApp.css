@@ -125,3 +125,28 @@ input[required] {
     background-position: right !important;
     background-position-y: top !important;
 }
+
+.bubble
+{
+    position: relative;
+    width: 70%;
+    min-height: 100px;
+    padding: 9px;
+    background: #75c5cf;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    border-radius: 14px;
+    border: #35929e solid 2px;
+    color: #ffffff;
+    margin-bottom : 15px;
+    margin-left: 15%;
+    word-wrap: break-word;
+}
+
+.break_word {
+    word-wrap: break-word;
+}
+
+.review-backgorund{
+    background: #75c5cf;
+}
