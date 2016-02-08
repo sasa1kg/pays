@@ -89,14 +89,35 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             return deffered.promise;
         }
 
-        this.uploadProductImage = function(productId, imageId, flowObj){
+        this.getStockProductImage = function(stockId,imageId){
+            var deffered = q.defer();
+
+            http.get(rootScope.serverURL + "stock_item/" + stockId + "/images/"+imageId+"/imagefile").
+              success(function (data, status) {
+                  if (status == 200) {
+                      data.index = stockId;
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getStockProductImage |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("Error " + status);
+                  deffered.reject("Error");
+              });
+            return deffered.promise;
+        }
+
+        this.uploadStockProductImage = function(stockId, imageId, flowObj){
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverURL+"product/"+productId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"stock_item/"+stockId+"/imagefile";
             } else {
                 // update current picture of vehicle
-                flowObj.opts.target = rootScope.serverURL+"product/"+productId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"stock_item/"+stockId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -223,7 +244,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
                             "product": product.product.id,
                             "currencyId": product.price.currency.id,
                             "price": product.price.price
-                        }).success(function (data, status) {
+                        }).success(function (dataPrice, status) {
                             if (status == 200) {
                                 deffered.resolve(data);
                             }
@@ -329,6 +350,27 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
               }).
               error(function (data, status) {
                   console.log("getPrices | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
+        this.getReviews = function(farmerId){
+            var deffered = q.defer();
+
+            http.get(rootScope.serverURL + "merchant/" + farmerId + "/reviews").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getReviews | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("getReviews | Error " + status);
                   deffered.reject("Error");
               });
 

@@ -133,37 +133,27 @@
                     <tr>
                       <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_NAME' |
                         translate}}</h5></td>
-                      <!--<td class="col-sm-9"><input type="text" ng-model="productNew.product.name.localization[currentLang]"-->
-                      <!--placeholder="{{ productNew.product.name.localization[currentLang]}}"/></td>-->
                       <td class="col-sm-9">
                         <input disabled ng-show="!newProduct" type="text"
                                ng-model="productNew.product.name.localization[currentLang]"
                                placeholder="{{ productNew.product.name.localization[currentLang]}}"/>
                         <select ng-selected="productNew.product" ng-change="onProductNameChanged()" ng-show="newProduct"
                                 name="singleSelectName" ng-model="productNew.product"
-                                ng-options="product as product.name.localization[currentLang] for product in allProducts track by product.id">
+                                ng-options="product as product.name.localization[currentLang] for product in availableProducts track by product.id">
                         </select>
                       </td>
                     </tr>
                     <tr>
                       <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
                         translate}} [RSD]</h5></td>
-                      <td class="col-sm-9"><input type="text" ng-model="productNew.price.price"
+                      <td class="col-sm-9"><input type="number" min="0" ng-model="productNew.price.price"
                                                   placeholder="{{productNew.price.price}}"/>
                       </td>
                     </tr>
-                    <!--<tr>-->
-                    <!--<td class="col-sm-3"><h5 class="text-left">{{ 'CURRENCY' |-->
-                    <!--translate}}</h5></td>-->
-                    <!--<td class="col-sm-9">-->
-                    <!--<select ng-selected="productNew.price.currency" name="singleSelect" ng-model="productNew.price.currency" ng-options="currency as currency.code for currency in currencies track by currency.id">-->
-                    <!--</select><br>-->
-                    <!--</td>-->
-                    <!--</tr>-->
                     <tr>
                       <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_QUANTITY' | translate}}</h5>
                       </td>
-                      <td class="col-sm-9"><input type="text"
+                      <td class="col-sm-9"><input type="number" min="0"
                                                   ng-model="productNew.amount"
                                                   placeholder="{{productNew.amount}}"/>
                       </td>
@@ -212,7 +202,7 @@
             </div>
             <div class="modal-footer" id="product-modal-footer">
               <button type="button" class="btn btn-default"
-                      ng-click="saveChanges()">{{ 'SAVE_CHANGES' |
+                      ng-click="saveChanges()" ng-disabled="!canBeSaved()">{{ 'SAVE_CHANGES' |
                 translate}}
               </button>
               <button type="button" class="btn btn-default" ng-click="cancelModal()">{{ 'DISCARD_CHANGES'

@@ -119,6 +119,9 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
         SearchService.getFarmerById(scope.farmerId).then(function (data) {
             if (data) {
                 scope.farmer = data;
+                FarmerService.getReviews(scope.farmer.id).then(function(data){
+                    scope.reviews = data;
+                });
                 scope.farmer.bannerImages = [];
                 var bannerPicIndex             = 0;
                 for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.farmer.images.banner.length)); i++) {
@@ -138,13 +141,23 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
                 var content = CartService.getItems(scope.farmerId);
                 for (var i = scope.farmerProducts.length - 1; i >= 0; i--) {
                     scope.farmerProducts[i].itemNum = 0;
-                    SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images).then(function (img) {
-                        for (var j = 0; j < scope.farmerProducts.length; j++) {
-                            if (scope.farmerProducts[j].product.id === img.index) {
-                                scope.farmerProducts[j].product.img = "data:image/jpeg;base64," + img.document_content;
+                    if (scope.farmerProducts[i].customImage) {
+                        FarmerService.getStockProductImage(scope.farmerProducts[i].stockItemId, scope.farmerProducts[i].customImage).then(function imgArrived(data) {
+                            for (var j = 0; j < scope.farmerProducts.length; j++) {
+                                if (scope.farmerProducts[j].stockItemId === data.index) {
+                                    scope.farmerProducts[j].product.img = "data:image/jpeg;base64," + data.document_content;
+                                }
                             }
-                        }
-                    });
+                        });
+                    } else {
+                        SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images).then(function imgArrived(data) {
+                            for (var j = 0; j < scope.farmerProducts.length; j++) {
+                                if (scope.farmerProducts[j].product.id === data.index) {
+                                    scope.farmerProducts[j].product.img = "data:image/jpeg;base64," + data.document_content;
+                                }
+                            }
+                        });
+                    }
                     if (content != null) {
                         for (var k = content.items.length - 1; k >= 0; k--) {
                             if (scope.farmerProducts[i].product.id == content.items[k].itemId) {
@@ -199,33 +212,6 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
         scope.canBeAdded = function () {
             return CartService.canBeAdded(scope.farmerId);
         }
-
-        scope.reviews = [{
-            commentBy : "Nemanja Ignjatov",
-            created_at : "06-02-2006",
-            rating : 4,
-            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
-        },{
-            commentBy : "Petar Ignjatov",
-            created_at : "06-02-2006",
-            rating : 3,
-            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
-        },{
-            commentBy : "Nemanja Ignjatov",
-            created_at : "06-02-2005",
-            rating : 5,
-            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
-        },{
-            commentBy : "Nemanja Ignjatov",
-            created_at : "05-02-2006",
-            rating : 1,
-            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
-        },{
-            commentBy : "Nemanja Ignjatov",
-            created_at : "06-02-2006",
-            rating : 2,
-            comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa."
-        }];
 
         scope.range = function(min, max, step){
             step = step || 1;

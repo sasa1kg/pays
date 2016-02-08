@@ -87,9 +87,9 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
             });
             OrderService.createOrder(order).then(function (data) {
                 Notification.success({message: filter('translate')('ORDER_CREATED')});
-                CartService.resetCart();
-                OrderService.clearOrderData();
-                location.path("/");
+                //CartService.resetCart();
+                //OrderService.clearOrderData();
+                location.path(data.redirectURL);
             }).catch(function (err) {
                 Notification.error({message: filter('translate')('ORDER_NOT_CREATED')});
             });
