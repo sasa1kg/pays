@@ -356,34 +356,21 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
         this.generateOrderQRCode = function(order, farmer, packageNumber){
 
-            var qrData = "";
-
-            var temp = order.createdAt.split("-");
-
-            qrData = qrData + "SR" + temp[0] + temp[1] + temp[2] + order.id + this.QRCodeDataSeparator; // TODO: Resolve country code and unique number.
-
-            qrData = qrData + farmer.businessSubject.name + this.QRCodeDataSeparator;
-
-            qrData += packageNumber + this.QRCodeDataSeparator;
-
-            temp = 0;
+            var qrData;
+            var weight = 0;
             for(var i=0; i < order.items.length; i++){ //TODO: What if product is not measured in KGs?
                 if(order.items[i].unit === "kilogram"){
-                    temp += parseInt(order.items[i].amount);
+                    weight += parseInt(order.items[i].amount);
                 }
-
-                if(i !== 0){
-                    qrData += ";";
-                }
-                qrData += order.items[i].id + ":" + parseInt(order.items[i].amount);
             }
-
-            qrData += this.QRCodeDataSeparator + temp;
-
-            qrData += this.QRCodeDataSeparator + order.client.privateSubject.name + " " + order.client.privateSubject.lastName +" ";
-            qrData += order.client.privateSubject.address + " " + order.client.privateSubject.city + this.QRCodeDataSeparator;
-            qrData += order.deliveryDate + "," + order.deliveryFrom + "-" + order.deliveryTo + this.QRCodeDataSeparator;
-
-            return qrData;
+            qrData = {
+                id: order.id,
+                farm: farmer.businessSubject.name,
+                brpaket: packageNumber,
+                tezina: weight,
+                kupac: order.client.privateSubject.name + " " + order.client.privateSubject.lastName + " " + order.client.privateSubject.address + " " + order.client.privateSubject.city,
+                vremedostave: order.deliveryDate + "," + order.deliveryFrom + "-" + order.deliveryTo
+            };
+            return JSON.stringify(qrData);
         }
     }]);

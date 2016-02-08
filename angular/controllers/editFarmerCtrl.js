@@ -401,7 +401,7 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
 
 });
 
-angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope, $filter, $modalInstance,farmer, orders, order, FarmerService, Notification) {
+angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope, $filter, $modalInstance, farmer, orders, order, FarmerService, Notification) {
 
     $scope.orders = orders;
     $scope.order = order;
@@ -410,6 +410,7 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
 
     $scope.generateQr =function(){
         $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
+        //var qrDiv = $modalInstance.getElementById('qrCode').firstElementChild;
         FarmerService.setTransportOrderStatus(farmer.id, order.id).then( function(data){
             Notification.success({message: $filter('translate')('ORDER_STATUS_TRANSPORT')});
             $scope.order.status = "T";
