@@ -150,3 +150,29 @@ input[required] {
 .review-backgorund{
     background: #75c5cf;
 }
+.fix-to-top {
+    position: fixed;
+    top: 100px;
+    right: 5px;
+    display: block !important;
+}
+.floating_cart {
+    display: none;
+    max-width: 250px;
+    height: 40px;
+    background-color: #FE980F;
+    z-index: 1000;
+    font-size: 14px !important;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.floating_link {
+    color: white;
+}
+.floating_badge {
+    min-width: 18px !important;
+    min-height: 18px !important;
+    border-radius: 8px;
+    font-size: 14px;
+}

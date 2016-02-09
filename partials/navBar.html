@@ -22,6 +22,12 @@
 </div>
 <!--/header_top-->
 
+<div ng-hide="isLoggedIn() && credentials.role!='C'" class="floating_cart" set-class-when-at-top="fix-to-top">
+    <a class="floating_link" href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
+                                class="badge alert-success floating_badge">{{price}}</span>
+    </a>
+</div>
+
 <div class="header-middle"><!--header-middle-->
     <div class="container">
         <div class="row">
