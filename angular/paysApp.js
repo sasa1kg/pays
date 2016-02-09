@@ -517,7 +517,10 @@ paysApp.config(function ($translateProvider) {
     ORDER_STATUS_TRANSPORT : 'Order status changed to - In transport',
     NOT_ORDER_STATUS_TRANSPORT : 'Unable to change order status to - In transport',
     FARMER_REVIEWS : 'Farmer reviews',
-    POSTED_ON :'Posted on'
+    POSTED_ON :'Posted on',
+    ORDER_INFO : 'Current status of your order',
+    ORDER_MESSAGE : 'You will be notified about payment status via e-mail. You can observe further progress of your order on your profile.',
+    MAIN_PAGE : 'Go to home page'
   })
     .translations('rs_RS', {
       HOME: 'Početna',
@@ -840,7 +843,10 @@ paysApp.config(function ($translateProvider) {
       ORDER_STATUS_TRANSPORT : 'Stanje narudžbine promenjeno u - U transportu',
       NOT_ORDER_STATUS_TRANSPORT : 'Neuspela promena stanja narudžbine',
       FARMER_REVIEWS : 'Komentari farmera',
-      POSTED_ON :'Postavljeno'
+      POSTED_ON :'Postavljeno',
+      ORDER_INFO : 'Trenutni status Vaše narudžbine',
+      ORDER_MESSAGE : 'U najskorijem roku bićete obavešteni o statusu Vaše uplate putem e-mail poruke. Dalji status Vaše narudžbine možete pratiti na Vašem profilu',
+      MAIN_PAGE : 'Idi na početnu stranicu'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

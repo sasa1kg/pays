@@ -24,7 +24,25 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
 
             return deffered.promise;
         }
+        this.getOrder = function (orderId) {
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "order/"+orderId).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getOrder | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
 
+              }).
+              error(function (data, status) {
+                  console.log("Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
         this.createOrderItem = function (farmerId,clientId) {
             localStorageService.set(JSON.stringify(
                 {

@@ -1,6 +1,6 @@
-angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$filter", "$location", "CartService", "WishlistService",
+angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$filter","$window", "$location", "CartService", "WishlistService",
     "OrderService", "UserService", "Notification",
-    function (scope, rootScope, filter, location, CartService, WishlistService, OrderService, UserService, Notification) {
+    function (scope, rootScope, filter, window,location, CartService, WishlistService, OrderService, UserService, Notification) {
 
         scope.orderData = OrderService.getOrderData();
         if (scope.orderData != null) {
@@ -87,7 +87,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
             });
             OrderService.createOrder(order).then(function (data) {
                 Notification.success({message: filter('translate')('ORDER_CREATED')});
-                location.path(data.redirectURL);
+                window.location.href = data.redirectURL;
             }).catch(function (err) {
                 Notification.error({message: filter('translate')('ORDER_NOT_CREATED')});
             });
