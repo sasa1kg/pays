@@ -368,7 +368,8 @@
                       |
                       translate}}
                     </button>
-                    <div id="orderQR" class="collapse mt20">
+                    <!-- DIRTY HACK-->
+                    <div ng-if="!qr.img" id="orderQR" class="collapse mt20">
                       <div class="col-sm-12">
                         <h5 class="col-sm-4"><strong>{{ 'NUMBER_OF_PACKAGES' | translate}}</strong></h5>
 
@@ -387,6 +388,10 @@
                           <qrcode size="150" version="10" data="{{qr.img}}" download></qrcode>
                         </div>
                       </div>
+                    </div>
+                    <!-- DIRTY HACK-->
+                    <div class="col-sm-12 thumbnail-vehicle text-center" ng-if="qr.img">
+                      <qrcode size="150" version="10" data="{{qr.img}}" download></qrcode>
                     </div>
                   </div>
                 </form>

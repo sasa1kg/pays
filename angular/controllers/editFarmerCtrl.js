@@ -452,6 +452,11 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
 
   $scope.qr = {};
 
+  if(order.status != 'C'){
+    $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, 1);
+
+    console.log("QR data generated: " + $scope.qr.img);
+  }
   $scope.generateQr = function () {
     $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
 

@@ -18,6 +18,9 @@ angular.module('paysApp').controller("orderCtrl", ["$scope", "$rootScope", "$rou
         SearchService.getFarmerById(scope.order.orderedFrom, 0).then(function (farmer) {
           scope.order.farmer = farmer;
         });
+        UserService.getUserPreviousDeliveryAddress(scope.order.orderedBy).then(function (address) {
+          UserService.storeUserDeliveryAddresses(scope.order.orderedBy, address);
+        });
       } else {
         scope.order = null;
       }

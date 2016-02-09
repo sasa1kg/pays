@@ -511,7 +511,7 @@ paysApp.config(function ($translateProvider) {
     DELIVERED : 'Delivered',
     PAID : 'Paid',
     GENERATE_QR : 'Generate QR code',
-    NUMBER_OF_PACKAGES : 'Number of packaged',
+    NUMBER_OF_PACKAGES : 'Number of packages',
     ENTER_NUMBER_OF_PACKAGES : 'Please enter number of packages for order',
     SEND_ORDER : 'Send order',
     ORDER_STATUS_TRANSPORT : 'Order status changed to - In transport',
