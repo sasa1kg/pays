@@ -163,6 +163,7 @@ input[required] {
     top: 150px;
     right: 5px;
     display: block !important;
+    z-index: 1000;
 }
 .floating_cart {
     display: none;
