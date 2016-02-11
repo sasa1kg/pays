@@ -156,6 +156,14 @@ input[required] {
     right: 5px;
     display: block !important;
 }
+.fix-to-top-search {
+    max-width: 170px;
+    height: 100px;
+    position: fixed;
+    top: 150px;
+    right: 5px;
+    display: block !important;
+}
 .floating_cart {
     display: none;
     max-width: 250px;
@@ -175,4 +183,42 @@ input[required] {
     min-height: 18px !important;
     border-radius: 8px;
     font-size: 14px;
+}
+.paysCaption {
+    top: -20px;
+}
+.mainPageContainer {
+    margin-top: 20px;
+}
+.box {
+    background-color: #F0F0E9;
+    min-height: 200px;
+    padding: 15px;
+    margin: 15px;
+}
+.greenTxt {
+    color: green;
+}
+.orangeTxt {
+    color: orange;
+}
+.darnOrangeTxt {
+    color: #e48201;
+}
+.boxTxt {
+    font-size: 12px;
+}
+.hrBox {
+    border-top: 1px solid #999999 !important;
+}
+.subtitle-center {
+   background-color: #F0F0E9; 
+   margin-left: auto;
+   margin-right: auto;
+   width: 230px;
+   height: 30px;
+   margin-bottom: 20px;
+}
+.subtitle-header {
+    padding-top: 7px;
 }

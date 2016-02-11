@@ -2,10 +2,83 @@
   <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
 </header><!--/header-->
 
+    <div class="col-lg-12">
+      <div id="sliderCarousel" class="carousel slide" data-ride="carousel"
+           ng-show="noSelectedCategory() && noFoundFarmers()">
+        <ol class="carousel-indicators pays-carousel-indicators">
+          <li data-target="#sliderCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#sliderCarousel" data-slide-to="1"></li>
+          <li data-target="#sliderCarousel" data-slide-to="2"></li>
+        </ol>
+
+
+ 
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="http://www.frigoscan.com/wp-content/uploads/2015/07/Rainbow-of-Fruits-and-Vegetables.jpg" class="girl img-responsive" alt="">
+          <div class="container">
+            <div class="carousel-caption text-centered paysCaption">
+              <h1><span>PAYS</span> web shop</h1>
+              <h2>{{ 'TITLE_1' | translate }}</h2>
+              <p>{{ 'TITLE_11' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="images/home/fruit-vegetables.jpg" class="girl img-responsive" alt="">
+          <div class="container">
+            <div class="carousel-caption text-centered paysCaption">
+              <h1><span>PAYS</span> {{ 'TITLE_2' | translate }}</h1>
+
+              <h2>24/7</h2>
+
+              <p>{{ 'TITLE_22' | translate }} </p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="images/home/sourcherry.jpg" class="girl img-responsive" alt="">
+          <div class="container">
+            <div class="carousel-caption text-centered paysCaption">
+              <h1><span>PAYS</span> {{ 'TITLE_3' | translate }}</h1>
+
+              <p>{{ 'TITLE_33' | translate }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+        <a class="control-carousel left" ng-non-bindable data-slide="prev" role="button" data-target="#sliderCarousel">
+          <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="control-carousel right" ng-non-bindable data-slide="next" role="button" data-target="#sliderCarousel">
+          <i class="fa fa-angle-right"></i>
+        </a>
+      </div>
+    </div>
+
+
+  <div class="fix-to-top-search" ng-show="!noSelectedCategory()">
+        <button type="button" class="btn btn-fefault cart actionbar"
+                ng-click="setSearchPrepared()">
+          <i class="fa fa-search"></i>
+          {{ 'SEARCH' | translate}}
+        </button>
+        <button type="button " class="btn btn-fefault cart actionbar new-wrap"
+                ng-click="clearSelectedSearchProducts()">
+          <i class="fa fa-times"></i>
+          {{ 'SEARCH_RESET' | translate}}
+        </button>
+  </div>
+
 <section id="slider"><!--slider-->
   <div class="container">
     <!--<div class="row">-->
-    <div class="col-sm-3">
+    <div class="col-sm-3 mainPageContainer">
       <div class="left-sidebar">
         <h2>{{ 'SEARCH' | translate}}</h2>
 
@@ -103,64 +176,10 @@
       <!--/category-products-->
     </div>
     <!--</div>-->
-    <div class="col-sm-7">
-      <div id="sliderCarousel" class="carousel slide" data-ride="carousel"
-           ng-show="noSelectedCategory() && noFoundFarmers()">
-        <ol class="carousel-indicators pays-carousel-indicators">
-          <li data-target="#sliderCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#sliderCarousel" data-slide-to="1"></li>
-          <li data-target="#sliderCarousel" data-slide-to="2"></li>
-        </ol>
+    <div class="col-sm-9">
+      <div class="row">
 
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <div class="col-sm-6">
-              <h1><span>PAYS</span> web shop</h1>
-
-              <h2>{{ 'TITLE_1' | translate }}</h2>
-
-              <p>{{ 'TITLE_11' | translate }}</p>
-            </div>
-            <div class="col-sm-6">
-              <img src="images/home/veggies.jpg" class="girl img-responsive" alt=""
-                   style="margin-top: 115px;"/>
-            </div>
-          </div>
-          <div class="item">
-            <div class="col-sm-6">
-              <h1><span>PAYS</span> {{ 'TITLE_2' | translate }}</h1>
-
-              <h2>24/7</h2>
-
-              <p>{{ 'TITLE_22' | translate }} </p>
-            </div>
-            <div class="col-sm-6">
-              <img src="images/home/fruit-vegetables.jpg" class="girl img-responsive" alt=""
-                   style="margin-top: 115px;"/>
-            </div>
-          </div>
-          <div class="item">
-            <div class="col-sm-6">
-
-              <h1><span>PAYS</span> {{ 'TITLE_3' | translate }}</h1>
-
-              <p>{{ 'TITLE_33' | translate }}</p>
-            </div>
-            <div class="col-sm-6">
-              <img src="images/home/sourcherry.jpg" class="girl img-responsive" alt=""
-                   style="margin-top: 115px;"/>
-            </div>
-          </div>
-
-        </div>
-
-        <a class="control-carousel left" ng-non-bindable data-slide="prev" role="button" data-target="#sliderCarousel">
-          <i class="fa fa-angle-left"></i>
-        </a>
-        <a class="control-carousel right" ng-non-bindable data-slide="next" role="button" data-target="#sliderCarousel">
-          <i class="fa fa-angle-right"></i>
-        </a>
-      </div>
+      <div class="mainPageContainer">
       <div class="col-sm-12" ng-show="!noSelectedCategory() && noFoundFarmers()">
         <row class="col-sm-12" ng-repeat="product in foundProducts">
 
@@ -184,6 +203,7 @@
           </div>
         </row>
       </div>
+
       <div class="col-sm-12" ng-show="!noFoundFarmers()">
         <div class="features_items col-sm-12"><!--features_items-->
           <div class="col-sm-4" ng-repeat="farmer in farmers">
@@ -204,8 +224,41 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-2">
+      </div>
+
+      </div>
+    <div class="row" ng-show="noSelectedCategory()">
+      <div class="col-lg-4">
+        <div class="box text-center">
+          <h4 class="greenTxt">Who are we?</h4>
+          <hr class="hrBox">
+          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
+            obtaining best price and fastest transport is included.</p>
+            <span class="glyphicon glyphicon-arrow-right greenTxt"></span>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="box text-center">
+          <h4 class="orangeTxt">What are we doing?</h4>
+          <hr class="hrBox">
+          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
+            obtaining best price and fastest transport is included.</p>
+           <span class="glyphicon glyphicon-arrow-right orangeTxt"></span>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="box text-center">
+          <h4 class="darnOrangeTxt">How can we help you?</h4>
+          <hr class="hrBox">
+          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
+            obtaining best price and fastest transport is included.</p>
+           <span class="glyphicon glyphicon-arrow-right darnOrangeTxt"></span>
+        </div>
+      </div>
+  
+
+
+    <!--<div class="col-sm-2">
       <div class="col-sm-12">
         <button type="button" class="btn btn-fefault cart actionbar"
                 ng-click="setSearchPrepared()">
@@ -231,21 +284,21 @@
         <p class="text-left" ng-repeat=" item in searchWishlistItems">
           {{item.name.localization[currentLang] | translate}}</p>
       </div>
+    </div>-->
     </div>
-  </div>
-  </div>
-</section><!--/slider-->
-
-<section>
-  <div class="container">
+    <!-- Picks holder -->
+    <div class="row" ng-show="noSelectedCategory()">
+    <div class="col-sm-12">
     <h2 class="title text-center">{{ 'MARKETING_SPACE' | translate}}</h2>
 
     <div cg-busy="{promise:nearByFarmers,message:'Loading...',backdrop:true}"></div>
     <div class="row">
-      <div class="col-sm-2 padding-right">
-        <h4 class="title text-center vertical-text-center">{{ 'MOST_IN_YEAR' | translate}}</h4>
+      <div class="col-sm-12 padding-right">
+        <div class="subtitle-center">
+        <h4 class="title text-center subtitle-header">{{ 'MOST_IN_YEAR' | translate}}</h4>
+        </div>
       </div>
-      <div class="col-sm-9 padding-right">
+      <div class="col-sm-12 padding-right">
         <div class="features_items"><!--features_items-->
           <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
             <div class="product-image-wrapper">
@@ -279,10 +332,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-2 padding-right">
-        <h4 class="title text-center vertical-text-center">{{ 'MOST_DIFFERENT' | translate}}</h4>
+      <div class="col-sm-12 padding-right">
+        <div class="subtitle-center">
+          <h4 class="title text-center subtitle-header">{{ 'MOST_DIFFERENT' | translate}}</h4>
+        </div>
       </div>
-      <div class="col-sm-9 padding-right">
+      <div class="col-sm-12 padding-right">
         <div class="features_items"><!--features_items-->
           <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
             <div class="product-image-wrapper">
@@ -316,10 +371,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-2 padding-right">
-        <h4 class="title text-center vertical-text-center">{{ 'MOST_ORDERS' | translate}}</h4>
+      <div class="col-sm-12 padding-right">
+        <div class="subtitle-center">
+          <h4 class="title text-center subtitle-header">{{ 'MOST_ORDERS' | translate}}</h4>
+        </div>
       </div>
-      <div class="col-sm-9 padding-right">
+      <div class="col-sm-12 padding-right">
         <div class="features_items"><!--features_items-->
           <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
             <div class="product-image-wrapper">
@@ -353,7 +410,15 @@
 
       </div>
     </div>
+    </div>
   </div>
+    </div>
+  </div>
+  </div>
+</section><!--/slider-->
+
+<section>
+  
 </section>
 
 <div ng-include="'partials/footer.html'"></div>
