@@ -87,6 +87,7 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
         }
 
         this.updateProductAmount = function (productId, farmerId, amount) {
+            console.log("AMOUNT "+ amount)
             var keys = localStorageService.keys();
             for (var i = keys.length - 1; i >= 0; i--) {
                 var identifier = JSON.parse(keys[i]);
@@ -94,7 +95,7 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
                     var localItem = localStorageService.get(keys[i]);
                     for (var j = 0; j < localItem.items.length; j++) {
                         if (localItem.items[j].itemId == productId) {
-                            if (localItem.items[j].itemNum > 1) {
+                            if (amount >= 1) {
                                 localItem.items[j].itemNum = amount;
                                 localStorageService.set(keys[i], localItem);
                             } else {

@@ -1,6 +1,6 @@
-angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$location", "$rootScope", "$modal", "CartService", "WishlistService",
-  "SearchService", "OrderService", "UserService",
-  function (scope, rootScope, location, rootScope, modal, CartService, WishlistService, SearchService, OrderService, UserService) {
+angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$location", "$rootScope", "$modal", "$filter", "CartService", "WishlistService",
+  "SearchService", "OrderService", "UserService","FarmerService",
+  function (scope, rootScope, location, rootScope, modal, filter, CartService, WishlistService, SearchService, OrderService, UserService, FarmerService) {
 
     console.log("Cart Ctrl!");
 
@@ -12,6 +12,50 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
 
     scope.previousAddresses = UserService.getUserDeliveryAddress(rootScope.credentials.id);
 
+    scope.farmerData = CartService.getCartFarmer();
+    SearchService.getFarmerProducts(scope.farmerData.farmerId).then(function (data) {
+      scope.farmerProducts = data;
+      scope.cartItems      = CartService.getItems();
+      scope.loadData();
+      if (scope.cartItems != null) {
+        for (var j = 0; j < scope.cartItems.items.length; j++) {
+          for (var i = 0; i < scope.farmerProducts.length; i++) {
+            if (scope.cartItems.items[j].itemId === scope.farmerProducts[i].product.id) {
+              scope.cartItems.items[j].amount = scope.farmerProducts[i].amount;
+              if (scope.farmerProducts[i].customImage) {
+                FarmerService.getStockProductImage(scope.farmerProducts[i].stockItemId, scope.farmerProducts[i].customImage).then(function imgArrived(data) {
+                  for (var j = 0; j < scope.farmerProducts.length; j++) {
+                    if (scope.farmerProducts[j].stockItemId === data.index) {
+                      scope.farmerProducts[j].img = "data:image/jpeg;base64," + data.document_content;
+                      data.index = scope.farmerProducts[j].product.id;
+                    }
+                  }
+                  for (var j = 0; j < scope.cartItems.items.length; j++) {
+                    if (scope.cartItems.items[j].itemId === data.index) {
+                      scope.cartItems.items[j].img = "data:image/jpeg;base64," + data.document_content;
+                    }
+                  }
+                });
+              } else {
+                SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images).then(function imgArrived(data) {
+                  for (var j = 0; j < scope.farmerProducts.length; j++) {
+                    if (scope.farmerProducts[j].product.id === data.index) {
+                      scope.farmerProducts[j].img = "data:image/jpeg;base64," + data.document_content;
+                    }
+                  }
+                  for (var j = 0; j < scope.cartItems.items.length; j++) {
+                    if (scope.cartItems.items[j].itemId === data.index) {
+                      scope.cartItems.items[j].img = "data:image/jpeg;base64," + data.document_content;
+                    }
+                  }
+                });
+              }
+            }
+          }
+        }
+      }
+    });
+
     scope.calculateTotal = function () {
       scope.totalPrice = 0;
       for (var i = scope.cartItems.items.length - 1; i >= 0; i--) {
@@ -21,42 +65,76 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
     }
 
 
-    scope.deleteCartItem = function (itemId) {
-      CartService.remove(itemId, scope.farmerData.farmerId);
+    scope.deleteCartItem = function (item) {
+      CartService.remove(item.itemId, scope.farmerData.farmerId);
       scope.loadData();
       scope.price = CartService.getTotalCartAmount() + "";
       scope.calculateTotal();
     };
 
-    scope.addMore = function (itemId) {
-      CartService.more(itemId, scope.farmerData.farmerId);
-      scope.loadData();
-      scope.price = CartService.getTotalCartAmount() + "";
-      scope.calculateTotal();
+    scope.addMore   = function (item) {
+      if (_validateProductAmount(item, ++item.itemNum)) {
+        item.resourceExcedeed = false;
+        item.alertMessage     = "";
+        CartService.more(item.itemId, scope.farmerData.farmerId);
+        scope.price           = CartService.getTotalCartAmount() + "";
+        scope.calculateTotal();
+      } else {
+        item.itemNum--;
+        item.resourceExcedeed = true;
+        item.alertMessage     = filter('translate')('MAX_AVAILABLE') + " " + item.amount + " " + item.itemMeasure.code;
+      }
     }
-    scope.less    = function (itemId) {
-      CartService.less(itemId, scope.farmerData.farmerId);
-      scope.loadData();
-      scope.price = CartService.getTotalCartAmount() + "";
-      scope.calculateTotal();
+    scope.less      = function (item) {
+      if (_validateProductAmount(item, --item.itemNum)) {
+        item.resourceExcedeed = false;
+        item.alertMessage     = "";
+        CartService.less(item.itemId, scope.farmerData.farmerId);
+        scope.price           = CartService.getTotalCartAmount() + "";
+        scope.calculateTotal();
+        if(item.itemNum== 0){
+          scope.loadData();
+        }
+      } else {
+        item.itemNum++;
+        item.resourceExcedeed = true;
+        item.alertMessage     = filter('translate')('MAX_AVAILABLE') + " " + item.amount + " " + item.itemMeasure.code;
+      }
     };
+    scope.setAmount = function (item, amount) {
 
+      if ((amount != null) && (amount >= 0)) {
+        console.log("Amount of " + item.itemId + " = " + amount);
+        if (!_validateProductAmount(item, amount)) {
+          item.resourceExcedeed = true;
+          item.alertMessage     = filter('translate')('MAX_AVAILABLE') + " " + item.amount + " " + item.itemMeasure.code;
+        } else {
+          item.resourceExcedeed = false;
+          item.alertMessage     = "";
+          CartService.updateProductAmount(item.itemId, scope.farmerData.farmerId, parseFloat(amount));
+          scope.price           = CartService.getTotalCartAmount() + "";
+          scope.calculateTotal();
+          if(amount== 0){
+            scope.loadData();
+          }
+        }
+      }
+    }
 
     scope.loadData = function () {
-      scope.cartItems = CartService.getItems();
+      scope.cartItems      = CartService.getItems();
+      console.log("ITEMS "+scope.cartItems.length);
       if (scope.cartItems != null) {
-        for (var i = 0; i < scope.cartItems.items.length; i++) {
-          SearchService.getProductImage(scope.cartItems.items[i].itemId, scope.cartItems.items[i].image).then(function (img) {
-            for (var j = 0; j < scope.cartItems.items.length; j++) {
-              if (scope.cartItems.items[j].itemId === img.index) {
-                scope.cartItems.items[j].img = "data:image/jpeg;base64," + img.document_content;
-              }
+        for (var j = 0; j < scope.cartItems.items.length; j++) {
+          for (var i = 0; i < scope.farmerProducts.length; i++) {
+            if (scope.cartItems.items[j].itemId === scope.farmerProducts[i].product.id) {
+              scope.cartItems.items[j].amount = scope.farmerProducts[i].amount;
+              scope.cartItems.items[j].img = scope.farmerProducts[i].img;
             }
-          });
+          }
         }
-        scope.farmerData = CartService.getCartFarmer();
-        scope.calculateTotal();
       }
+      scope.calculateTotal();
       scope.wishlistItemSize = WishlistService.getItemsSize();
     }
 
@@ -75,24 +153,8 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
       });
     };
 
-    scope.setAmount         = function (productId, amount) {
-
-      if (!isNaN(amount) && (amount >= 0)) {
-        console.log("Amount of " + productId + " = " + amount);
-        for (var i  = scope.cartItems.length - 1; i >= 0; i--) {
-          if (scope.cartItems[i].id == productId) {
-            scope.cartItems[i].itemNum = parseFloat(amount);
-          }
-        }
-        CartService.updateProductAmount(productId, scope.farmerId, parseFloat(amount));
-        scope.price = CartService.getTotalCartAmount() + "";
-        scope.calculateTotal();
-      }
-    }
-
-    scope.loadData();
-    scope.price             = CartService.getTotalCartAmount() + "";
-    scope.wishlistItemsSize = WishlistService.getItemsSize();
+    scope.price              = CartService.getTotalCartAmount() + "";
+    scope.wishlistItemsSize  = WishlistService.getItemsSize();
 
     //Checkout data
 
@@ -156,14 +218,21 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
 
     scope.$watch('address.city', function () {
       if ((scope.address.city != null) && (scope.address.city.length > 0)) {
-        for(var i =0;i<scope.cities.length;i++){
-          if(scope.cities[i].name == scope.address.city){
+        for (var i = 0; i < scope.cities.length; i++) {
+          if (scope.cities[i].name == scope.address.city) {
             scope.address.postalCode = parseInt(scope.cities[i].postalCode);
             return true;
           }
         }
       }
     });
+
+    _validateProductAmount = function (product, amount) {
+      if (parseFloat(product.amount) >= amount) {
+        return true;
+      }
+      return false;
+    }
   }]);
 
 angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance, $location, CartService) {

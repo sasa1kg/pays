@@ -30,16 +30,16 @@
                     <tbody>
                     <tr ng-repeat="item in wishlistItem.products.items">
                         <td class="cart_product">
-                            <a href=""><img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}"
-                                            style="width:128px;height:128px;"></a>
+                            <img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}"
+                                            style="width:100%;height:170px;">
                         </td>
-                        <td class="cart_description">
+                        <td class="cart_description col-sm-2">
                             <h4>{{item.itemName.localization[currentLang]}}</h4>
                         </td>
-                        <td class="cart_price">
+                        <td class="cart_price col-sm-3">
                             <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code}}</p>
                         </td>
-                        <td class="cart_quantity">
+                        <td class="cart_quantity col-sm-3">
                             <div ng-if="canBeAdded(wishlistItem.farmer.farmerId) && !isProductInCart(item.itemId)">
                                 <a ng-click="putToCart(item.itemId,wishlistItem.farmer.farmerId,('ITEM_ADDED_TO_CART' | translate))"
                                    class="btn btn-default add-to-cart"><i

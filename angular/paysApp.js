@@ -520,7 +520,8 @@ paysApp.config(function ($translateProvider) {
     POSTED_ON :'Posted on',
     ORDER_INFO : 'Current status of your order',
     ORDER_MESSAGE : 'You will be notified about payment status via e-mail. You can observe further progress of your order on your profile.',
-    MAIN_PAGE : 'Go to home page'
+    MAIN_PAGE : 'Go to home page',
+    MAX_AVAILABLE : 'Maximum available'
   })
     .translations('rs_RS', {
       HOME: 'Početna',
@@ -846,7 +847,8 @@ paysApp.config(function ($translateProvider) {
       POSTED_ON :'Postavljeno',
       ORDER_INFO : 'Trenutni status Vaše narudžbine',
       ORDER_MESSAGE : 'U najskorijem roku bićete obavešteni o statusu Vaše uplate putem e-mail poruke. Dalji status Vaše narudžbine možete pratiti na Vašem profilu',
-      MAIN_PAGE : 'Idi na početnu stranicu'
+      MAIN_PAGE : 'Idi na početnu stranicu',
+      MAX_AVAILABLE : 'Na raspolaganju'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

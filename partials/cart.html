@@ -50,32 +50,44 @@
         <tbody>
         <tr ng-repeat="item in cartItems.items">
           <td class="cart_product">
-            <a href=""><img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}"
-                            style="width:128px;height:128px;"></a>
+            <img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}"
+                            style="width:100%;height:170px;">
           </td>
-          <td class="cart_description">
+          <td class="cart_description col-sm-2">
             <h4><a href="">{{item.itemName.localization[currentLang]}}</a></h4>
 
             <p>{{'NON_ORGANIC' | translate}}</p>
           </td>
-          <td class="cart_price">
+          <td class="cart_price col-sm-2">
             <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code}}</p>
           </td>
-          <td class="cart_quantity">
+          <td class="cart_quantity col-sm-2">
 
             <div class="cart_quantity_button">
-              <a class="cart_quantity_up cursor-pointer" ng-click="addMore(item.itemId)"> + </a>
-              <input class="cart_quantity_input" type="text" name="quantity" ng-model="item.itemNum"
-                     ng-change="setAmount(item.itemId,item.itemNum)"
-                     autocomplete="off" size="2">
-              <a class="cart_quantity_down cursor-pointer" ng-click="less(item.itemId)"> - </a>
+              <div class="col-sm-3 no-padding">
+                <a class="cursor-pointer form-control" ng-click="addMore(item)">
+                  + </a>
+              </div>
+              <div class="col-sm-5 no-padding">
+                <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                       name="quantity"
+                       ng-model="item.itemNum"
+                       ng-change="setAmount(item,item.itemNum)"
+                       ng-class="{'alert_color' : item.resourceExcedeed}"
+                       autocomplete="off"
+                       size="5">
+              </div>
+              <div class="col-sm-3 no-padding">
+                <a class="cursor-pointer form-control" ng-click="less(item)"> - </a>
+              </div>
+              <h5 ng-show="item.resourceExcedeed"class="text-center" style="color:red;">{{item.alertMessage}}</h5>
             </div>
           </td>
-          <td class="cart_total">
+          <td class="cart_total col-sm-2">
             <p class="cart_total_price">{{item.itemPrice * item.itemNum}} RSD</p>
           </td>
-          <td class="cart_delete">
-            <a class="cart_quantity_delete" ng-click="deleteCartItem(item.itemId)"><i
+          <td class="cart_delete col-sm-1">
+            <a class="cart_quantity_delete" ng-click="deleteCartItem(item)"><i
               class="fa fa-times"></i></a>
           </td>
         </tr>

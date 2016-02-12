@@ -147,7 +147,7 @@
             <div class="productinfo text-center">
               <a>
                 <img src="{{product.product.img}}" alt="{{product.product.name.localization[currentLang]}}"
-                     height="128px"
+                     height="200px"
                      width="128px" class="cursorhover"/>
               </a>
 
@@ -169,15 +169,24 @@
                 class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate}}</a>
 
               <div ng-if="canBeAdded () && isProductInCart(product.product.id)"
-                   class="cart_quantity_button add-remove-product-aligment">
-                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.product.id)">
-                  + </a>
-                <input class="cart_quantity_input" type="text" name="quantity"
-                       ng-model="product.itemNum"
-                       ng-change="setAmount(product.product.id,product.itemNum)" autocomplete="off"
-                       size="5">
-                <a class="cart_quantity_down cursor-pointer" ng-click="less(product.product.id)"> - </a>
+                   class="cart_quantity_button col-sm-12 mb25">
+                <div class="col-sm-3 col-sm-offset-1 no-padding">
+                  <a class="cursor-pointer form-control" ng-click="addMore(product)">
+                    + </a>
+                </div>
+                <div class="col-sm-4 no-padding">
+                  <input class="form-control col-sm-12 text-center disable_number_spinner" type="number" name="quantity"
+                         ng-model="product.itemNum"
+                         ng-change="setAmount(product,product.itemNum)" autocomplete="off"
+                         ng-class="{'alert_color' : product.resourceExcedeed}"
+                         size="5">
+                </div>
+                <div class="col-sm-3 no-padding">
+                  <a class="cursor-pointer form-control" ng-click="less(product)"> - </a>
+                </div>
+
               </div>
+              <h5 ng-show="product.resourceExcedeed"class="text-center" style="color:red;">{{product.alertMessage}}</h5>
             </div>
           </div>
         </div>
@@ -185,43 +194,55 @@
     </div>
     <h2 class="title text-center">{{ 'ALL_PRODUCTS' | translate}}</h2>
 
-    <div class="product-details">
-      <div class="col-sm-3" ng-repeat="product in farmerProducts">
-        <div class="product-image-wrapper">
-          <div class="single-products">
-            <div class="productinfo text-center">
-              <a>
-                <img src="{{product.product.img}}" alt="{{product.product.name.localization[currentLang]}}"
-                     height="200px"
-                     width="128px" class="cursorhover"/>
-              </a>
+    <div class="row">
+      <div class="product-details">
+        <div class="col-sm-3" ng-repeat="product in farmerProducts">
+          <div class="product-image-wrapper">
+            <div class="single-products">
+              <div class="productinfo text-center">
+                <a>
+                  <img src="{{product.product.img}}" alt="{{product.product.name.localization[currentLang]}}"
+                       height="200px"
+                       width="128px" class="cursorhover"/>
+                </a>
 
-              <h2>{{product.price.price}} {{product.price.currency.code}}/{{product.measure.code}}</h2>
+                <h2>{{product.price.price}} {{product.price.currency.code}}/{{product.measure.code}}</h2>
 
-              <p>{{product.product.name.localization[currentLang]}}</p>
+                <p>{{product.product.name.localization[currentLang]}}</p>
 
-              <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
-                 ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
-                class="fa fa-star"></i>
-                {{ 'ADD_TO_WISHLIST' | translate}}</a>
+                <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
+                   ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
+                  class="fa fa-star"></i>
+                  {{ 'ADD_TO_WISHLIST' | translate}}</a>
 
-              <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
-                 ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
-                <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+                <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
+                   ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
+                  <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
 
-              <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
-                 ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
-                class="fa fa-shopping-cart"></i>{{'ADD_TO_CART' | translate}}</a>
+                <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
+                   ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
+                  class="fa fa-shopping-cart"></i>{{'ADD_TO_CART' | translate}}</a>
 
-              <div ng-if="canBeAdded() && isProductInCart(product.product.id)"
-                   class="cart_quantity_button add-remove-product-aligment">
-                <a class="cart_quantity_up cursor-pointer" ng-click="addMore(product.product.id)">
-                  + </a>
-                <input class="cart_quantity_input" type="text" name="quantity"
-                       ng-model="product.itemNum"
-                       ng-change="setAmount(product.product.id,product.itemNum)" autocomplete="off"
-                       size="5">
-                <a class="cart_quantity_down cursor-pointer" ng-click="less(product.product.id)"> - </a>
+                <div ng-if="canBeAdded() && isProductInCart(product.product.id)"
+                     class="cart_quantity_button col-sm-12 mb25">
+                  <div class="col-sm-3 col-sm-offset-1 no-padding">
+                    <a class="cursor-pointer form-control" ng-click="addMore(product)">
+                      + </a>
+                  </div>
+                  <div class="col-sm-4 no-padding">
+                    <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                           name="quantity"
+                           ng-model="product.itemNum"
+                           ng-change="setAmount(product,product.itemNum)"
+                           ng-class="{'alert_color' : product.resourceExcedeed}"
+                           autocomplete="off"
+                           size="5">
+                  </div>
+                  <div class="col-sm-3 no-padding">
+                    <a class="cursor-pointer form-control" ng-click="less(product)"> - </a>
+                  </div>
+                </div>
+                <h5 ng-show="product.resourceExcedeed"class="text-center" style="color:red;">{{product.alertMessage}}</h5>
               </div>
             </div>
           </div>
@@ -237,6 +258,7 @@
         <div class="bubble" class="col-sm-7 ">
           <div class="col-sm-12 text-left">
             <h4 class="col-sm-12 text-center">{{review.commentBy}}</h4>
+
             <div class="col-sm-12 text-center">
               <ul class="star-rating">
                 <li ng-repeat="star in range(1,review.rating)" class="filled review-backgorund">
