@@ -191,11 +191,11 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             return deferred.promise;
         }
 
-        //@url PUT /merchant/$id/products/$productId/amount/$amount/unit/$unitId
+        //@url PUT /merchant/$id/products/$productId/amount/$amount
         this.updateProduct = function (farmerId, product) {
             var deffered = q.defer();
 
-            http.put(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id + "/amount/" + product.amount + "/unit/" + product.measure.id).
+            http.put(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id + "/amount/" + product.amount).
                 success(function (data, status) {
                     if (status == 200) {
                         console.log(data);
@@ -236,7 +236,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.addNewProduct = function (farmerId, product) {
             var deffered = q.defer();
 
-            http.put(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id + "/amount/" + product.amount + "/unit/" + product.measure.id).
+            http.put(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id + "/amount/" + product.amount).
                 success(function (data, status) {
                     if (status == 200) {
                         console.log(data);

@@ -17,7 +17,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
         if (scope.farmerProducts[i].product.id == productId) {
           WishlistService.putInWishlist(scope.farmerProducts[i].product.id,
             scope.farmerProducts[i].product.name,
-            scope.farmerProducts[i].measure,
+            scope.farmerProducts[i].product.unit,
             scope.farmerProducts[i].price.price,
             scope.farmerProducts[i].product.images,
             scope.farmer.id,
@@ -45,7 +45,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
           if (scope.farmerProducts[i].product.id == productId) {
             CartService.putInCartAmmount(scope.farmerProducts[i].product.id,
               scope.farmerProducts[i].product.name,
-              scope.farmerProducts[i].measure,
+              scope.farmerProducts[i].product.unit,
               scope.farmerProducts[i].price.price,
               scope.farmerProducts[i].product.images,
               scope.farmer.id,

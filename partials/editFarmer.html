@@ -161,9 +161,7 @@
                     <tr>
                       <td class="col-sm-3"><h5 class="text-left">{{ 'MEASURE_UNIT' | translate}}</h5>
                       </td>
-                      <td class="col-sm-9"><select ng-selected="productNew.measure" name="singleSelectMeasure"
-                                                   ng-model="productNew.measure"
-                                                   ng-options="measure as measure.code for measure in measures track by measure.id">
+                      <td class="col-sm-9"><input type="text" ng-model="productNew.product.unit.name" ng-disabled="true"/>
                       </select>
                       </td>
                     </tr>
@@ -226,7 +224,7 @@
                 <h4>{{ product.product.name.localization[currentLang]}}</h4>
               </td>
               <td>
-                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [ {{product.measure.code}} ]</h5>
+                <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [ {{product.product.unit.code}} ]</h5>
                 <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price.price}} {{product.price.currency.code}}</h5>
               </td>
               <td>

@@ -82,7 +82,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                     productId: item.itemId,
                     amount: item.itemNum,
                     measurementUnitId: item.itemMeasure.id,
-                    totalPrice: item.itemPrice * item.itemNum
+                    totalPrice: item.itemPrice
                 });
             });
             OrderService.createOrder(order).then(function (data) {

@@ -421,7 +421,6 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
   $scope.canBeSaved  = function () {
     var retValue = false;
     if (($scope.productNew.price.price > 0 || $scope.productNew.amount > 0)
-      && ( typeof $scope.productNew.measure != 'undefined')
       && (typeof $scope.productNew.product.id != 'undefined')) {
       retValue = true;
     }
