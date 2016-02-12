@@ -2,7 +2,7 @@
   <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
 </header><!--/header-->
 
-    <div class="col-lg-12">
+    <div class="col-lg-12 paysCarrouselHolder">
       <div id="sliderCarousel" class="carousel slide" data-ride="carousel"
            ng-show="noSelectedCategory() && noFoundFarmers()">
         <ol class="carousel-indicators pays-carousel-indicators">
@@ -15,8 +15,8 @@
  
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
-        <div class="item active">
-          <img src="http://www.frigoscan.com/wp-content/uploads/2015/07/Rainbow-of-Fruits-and-Vegetables.jpg" class="girl img-responsive" alt="">
+        <div class="item active carrouselItemFirst">
+          <img src="images/home/carr1.png" class="girl img-responsive carrouselPic" alt="">
           <div class="container">
             <div class="carousel-caption text-centered paysCaption">
               <h1><span>PAYS</span> web shop</h1>
@@ -25,8 +25,8 @@
             </div>
           </div>
         </div>
-        <div class="item">
-          <img src="images/home/fruit-vegetables.jpg" class="girl img-responsive" alt="">
+        <div class="item carrouselItemSecond">
+          <img src="images/home/carr3.png" class="girl img-responsive carrouselPic" alt="">
           <div class="container">
             <div class="carousel-caption text-centered paysCaption">
               <h1><span>PAYS</span> {{ 'TITLE_2' | translate }}</h1>
@@ -37,11 +37,11 @@
             </div>
           </div>
         </div>
-        <div class="item">
-          <img src="images/home/sourcherry.jpg" class="girl img-responsive" alt="">
+        <div class="item carrouselItemThird">
+          <img src="images/home/carr4.png" class="girl img-responsive carrouselPic" alt="">
           <div class="container">
-            <div class="carousel-caption text-centered paysCaption">
-              <h1><span>PAYS</span> {{ 'TITLE_3' | translate }}</h1>
+            <div class="carousel-caption text-centered paysCaptionAlt">
+              <h1><span class="greenTxt">PAYS</span> {{ 'TITLE_3' | translate }}</h1>
 
               <p>{{ 'TITLE_33' | translate }}</p>
             </div>
@@ -52,10 +52,10 @@
 
 
 
-        <a class="control-carousel left" ng-non-bindable data-slide="prev" role="button" data-target="#sliderCarousel">
+        <a class="control-carousel left paysCarrousel paysCarrouselLeft" ng-non-bindable data-slide="prev" role="button" data-target="#sliderCarousel">
           <i class="fa fa-angle-left"></i>
         </a>
-        <a class="control-carousel right" ng-non-bindable data-slide="next" role="button" data-target="#sliderCarousel">
+        <a class="control-carousel right paysCarrousel paysCarrouselRight" ng-non-bindable data-slide="next" role="button" data-target="#sliderCarousel">
           <i class="fa fa-angle-right"></i>
         </a>
       </div>
@@ -227,65 +227,8 @@
       </div>
 
       </div>
-    <div class="row" ng-show="noSelectedCategory()">
-      <div class="col-lg-4">
-        <div class="box text-center">
-          <h4 class="greenTxt">Who are we?</h4>
-          <hr class="hrBox">
-          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
-            obtaining best price and fastest transport is included.</p>
-            <span class="glyphicon glyphicon-arrow-right greenTxt"></span>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="box text-center">
-          <h4 class="orangeTxt">What are we doing?</h4>
-          <hr class="hrBox">
-          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
-            obtaining best price and fastest transport is included.</p>
-           <span class="glyphicon glyphicon-arrow-right orangeTxt"></span>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="box text-center">
-          <h4 class="darnOrangeTxt">How can we help you?</h4>
-          <hr class="hrBox">
-          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
-            obtaining best price and fastest transport is included.</p>
-           <span class="glyphicon glyphicon-arrow-right darnOrangeTxt"></span>
-        </div>
-      </div>
+
   
-
-
-    <!--<div class="col-sm-2">
-      <div class="col-sm-12">
-        <button type="button" class="btn btn-fefault cart actionbar"
-                ng-click="setSearchPrepared()">
-          <i class="fa fa-search"></i>
-          {{ 'SEARCH' | translate}}
-        </button>
-        <button type="button " class="btn btn-fefault cart actionbar new-wrap"
-                ng-click="clearSelectedSearchProducts()">
-          <i class="fa fa-times"></i>
-          {{ 'SEARCH_RESET' | translate}}
-        </button>
-      </div>
-      <div ng-if="isWishListEmpty() && noSelectedCategory()">
-        <h4 class="title text-center">{{ 'ADVERTISING' | translate}}</h4>
-
-        <div>
-          <p>{{ 'ADVERTISING_MSG' | translate}}</p>
-        </div>
-      </div>
-      <div ng-if="!isWishListEmpty() || !noSelectedCategory()">
-        <h5 class="title text-center">{{ 'SEARCH_PRODUCTS' | translate}}:</h5>
-
-        <p class="text-left" ng-repeat=" item in searchWishlistItems">
-          {{item.name.localization[currentLang] | translate}}</p>
-      </div>
-    </div>-->
-    </div>
     <!-- Picks holder -->
     <div class="row" ng-show="noSelectedCategory()">
     <div class="col-sm-12">
@@ -412,6 +355,36 @@
     </div>
     </div>
   </div>
+      <hr>
+      <div class="row" ng-show="noSelectedCategory()">
+      <div class="col-lg-4">
+        <div class="box text-center">
+          <h4 class="greenTxt">Who are we?</h4>
+          <hr class="hrBox">
+          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
+            obtaining best price and fastest transport is included.</p>
+            <span class="glyphicon glyphicon-arrow-right greenTxt"></span>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="box text-center">
+          <h4 class="orangeTxt">What are we doing?</h4>
+          <hr class="hrBox">
+          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
+            obtaining best price and fastest transport is included.</p>
+           <span class="glyphicon glyphicon-arrow-right orangeTxt"></span>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="box text-center">
+          <h4 class="darnOrangeTxt">How can we help you?</h4>
+          <hr class="hrBox">
+          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
+            obtaining best price and fastest transport is included.</p>
+           <span class="glyphicon glyphicon-arrow-right darnOrangeTxt"></span>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
   </div>
