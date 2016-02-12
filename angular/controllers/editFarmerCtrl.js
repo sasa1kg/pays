@@ -302,6 +302,9 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
           },
           SearchService: function () {
             return SearchService;
+          },
+          FarmerService: function () {
+            return FarmerService;
           }
         }
       });
@@ -377,7 +380,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
     };
   }]);
 
-angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope, $filter, $modalInstance, products, product, SearchService) {
+angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope, $filter, $modalInstance, products, product, SearchService,FarmerService) {
   $scope.productImage      = {
     flow: null
   }
@@ -425,6 +428,11 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
       retValue = true;
     }
     return retValue;
+  }
+
+  $scope.revertToDefaultImage = function (){
+    FarmerService.deleteStockProductImage($scope.productNew.customImage).then(function(){
+    });
   }
   $scope.saveChanges = function () {
     console.log($scope.productNew);

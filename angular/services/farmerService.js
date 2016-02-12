@@ -137,6 +137,27 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             return deferred.promise;
         }
 
+        this.deleteStockProductImage = function(stockId){
+            var deffered = q.defer();
+
+            http.delete(rootScope.serverURL + "stock_item/" + stockId + "/images").
+              success(function (data, status) {
+                  if (status == 200) {
+                      data.index = stockId;
+                      deffered.resolve(data);
+                  } else {
+                      console.log("deleteStockProductImage |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("Error " + status);
+                  deffered.reject("Error");
+              });
+            return deffered.promise;
+        }
+
         this.uploadFarmerProfileImage = function(farmerId,imageId,flowObj){
             var deferred = q.defer();
             //image doesnt exists,create new one

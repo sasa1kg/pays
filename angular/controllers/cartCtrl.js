@@ -130,6 +130,7 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
             if (scope.cartItems.items[j].itemId === scope.farmerProducts[i].product.id) {
               scope.cartItems.items[j].amount = scope.farmerProducts[i].amount;
               scope.cartItems.items[j].img = scope.farmerProducts[i].img;
+              scope.cartItems.items[j].tax = scope.farmerProducts[i].product.tax;
             }
           }
         }

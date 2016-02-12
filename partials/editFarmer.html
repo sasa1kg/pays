@@ -186,9 +186,14 @@
                                                               ng-show="$flow.files.length"
                                                               flow-btn="">{{'UPDATE' | translate}}<input type="file"
                                                                                                          style="visibility: hidden; position: absolute;"></span>
+
                           <a class="btn btn-primary" ng-show="$flow.files.length"
                              ng-click="$flow.cancel()">
                             {{'DELETE' | translate}}
+                          </a>
+                          <a class="btn btn-primary" ng-show="productNew.customImage != null"
+                             ng-click="revertToDefaultImage()">
+                            {{'REVERT_IMAGE' | translate}}
                           </a>
                         </div>
                       </div>
