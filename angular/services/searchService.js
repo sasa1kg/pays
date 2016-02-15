@@ -1,5 +1,5 @@
 var SearchService = angular.module('SearchService', []).service('SearchService',
-    ["$rootScope", "$q", "$http", function (rootScope, q, http) {
+    ["$rootScope", "$q", "$http", "googleDirections", function (rootScope, q, http, googleDirections) {
 
         this.searchWishListItems = [];
 
@@ -338,6 +338,29 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                   console.log("getCities | Error " + status);
                   deffered.reject("Error");
               });
+
+            return deffered.promise;
+        }
+
+        this.getDistanceBetweenCities = function(originCity, destinationCity){
+            var deffered = q.defer();
+            var args = {
+                origin: originCity.toString(),
+                destination: destinationCity.toString(),
+                travelMode: 'driving',
+                unitSystem: 'metric'
+            }
+            googleDirections.getDirections(args).then(function(directions) {
+                if(directions === undefined || directions.routes.length < 1 || directions.routes[0].legs.length < 1){
+                    deffered.$$reject("Error")
+                }
+                else {
+                    var distanceMeters = directions.routes[0].legs[0].distance.value;
+                    console.log("Distance between places: " + (distanceMeters/1000) + " km");
+                    deffered.resolve(distanceMeters/1000);
+                }
+                console.log(directions);
+            });
 
             return deffered.promise;
         }

@@ -1,6 +1,6 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'LocalStorageModule',
   'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'FarmerService', 'UserService', 'OrderService',
-  'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow', 'monospaced.qrcode'])
+  'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow', 'monospaced.qrcode', 'dbaq.google.directions'])
   .filter('html', function ($sce) {
     return function (input) {
       return $sce.trustAsHtml(input);
