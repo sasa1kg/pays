@@ -1,6 +1,7 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'LocalStorageModule',
   'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'FarmerService', 'UserService', 'OrderService',
-  'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow', 'monospaced.qrcode', 'dbaq.google.directions'])
+  'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow', 'monospaced.qrcode', 'dbaq.google.directions',
+  'ngPrint'])
   .filter('html', function ($sce) {
     return function (input) {
       return $sce.trustAsHtml(input);
@@ -59,7 +60,13 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'L
       positionX: 'center',
       positionY: 'top'
     });
-  });
+  }).config(
+    function( $compileProvider )
+    {
+      $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
+      // Angular before v1.2 uses $compileProvider.urlSanitizationWhitelist(...)
+    }
+  );
 
 paysApp.config(function (localStorageServiceProvider) {
   localStorageServiceProvider
@@ -522,7 +529,8 @@ paysApp.config(function ($translateProvider) {
     ORDER_MESSAGE : 'You will be notified about payment status via e-mail. You can observe further progress of your order on your profile.',
     MAIN_PAGE : 'Go to home page',
     MAX_AVAILABLE : 'Maximum available',
-    REVERT_IMAGE : 'Use default image'
+    REVERT_IMAGE : 'Use default image',
+    EMPTY_WISHLIST_MESSAGE : 'Your wishlist is empty. Please visit main page, search for desired products and add them to you wishlist.'
   })
     .translations('rs_RS', {
       HOME: 'Početna',
@@ -850,7 +858,8 @@ paysApp.config(function ($translateProvider) {
       ORDER_MESSAGE : 'U najskorijem roku bićete obavešteni o statusu Vaše uplate putem e-mail poruke. Dalji status Vaše narudžbine možete pratiti na Vašem profilu',
       MAIN_PAGE : 'Idi na početnu stranicu',
       MAX_AVAILABLE : 'Na raspolaganju',
-      REVERT_IMAGE : 'Vrati na predefinisanu sliku'
+      REVERT_IMAGE : 'Vrati na predefinisanu sliku',
+      EMPTY_WISHLIST_MESSAGE : 'Nema proizvoda u Vašoj listi želja. Molimo posetite početnu stranicu, pronađite željene proizvode i dodajte ih u Vašu listu želja.'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

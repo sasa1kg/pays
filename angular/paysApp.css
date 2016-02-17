@@ -268,3 +268,7 @@ input[required] {
 .carrouselPic {
     opacity: 0.7;
 }
+/*Dirty hack for hiding print qr image div*/
+/*#qrDivPrintImg {*/
+    /*height : 0px;*/
+/*}*/

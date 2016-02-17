@@ -84,9 +84,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
       scope.orders = data;
       for (var i = 0; i < scope.orders.length; i++) {
         SearchService.getClientById(scope.orders[i].orderedBy, 0).then(function clientDataArrived(client) {
-
           for (var j = 0; j < scope.orders.length; j++) {
-            console.log(scope.orders[j].orderedBy + ", " + client.id);
             if (scope.orders[j].orderedBy == client.id) {
               scope.orders[j].client = client;
             }
@@ -431,7 +429,7 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
   }
 
   $scope.revertToDefaultImage = function (){
-    FarmerService.deleteStockProductImage($scope.productNew.customImage).then(function(){
+    FarmerService.deleteStockProductImage($scope.productNew.stockItemId).then(function(){
     });
   }
   $scope.saveChanges = function () {
@@ -459,16 +457,27 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
 
   $scope.qr = {};
 
+  check = function(){
+    console.log("CEHCKING");
+    if(($scope.qr.content == null) && (document.getElementsByClassName("qrcode-link").length > 0)){
+      console.log("FOUND");
+      var qrElement = angular.element(document.getElementsByClassName("qrcode-link"));
+      $scope.qr.content = qrElement[0].attributes['href'].value;
+    }
+    else {
+      console.log("TIMEOUT");
+      setTimeout(check, 500); // check again in a second
+    }
+  }
+
   if(order.status != 'C' && order.status != 'A'){
     $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, 1);
-
+    check();
     console.log("QR data generated: " + $scope.qr.img);
   }
   $scope.generateQr = function () {
     $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
-
-    console.log("QR data generated: " + $scope.qr.img);
-    //var qrDiv = $modalInstance.getElementById('qrCode').firstElementChild;
+    check();
     FarmerService.setTransportOrderStatus(farmer.id, order.id).then(function (data) {
       Notification.success({message: $filter('translate')('ORDER_STATUS_TRANSPORT')});
       $scope.order.status = "T";

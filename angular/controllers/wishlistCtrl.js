@@ -113,6 +113,11 @@ angular.module('paysApp').controller("wishlistCtrl", ["$scope", "$http", "$filte
       }
       return false;
     }
+
+    scope.goToMainPage = function () {
+      window.location.href = "#/";
+    };
+
     scope.price             = CartService.getTotalCartAmount() + "";
     scope.wishlistItemsSize = WishlistService.getItemsSize();
   }]);

@@ -10,7 +10,7 @@
                 <li class="active">{{ 'WISHLIST' | translate }}</li>
             </ol>
         </div>
-        <div class="table-responsive cart_info">
+        <div ng-if="wishlistItems.length" class="table-responsive cart_info">
 
             <div class="wishlist-farmer" ng-repeat="wishlistItem in wishlistItems">
                 <h3 class="text-center" ng-bind-html=" wishlistItem.farmer.farmer | html"></h3>
@@ -58,6 +58,14 @@
                 </table>
             </div>
         </div>
+        <div ng-if="!wishlistItems.length" class="mb100">
+            <h3 class="text-center">{{ 'EMPTY_WISHLIST_MESSAGE' | translate}}</h3>
+            <div class="text-center col-sm-12 mt20">
+                <button type="submit" ng-click="goToMainPage()" class="btn btn-default btn-lg col-sm-4 col-sm-offset-4 apply-changes-btn">
+                    {{ 'MAIN_PAGE' | translate}}
+                </button>
+            </div>
+            </div>
     </div>
 </section> <!--/#cart_items-->
 

@@ -3,113 +3,113 @@
       flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
       flow-files-submitted="$flow.upload()">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pays web application">
-    <meta name="author" content="Pays Team 2015">
-    <title>PAYS | Webshop</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">
-    <link href="css/price-range.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pays web application">
+  <meta name="author" content="Pays Team 2015">
+  <title>PAYS | Webshop</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/prettyPhoto.css" rel="stylesheet">
+  <link href="css/price-range.css" rel="stylesheet">
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <link href="css/responsive.css" rel="stylesheet">
+  <link href="css/ngPrint.css" rel="stylesheet">
 
-	<link href="angular/paysApp.css" rel="stylesheet">
-    <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css">
-    <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.min.css">
-    <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">-->
-    <link rel="stylesheet" href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css">
-    <!--<link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">-->
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+  <link href="angular/paysApp.css" rel="stylesheet">
+  <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css">
+  <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.min.css">
+  <link rel="stylesheet" href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css">
 
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/price-range.js"></script>
-    <script src="js/main.js"></script>
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+  <link rel="shortcut icon" href="images/ico/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.scrollUp.min.js"></script>
+  <script src="js/jquery.prettyPhoto.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/price-range.js"></script>
+  <script src="js/main.js"></script>
 
-    <!--<script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js??v=3&sensor=false&libraries=places&key=AIzaSyDMnywveJBcKUck4iqNe_MAL5BWgzfDolU"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
+
+  <!--<script type="text/javascript"
+          src="https://maps.googleapis.com/maps/api/js??v=3&sensor=false&libraries=places&key=AIzaSyDMnywveJBcKUck4iqNe_MAL5BWgzfDolU"></script>
 -->
-	<script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-	<script src="bower_components/angular-route/angular-route.min.js"></script>
-	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-	<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+  <script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
+  <script src="bower_components/angular-busy/dist/angular-busy.min.js"></script>
+  <script src="bower_components/angular-paging/paging.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script type="text/javascript" src="bower_components/moment/moment.js"></script>
+  <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
-    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-    <script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
-    <script src="bower_components/angular-busy/dist/angular-busy.min.js"></script>
-    <script src="bower_components/angular-paging/paging.js"></script>
-	<script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
+  <script src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
+  <script src="bower_components/flow.js/dist/flow.min.js"></script>
+  <script src="bower_components/ng-flow/dist/ng-flow.min.js"></script>
+  <script src="bower_components/qrcode-generator/js/qrcode.js"></script>
+  <script src="bower_components/qrcode-generator/js/qrcode_UTF8.js"></script>
+  <script src="bower_components/angular-qrcode/angular-qrcode.js"></script>
+  <script src="bower_components/angularjs-google-directions/src/angularjs-google-directions.js"></script>
 
-    <script type="text/javascript" src="bower_components/moment/moment.js"></script>
-    <!--<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>-->
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <!-- Main application file -->
+  <script src="angular/paysApp.js"></script>
+  <!-- Routing file -->
+  <script src="angular/routes.js"></script>
+  <!-- Controllers -->
+  <script src="angular/controllers/navbarCtrl.js"></script>
+  <script src="angular/controllers/mainCtrl.js"></script>
+  <script src="angular/controllers/cartCtrl.js"></script>
+  <script src="angular/controllers/checkoutCtrl.js"></script>
+  <script src="angular/controllers/farmerCtrl.js"></script>
+  <script src="angular/controllers/wishlistCtrl.js"></script>
+  <script src="angular/controllers/loginCtrl.js"></script>
+  <script src="angular/controllers/distributorCtrl.js"></script>
+  <script src="angular/controllers/registerCtrl.js"></script>
+  <script src="angular/controllers/editDistributorCtrl.js"></script>
+  <script src="angular/controllers/editFarmerCtrl.js"></script>
+  <script src="angular/controllers/editBuyerCtrl.js"></script>
+  <script src="angular/controllers/distributorSearchCtrl.js"></script>
+  <script src="angular/controllers/redirectCtrl.js"></script>
+  <script src="angular/controllers/forgotPasswordCtrl.js"></script>
+  <script src="angular/controllers/activateUserCtrl.js"></script>
+  <script src="angular/controllers/orderCtrl.js"></script>
+  <script src="angular/directives/floatingDiv.dir.js"></script>
+  <script src="angular/directives/ngPrint.min.js"></script>
+  <!-- Services -->
+  <script src="angular/services/geoLocationService.js"></script>
+  <script src="angular/services/cartService.js"></script>
+  <script src="angular/services/wishlistService.js"></script>
+  <script src="angular/services/resourceService.js"></script>
+  <script src="angular/services/searchService.js"></script>
+  <script src="angular/services/userService.js"></script>
+  <script src="angular/services/distributorService.js"></script>
+  <script src="angular/services/farmerService.js"></script>
+  <script src="angular/services/orderService.js"></script>
 
-    <script src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
-    <script src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
-    <script src="bower_components/flow.js/dist/flow.min.js"></script>
-    <script src="bower_components/ng-flow/dist/ng-flow.min.js"></script>
-    <script src="bower_components/qrcode-generator/js/qrcode.js"></script>
-    <script src="bower_components/qrcode-generator/js/qrcode_UTF8.js"></script>
-    <script src="bower_components/angular-qrcode/angular-qrcode.js"></script>
-    <script src="bower_components/angularjs-google-directions/src/angularjs-google-directions.js"></script>
 
-    <!-- Main application file -->
-	<script src="angular/paysApp.js"></script>
-	<!-- Routing file -->
-	<script src="angular/routes.js"></script>
-	<!-- Controllers -->
-    <script src="angular/controllers/navbarCtrl.js"></script>
-	<script src="angular/controllers/mainCtrl.js"></script>
-	<script src="angular/controllers/cartCtrl.js"></script>
-	<script src="angular/controllers/checkoutCtrl.js"></script>
-    <script src="angular/controllers/farmerCtrl.js"></script>
-    <script src="angular/controllers/wishlistCtrl.js"></script>
-    <script src="angular/controllers/loginCtrl.js"></script>
-    <script src="angular/controllers/distributorCtrl.js"></script>
-    <script src="angular/controllers/registerCtrl.js"></script>
-    <script src="angular/controllers/editDistributorCtrl.js"></script>
-    <script src="angular/controllers/editFarmerCtrl.js"></script>
-    <script src="angular/controllers/editBuyerCtrl.js"></script>
-    <script src="angular/controllers/distributorSearchCtrl.js"></script>
-    <script src="angular/controllers/redirectCtrl.js"></script>
-    <script src="angular/controllers/forgotPasswordCtrl.js"></script>
-    <script src="angular/controllers/activateUserCtrl.js"></script>
-    <script src="angular/controllers/orderCtrl.js"></script>
-	<script src="angular/controllers/floatingDiv.dir.js"></script>
-    <!-- Services -->
-    <script src="angular/services/geoLocationService.js"></script>
-    <script src="angular/services/cartService.js"></script>
-    <script src="angular/services/wishlistService.js"></script>
-    <script src="angular/services/resourceService.js"></script>
-    <script src="angular/services/searchService.js"></script>
-    <script src="angular/services/userService.js"></script>
-    <script src="angular/services/distributorService.js"></script>
-    <script src="angular/services/farmerService.js"></script>
-    <script src="angular/services/orderService.js"></script>
-
-</head><!--/head-->
+</head>
+<!--/head-->
 
 <body>
-	
-	<div ng-view autoscroll="true"></div>
-  
+
+<div ng-view autoscroll="true"></div>
+
 
 </body>
 </html>

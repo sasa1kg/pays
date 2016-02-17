@@ -29,7 +29,7 @@ angular.module('monospaced.qrcode', [])
 
     return {
       restrict: 'E',
-      template: '<canvas class="qrcode"></canvas>',
+      template: '<canvas class="qrcode" id="qrDivPrint"></canvas>',
       link: function(scope, element, attrs) {
         var domElement = element[0],
             $canvas = element.find('canvas'),
