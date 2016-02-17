@@ -284,15 +284,15 @@ input[required] {
     padding: 0px !important;
 }
 .carrouselItemFirst {
-    background-image: url('/pays2/pays/images/home/pays_green.jpg');
+    background-image: url('/images/home/pays_green.jpg');
     height: 100%;
 }
 .carrouselItemSecond {
-    background-image: url('/pays2/pays/images/home/pays_green.jpg');
+    background-image: url('/images/home/pays_green.jpg');
     height: 100%;
 }
 .carrouselItemThird {
-    background-image: url('/pays2/pays/images/home/pays_green.jpg');
+    background-image: url('/images/home/pays_green.jpg');
     height: 100%;
 }
 .carrouselPic {
