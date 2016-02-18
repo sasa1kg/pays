@@ -466,7 +466,7 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
     }
     else {
       console.log("TIMEOUT");
-      setTimeout(check, 500); // check again in a second
+      setTimeout(check, 100); // check again in a second
     }
   }
 
@@ -476,11 +476,11 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
     console.log("QR data generated: " + $scope.qr.img);
   }
   $scope.generateQr = function () {
-    $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
-    check();
     FarmerService.setTransportOrderStatus(farmer.id, order.id).then(function (data) {
       Notification.success({message: $filter('translate')('ORDER_STATUS_TRANSPORT')});
       $scope.order.status = "T";
+      $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
+      check();
     }).catch(function () {
       Notification.error({message: $filter('translate')('NOT_ORDER_STATUS_TRANSPORT')});
     });

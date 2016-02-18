@@ -79,7 +79,7 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
   $rootScope.englishLangCode = "en_EN";
   $rootScope.serbianLangCode = "rs_RS";
 
-  $rootScope.currentLang = $rootScope.englishLangCode;
+  $rootScope.currentLang = $rootScope.serbianLangCode;
 
   $rootScope.translate = function (lang) {
     $rootScope.currentLang = lang;
@@ -241,10 +241,10 @@ paysApp.config(function ($translateProvider) {
     MOST_ORDERS: 'The most orders',
     ABOUT_US: 'About us',
     TITLE_1: 'Everyday items shop',
-    TITLE_11: 'The first marketplace for selling and buying fresh goods directly from farmers',
+    TITLE_11: 'Only marketplace for selling and buying fresh goods firectly from farmers',
     TITLE_2: 'Direct from farmers',
-    TITLE_22: 'Choose among variety of products and find best price for yourself',
-    TITLE_3: 'Delivery to you',
+    TITLE_22: 'Choose among variety of products and find find best price for yourself',
+    TITLE_3: 'Find best farmer',
     TITLE_33: 'Find best farmer using previous customers opinions and top picks',
     ADVERTISING_MSG: 'PAYS system is designed to make buying fresh products easier. Users can choose farmer and and set of products they want to buy.Furthermore, obtaining best price and fastest transport is included',
     ORDER: 'Order',
@@ -530,7 +530,11 @@ paysApp.config(function ($translateProvider) {
     MAIN_PAGE : 'Go to home page',
     MAX_AVAILABLE : 'Maximum available',
     REVERT_IMAGE : 'Use default image',
-    EMPTY_WISHLIST_MESSAGE : 'Your wishlist is empty. Please visit main page, search for desired products and add them to you wishlist.'
+    EMPTY_WISHLIST_MESSAGE : 'Your wishlist is empty. Please visit main page, search for desired products and add them to you wishlist.',
+    PRINT : 'Print',
+    DOWNLOAD : 'Download',
+    NO_QR_GENERATION : 'Generation of QR code in not possible at the moment.Please wait for the money transaction for the order to be performed.'
+
   })
     .translations('rs_RS', {
       HOME: 'Početna',
@@ -573,10 +577,10 @@ paysApp.config(function ($translateProvider) {
       MOST_ORDERS: 'Najviše porudžbina',
       ABOUT_US: 'O nama',
       TITLE_1: 'Kupovina svakodnevnih namirnica',
-      TITLE_11: 'Prva online prodavnica svežih proizvoda direktno od farmera',
-      TITLE_2: 'Direktno od proizvođača',
+      TITLE_11: 'Jedina online prodavnica svežih proizvoda direktno od farmera',
+      TITLE_2: 'direktno od proizvođača',
       TITLE_22: 'Izaberite između mnoštva proizvoda pod najboljom cenom',
-      TITLE_3: 'Dostava do Vas',
+      TITLE_3: 'Pratite naš blog',
       TITLE_33: 'Nađite najboljeg farmera za Vas koristeći naše preporuke',
       ADVERTISING_MSG: 'PAYS sistem je osmišljen da olakša kupovinu svežih namirnica. Kupci mogu izabrati farmera iz proizvode koje žele da naruče. Takođe, dobijanje najniže cene i najbržeg transporta se podrazumeva',
       ORDER: 'Narudžbina',
@@ -859,7 +863,10 @@ paysApp.config(function ($translateProvider) {
       MAIN_PAGE : 'Idi na početnu stranicu',
       MAX_AVAILABLE : 'Na raspolaganju',
       REVERT_IMAGE : 'Vrati na predefinisanu sliku',
-      EMPTY_WISHLIST_MESSAGE : 'Nema proizvoda u Vašoj listi želja. Molimo posetite početnu stranicu, pronađite željene proizvode i dodajte ih u Vašu listu želja.'
+      EMPTY_WISHLIST_MESSAGE : 'Nema proizvoda u Vašoj listi želja. Molimo posetite početnu stranicu, pronađite željene proizvode i dodajte ih u Vašu listu želja.',
+      PRINT : 'Štampaj',
+      DOWNLOAD : 'Preuzmi',
+      NO_QR_GENERATION : 'Generisanje QR koda trenutno nije moguće. Molimo sačekajte da sredstva za narudžbinu budu rezervisana.'
     })
   $translateProvider.preferredLanguage('en_EN');
 });
