@@ -23,7 +23,7 @@
         <tbody>
         <tr>
           <td>
-            <h4 class="farmer_data farmer_data_padding" ng-bind-html="farmerData.farmer | html"></h4>
+            <a href="" class="cursor-pointer" ng-click="goToFarmerPage(farmerData)"><h4 class="farmer_data farmer_data_padding" ng-bind-html="farmerData.farmer | html">{{ 'VISIT_FARMER_PAGE' | translate}}</h4></a>
           </td>
           <td>
             <h4 class="farmer_data" ng-bind-html="farmerData.farmerLocation | html"></h4>
@@ -219,7 +219,7 @@
           <a class="btn btn-default update" ng-click="goBack()">{{ 'UPDATE_CART' | translate}}</a>
           <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
             'EMPTY_CART' | translate}}</a>
-          <a class="btn btn-default check_out" ng-click="goToPayment()">{{ 'PAY' | translate}}</a>
+          <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()" ng-click="goToPayment()">{{ 'PAY' | translate}}</a>
 
         </div>
       </div>

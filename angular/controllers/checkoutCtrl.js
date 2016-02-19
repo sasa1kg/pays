@@ -33,14 +33,18 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         }
 
 
-        scope.fromTime = {
-            time: ""
+        scope.fromTime ={
+            minTime : null,
+            time: new Date()
         };
         scope.toTime = {
-            time: ""
+            minTime : null,
+            time: new Date()
         };
+
+
         scope.deliveryDate = {
-            date: ""
+            date: new Date()
         }
 
         scope.minDate = new Date();
@@ -57,6 +61,30 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         };
 
         scope.note = "";
+
+        scope.$watch('fromTime.time', function () {
+            if(scope.fromTime.time > scope.toTime.time){
+                scope.toTime.time = scope.fromTime.time;
+                scope.toTime.minTime = scope.fromTime.time;
+            } else {
+                scope.toTime.minTime = scope.fromTime.time;
+            }
+        });
+
+        scope.$watch('deliveryDate.date', function () {
+
+            var todayMillis = new Date(new Date().toLocaleDateString("en-au", {year: "numeric", month: "short",day: "numeric"})).getTime();
+            var deliveryMillis = new Date(scope.deliveryDate.date).getTime();
+            if((deliveryMillis - todayMillis) > 1000*60*60*24){
+                //if selected day is not today, enable all time periods for selection
+                scope.fromTime.minTime = null;
+                scope.fromTime.time = new Date();
+            } else {
+                // if selected day is today, enable just incoming time period
+                scope.fromTime.minTime = new Date();
+                scope.fromTime.time = new Date();
+            }
+        });
 
 
         scope.executePayment = function () {
