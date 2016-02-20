@@ -398,9 +398,9 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             return deffered.promise;
         }
 
-        this.setTransportOrderStatus = function(farmerId,orderId) {
+        this.setTransportOrderStatus = function(farmerId,orderId,packageNumber) {
             var deffered = q.defer();
-            http.put(rootScope.serverURL + "merchant/" + farmerId + "/orders/" + orderId + "/startTransport").
+            http.put(rootScope.serverURL + "merchant/" + farmerId + "/orders/" + orderId + "/startTransport/"+packageNumber).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);

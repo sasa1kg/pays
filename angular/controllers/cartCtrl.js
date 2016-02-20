@@ -125,7 +125,8 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
 
     scope.loadData = function () {
       scope.cartItems        = CartService.getItems();
-      console.log("ITEMS " + scope.cartItems.length);
+      console.log("ITEMS")
+      console.log(scope.cartItems);
       if (scope.cartItems != null) {
         for (var j = 0; j < scope.cartItems.items.length; j++) {
           for (var i = 0; i < scope.farmerProducts.length; i++) {

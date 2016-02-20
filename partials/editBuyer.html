@@ -86,7 +86,7 @@
               <h5>{{order.items.length}}</h5>
             </td>
             <td>
-              <h5>{{order.totalPrice}} DIN</h5>
+              <h5>{{order.totalPrice}} RSD</h5>
             </td>
             <td>
               <h5>{{order.status | orderStatus | translate}}</h5>
@@ -96,7 +96,7 @@
                       ng-click="order.showDetails = !order.showDetails;order.showReview = false;"><i
                 class="fa fa-pencil-square-o"></i> {{ 'DETAILS' | translate}}
               </button>
-              <button ng-if="order.status == 'D'" class="btn btn-default apply-changes-btn"
+              <button ng-if="order.status == 'D' && order.hasComments == false" class="btn btn-default apply-changes-btn"
                       ng-click="order.showReview = !order.showReview;order.showDetails = false;"><i
                 class="fa fa-star-half-o"></i> {{
                 'LEAVE_REVIEW' | translate}}
@@ -226,7 +226,7 @@
               </div>
               <div class="text-center">
               <button class="btn btn-default btn-lg apply-changes-btn mtb10"
-                      ng-click="submitReview(order)" ng-disabled="!order.review.comment"><i
+                      ng-click="submitReview(order)" ng-disabled="!order.review.comment || order.hasComments"><i
                 class="fa fa-pencil-square-o"></i> {{ 'SUBMIT_REVIEW' | translate}}
               </button>
               </div>

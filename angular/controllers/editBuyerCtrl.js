@@ -15,23 +15,28 @@ angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "
 
     var defaultRating = 5;
     SearchService.getBuyerOrders(routeParams.id).then(function (data) {
-      scope.orders  = data;
+      scope.orders  = [];
       var farmerIds = [];
+      angular.forEach(data,function(order){
+        if (order.status != 'C') {
+          scope.orders.push(order);
+        }
+      });
       for (var i = 0; i < scope.orders.length; i++) {
-        scope.orders[i].showDetails = false;
-        scope.orders[i].showReview  = false;
-        scope.orders[i].review      = {
-          stars: [],
-          comment: "",
-          rating: defaultRating,
-        };
-        for (var j = 1; j <= defaultRating; j++) {
-          scope.orders[i].review.stars.push({index: j, filled: true});
-        }
+          scope.orders[i].showDetails = false;
+          scope.orders[i].showReview  = false;
+          scope.orders[i].review      = {
+            stars: [],
+            comment: "",
+            rating: defaultRating,
+          };
+          for (var j = 1; j <= defaultRating; j++) {
+            scope.orders[i].review.stars.push({index: j, filled: true});
+          }
 
-        if (farmerIds.indexOf(scope.orders[i].orderedFrom) == -1) {
-          farmerIds.push(scope.orders[i].orderedFrom);
-        }
+          if (farmerIds.indexOf(scope.orders[i].orderedFrom) == -1) {
+            farmerIds.push(scope.orders[i].orderedFrom);
+          }
       }
       for (var i = 0; i < farmerIds.length; i++) {
         SearchService.getFarmerById(farmerIds[i]).then(function (farmer) {
@@ -67,6 +72,8 @@ angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "
         rating: order.review.rating
       }).then(function (data) {
         Notification.success({message: filter('translate')('REVIEW_SUBMITED')});
+        order.review.comment = "";
+        order.hasComments = true;
       }).catch(function () {
         Notification.error({message: filter('translate')('REVIEW_NOT_SUBMITED')});
       });

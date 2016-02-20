@@ -533,7 +533,8 @@ paysApp.config(function ($translateProvider) {
     EMPTY_WISHLIST_MESSAGE : 'Your wishlist is empty. Please visit main page, search for desired products and add them to you wishlist.',
     PRINT : 'Print',
     DOWNLOAD : 'Download',
-    NO_QR_GENERATION : 'Generation of QR code in not possible at the moment.Please wait for the money transaction for the order to be performed.'
+    NO_QR_GENERATION : 'Generation of QR code in not possible at the moment.Please wait for the money transaction for the order to be performed.',
+    NO_REVIEWS_MESSAGE : 'There are no reviews for this farmer. Buy products from this farmer and be the first one to leave a review!'
 
   })
     .translations('rs_RS', {
@@ -866,7 +867,8 @@ paysApp.config(function ($translateProvider) {
       EMPTY_WISHLIST_MESSAGE : 'Nema proizvoda u Vašoj listi želja. Molimo posetite početnu stranicu, pronađite željene proizvode i dodajte ih u Vašu listu želja.',
       PRINT : 'Štampaj',
       DOWNLOAD : 'Preuzmi',
-      NO_QR_GENERATION : 'Generisanje QR koda trenutno nije moguće. Molimo sačekajte da sredstva za narudžbinu budu rezervisana.'
+      NO_QR_GENERATION : 'Generisanje QR koda trenutno nije moguće. Molimo sačekajte da sredstva za narudžbinu budu rezervisana.',
+      NO_REVIEWS_MESSAGE : 'Ne postoje komentari o ovom farmeru. Kupite proizvode od ovog farmera i budite prvi koji će mu ostaviti komentar!'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

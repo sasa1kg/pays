@@ -309,7 +309,3 @@ input[required] {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
-/*Dirty hack for hiding print qr image div*/
-/*#qrDivPrintImg {*/
-    /*height : 0px;*/
-/*}*/

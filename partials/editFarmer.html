@@ -324,7 +324,7 @@
                       <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_TOTAL_PRICE' | translate}}</h5>
                       </td>
                       <td class="col-sm-9">
-                        <div class="text-left">{{order.totalPrice}} DIN</div>
+                        <div class="text-left">{{order.totalPrice}} RSD</div>
                       </td>
                     </tr>
                     <tr>
@@ -358,7 +358,7 @@
                               <div>{{product.amount}} [{{product.unit}}]</div>
                             </td>
                             <td>
-                              <div>{{product.totalItemPrice}} DIN</div>
+                              <div>{{product.totalItemPrice}} RSD</div>
                             </td>
                           </tr>
                           </tbody>
@@ -446,7 +446,7 @@
                 <h5>{{order.items.length}}</h5>
               </td>
               <td>
-                <h5>{{order.totalPrice}} DIN</h5>
+                <h5>{{order.totalPrice}} RSD</h5>
               </td>
               <td>
                 <h5>{{order.status | orderStatus | translate}}</h5>

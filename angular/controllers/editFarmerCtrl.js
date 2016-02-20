@@ -81,7 +81,12 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
     });
 
     SearchService.getFarmerOrders(routeParams.id).then(function (data) {
-      scope.orders = data;
+      scope.orders = [];
+      angular.forEach(data,function(order){
+        if (order.status != 'C') {
+          scope.orders.push(order);
+        }
+      });
       for (var i = 0; i < scope.orders.length; i++) {
         SearchService.getClientById(scope.orders[i].orderedBy, 0).then(function clientDataArrived(client) {
           for (var j = 0; j < scope.orders.length; j++) {
@@ -458,25 +463,22 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
   $scope.qr = {};
 
   check = function(){
-    console.log("CEHCKING");
     if(($scope.qr.content == null) && (document.getElementsByClassName("qrcode-link").length > 0)){
-      console.log("FOUND");
       var qrElement = angular.element(document.getElementsByClassName("qrcode-link"));
       $scope.qr.content = qrElement[0].attributes['href'].value;
     }
     else {
-      console.log("TIMEOUT");
       setTimeout(check, 100); // check again in a second
     }
   }
 
   if(order.status != 'C' && order.status != 'A'){
-    $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, 1);
+    $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, order.packageNumber);
     check();
     console.log("QR data generated: " + $scope.qr.img);
   }
   $scope.generateQr = function () {
-    FarmerService.setTransportOrderStatus(farmer.id, order.id).then(function (data) {
+    FarmerService.setTransportOrderStatus(farmer.id, order.id,$scope.qr.packagesNumber).then(function (data) {
       Notification.success({message: $filter('translate')('ORDER_STATUS_TRANSPORT')});
       $scope.order.status = "T";
       $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);

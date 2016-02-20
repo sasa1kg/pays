@@ -1462,7 +1462,7 @@ h2.title {
 
 .login-form form input, .signup-form form input {
     background: #F0F0E9;
-    border: medium none;
+    border: thin solid;
     color: #696763;
     display: block;
     font-family: 'Roboto', sans-serif;
