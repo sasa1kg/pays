@@ -406,12 +406,16 @@
                         </div>
                       </div>
                       <!-- DIRTY HACK-->
-                      <div class="text-center mt20" ng-if="qr.img">
+                      <div class="text-center " ng-if="qr.img">
                         <div class="col-sm-12 thumbnail-vehicle text-center">
                           <qrcode ng-hide="true" size="150" version="10" data="{{qr.img}}" download></qrcode>
-                          <img id="qrDivPrintImg" src="{{qr.content}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
+                          <div id="qrDivPrintImg">
+                            <div style="margin: 20px 20px 20px 20px;">
+                              <img src="{{qr.content}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
+                            </div>
+                          </div>
                         </div>
-                        <button class="btn btn-primary" ng-print print-element-id="qrDivPrintImg">
+                        <button class="btn btn-primary" ng-click="printQR('qrDivPrintImg')">
                           <i class="fa fa-print"></i>
                           {{ 'PRINT' | translate}}
                         </button>
@@ -597,7 +601,9 @@
             <hr/>
             <div cg-busy="{promise:updatePricesDeffered.promise,message:waitMsg,backdrop:true}">
               <div class="col-sm-12 text-center">
-                <button class="btn btn-default apply-changes-btn" ng-disabled="(updatePricesDeffered != null && updatePricesDeffered.promise.$$state.status == 0)" ng-click="updatePrices()">{{'SAVE_CHANGES' |
+                <button class="btn btn-default apply-changes-btn"
+                        ng-disabled="(updatePricesDeffered != null && updatePricesDeffered.promise.$$state.status == 0)"
+                        ng-click="updatePrices()">{{'SAVE_CHANGES' |
                   translate}}
                 </button>
               </div>

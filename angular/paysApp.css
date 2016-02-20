@@ -72,12 +72,14 @@
 .mt10 {
     margin-top: 10px;
 }
+
 .mtb10 {
     margin-top: 10px;
-    margin-bottom : 10px;
+    margin-bottom: 10px;
 }
+
 .mb100 {
-    margin-bottom : 200px;
+    margin-bottom: 200px;
 }
 
 .star-rating {
@@ -85,6 +87,7 @@
     padding: 0;
     display: inline-block;
 }
+
 .star {
     padding: 1px;
     color: #ddd;
@@ -94,25 +97,29 @@
     display: inline-block;
     cursor: pointer;
 }
+
 .filled {
     color: #fd0;
 }
+
 .not_filled {
     color: #999;
 }
 
 #priceTable tr td {
-    padding:1px;
+    padding: 1px;
 }
 
 #priceTable tr td h5 {
-    font-size : 12px
+    font-size: 12px
 }
+
 .login_form {
     padding: 15px;
     border: 1px solid #F0F0E9;
     padding-top: 0px;
 }
+
 .pays_footer {
     position: fixed;
     bottom: 0px !important;
@@ -126,8 +133,7 @@ input[required] {
     background-position-y: top !important;
 }
 
-.bubble
-{
+.bubble {
     position: relative;
     width: 70%;
     min-height: 100px;
@@ -138,7 +144,7 @@ input[required] {
     border-radius: 14px;
     border: #35929e solid 2px;
     color: #ffffff;
-    margin-bottom : 15px;
+    margin-bottom: 15px;
     margin-left: 15%;
     word-wrap: break-word;
 }
@@ -147,15 +153,17 @@ input[required] {
     word-wrap: break-word;
 }
 
-.review-backgorund{
+.review-backgorund {
     background: #75c5cf;
 }
+
 .fix-to-top {
     position: fixed;
     top: 100px;
     right: 5px;
     display: block !important;
 }
+
 .fix-to-top-search {
     max-width: 170px;
     height: 100px;
@@ -165,6 +173,7 @@ input[required] {
     display: block !important;
     z-index: 1000;
 }
+
 .floating_cart {
     display: none;
     max-width: 250px;
@@ -176,9 +185,11 @@ input[required] {
     padding-left: 10px;
     padding-right: 10px;
 }
+
 .floating_link {
     color: white;
 }
+
 .floating_badge {
     min-width: 18px !important;
     min-height: 18px !important;
@@ -189,11 +200,12 @@ input[required] {
 .paysCaption {
 
 }
+
 @media screen and (min-width: 768px) and (max-device-width: 1768px) {
     .paysCaption {
         top: -100px;
         left: 800px;
-        max-width: 300px; 
+        max-width: 300px;
     }
 }
 
@@ -201,13 +213,14 @@ input[required] {
     .paysCaption {
         top: -100px;
         left: 1000px;
-        max-width: 300px; 
+        max-width: 300px;
     }
 }
 
 .paysCaptionAlt {
 
 }
+
 @media screen and (min-width: 768px) and (max-device-width: 1768px) {
     .paysCaptionAlt {
         top: -120px;
@@ -239,77 +252,96 @@ input[required] {
 .mainPageContainer {
     margin-top: 20px;
 }
+
 .box {
     background-color: #F0F0E9;
     min-height: 200px;
     padding: 15px;
     margin: 15px;
 }
+
 .greenTxt {
     color: green !important;
 }
+
 .orangeTxt {
     color: orange;
 }
+
 .darnOrangeTxt {
     color: #e48201;
 }
+
 .boxTxt {
     font-size: 12px;
 }
+
 .hrBox {
     border-top: 1px solid #999999 !important;
 }
+
 .subtitle-center {
-   background-color: #F0F0E9; 
-   margin-left: auto;
-   margin-right: auto;
-   width: 230px;
-   height: 30px;
-   margin-bottom: 20px;
+    background-color: #F0F0E9;
+    margin-left: auto;
+    margin-right: auto;
+    width: 230px;
+    height: 30px;
+    margin-bottom: 20px;
 }
+
 .subtitle-header {
     padding-top: 7px;
 }
+
 .paysCarrousel {
     top: 40% !important;
 }
+
 .paysCarrouselLeft {
     padding-left: 20px !important;
 }
+
 .paysCarrouselRight {
     padding-right: 20px !important;
 }
+
 .paysCarrouselHolder {
     padding: 0px !important;
 }
+
 .carrouselItemFirst {
     background-image: url('/images/home/pays_green.jpg');
     height: 100%;
 }
+
 .carrouselItemSecond {
     background-image: url('/images/home/pays_green.jpg');
     height: 100%;
 }
+
 .carrouselItemThird {
     background-image: url('/images/home/pays_green.jpg');
     height: 100%;
 }
+
 .carrouselPic {
     opacity: 0.7;
 }
+
 .opacTitle {
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255, 255, 255, 0.4);
 }
+
 .opacTitlePadded {
     padding: 5px;
     margin-bottom: 10px;
 }
+
 .opacTitlePaddedInside {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
 
 .loading-min-height {
-    min-height : 50px;
+    min-height: 50px;
 }

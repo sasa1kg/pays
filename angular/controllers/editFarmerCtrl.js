@@ -549,6 +549,7 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
   }
 
   if (order.status != 'C' && order.status != 'A') {
+    $scope.qr.packagesNumber = order.packageNumber;
     $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, order.packageNumber);
     check();
     console.log("QR data generated: " + $scope.qr.img);
@@ -562,6 +563,38 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
     }).catch(function () {
       Notification.error({message: $filter('translate')('NOT_ORDER_STATUS_TRANSPORT')});
     });
+  }
+
+  $scope.printQR = function(divName) {
+    var printDiv = document.getElementById(divName).innerHTML;
+    var printContents = "";
+    for(var i=0;i<$scope.qr.packagesNumber;i++){
+      printContents += printDiv;
+    }
+
+    if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+      var popupWin = window.open('', '_blank', 'width=600,height=600,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+      popupWin.window.focus();
+      popupWin.document.write('<!DOCTYPE html><html><head>' +
+        '<link rel="stylesheet" type="text/css" href="style.css" />' +
+        '</head><body onload="window.print()"><div class="reward-body">' + printContents + '</div></html>');
+      popupWin.onbeforeunload = function (event) {
+        popupWin.close();
+        return '.\n';
+      };
+      popupWin.onabort = function (event) {
+        popupWin.document.close();
+        popupWin.close();
+      }
+    } else {
+      var popupWin = window.open('', '_blank', 'width=800,height=600');
+      popupWin.document.open();
+      popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + printContents + '</html>');
+      popupWin.document.close();
+    }
+    popupWin.document.close();
+
+    return true;
   }
 
   $scope.cancelModal = function () {
