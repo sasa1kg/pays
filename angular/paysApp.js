@@ -83,6 +83,8 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
 
   $rootScope.translate = function (lang) {
     $rootScope.currentLang = lang;
+    $rootScope.waitMsg = $filter('translate')('WAIT_MSG');
+    $rootScope.loadMsg = $filter('translate')('LOAD_MSG');
     $translate.use(lang);
   };
 
@@ -115,7 +117,8 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
   $rootScope.farmerUserType      = 'F';
   $rootScope.distributorUserType = 'T';
   $rootScope.bannerPicsLimit     = 5;
-
+  $rootScope.waitMsg = $filter('translate')('WAIT_MSG');
+  $rootScope.loadMsg = $filter('translate')('LOAD_MSG');
   $rootScope.range = function (n) {
     return new Array(n);
   };
@@ -534,7 +537,9 @@ paysApp.config(function ($translateProvider) {
     PRINT : 'Print',
     DOWNLOAD : 'Download',
     NO_QR_GENERATION : 'Generation of QR code in not possible at the moment.Please wait for the money transaction for the order to be performed.',
-    NO_REVIEWS_MESSAGE : 'There are no reviews for this farmer. Buy products from this farmer and be the first one to leave a review!'
+    NO_REVIEWS_MESSAGE : 'There are no reviews for this farmer. Buy products from this farmer and be the first one to leave a review!',
+    WAIT_MSG : 'Please wait',
+    LOAD_MSG : 'Loading...'
 
   })
     .translations('rs_RS', {
@@ -868,7 +873,9 @@ paysApp.config(function ($translateProvider) {
       PRINT : 'Štampaj',
       DOWNLOAD : 'Preuzmi',
       NO_QR_GENERATION : 'Generisanje QR koda trenutno nije moguće. Molimo sačekajte da sredstva za narudžbinu budu rezervisana.',
-      NO_REVIEWS_MESSAGE : 'Ne postoje komentari o ovom farmeru. Kupite proizvode od ovog farmera i budite prvi koji će mu ostaviti komentar!'
+      NO_REVIEWS_MESSAGE : 'Ne postoje komentari o ovom farmeru. Kupite proizvode od ovog farmera i budite prvi koji će mu ostaviti komentar!',
+      WAIT_MSG : 'Molimo sačekajte',
+      LOAD_MSG : 'Učitavanje...'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

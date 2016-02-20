@@ -309,3 +309,7 @@ input[required] {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
+
+.loading-min-height {
+    min-height : 50px;
+}

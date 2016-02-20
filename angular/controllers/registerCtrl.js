@@ -1,10 +1,10 @@
-angular.module('paysApp').controller("registerCtrl", ["$scope", "$http", "$rootScope", "$filter", "$modal", "UserService", "WishlistService", "CartService", "Notification",
-  function (scope, http, rootScope, filter, modal, UserService, WishlistService, CartService, Notification) {
+angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout", "$rootScope", "$filter", "$modal", "UserService", "WishlistService", "CartService", "Notification",
+  function (scope, q, timeout, rootScope, filter, modal, UserService, WishlistService, CartService, Notification) {
 
     scope.userType = "";
 
     scope.confPassword = "";
-
+    scope.registerDeffered = {};
     scope.userTypes = [
       {
         name: "BUYER",
@@ -77,14 +77,16 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http", "$rootS
       }
     };
 
-
     scope.register = function () {
+      scope.registerDeffered = q.defer();
+
       if (scope.userType == rootScope.buyerUserType) {
         console.log(scope.buyer);
         if ((scope.buyer.password.length == 0) || (scope.confPassword.length == 0) || (scope.buyer.password !== scope.confPassword)) {
           Notification.error({message: filter('translate')('PASSWORD_NOT_MATCH')});
         } else {
           UserService.registerUser(scope.buyer).then(function (data) {
+            scope.registerDeffered.resolve();
             var modalInstance = modal.open({
               animation: true,
               templateUrl: 'userActivateModal.html',
@@ -92,6 +94,7 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http", "$rootS
               size: 'sm'
             });
           }).catch(function (error) {
+            scope.registerDeffered.reject();
             Notification.error({message: filter('translate')('USER_NOT_ADDED')});
           });
         }
@@ -101,6 +104,7 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http", "$rootS
           Notification.error({message: filter('translate')('PASSWORD_NOT_MATCH')});
         } else {
           UserService.registerUser(scope.distributor).then(function (data) {
+            scope.registerDeffered.resolve();
             var modalInstance = modal.open({
               animation: true,
               templateUrl: 'userActivateModal.html',
@@ -108,6 +112,7 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http", "$rootS
               size: 'sm'
             });
           }).catch(function (error) {
+            scope.registerDeffered.reject();
             Notification.error({message: filter('translate')('USER_NOT_ADDED')});
           });
         }
@@ -118,6 +123,7 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http", "$rootS
           Notification.error({message: filter('translate')('PASSWORD_NOT_MATCH')});
         } else {
           UserService.registerUser(scope.farmer).then(function (data) {
+            scope.registerDeffered.resolve();
             var modalInstance = modal.open({
               animation: true,
               templateUrl: 'userActivateModal.html',
@@ -125,6 +131,7 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$http", "$rootS
               size: 'sm'
             });
           }).catch(function (error) {
+            scope.registerDeffered.reject();
             Notification.error({message: filter('translate')('USER_NOT_ADDED')});
           });
         }

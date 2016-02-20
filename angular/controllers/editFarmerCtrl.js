@@ -1,8 +1,8 @@
 /**
  * Created by Norbert on 2015-11-01.
  */
-angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", "$http", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService", "FarmerService", "Notification",
-  function (scope, rootScope, http, filter, modal, routeParams, CartService, WishlistService, SearchService, FarmerService, Notification) {
+angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", "$q", "$filter", "$modal", "$routeParams", "CartService", "WishlistService", "SearchService", "FarmerService", "Notification",
+  function (scope, rootScope, q, filter, modal, routeParams, CartService, WishlistService, SearchService, FarmerService, Notification) {
 
     console.log("edit Distributor:  " + routeParams.id);
 
@@ -14,11 +14,17 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
       flow: null
     };
 
+    scope.loadGeneralDeffered     = null;
+    scope.loadVehicleDeffered     = null;
+    scope.loadAdvertisingDeffered = null;
+    scope.loadPricesDeffered      = null;
+    scope.loadOrdersDeffered      = null;
+    scope.loadGeneralDeffered     = q.defer();
 
     SearchService.getFarmerById(routeParams.id).then(function (data) {
       scope.farmer              = data;
       scope.farmer.bannerImages = [];
-
+      scope.loadGeneralDeffered.resolve();
       //Initialize array for banner images
       for (var i = 0; i < rootScope.bannerPicsLimit; i++) {
         scope.farmer.bannerImages[i] = {
@@ -28,12 +34,23 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
         };
       }
       ;
-
+      scope.loadAdvertisingDeffered = q.defer();
+      var advertisingPromises       = 0;
       if (scope.farmer.images.profile != null) {
         FarmerService.getFarmerImage(scope.farmer.id, scope.farmer.images.profile)
           .then(function (img) {
+            advertisingPromises--;
+            if (advertisingPromises == 0) {
+              scope.loadAdvertisingDeffered.resolve();
+            }
             scope.farmer.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
+          }).catch(function () {
+            advertisingPromises--;
+            if (advertisingPromises == 0) {
+              scope.loadAdvertisingDeffered.resolve();
+            }
           });
+        advertisingPromises++;
       }
       var bannerPicIndex  = 0;
       var bannerLoadIndex = 0;
@@ -41,62 +58,135 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
         scope.farmer.bannerImages[bannerLoadIndex++].imageId = scope.farmer.images.banner[scope.farmer.images.banner.length - (i + 1)];
         FarmerService.getFarmerImage(scope.farmer.id, scope.farmer.images.banner[scope.farmer.images.banner.length - (i + 1)])
           .then(function (img) {
+            advertisingPromises--;
+            if (advertisingPromises == 0) {
+              scope.loadAdvertisingDeffered.resolve();
+            }
             if (img.type != 'undefined') {
-              console.log("RECEIVED BANNER IMG " + img.imageIndex);
               for (var j = 0; j < scope.farmer.bannerImages.length; j++) {
                 if (scope.farmer.bannerImages[j].imageId == img.imageIndex) {
-                  console.log("BANNER IMG MATCHED " + img.imageIndex);
                   scope.farmer.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
                   bannerPicIndex++
                 }
               }
             }
-          }
-        )
-        ;
+          }).catch(function () {
+            advertisingPromises--;
+            if (advertisingPromises == 0) {
+              scope.loadAdvertisingDeffered.resolve();
+            }
+          });
+        advertisingPromises++;
       }
     });
-
+    scope.loadProductsDeffered    = q.defer();
     SearchService.getFarmerProducts(routeParams.id).then(function (data) {
-      scope.products = data;
+      scope.products      = data;
+      var productPromises = 0;
       for (var i = 0; i < scope.products.length; i++) {
         if (scope.products[i].customImage) {
           FarmerService.getStockProductImage(scope.products[i].stockItemId, scope.products[i].customImage).then(function imgArrived(data) {
+            productPromises--;
+            if (productPromises == 0) {
+              scope.loadProductsDeffered.resolve();
+            }
             for (var j = 0; j < scope.products.length; j++) {
               if (scope.products[j].stockItemId === data.index) {
                 scope.products[j].product.img = "data:image/jpeg;base64," + data.document_content;
               }
             }
+          }).catch(function () {
+            productPromises--;
+            if (productPromises == 0) {
+              scope.loadProductsDeffered.resolve();
+            }
           });
+          ;
         } else {
           SearchService.getProductImage(scope.products[i].product.id, scope.products[i].product.images).then(function imgArrived(data) {
+            productPromises--;
+            if (productPromises == 0) {
+              scope.loadProductsDeffered.resolve();
+            }
             for (var j = 0; j < scope.products.length; j++) {
               if (scope.products[j].product.id === data.index) {
                 scope.products[j].product.img = "data:image/jpeg;base64," + data.document_content;
               }
             }
+          }).catch(function () {
+            productPromises--;
+            if (productPromises == 0) {
+              scope.loadProductsDeffered.resolve();
+            }
           });
         }
+        productPromises++;
       }
+    }).catch(function () {
+      scope.loadProductsDeffered.reject();
     });
 
+    scope.loadOrdersDeffered = q.defer();
     SearchService.getFarmerOrders(routeParams.id).then(function (data) {
-      scope.orders = [];
-      angular.forEach(data,function(order){
+      scope.orders       = [];
+      angular.forEach(data, function (order) {
         if (order.status != 'C') {
           scope.orders.push(order);
         }
       });
+      var clientPromises = 0;
       for (var i = 0; i < scope.orders.length; i++) {
         SearchService.getClientById(scope.orders[i].orderedBy, 0).then(function clientDataArrived(client) {
+          clientPromises--;
+          if (clientPromises == 0) {
+            scope.loadOrdersDeffered.resolve();
+          }
           for (var j = 0; j < scope.orders.length; j++) {
             if (scope.orders[j].orderedBy == client.id) {
               scope.orders[j].client = client;
             }
           }
+        }).catch(function () {
+          clientPromises--;
+          if (clientPromises == 0) {
+            scope.loadOrdersDeffered.resolve();
+          }
         });
+        clientPromises++;
       }
+    }).catch(function () {
+      scope.loadOrdersDeffered.reject();
     });
+    scope.loadPricesDeffered = q.defer();
+    FarmerService.getPrices(routeParams.id).then(function (data) {
+      if (data.prices && data.prices.length > 0) {
+        angular.forEach(data.prices, function (price) {
+          if (!scope.prices[price.distance]) {
+            scope.prices[price.distance]               = new Array();
+            scope.prices[price.distance][price.weight] = parseFloat(price.price);
+          } else {
+            scope.prices[price.distance][price.weight] = parseFloat(price.price);
+          }
+        });
+      } else {
+        for (var i in rootScope.transportDistances) {
+          scope.prices[rootScope.transportDistances[i]] = [];
+          for (var j in rootScope.transportWeights) {
+            scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
+          }
+        }
+      }
+      scope.loadPricesDeffered.resolve();
+    }).catch(function (err) {
+      for (var i in rootScope.transportDistances) {
+        scope.prices[rootScope.transportDistances[i]] = [];
+        for (var j in rootScope.transportWeights) {
+          scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
+        }
+      }
+      scope.loadPricesDeffered.reject();
+    });
+
 
     scope.sectionChange = function (sectionName) {
       scope.page = sectionName;
@@ -124,10 +214,6 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
 
     scope.addProduct = function () {
       scope.openProductModal()
-    }
-
-    scope.updatePrices = function () {
-      console.log(scope.prices);
     }
 
     scope.uploadStockProductImage = function (product, stockId, imageId, flow) {
@@ -237,36 +323,10 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
       }
     }
 
-    FarmerService.getPrices(routeParams.id).then(function (data) {
-      if (data.prices && data.prices.length > 0) {
-        angular.forEach(data.prices, function (price) {
-          if (!scope.prices[price.distance]) {
-            scope.prices[price.distance]               = new Array();
-            scope.prices[price.distance][price.weight] = price.price;
-          } else {
-            scope.prices[price.distance][price.weight] = price.price;
-          }
-        });
-      } else {
-        for (var i in rootScope.transportDistances) {
-          scope.prices[rootScope.transportDistances[i]] = [];
-          for (var j in rootScope.transportWeights) {
-            scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
-          }
-        }
-      }
-    }).catch(function (err) {
-      for (var i in rootScope.transportDistances) {
-        scope.prices[rootScope.transportDistances[i]] = [];
-        for (var j in rootScope.transportWeights) {
-          scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
-        }
-      }
-    });
-
 
     scope.updatePrices = function () {
-      var pricesObj = {
+      scope.updatePricesDeffered = q.defer();
+      var pricesObj              = {
         currency: rootScope.defaultCurrency.id,
         prices: []
       };
@@ -283,8 +343,10 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
 
       FarmerService.updatePrices(scope.farmer.id, pricesObj).then(function (data) {
         Notification.success({message: filter('translate')('PRICES_UPDATED')});
+        scope.updatePricesDeffered.resolve();
       }).catch(function () {
         Notification.error({message: filter('translate')('PRICES_NOT_UPDATED')});
+        scope.updatePricesDeffered.reject();
       });
 
     }
@@ -383,7 +445,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
     };
   }]);
 
-angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope, $filter, $modalInstance, products, product, SearchService,FarmerService) {
+angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope, $filter, $modalInstance, products, product, SearchService, FarmerService) {
   $scope.productImage      = {
     flow: null
   }
@@ -424,7 +486,7 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
     });
   }
 
-  $scope.canBeSaved  = function () {
+  $scope.canBeSaved = function () {
     var retValue = false;
     if (($scope.productNew.price.price > 0 || $scope.productNew.amount > 0)
       && (typeof $scope.productNew.product.id != 'undefined')) {
@@ -433,11 +495,11 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
     return retValue;
   }
 
-  $scope.revertToDefaultImage = function (){
-    FarmerService.deleteStockProductImage($scope.productNew.stockItemId).then(function(){
+  $scope.revertToDefaultImage = function () {
+    FarmerService.deleteStockProductImage($scope.productNew.stockItemId).then(function () {
     });
   }
-  $scope.saveChanges = function () {
+  $scope.saveChanges          = function () {
     console.log($scope.productNew);
     var returnJson = {
       info: $scope.productNew,
@@ -462,9 +524,9 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
 
   $scope.qr = {};
 
-  check = function(){
-    if(($scope.qr.content == null) && (document.getElementsByClassName("qrcode-link").length > 0)){
-      var qrElement = angular.element(document.getElementsByClassName("qrcode-link"));
+  check = function () {
+    if (($scope.qr.content == null) && (document.getElementsByClassName("qrcode-link").length > 0)) {
+      var qrElement     = angular.element(document.getElementsByClassName("qrcode-link"));
       $scope.qr.content = qrElement[0].attributes['href'].value;
     }
     else {
@@ -472,16 +534,16 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
     }
   }
 
-  if(order.status != 'C' && order.status != 'A'){
+  if (order.status != 'C' && order.status != 'A') {
     $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, order.packageNumber);
     check();
     console.log("QR data generated: " + $scope.qr.img);
   }
   $scope.generateQr = function () {
-    FarmerService.setTransportOrderStatus(farmer.id, order.id,$scope.qr.packagesNumber).then(function (data) {
+    FarmerService.setTransportOrderStatus(farmer.id, order.id, $scope.qr.packagesNumber).then(function (data) {
       Notification.success({message: $filter('translate')('ORDER_STATUS_TRANSPORT')});
       $scope.order.status = "T";
-      $scope.qr.img = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
+      $scope.qr.img       = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
       check();
     }).catch(function () {
       Notification.error({message: $filter('translate')('NOT_ORDER_STATUS_TRANSPORT')});

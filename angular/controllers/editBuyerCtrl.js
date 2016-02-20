@@ -1,19 +1,26 @@
 /**
  * Created by Norbert on 2015-11-01.
  */
-angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "$http", "$filter", "$routeParams", "CartService", "WishlistService", "SearchService", "UserService", "Notification",
-  function (scope, rootScope, http, filter, routeParams, CartService, WishlistService, SearchService, UserService, Notification) {
+angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "$q", "$filter", "$routeParams", "CartService", "WishlistService", "SearchService", "UserService", "Notification",
+  function (scope, rootScope, q, filter, routeParams, CartService, WishlistService, SearchService, UserService, Notification) {
 
     console.log("edit buyer:  " + routeParams.id);
 
     scope.page = 'GENERAL_BUYER_DATA';
 
     scope.orders = [];
+    var defaultRating = 5;
+
+    scope.loadGeneralDeffered = q.defer();
     SearchService.getClientById(routeParams.id).then(function (data) {
       scope.buyer = data;
+      scope.loadGeneralDeffered.resolve();
+    }).catch(function(){
+      scope.loadGeneralDeffered.reject();
     });
 
-    var defaultRating = 5;
+
+    scope.loadOrdersDeffered = q.defer();
     SearchService.getBuyerOrders(routeParams.id).then(function (data) {
       scope.orders  = [];
       var farmerIds = [];
@@ -47,7 +54,10 @@ angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "
           }
         });
       }
-    });
+      scope.loadOrdersDeffered.resolve();
+    }).catch(function(){
+      scope.loadOrdersDeffered.reject();
+    });;
 
     scope.sectionChange = function (sectionName) {
       scope.page = sectionName;

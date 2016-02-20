@@ -1,6 +1,6 @@
-angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$location", "$rootScope", "$modal", "$filter", "CartService", "WishlistService",
+angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", "$location", "$modal", "$filter", "CartService", "WishlistService",
   "SearchService", "OrderService", "UserService", "FarmerService",
-  function (scope, rootScope, location, rootScope, modal, filter, CartService, WishlistService, SearchService, OrderService, UserService, FarmerService) {
+  function (scope, rootScope, q, location, modal, filter, CartService, WishlistService, SearchService, OrderService, UserService, FarmerService) {
 
     console.log("Cart Ctrl!");
 
@@ -13,11 +13,17 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
     scope.previousAddresses = UserService.getUserDeliveryAddress(rootScope.credentials.id);
 
     scope.farmerData = CartService.getCartFarmer();
+
+    scope.loadDeffered = null;
     if (scope.farmerData != null) {
+      scope.loadDeffered = q.defer();
       SearchService.getFarmerProducts(scope.farmerData.farmerId).then(function (data) {
         scope.farmerProducts = data;
         scope.cartItems      = CartService.getItems();
         scope.loadData();
+        scope.loadDeffered.resolve();
+        scope.loadDeffered   = q.defer();
+        var promisesWaiting  = 0;
         if (scope.cartItems != null) {
           for (var j = 0; j < scope.cartItems.items.length; j++) {
             for (var i = 0; i < scope.farmerProducts.length; i++) {
@@ -25,6 +31,10 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
                 scope.cartItems.items[j].amount = scope.farmerProducts[i].amount;
                 if (scope.farmerProducts[i].customImage) {
                   FarmerService.getStockProductImage(scope.farmerProducts[i].stockItemId, scope.farmerProducts[i].customImage).then(function imgArrived(data) {
+                    promisesWaiting--;
+                    if (promisesWaiting == 0) {
+                      scope.loadDeffered.resolve();
+                    }
                     for (var j = 0; j < scope.farmerProducts.length; j++) {
                       if (scope.farmerProducts[j].stockItemId === data.index) {
                         scope.farmerProducts[j].img = "data:image/jpeg;base64," + data.document_content;
@@ -36,9 +46,20 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
                         scope.cartItems.items[j].img = "data:image/jpeg;base64," + data.document_content;
                       }
                     }
+                  }).catch(function () {
+                    promisesWaiting--;
+                    if (promisesWaiting == 0) {
+                      scope.loadDeffered.resolve();
+                    }
                   });
+                  ;
+                  promisesWaiting++;
                 } else {
                   SearchService.getProductImage(scope.farmerProducts[i].product.id, scope.farmerProducts[i].product.images).then(function imgArrived(data) {
+                    promisesWaiting--;
+                    if (promisesWaiting == 0) {
+                      scope.loadDeffered.resolve();
+                    }
                     for (var j = 0; j < scope.farmerProducts.length; j++) {
                       if (scope.farmerProducts[j].product.id === data.index) {
                         scope.farmerProducts[j].img = "data:image/jpeg;base64," + data.document_content;
@@ -49,12 +70,20 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
                         scope.cartItems.items[j].img = "data:image/jpeg;base64," + data.document_content;
                       }
                     }
+                  }).catch(function () {
+                    promisesWaiting--;
+                    if (promisesWaiting == 0) {
+                      scope.loadDeffered.resolve();
+                    }
                   });
+                  promisesWaiting++;
                 }
               }
             }
           }
         }
+      }).catch(function () {
+        scope.loadDeffered.resolve();
       });
     }
 
@@ -126,7 +155,6 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
     scope.loadData = function () {
       scope.cartItems        = CartService.getItems();
       console.log("ITEMS")
-      console.log(scope.cartItems);
       if (scope.cartItems != null) {
         for (var j = 0; j < scope.cartItems.items.length; j++) {
           for (var i = 0; i < scope.farmerProducts.length; i++) {
@@ -184,20 +212,20 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
       scope.cities = data;
     });
 
-    scope.canGoToPayment =function (){
-      if(scope.isShipped == false){
+    scope.canGoToPayment = function () {
+      if (scope.isShipped == false) {
         return true;
       } else {
-        if((scope.address.city!= null) && (scope.address.city.length > 0)
-        && (scope.address.postalCode!= null) && (scope.address.postalCode > 0)
-        && (scope.address.street != null) && (scope.address.street.length > 0)
-        && (scope.address.houseNumber!= null) && (scope.address.houseNumber.length > 0)){
+        if ((scope.address.city != null) && (scope.address.city.length > 0)
+          && (scope.address.postalCode != null) && (scope.address.postalCode > 0)
+          && (scope.address.street != null) && (scope.address.street.length > 0)
+          && (scope.address.houseNumber != null) && (scope.address.houseNumber.length > 0)) {
           return true;
         }
       }
       return false;
     }
-    scope.goToPayment = function () {
+    scope.goToPayment    = function () {
       console.log(scope.locationType.selected);
       console.log(scope.address);
       OrderService.createOrderItem(scope.farmerData.farmerId, rootScope.credentials.id);
@@ -251,9 +279,9 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$loca
       return false;
     }
 
-    scope.goToFarmerPage =function(farmer){
+    scope.goToFarmerPage = function (farmer) {
       console.log(farmer.farmerId);
-      location.path("/farmer/"+farmer.farmerId);
+      location.path("/farmer/" + farmer.farmerId);
     }
   }]);
 

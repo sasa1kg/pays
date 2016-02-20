@@ -1,100 +1,105 @@
 <header id="header"><!--header-->
   <div ng-include="'partials/navBar.html'"></div>
 </header><!--/header-->
+<div cg-busy="{promise:loadDeffered.promise,message:waitMsg,backdrop:true}">
 
-<section id="cart_items">
-  <div class="container">
-    <div class="breadcrumbs">
-      <ol class="breadcrumb">
-        <li><a href="#/">{{ 'HOME' | translate}}</a></li>
-        <li class="active">{{ 'CART' | translate }}</li>
-      </ol>
-    </div>
-    <div class="table-responsive cart_info">
-      <table class="table table-condensed">
-        <thead>
-        <tr class="cart_menu">
-          <td class="image">{{ 'FARMER' | translate}}</td>
-          <td class="price">{{ 'LOCATION' | translate}}</td>
-          <td class="quantity">{{' EMAIL' | translate}}</td>
-          <td></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>
-            <a href="" class="cursor-pointer" ng-click="goToFarmerPage(farmerData)"><h4 class="farmer_data farmer_data_padding" ng-bind-html="farmerData.farmer | html">{{ 'VISIT_FARMER_PAGE' | translate}}</h4></a>
-          </td>
-          <td>
-            <h4 class="farmer_data" ng-bind-html="farmerData.farmerLocation | html"></h4>
-          </td>
-          <td>
-            <h4 class="farmer_data" ng-bind-html="farmerData.farmerEMail | html"></h4>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="table-responsive cart_info">
-      <table class="table table-condensed">
-        <thead>
-        <tr class="cart_menu">
-          <td class="image">{{ 'ITEM' | translate}}</td>
-          <td class="description"></td>
-          <td class="price">{{ 'PRICE' | translate}}</td>
-          <td class="quantity">{{ 'ITEM_AMOUNT' | translate}}</td>
-          <td class="total">{{ 'MONEY_AMOUNT' | translate}}</td>
-          <td></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="item in cartItems.items">
-          <td class="cart_product">
-            <img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}"
-                            style="width:100%;height:170px;">
-          </td>
-          <td class="cart_description col-sm-2">
-            <h4><a href="">{{item.itemName.localization[currentLang]}}</a></h4>
+  <section id="cart_items">
+    <div class="container">
+      <div class="breadcrumbs">
+        <ol class="breadcrumb">
+          <li><a href="#/">{{ 'HOME' | translate}}</a></li>
+          <li class="active">{{ 'CART' | translate }}</li>
+        </ol>
+      </div>
+      <div class="table-responsive cart_info">
+        <table class="table table-condensed">
+          <thead>
+          <tr class="cart_menu">
+            <td class="image">{{ 'FARMER' | translate}}</td>
+            <td class="price">{{ 'LOCATION' | translate}}</td>
+            <td class="quantity">{{' EMAIL' | translate}}</td>
+            <td></td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <a href="" class="cursor-pointer" ng-click="goToFarmerPage(farmerData)"><h4
+                class="farmer_data farmer_data_padding" ng-bind-html="farmerData.farmer | html">{{ 'VISIT_FARMER_PAGE'
+                |
+                translate}}</h4></a>
+            </td>
+            <td>
+              <h4 class="farmer_data" ng-bind-html="farmerData.farmerLocation | html"></h4>
+            </td>
+            <td>
+              <h4 class="farmer_data" ng-bind-html="farmerData.farmerEMail | html"></h4>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-responsive cart_info">
+        <table class="table table-condensed">
+          <thead>
+          <tr class="cart_menu">
+            <td class="image">{{ 'ITEM' | translate}}</td>
+            <td class="description"></td>
+            <td class="price">{{ 'PRICE' | translate}}</td>
+            <td class="quantity">{{ 'ITEM_AMOUNT' | translate}}</td>
+            <td class="total">{{ 'MONEY_AMOUNT' | translate}}</td>
+            <td></td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="item in cartItems.items">
+            <td class="cart_product">
+              <img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}"
+                   style="width:100%;height:170px;">
+            </td>
+            <td class="cart_description col-sm-2">
+              <h4><a href="">{{item.itemName.localization[currentLang]}}</a></h4>
 
-            <p>{{'NON_ORGANIC' | translate}}</p>
-          </td>
-          <td class="cart_price col-sm-2">
-            <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code}}</p>
-          </td>
-          <td class="cart_quantity col-sm-2">
+              <p>{{'NON_ORGANIC' | translate}}</p>
+            </td>
+            <td class="cart_price col-sm-2">
+              <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code}}</p>
+            </td>
+            <td class="cart_quantity col-sm-2">
 
-            <div class="cart_quantity_button">
-              <div class="col-sm-3 no-padding">
-                <a class="cursor-pointer form-control" ng-click="addMore(item)">
-                  + </a>
+              <div class="cart_quantity_button">
+                <div class="col-sm-3 no-padding">
+                  <a class="cursor-pointer form-control" ng-click="addMore(item)">
+                    + </a>
+                </div>
+                <div class="col-sm-5 no-padding">
+                  <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                         name="quantity"
+                         ng-model="item.itemNum"
+                         ng-change="setAmount(item,item.itemNum)"
+                         ng-class="{'alert_color' : item.resourceExcedeed}"
+                         autocomplete="off"
+                         size="5">
+                </div>
+                <div class="col-sm-3 no-padding">
+                  <a class="cursor-pointer form-control" ng-click="less(item)"> - </a>
+                </div>
+                <h5 ng-show="item.resourceExcedeed" class="text-center" style="color:red;">{{item.alertMessage}}</h5>
               </div>
-              <div class="col-sm-5 no-padding">
-                <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
-                       name="quantity"
-                       ng-model="item.itemNum"
-                       ng-change="setAmount(item,item.itemNum)"
-                       ng-class="{'alert_color' : item.resourceExcedeed}"
-                       autocomplete="off"
-                       size="5">
-              </div>
-              <div class="col-sm-3 no-padding">
-                <a class="cursor-pointer form-control" ng-click="less(item)"> - </a>
-              </div>
-              <h5 ng-show="item.resourceExcedeed"class="text-center" style="color:red;">{{item.alertMessage}}</h5>
-            </div>
-          </td>
-          <td class="cart_total col-sm-2">
-            <p class="cart_total_price">{{item.itemPrice * item.itemNum}} RSD</p>
-          </td>
-          <td class="cart_delete col-sm-1">
-            <a class="cart_quantity_delete" ng-click="deleteCartItem(item)"><i
-              class="fa fa-times"></i></a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+            </td>
+            <td class="cart_total col-sm-2">
+              <p class="cart_total_price">{{item.itemPrice * item.itemNum}} RSD</p>
+            </td>
+            <td class="cart_delete col-sm-1">
+              <a class="cart_quantity_delete" ng-click="deleteCartItem(item)"><i
+                class="fa fa-times"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+</div>
 </section> <!--/#cart_items-->
 
 <section id="delivery">
@@ -115,7 +120,9 @@
           <div class="col-sm-12">
             <select ng-model="prevAddress.address" class="form-control"
                     ng-disabled="locationType.selected!=predefinedLocationString">
-              <option ng-repeat="addr in previousAddresses" value="{{addr}}">{{addr.street | html}} {{addr.houseNumber | html}}, {{addr.postalCode | html}}, {{addr.city | html}}
+              <option ng-repeat="addr in previousAddresses" value="{{addr}}">{{addr.street | html}} {{addr.houseNumber
+                |
+                html}}, {{addr.postalCode | html}}, {{addr.city | html}}
               </option>
             </select>
           </div>
@@ -219,12 +226,13 @@
           <a class="btn btn-default update" ng-click="goBack()">{{ 'UPDATE_CART' | translate}}</a>
           <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
             'EMPTY_CART' | translate}}</a>
-          <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()" ng-click="goToPayment()">{{ 'PAY' | translate}}</a>
+          <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()" ng-click="goToPayment()">{{ 'PAY' |
+            translate}}</a>
 
         </div>
       </div>
     </div>
   </div>
 </section><!--/#do_action-->
-
+</div>
 <div ng-include="'partials/footer.html'"></div>

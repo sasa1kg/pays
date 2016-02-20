@@ -17,8 +17,9 @@
             </select>
             <hr>
           </form>
-          <form name="userForm" id="userForm" ng-if="userType == buyerUserType">
-            <div >
+          <form name="userForm" id="userForm" ng-if="userType == buyerUserType" novalidate>
+            <div>
+
               <input type="email" ng-model="buyer.email" ng-change="copyEmail()" placeholder="{{ 'EMAIL' | translate}}"
                      required/>
               <input type="password" ng-model="buyer.password" placeholder="{{ 'PASSWORD' | translate}}" required/>
@@ -35,9 +36,12 @@
               <input type="text" ng-model="buyer.private.city" placeholder="{{'CITY' | translate}}" required/>
               <input type="text" ng-model="buyer.private.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
             </div>
-            <button class="btn btn-default" ng-disabled="userForm.$invalid || !validatePassword(confPassword,false)" ng-click="register()">{{'REGISTER' |
-              translate}}
-            </button>
+            <div>
+              <div class="loading-min-height" cg-busy="{promise:registerDeffered.promise,message:waitMsg,backdrop:true}"></div>
+              <button class="btn btn-default" ng-disabled="userForm.$invalid || !validatePassword(confPassword,false) || (registerDeffered != null && registerDeffered.promise.$$state.status == 0)" ng-click="register()">{{'REGISTER' |
+                translate}}
+              </button>
+            </div>
           </form>
           <form name="distributorForm" id="distributorForm" ng-if="userType == distributorUserType">
             <div>
@@ -61,7 +65,8 @@
               <input type="text" ng-model="distributor.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
               <input type="text" ng-model="distributor.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
             </div>
-            <button class="btn btn-default" ng-disabled="distributorForm.$invalid || !validatePassword(confPassword,false)" ng-click="register()">{{'REGISTER' |
+            <div class="loading-min-height" cg-busy="{promise:registerDeffered.promise,message:waitMsg,backdrop:true}"></div>
+            <button class="btn btn-default" ng-disabled="distributorForm.$invalid || !validatePassword(confPassword,false) || (registerDeffered != null && registerDeffered.promise.$$state.status == 0)" ng-click="register()">{{'REGISTER' |
               translate}}
             </button>
           </form>
@@ -86,7 +91,8 @@
               <input type="text" ng-model="farmer.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
               <input type="text" ng-model="farmer.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
             </div>
-            <button class="btn btn-default" ng-disabled="farmerForm.$invalid || !validatePassword(confPassword,false)" ng-click="register()">{{'REGISTER' |
+            <div class="loading-min-height" cg-busy="{promise:registerDeffered.promise,message:waitMsg,backdrop:true}"></div>
+            <button class="btn btn-default" ng-disabled="farmerForm.$invalid || !validatePassword(confPassword,false) || (registerDeffered != null && registerDeffered.promise.$$state.status == 0)" ng-click="register()">{{'REGISTER' |
               translate}}
             </button>
           </form>
