@@ -129,14 +129,18 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
     scope.loadOrdersDeffered = q.defer();
     SearchService.getFarmerOrders(routeParams.id).then(function (data) {
       scope.orders       = [];
+      var clientIds = [];
       angular.forEach(data, function (order) {
         if (order.status != 'C') {
           scope.orders.push(order);
+          if (clientIds.indexOf(order.orderedBy) == -1) {
+            clientIds.push(order.orderedBy);
+          }
         }
       });
       var clientPromises = 0;
-      for (var i = 0; i < scope.orders.length; i++) {
-        SearchService.getClientById(scope.orders[i].orderedBy, 0).then(function clientDataArrived(client) {
+      for (var i = 0; i < clientIds.length; i++) {
+        SearchService.getClientById(clientIds[i], 0).then(function clientDataArrived(client) {
           clientPromises--;
           if (clientPromises == 0) {
             scope.loadOrdersDeffered.resolve();
