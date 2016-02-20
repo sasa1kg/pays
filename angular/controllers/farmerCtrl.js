@@ -1,5 +1,6 @@
-angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filter", "$routeParams", "CartService", "WishlistService", "SearchService", "FarmerService",
-  function (scope, rootScope, filter, routeParams, CartService, WishlistService, SearchService, FarmerService) {
+angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filter", "$routeParams", "CartService", "WishlistService",
+  "SearchService", "FarmerService","UserService",
+  function (scope, rootScope, filter, routeParams, CartService, WishlistService, SearchService, FarmerService, UserService) {
 
 
     console.log("FARM! " + routeParams.id);
@@ -124,6 +125,15 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
       }
     }
 
+    scope.canShop = function(){
+      var credentials = UserService.getUserCredentials();
+      if (credentials.token != null) {
+        if ((credentials.role == rootScope.farmerUserType) || (credentials.role == rootScope.distributorUserType)) {
+          return false;
+        }
+      }
+      return true;
+    }
     SearchService.getFarmerById(scope.farmerId).then(function (data) {
       if (data) {
         scope.farmer              = data;

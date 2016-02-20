@@ -34,93 +34,99 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
         };
       }
       ;
-      scope.loadAdvertisingDeffered = q.defer();
-      var advertisingPromises       = 0;
-      if (scope.farmer.images.profile != null) {
-        FarmerService.getFarmerImage(scope.farmer.id, scope.farmer.images.profile)
-          .then(function (img) {
-            advertisingPromises--;
-            if (advertisingPromises == 0) {
-              scope.loadAdvertisingDeffered.resolve();
-            }
-            scope.farmer.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
-          }).catch(function () {
-            advertisingPromises--;
-            if (advertisingPromises == 0) {
-              scope.loadAdvertisingDeffered.resolve();
-            }
-          });
-        advertisingPromises++;
-      }
-      var bannerPicIndex  = 0;
-      var bannerLoadIndex = 0;
-      for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.farmer.images.banner.length)); i++) {
-        scope.farmer.bannerImages[bannerLoadIndex++].imageId = scope.farmer.images.banner[scope.farmer.images.banner.length - (i + 1)];
-        FarmerService.getFarmerImage(scope.farmer.id, scope.farmer.images.banner[scope.farmer.images.banner.length - (i + 1)])
-          .then(function (img) {
-            advertisingPromises--;
-            if (advertisingPromises == 0) {
-              scope.loadAdvertisingDeffered.resolve();
-            }
-            if (img.type != 'undefined') {
-              for (var j = 0; j < scope.farmer.bannerImages.length; j++) {
-                if (scope.farmer.bannerImages[j].imageId == img.imageIndex) {
-                  scope.farmer.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
-                  bannerPicIndex++
+      if((scope.farmer.images.profile != null) || (scope.farmer.images.banner.length)) {
+        scope.loadAdvertisingDeffered = q.defer();
+        var advertisingPromises       = 0;
+        if (scope.farmer.images.profile != null) {
+          FarmerService.getFarmerImage(scope.farmer.id, scope.farmer.images.profile)
+            .then(function (img) {
+              advertisingPromises--;
+              if (advertisingPromises == 0) {
+                scope.loadAdvertisingDeffered.resolve();
+              }
+              scope.farmer.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
+            }).catch(function () {
+              advertisingPromises--;
+              if (advertisingPromises == 0) {
+                scope.loadAdvertisingDeffered.resolve();
+              }
+            });
+          advertisingPromises++;
+        }
+        var bannerPicIndex  = 0;
+        var bannerLoadIndex = 0;
+        for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.farmer.images.banner.length)); i++) {
+          scope.farmer.bannerImages[bannerLoadIndex++].imageId = scope.farmer.images.banner[scope.farmer.images.banner.length - (i + 1)];
+          FarmerService.getFarmerImage(scope.farmer.id, scope.farmer.images.banner[scope.farmer.images.banner.length - (i + 1)])
+            .then(function (img) {
+              advertisingPromises--;
+              if (advertisingPromises == 0) {
+                scope.loadAdvertisingDeffered.resolve();
+              }
+              if (img.type != 'undefined') {
+                for (var j = 0; j < scope.farmer.bannerImages.length; j++) {
+                  if (scope.farmer.bannerImages[j].imageId == img.imageIndex) {
+                    scope.farmer.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
+                    bannerPicIndex++
+                  }
                 }
               }
-            }
-          }).catch(function () {
-            advertisingPromises--;
-            if (advertisingPromises == 0) {
-              scope.loadAdvertisingDeffered.resolve();
-            }
-          });
-        advertisingPromises++;
+            }).catch(function () {
+              advertisingPromises--;
+              if (advertisingPromises == 0) {
+                scope.loadAdvertisingDeffered.resolve();
+              }
+            });
+          advertisingPromises++;
+        }
       }
     });
     scope.loadProductsDeffered    = q.defer();
     SearchService.getFarmerProducts(routeParams.id).then(function (data) {
       scope.products      = data;
-      var productPromises = 0;
-      for (var i = 0; i < scope.products.length; i++) {
-        if (scope.products[i].customImage) {
-          FarmerService.getStockProductImage(scope.products[i].stockItemId, scope.products[i].customImage).then(function imgArrived(data) {
-            productPromises--;
-            if (productPromises == 0) {
-              scope.loadProductsDeffered.resolve();
-            }
-            for (var j = 0; j < scope.products.length; j++) {
-              if (scope.products[j].stockItemId === data.index) {
-                scope.products[j].product.img = "data:image/jpeg;base64," + data.document_content;
+      if(scope.products.length == 0){
+        scope.loadProductsDeffered.resolve();
+      } else {
+        var productPromises = 0;
+        for (var i = 0; i < scope.products.length; i++) {
+          if (scope.products[i].customImage) {
+            FarmerService.getStockProductImage(scope.products[i].stockItemId, scope.products[i].customImage).then(function imgArrived(data) {
+              productPromises--;
+              if (productPromises == 0) {
+                scope.loadProductsDeffered.resolve();
               }
-            }
-          }).catch(function () {
-            productPromises--;
-            if (productPromises == 0) {
-              scope.loadProductsDeffered.resolve();
-            }
-          });
-          ;
-        } else {
-          SearchService.getProductImage(scope.products[i].product.id, scope.products[i].product.images).then(function imgArrived(data) {
-            productPromises--;
-            if (productPromises == 0) {
-              scope.loadProductsDeffered.resolve();
-            }
-            for (var j = 0; j < scope.products.length; j++) {
-              if (scope.products[j].product.id === data.index) {
-                scope.products[j].product.img = "data:image/jpeg;base64," + data.document_content;
+              for (var j = 0; j < scope.products.length; j++) {
+                if (scope.products[j].stockItemId === data.index) {
+                  scope.products[j].product.img = "data:image/jpeg;base64," + data.document_content;
+                }
               }
-            }
-          }).catch(function () {
-            productPromises--;
-            if (productPromises == 0) {
-              scope.loadProductsDeffered.resolve();
-            }
-          });
+            }).catch(function () {
+              productPromises--;
+              if (productPromises == 0) {
+                scope.loadProductsDeffered.resolve();
+              }
+            });
+            productPromises++;
+          } else {
+            SearchService.getProductImage(scope.products[i].product.id, scope.products[i].product.images).then(function imgArrived(data) {
+              productPromises--;
+              if (productPromises == 0) {
+                scope.loadProductsDeffered.resolve();
+              }
+              for (var j = 0; j < scope.products.length; j++) {
+                if (scope.products[j].product.id === data.index) {
+                  scope.products[j].product.img = "data:image/jpeg;base64," + data.document_content;
+                }
+              }
+            }).catch(function () {
+              productPromises--;
+              if (productPromises == 0) {
+                scope.loadProductsDeffered.resolve();
+              }
+            });
+          }
+          productPromises++;
         }
-        productPromises++;
       }
     }).catch(function () {
       scope.loadProductsDeffered.reject();
@@ -138,25 +144,29 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
           }
         }
       });
-      var clientPromises = 0;
-      for (var i = 0; i < clientIds.length; i++) {
-        SearchService.getClientById(clientIds[i], 0).then(function clientDataArrived(client) {
-          clientPromises--;
-          if (clientPromises == 0) {
-            scope.loadOrdersDeffered.resolve();
-          }
-          for (var j = 0; j < scope.orders.length; j++) {
-            if (scope.orders[j].orderedBy == client.id) {
-              scope.orders[j].client = client;
+      if(clientIds.length == 0){
+        scope.loadOrdersDeffered.resolve();
+      }else {
+        var clientPromises = 0;
+        for (var i = 0; i < clientIds.length; i++) {
+          SearchService.getClientById(clientIds[i], 0).then(function clientDataArrived(client) {
+            clientPromises--;
+            if (clientPromises == 0) {
+              scope.loadOrdersDeffered.resolve();
             }
-          }
-        }).catch(function () {
-          clientPromises--;
-          if (clientPromises == 0) {
-            scope.loadOrdersDeffered.resolve();
-          }
-        });
-        clientPromises++;
+            for (var j = 0; j < scope.orders.length; j++) {
+              if (scope.orders[j].orderedBy == client.id) {
+                scope.orders[j].client = client;
+              }
+            }
+          }).catch(function () {
+            clientPromises--;
+            if (clientPromises == 0) {
+              scope.loadOrdersDeffered.resolve();
+            }
+          });
+          clientPromises++;
+        }
       }
     }).catch(function () {
       scope.loadOrdersDeffered.reject();

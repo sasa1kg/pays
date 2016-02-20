@@ -136,7 +136,7 @@
       </div>
     </div>
     <hr class="orangehr">
-    <h5 ng-if="!canBeAdded()" class="text-center" style="color:red;">{{ 'UNABLE_CART_INSERT' | translate}}</h5>
+    <h5 ng-if="canShop() && !canBeAdded()" class="text-center" style="color:red;">{{ 'UNABLE_CART_INSERT' | translate}}</h5>
 
     <div ng-if="searchedItems.length" class="row">
       <h2 class="title text-center">{{ 'SEARCHED_PRODUCTS' | translate}}</h2>
@@ -155,38 +155,42 @@
 
               <p>{{product.product.name.localization[currentLang]}}</p>
 
-              <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
-                 ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
-                class="fa fa-star"></i>
-                {{ 'ADD_TO_WISHLIST' | translate}}</a>
+              <div ng-if="canShop()">
+                <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
+                   ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
+                  class="fa fa-star"></i>
+                  {{ 'ADD_TO_WISHLIST' | translate}}</a>
 
-              <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
-                 ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
-                <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+                <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
+                   ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
+                  <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
 
-              <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
-                 ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
-                class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate}}</a>
+                <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
+                   ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
+                  class="fa fa-shopping-cart"></i>{{ 'ADD_TO_CART' | translate}}</a>
 
-              <div ng-if="canBeAdded () && isProductInCart(product.product.id)"
-                   class="cart_quantity_button col-sm-12 mb25">
-                <div class="col-sm-3 col-sm-offset-1 no-padding">
-                  <a class="cursor-pointer form-control" ng-click="addMore(product)">
-                    + </a>
+                <div ng-if="canBeAdded () && isProductInCart(product.product.id)"
+                     class="cart_quantity_button col-sm-12 mb25">
+                  <div class="col-sm-3 col-sm-offset-1 no-padding">
+                    <a class="cursor-pointer form-control" ng-click="addMore(product)">
+                      + </a>
+                  </div>
+                  <div class="col-sm-4 no-padding">
+                    <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                           name="quantity"
+                           ng-model="product.itemNum"
+                           ng-change="setAmount(product,product.itemNum)" autocomplete="off"
+                           ng-class="{'alert_color' : product.resourceExcedeed}"
+                           size="5">
+                  </div>
+                  <div class="col-sm-3 no-padding">
+                    <a class="cursor-pointer form-control" ng-click="less(product)"> - </a>
+                  </div>
+
                 </div>
-                <div class="col-sm-4 no-padding">
-                  <input class="form-control col-sm-12 text-center disable_number_spinner" type="number" name="quantity"
-                         ng-model="product.itemNum"
-                         ng-change="setAmount(product,product.itemNum)" autocomplete="off"
-                         ng-class="{'alert_color' : product.resourceExcedeed}"
-                         size="5">
-                </div>
-                <div class="col-sm-3 no-padding">
-                  <a class="cursor-pointer form-control" ng-click="less(product)"> - </a>
-                </div>
-
+                <h5 ng-show="product.resourceExcedeed" class="text-center" style="color:red;">
+                  {{product.alertMessage}}</h5>
               </div>
-              <h5 ng-show="product.resourceExcedeed"class="text-center" style="color:red;">{{product.alertMessage}}</h5>
             </div>
           </div>
         </div>
@@ -210,39 +214,42 @@
 
                 <p>{{product.product.name.localization[currentLang]}}</p>
 
-                <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
-                   ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
-                  class="fa fa-star"></i>
-                  {{ 'ADD_TO_WISHLIST' | translate}}</a>
+                <div ng-if="canShop()">
+                  <a ng-if="!canBeAdded() && !isProductInWishlist(product.product.id)"
+                     ng-click="addToWishlist(product.product.id)" class="btn btn-default add-to-cart"><i
+                    class="fa fa-star"></i>
+                    {{ 'ADD_TO_WISHLIST' | translate}}</a>
 
-                <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
-                   ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
-                  <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
+                  <a ng-if="!canBeAdded() && isProductInWishlist(product.product.id)"
+                     ng-click="removeFromWishlist(product.product.id)" class="btn btn-default add-to-cart">
+                    <i class="fa fa-star-o"></i>{{ 'REMOVE_FROM_WISHLIST' | translate}}</a>
 
-                <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
-                   ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
-                  class="fa fa-shopping-cart"></i>{{'ADD_TO_CART' | translate}}</a>
+                  <a ng-if="canBeAdded() && !isProductInCart(product.product.id)"
+                     ng-click="addToCart(product.product.id)" class="btn btn-default add-to-cart"><i
+                    class="fa fa-shopping-cart"></i>{{'ADD_TO_CART' | translate}}</a>
 
-                <div ng-if="canBeAdded() && isProductInCart(product.product.id)"
-                     class="cart_quantity_button col-sm-12 mb25">
-                  <div class="col-sm-3 col-sm-offset-1 no-padding">
-                    <a class="cursor-pointer form-control" ng-click="addMore(product)">
-                      + </a>
+                  <div ng-if="canBeAdded() && isProductInCart(product.product.id)"
+                       class="cart_quantity_button col-sm-12 mb25">
+                    <div class="col-sm-3 col-sm-offset-1 no-padding">
+                      <a class="cursor-pointer form-control" ng-click="addMore(product)">
+                        + </a>
+                    </div>
+                    <div class="col-sm-4 no-padding">
+                      <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                             name="quantity"
+                             ng-model="product.itemNum"
+                             ng-change="setAmount(product,product.itemNum)"
+                             ng-class="{'alert_color' : product.resourceExcedeed}"
+                             autocomplete="off"
+                             size="5">
+                    </div>
+                    <div class="col-sm-3 no-padding">
+                      <a class="cursor-pointer form-control" ng-click="less(product)"> - </a>
+                    </div>
                   </div>
-                  <div class="col-sm-4 no-padding">
-                    <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
-                           name="quantity"
-                           ng-model="product.itemNum"
-                           ng-change="setAmount(product,product.itemNum)"
-                           ng-class="{'alert_color' : product.resourceExcedeed}"
-                           autocomplete="off"
-                           size="5">
-                  </div>
-                  <div class="col-sm-3 no-padding">
-                    <a class="cursor-pointer form-control" ng-click="less(product)"> - </a>
-                  </div>
+                  <h5 ng-show="product.resourceExcedeed" class="text-center" style="color:red;">
+                    {{product.alertMessage}}</h5>
                 </div>
-                <h5 ng-show="product.resourceExcedeed"class="text-center" style="color:red;">{{product.alertMessage}}</h5>
               </div>
             </div>
           </div>

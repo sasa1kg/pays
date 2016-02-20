@@ -37,49 +37,52 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         };
       }
       ;
-      scope.loadAdvertisingDeffered = q.defer();
-      var advertisingPromises   = 0;
-      if (scope.distributor.images.profile != null) {
-        DistributorService.getDistributorImage(distributorId, scope.distributor.images.profile)
-          .then(function (img) {
-            advertisingPromises--;
-            if (advertisingPromises == 0) {
-              scope.loadAdvertisingDeffered.resolve();
-            }
-            scope.distributor.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
-          }).catch(function(){
-            advertisingPromises--;
-            if (advertisingPromises == 0) {
-              scope.loadAdvertisingDeffered.resolve();
-            }
-          });
-        advertisingPromises++;
-      }
-      var bannerPicIndex  = 0;
-      var bannerLoadIndex = 0;
-      for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.distributor.images.banner.length)); i++) {
-        scope.distributor.bannerImages[bannerLoadIndex++].imageId = scope.distributor.images.banner[scope.distributor.images.banner.length - (i + 1)];
-        DistributorService.getDistributorImage(distributorId, scope.distributor.images.banner[scope.distributor.images.banner.length - (i + 1)])
-          .then(function (img) {
-            advertisingPromises--;
-            if (advertisingPromises == 0) {
-              scope.loadAdvertisingDeffered.resolve();
-            }
-            if (img.type != 'undefined') {
-              for (var j = 0; j < scope.distributor.bannerImages.length; j++) {
-                if (scope.distributor.bannerImages[j].imageId == img.imageIndex) {
-                  scope.distributor.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
-                  bannerPicIndex++
+      if((scope.farmer.images.profile != null) || (scope.farmer.images.banner.length)) {
+        scope.loadAdvertisingDeffered = q.defer();
+        var advertisingPromises       = 0;
+        if (scope.distributor.images.profile != null) {
+          DistributorService.getDistributorImage(distributorId, scope.distributor.images.profile)
+            .then(function (img) {
+              advertisingPromises--;
+              if (advertisingPromises == 0) {
+                scope.loadAdvertisingDeffered.resolve();
+              }
+              scope.distributor.profilePictureBase64 = "data:image/jpeg;base64," + img.document_content;
+            }).catch(function () {
+              advertisingPromises--;
+              if (advertisingPromises == 0) {
+                scope.loadAdvertisingDeffered.resolve();
+              }
+            });
+          advertisingPromises++;
+        }
+        var bannerPicIndex  = 0;
+        var bannerLoadIndex = 0;
+        for (var i = 0; ((i < rootScope.bannerPicsLimit) && (i < scope.distributor.images.banner.length)); i++) {
+          scope.distributor.bannerImages[bannerLoadIndex++].imageId = scope.distributor.images.banner[scope.distributor.images.banner.length - (i + 1)];
+          DistributorService.getDistributorImage(distributorId, scope.distributor.images.banner[scope.distributor.images.banner.length - (i + 1)])
+            .then(function (img) {
+              advertisingPromises--;
+              if (advertisingPromises == 0) {
+                scope.loadAdvertisingDeffered.resolve();
+              }
+              if (img.type != 'undefined') {
+                for (var j = 0; j < scope.distributor.bannerImages.length; j++) {
+                  if (scope.distributor.bannerImages[j].imageId == img.imageIndex) {
+                    scope.distributor.bannerImages[bannerPicIndex].imgData = "data:image/jpeg;base64," + img.document_content;
+                    bannerPicIndex++
+                  }
                 }
               }
-            }
-          }).catch(function(){
-            advertisingPromises--;
-            if (advertisingPromises == 0) {
-              scope.loadAdvertisingDeffered.resolve();
-            }
-          });;
-        advertisingPromises++;
+            }).catch(function () {
+              advertisingPromises--;
+              if (advertisingPromises == 0) {
+                scope.loadAdvertisingDeffered.resolve();
+              }
+            });
+          ;
+          advertisingPromises++;
+        }
       }
     }).catch(function () {
       scope.loadGeneralDeffered.reject();
@@ -87,27 +90,34 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
     scope.loadVehicleDeffered     = q.defer();
     DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
       scope.vehicles      = data;
-      var vehiclePromises = 0;
-      for (var j = 0; j < scope.vehicles.length; j++) {
-        if (scope.vehicles[j].images) {
-          DistributorService.getVehicleImage(scope.vehicles[j].id, scope.vehicles[j].images)
-            .then(function (img) {
-              vehiclePromises--;
-              if (vehiclePromises == 0) {
-                scope.loadVehicleDeffered.resolve();
-              }
-              for (var i = 0; i < scope.vehicles.length; i++) {
-                if (scope.vehicles[i].id === img.index) {
-                  scope.vehicles[i].img = "data:image/jpeg;base64," + img.document_content;
+      if(scope.vehicles.length == 0){
+        scope.loadVehicleDeffered.resolve();
+      }else {
+        var vehiclePromises = 0;
+        for (var j = 0; j < scope.vehicles.length; j++) {
+          if (scope.vehicles[j].images) {
+            DistributorService.getVehicleImage(scope.vehicles[j].id, scope.vehicles[j].images)
+              .then(function (img) {
+                vehiclePromises--;
+                if (vehiclePromises == 0) {
+                  scope.loadVehicleDeffered.resolve();
                 }
-              }
-            }).catch(function () {
-              vehiclePromises--;
-              if (vehiclePromises == 0) {
-                scope.loadVehicleDeffered.resolve();
-              }
-            });
-          vehiclePromises++;
+                for (var i = 0; i < scope.vehicles.length; i++) {
+                  if (scope.vehicles[i].id === img.index) {
+                    scope.vehicles[i].img = "data:image/jpeg;base64," + img.document_content;
+                  }
+                }
+              }).catch(function () {
+                vehiclePromises--;
+                if (vehiclePromises == 0) {
+                  scope.loadVehicleDeffered.resolve();
+                }
+              });
+            vehiclePromises++;
+          }
+        }
+        if (vehiclePromises == 0) {
+          scope.loadVehicleDeffered.resolve();
         }
       }
     }).catch(function () {
