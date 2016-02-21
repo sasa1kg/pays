@@ -6,9 +6,9 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
 
     scope.total = "";
 
-    scope.shippingConst = 200;
-    scope.shipping      = scope.shippingConst;
-    scope.isShipped     = true;
+    scope.shippingConst  = 0;
+    scope.transportPrice = scope.shippingConst;
+    scope.isShipped      = true;
 
     scope.previousAddresses = UserService.getUserDeliveryAddress(rootScope.credentials.id);
 
@@ -28,7 +28,8 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
           for (var j = 0; j < scope.cartItems.items.length; j++) {
             for (var i = 0; i < scope.farmerProducts.length; i++) {
               if (scope.cartItems.items[j].itemId === scope.farmerProducts[i].product.id) {
-                scope.cartItems.items[j].amount = scope.farmerProducts[i].amount;
+                scope.cartItems.items[j].amount    = scope.farmerProducts[i].amount;
+                scope.cartItems.items[j].shortDesc = scope.farmerProducts[i].product.shortDesc;
                 if (scope.farmerProducts[i].customImage) {
                   FarmerService.getStockProductImage(scope.farmerProducts[i].stockItemId, scope.farmerProducts[i].customImage).then(function imgArrived(data) {
                     promisesWaiting--;
@@ -89,10 +90,11 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
 
     scope.calculateTotal = function () {
       scope.totalPrice = 0;
-      for (var i = scope.cartItems.items.length - 1; i >= 0; i--) {
+      for (var i  = scope.cartItems.items.length - 1; i >= 0; i--) {
         scope.totalPrice = scope.totalPrice + scope.cartItems.items[i].itemPrice * scope.cartItems.items[i].itemNum;
       }
-      scope.total = scope.totalPrice + scope.shipping;
+      console.log((scope.isShipped == true ? parseFloat(scope.transportPrice) : 0));
+      scope.total = scope.totalPrice + (scope.isShipped == true ? parseFloat(scope.transportPrice) : 0);
     }
 
 
@@ -174,6 +176,27 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
       window.history.back();
     }
 
+    scope.calculateTransportPrice = function () {
+      SearchService.getDistanceBetweenCities("Novi Sad", "Beograd").then(function(data){
+        var reqData          = {
+          distance: data,
+          items: []
+        };
+        angular.forEach(scope.cartItems.items, function (item) {
+          reqData.items.push({
+            item: item.itemId,
+            amount: item.amount
+          })
+        });
+        console.log(reqData);
+        FarmerService.getTransportPrice(scope.farmerData.farmerId,reqData).then(function(data){
+          scope.transportPrice = data.price;
+          scope.calculateTotal();
+        }).catch(function (err){
+
+        })
+      });
+    }
 
     scope.openEmptyCartModal = function () {
 
@@ -199,12 +222,6 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
 
     scope.changeShipment = function (isShipped) {
       scope.isShipped = isShipped;
-
-      if (scope.isShipped == true) {
-        scope.shipping = scope.shippingConst;
-      } else {
-        scope.shipping = 0;
-      }
       scope.calculateTotal();
     }
 

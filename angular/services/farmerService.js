@@ -436,4 +436,23 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             };
             return JSON.stringify(qrData);
         }
+
+        this.getTransportPrice = function(farmerId, priceData){
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "merchant/" + farmerId + "/calculateTransport",priceData).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getTransportPrice | Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("getTransportPrice | Error " + status);
+                  deffered.reject("Error");
+              });
+            return deffered.promise;
+        }
     }]);

@@ -566,7 +566,8 @@ paysApp.config(function ($translateProvider) {
     NO_QR_GENERATION : 'Generation of QR code in not possible at the moment.Please wait for the money transaction for the order to be performed.',
     NO_REVIEWS_MESSAGE : 'There are no reviews for this farmer. Buy products from this farmer and be the first one to leave a review!',
     WAIT_MSG : 'Please wait',
-    LOAD_MSG : 'Loading...'
+    LOAD_MSG : 'Loading...',
+    CALCULATE_TRANSPORT_PRICE : 'Calculate transport price'
 
   })
     .translations('rs_RS', {
@@ -902,7 +903,8 @@ paysApp.config(function ($translateProvider) {
       NO_QR_GENERATION : 'Generisanje QR koda trenutno nije moguće. Molimo sačekajte da sredstva za narudžbinu budu rezervisana.',
       NO_REVIEWS_MESSAGE : 'Ne postoje komentari o ovom farmeru. Kupite proizvode od ovog farmera i budite prvi koji će mu ostaviti komentar!',
       WAIT_MSG : 'Molimo sačekajte',
-      LOAD_MSG : 'Učitavanje...'
+      LOAD_MSG : 'Učitavanje...',
+      CALCULATE_TRANSPORT_PRICE : 'Izračunajte cenu prevoza'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

@@ -3,7 +3,7 @@
 </header><!--/header-->
 <div cg-busy="{promise:loadDeffered.promise,message:waitMsg,backdrop:true}">
 
-  <section id="cart_items">
+  <div id="cart_items">
     <div class="container">
       <div class="breadcrumbs">
         <ol class="breadcrumb">
@@ -60,7 +60,7 @@
             <td class="cart_description col-sm-2">
               <h4><a href="">{{item.itemName.localization[currentLang]}}</a></h4>
 
-              <p>{{'NON_ORGANIC' | translate}}</p>
+              <p>{{item.shortDesc.localization[currentLang]}}</p>
             </td>
             <td class="cart_price col-sm-2">
               <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code}}</p>
@@ -99,140 +99,148 @@
         </table>
       </div>
     </div>
-</div>
-</section> <!--/#cart_items-->
+  </div>
+  </section> <!--/#cart_items-->
 
-<section id="delivery">
-  <div class="container ">
-    <div class="row total_area">
-      <!--predefined location -->
-      <div ng-if="credentials.role !== buyerUserType " class="col-sm-12 mt20">
-        <h5 class="text-center" style="color:red;">{{ 'NO_PREDEFINED_LOCATIONS' | translate}}</h5>
-      </div>
-
-      <div ng-if="credentials.role === buyerUserType && previousAddresses.length" class="col-sm-12 mt20">
-        <div class="col-sm-3">
-          <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
-                 value="{{predefinedLocationString}}">
-          {{ 'PREDEFINED_LOCATION' | translate}}
+  <section id="delivery">
+    <div class="container ">
+      <div class="row total_area">
+        <!--predefined location -->
+        <div ng-if="credentials.role !== buyerUserType " class="col-sm-12 mt20">
+          <h5 class="text-center" style="color:red;">{{ 'NO_PREDEFINED_LOCATIONS' | translate}}</h5>
         </div>
-        <div class="col-sm-9">
-          <div class="col-sm-12">
-            <select ng-model="prevAddress.address" class="form-control"
-                    ng-disabled="locationType.selected!=predefinedLocationString">
-              <option ng-repeat="addr in previousAddresses" value="{{addr}}">{{addr.street | html}} {{addr.houseNumber
-                |
-                html}}, {{addr.postalCode | html}}, {{addr.city | html}}
-              </option>
-            </select>
+
+        <div ng-if="credentials.role === buyerUserType && previousAddresses.length" class="col-sm-12 mt20">
+          <div class="col-sm-3">
+            <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
+                   value="{{predefinedLocationString}}">
+            {{ 'PREDEFINED_LOCATION' | translate}}
           </div>
-        </div>
-      </div>
-      <!-- New address-->
-      <div class="col-sm-12 mt20">
-        <div class="col-sm-3 ">
-          <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
-                 value="{{newAddressString}}">
-          {{ 'NEW_ADDRESS' | translate}}
-        </div>
-        <div class="col-sm-9">
-          <div class="col-sm-6">
-            <label class="col-sm-2 mt6">{{ 'CITY' | translate}}:</label>
-
-            <form class="col-sm-10">
-              <select ng-model="address.city" class="form-control">
-                <option ng-repeat="city in cities | orderBy:'name':false" value="{{city.name}}">{{city.name |
-                  html}}
+          <div class="col-sm-9">
+            <div class="col-sm-12">
+              <select ng-model="prevAddress.address" class="form-control"
+                      ng-disabled="locationType.selected!=predefinedLocationString">
+                <option ng-repeat="addr in previousAddresses" value="{{addr}}">{{addr.street | html}} {{addr.houseNumber
+                  |
+                  html}}, {{addr.postalCode | html}}, {{addr.city | html}}
                 </option>
               </select>
-            </form>
-          </div>
-          <div class="col-sm-5">
-            <label class="mt6 col-sm-5">{{ 'POSTAL_CODE' | translate}}:</label>
-
-            <div class="col-sm-6">
-              <input class="form-control" type="number"
-                     autocomplete="off" ng-model="address.postalCode"></div>
-          </div>
-          <div class="col-sm-6 mt20">
-            <label class="mt6 col-sm-2">{{ 'STREET' | translate}}</label>
-
-            <div class="col-sm-10">
-              <input class="form-control" type="text"
-                     autocomplete="off" ng-model="address.street"></div>
-          </div>
-          <div class="col-sm-5 mt20">
-            <label class="mt6 col-sm-5">{{ 'HOUSE_NUMBER' | translate}}</label>
-
-            <div class="col-sm-6">
-              <input class="form-control" type="text"
-                     autocomplete="off" ng-model="address.houseNumber"></div>
-          </div>
-          <div class="col-sm-6 mt20">
-            <label class="mt6 col-sm-2">{{ 'FLOOR' | translate}}</label>
-
-            <div class="col-sm-6">
-              <input class="form-control" type="number"
-                     autocomplete="off" ng-model="address.floor">
             </div>
           </div>
-          <div class="col-sm-5 mt20">
-            <label class="mt6 col-sm-5">{{ 'APARTMENT' | translate}}</label>
-
+        </div>
+        <!-- New address-->
+        <div class="col-sm-12 mt20">
+          <div class="col-sm-3 ">
+            <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
+                   value="{{newAddressString}}">
+            {{ 'NEW_ADDRESS' | translate}}
+          </div>
+          <div class="col-sm-9">
             <div class="col-sm-6">
-              <input class="form-control" type="number"
-                     autocomplete="off" ng-model="address.apartmentNumber"></div>
+              <label class="col-sm-2 mt6">{{ 'CITY' | translate}}:</label>
+
+              <form class="col-sm-10">
+                <select ng-model="address.city" class="form-control">
+                  <option ng-repeat="city in cities | orderBy:'name':false" value="{{city.name}}">{{city.name |
+                    html}}
+                  </option>
+                </select>
+              </form>
+            </div>
+            <div class="col-sm-5">
+              <label class="mt6 col-sm-5">{{ 'POSTAL_CODE' | translate}}:</label>
+
+              <div class="col-sm-6">
+                <input class="form-control" type="number"
+                       autocomplete="off" ng-model="address.postalCode"></div>
+            </div>
+            <div class="col-sm-6 mt20">
+              <label class="mt6 col-sm-2">{{ 'STREET' | translate}}</label>
+
+              <div class="col-sm-10">
+                <input class="form-control" type="text"
+                       autocomplete="off" ng-model="address.street"></div>
+            </div>
+            <div class="col-sm-5 mt20">
+              <label class="mt6 col-sm-5">{{ 'HOUSE_NUMBER' | translate}}</label>
+
+              <div class="col-sm-6">
+                <input class="form-control" type="text"
+                       autocomplete="off" ng-model="address.houseNumber"></div>
+            </div>
+            <div class="col-sm-6 mt20">
+              <label class="mt6 col-sm-2">{{ 'FLOOR' | translate}}</label>
+
+              <div class="col-sm-6">
+                <input class="form-control" type="number"
+                       autocomplete="off" ng-model="address.floor">
+              </div>
+            </div>
+            <div class="col-sm-5 mt20">
+              <label class="mt6 col-sm-5">{{ 'APARTMENT' | translate}}</label>
+
+              <div class="col-sm-6">
+                <input class="form-control" type="number"
+                       autocomplete="off" ng-model="address.apartmentNumber"></div>
+            </div>
+          </div>
+          <div class="col-sm-12 mt25">
+            <h5 class="col-sm-2 pull-right">{{transportPrice}} (RSD)</h5>
+            <div class="col-sm-3 pull-right">
+              <a class=" btn btn-default apply-changes-btn" ng-click="calculateTransportPrice()">{{
+                'CALCULATE_TRANSPORT_PRICE' | translate}}</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
-</section>
-<section id="do_action">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="total_area">
-          <ul>
-            <li class="amount_data">{{ 'CART' | translate}} <span>{{totalPrice}} RSD</span></li>
-            <li class="amount_data"><input type="checkbox"
-                                           ng-model="isShipped" ng-click="changeShipment(isShipped)"
-                                           style="width: 20px;height: 20px;">{{ 'DELIVERY' | translate}}
-              ({{ 'DELIVERY_OPTION' | translate}}) <span>{{shipping}} RSD</span></li>
-            <li class="amount_data">{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
-          </ul>
 
-          <script type="text/ng-template" id="emptyCartModal.html">
-            <div class="modal-header">
-              <button type="button" class="close" ng-click="cancelModal()">&times;</button>
-              <h4 class="modal-title">{{ 'EMPTY_CART' | translate}}</h4>
-            </div>
-            <div class="modal-body">
-              <p>{{ 'DIALOG_EMPTY_CART_QUESTION' | translate}}</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default check_out"
-                      ng-click="emptyCart()">{{ 'YES' |
-                translate}}
-              </button>
-              <button type="button" class="btn btn-default check_out" ng-click="cancelModal()">{{ 'NO'
-                |
-                translate}}
-              </button>
-            </div>
-          </script>
+  </section>
+  <section id="do_action">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="total_area">
+            <ul>
+              <li class="amount_data">{{ 'CART' | translate}} <span>{{totalPrice}} RSD</span></li>
+              <li class="amount_data"><input type="checkbox"
+                                             ng-model="isShipped" ng-click="changeShipment(isShipped)"
+                                             style="width: 20px;height: 20px;">{{ 'DELIVERY' | translate}}
+                ({{ 'DELIVERY_OPTION' | translate}}) <span>{{isShipped ? transportPrice : "0"}} RSD</span></li>
+              <li class="amount_data">{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
+            </ul>
 
-          <a class="btn btn-default update" ng-click="goBack()">{{ 'UPDATE_CART' | translate}}</a>
-          <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
-            'EMPTY_CART' | translate}}</a>
-          <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()" ng-click="goToPayment()">{{ 'PAY' |
-            translate}}</a>
+            <script type="text/ng-template" id="emptyCartModal.html">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+                <h4 class="modal-title">{{ 'EMPTY_CART' | translate}}</h4>
+              </div>
+              <div class="modal-body">
+                <p>{{ 'DIALOG_EMPTY_CART_QUESTION' | translate}}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default check_out"
+                        ng-click="emptyCart()">{{ 'YES' |
+                  translate}}
+                </button>
+                <button type="button" class="btn btn-default check_out" ng-click="cancelModal()">{{ 'NO'
+                  |
+                  translate}}
+                </button>
+              </div>
+            </script>
 
+            <a class="btn btn-default update" ng-click="goBack()">{{ 'UPDATE_CART' | translate}}</a>
+            <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
+              'EMPTY_CART' | translate}}</a>
+            <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()" ng-click="goToPayment()">{{ 'PAY' |
+              translate}}</a>
+
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section><!--/#do_action-->
+  </section>
+  <!--/#do_action-->
 </div>
 <div ng-include="'partials/footer.html'"></div>
