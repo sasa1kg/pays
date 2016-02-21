@@ -74,15 +74,40 @@
           <table class="table table-condensed">
             <thead>
             <tr class="vehicles_menu">
-              <td>{{ 'COMPANY_NAME' | translate}}</td>
-              <td>{{ 'PRODUCT_NUMBER' | translate}}</td>
-              <td>{{ 'PRODUCT_TOTAL_PRICE' | translate}}</td>
-              <td>{{ 'STATUS' | translate}}</td>
+              <td>
+                <a class="cursor-pointer white-font" ng-click="sortType = 'farmer.businessSubject.name'; sortReverse = !sortReverse">
+                  {{ 'COMPANY_NAME' | translate}}
+                  <span ng-show="sortType == 'farmer.businessSubject.name' && sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'farmer.businessSubject.name' && !sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
+              <td>
+                <a class="cursor-pointer white-font" ng-click="sortType = 'items.length'; sortReverse = !sortReverse">
+                  {{ 'PRODUCT_NUMBER' | translate}}
+                  <span ng-show="sortType == 'items.length' && sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'items.length' && !sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
+              <td>
+                <a class="cursor-pointer white-font" ng-click="sortType = 'totalPrice'; sortReverse = !sortReverse">
+                  {{ 'PRODUCT_TOTAL_PRICE' | translate}}
+                  <span ng-show="sortType == 'totalPrice' && sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'totalPrice' && !sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
+              <td>
+                <a class="cursor-pointer white-font" ng-click="sortType = 'numericStatus'; sortReverse = !sortReverse">
+                  {{ 'STATUS' | translate}}
+                  <span ng-show="sortType == 'numericStatus' && sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'numericStatus' && !sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
               <td>{{ 'ACTIONS' | translate}}</td>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat-start="order in orders">
+            <tr
+              dir-paginate-start="order in orders | orderBy:sortType:sortReverse |itemsPerPage:maxItemsPerPage">
               <td>
                 <h4>{{order.farmer.businessSubject.name}}</h4>
               </td>
@@ -100,7 +125,7 @@
                         ng-click="order.showDetails = !order.showDetails;order.showReview = false;"><i
                   class="fa fa-pencil-square-o"></i> {{ 'DETAILS' | translate}}
                 </button>
-                <button ng-if="order.status == 'D' && order.hasComments == false"
+                <button ng-disabled="order.status != 'D' || order.hasComments == true"
                         class="btn btn-default apply-changes-btn"
                         ng-click="order.showReview = !order.showReview;order.showDetails = false;"><i
                   class="fa fa-star-half-o"></i> {{
@@ -108,7 +133,7 @@
                 </button>
               </td>
             </tr>
-            <tr ng-if="order.showDetails || order.showReview" ng-repeat-end="" style="border-width: 5px">
+            <tr ng-if="order.showDetails || order.showReview" dir-paginate-end="" style="border-width: 5px">
               <td ng-if="order.showDetails" colspan="5" style="background-color: antiquewhite;">
                 <h4 class="text-center">{{"DETAILS" |translate}}</h4>
 
@@ -241,6 +266,13 @@
             </tr>
             </tbody>
           </table>
+          <div class="text-center">
+            <dir-pagination-controls
+              max-size="5"
+              direction-links="true"
+              boundary-links="true">
+            </dir-pagination-controls>
+          </div>
         </div>
       </div>
     </div>

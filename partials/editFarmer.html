@@ -229,7 +229,8 @@
               </tr>
               </thead>
               <tbody>
-              <tr ng-repeat="product in products">
+              <tr
+                dir-paginate="product in products | orderBy:sortTypeProduc:sortReverseProduct |itemsPerPage:maxItemsPerPagePictures">
                 <td>
                   <h4>{{ product.product.name.localization[currentLang]}}</h4>
                 </td>
@@ -252,6 +253,13 @@
               </tr>
               </tbody>
             </table>
+            <div class="text-center">
+              <dir-pagination-controls
+                max-size="5"
+                direction-links="true"
+                boundary-links="true">
+              </dir-pagination-controls>
+            </div>
           </div>
           <button class="btn btn-default btn-lg add-vehicle-btn" ng-click="addProduct()"><i
             class="fa fa-plus"></i> {{'ADD_NEW_PRODUCT' |
@@ -440,15 +448,40 @@
             <table class="table table-condensed">
               <thead>
               <tr class="vehicles_menu">
-                <td>{{ 'CLIENT_NAME' | translate}}</td>
-                <td>{{ 'PRODUCT_NUMBER' | translate}}</td>
-                <td>{{ 'PRODUCT_TOTAL_PRICE' | translate}}</td>
-                <td>{{ 'STATUS' | translate}}</td>
+                <td>
+                  <a class="cursor-pointer white-font" ng-click="sortTypeOrder = 'client.privateSubject.name'; sortReverseOrder = !sortReverseOrder">
+                    {{ 'CLIENT_NAME' | translate}}
+                    <span ng-show="sortTypeOrder == 'client.privateSubject.name' && sortReverseOrder" class="fa fa-caret-down"></span>
+                    <span ng-show="sortTypeOrder == 'client.privateSubject.name' && !sortReverseOrder" class="fa fa-caret-up"></span>
+                  </a>
+                </td>
+                <td>
+                  <a class="cursor-pointer white-font" ng-click="sortTypeOrder = 'items.length'; sortReverseOrder = !sortReverseOrder">
+                    {{ 'PRODUCT_NUMBER' | translate}}
+                    <span ng-show="sortTypeOrder == 'items.length' && sortReverseOrder" class="fa fa-caret-down"></span>
+                    <span ng-show="sortTypeOrder == 'items.length' && !sortReverseOrder" class="fa fa-caret-up"></span>
+                  </a>
+                </td>
+                <td>
+                  <a class="cursor-pointer white-font" ng-click="sortTypeOrder = 'totalPrice'; sortReverseOrder = !sortReverseOrder">
+                  {{ 'PRODUCT_TOTAL_PRICE' | translate}}
+                  <span ng-show="sortTypeOrder == 'totalPrice' && sortReverseOrder" class="fa fa-caret-down"></span>
+                  <span ng-show="sortTypeOrder == 'totalPrice' && !sortReverseOrder" class="fa fa-caret-up"></span>
+                </a>
+                </td>
+                <td>
+                  <a class="cursor-pointer white-font"
+                     ng-click="sortTypeOrder = 'numericStatus'; sortReverseOrder = !sortReverseOrder">
+                    {{ 'STATUS' | translate}}
+                    <span ng-show="sortTypeOrder == 'numericStatus' && sortReverseOrder" class="fa fa-caret-down"></span>
+                    <span ng-show="sortTypeOrder == 'numericStatus' && !sortReverseOrder" class="fa fa-caret-up"></span>
+                  </a>
+                </td>
                 <td>{{ 'ACTIONS' | translate}}</td>
               </tr>
               </thead>
               <tbody>
-              <tr ng-repeat="order in orders">
+              <tr dir-paginate="order in orders | orderBy:sortTypeOrder:sortReverseOrder |itemsPerPage:maxItemsPerPage">
                 <td>
                   <h4>{{order.client.privateSubject.name}} {{order.client.privateSubject.lastName}}</h4>
                 </td>
@@ -468,6 +501,13 @@
               </tr>
               </tbody>
             </table>
+            <div class="text-center">
+              <dir-pagination-controls
+                max-size="5"
+                direction-links="true"
+                boundary-links="true">
+              </dir-pagination-controls>
+            </div>
           </div>
         </div>
       </div>

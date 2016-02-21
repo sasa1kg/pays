@@ -16,6 +16,9 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
       flow: null
     };
 
+    scope.sortType    = "name";
+    scope.sortReverse = false;
+
     scope.loadGeneralDeffered     = null;
     scope.loadVehicleDeffered     = null;
     scope.loadAdvertisingDeffered = null;

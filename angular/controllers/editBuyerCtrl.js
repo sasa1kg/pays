@@ -26,7 +26,10 @@ angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "
       var farmerIds = [];
       angular.forEach(data,function(order){
         if (order.status != 'C') {
+          order.totalPrice = parseFloat(order.totalPrice);
+          order.numericStatus = rootScope.getNumericOrderStatus(order.status);
           scope.orders.push(order);
+
         }
       });
       for (var i = 0; i < scope.orders.length; i++) {
@@ -101,6 +104,9 @@ angular.module('paysApp').controller("editBuyerCtrl", ["$scope", "$rootScope", "
           Notification.error({message: filter('translate')('GENERAL_INFO_NOT_UPDATED')});
         })
     }
+
+    scope.sortType    = "id";
+    scope.sortReverse = true;
   }])
 ;
 

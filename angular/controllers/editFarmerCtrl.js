@@ -14,11 +14,18 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
       flow: null
     };
 
+    scope.sortTypeProduct    = "product.name.localization[currentLang]";
+    scope.sortReverseProduct = false;
+
+    scope.sortTypeOrder    = "id";
+    scope.sortReverseOrder = true;
+
     scope.loadGeneralDeffered     = null;
     scope.loadVehicleDeffered     = null;
     scope.loadAdvertisingDeffered = null;
     scope.loadPricesDeffered      = null;
     scope.loadOrdersDeffered      = null;
+
     scope.loadGeneralDeffered     = q.defer();
 
     SearchService.getFarmerById(routeParams.id).then(function (data) {
@@ -138,6 +145,8 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
       var clientIds = [];
       angular.forEach(data, function (order) {
         if (order.status != 'C') {
+          order.totalPrice = parseFloat(order.totalPrice);
+          order.numericStatus = rootScope.getNumericOrderStatus(order.status);
           scope.orders.push(order);
           if (clientIds.indexOf(order.orderedBy) == -1) {
             clientIds.push(order.orderedBy);

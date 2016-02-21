@@ -1,7 +1,7 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'LocalStorageModule',
   'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'FarmerService', 'UserService', 'OrderService',
   'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow', 'monospaced.qrcode', 'dbaq.google.directions',
-  'ngPrint'])
+  'angularUtils.directives.dirPagination'])
   .filter('html', function ($sce) {
     return function (input) {
       return $sce.trustAsHtml(input);
@@ -131,6 +131,9 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
     0, 5, 10, 15, 20, 30, 40, 50, 65, 80, 100, 150, 200, 300, 400, 500
   ];
 
+  $rootScope.maxItemsPerPage = 15;
+  $rootScope.maxItemsPerPagePictures = 8;
+
   $rootScope.paysEMail = 'office@pays-system.com';
 
   $rootScope.serverURL       = "http://185.23.171.43/PEP/PaysRest/";
@@ -154,6 +157,30 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
   SearchService.getMeasurementUnits().then(function (data) {
     $rootScope.measures = data;
   });
+
+  $rootScope.getNumericOrderStatus = function(statusAlpha){
+    var ret = 0;
+    switch (statusAlpha) {
+      case 'C':
+        ret = 1;
+        break;
+      case 'A':
+        ret = 2;
+        break;
+      case 'T':
+        ret = 3;
+        break;
+      case 'D':
+        ret = 4;
+        break;
+      case 'P':
+        ret = 5;
+        break;
+      default:
+        break;
+    }
+    return ret;
+  }
 
   $rootScope.getMeasureUnitObjectFromCode = function (code) {
     var retVal = {};
@@ -857,7 +884,7 @@ paysApp.config(function ($translateProvider) {
       DELIVERED : 'Dostavljena',
       PAID : 'Plaćena',
       GENERATE_QR : 'Generiši QR kod',
-      NUMBER_OF_PACKAGES : 'Brok paketa',
+      NUMBER_OF_PACKAGES : 'Broj paketa',
       ENTER_NUMBER_OF_PACKAGES : 'Molimo unesite broj paketa u porudžbini',
       SEND_ORDER : 'Pošalji porudžbinu',
       ORDER_STATUS_TRANSPORT : 'Stanje narudžbine promenjeno u - U transportu',

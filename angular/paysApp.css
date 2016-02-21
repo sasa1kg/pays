@@ -345,3 +345,7 @@ input[required] {
 .loading-min-height {
     min-height: 50px;
 }
+
+.white-font {
+    color: white;
+}
