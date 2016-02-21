@@ -275,6 +275,50 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             }
         });
 
+        SearchService.getMostProfitFarmers().then(function (data) {
+            scope.mostProfitFarmers = data;
+            for (var j = 0; j < scope.mostProfitFarmers.length; j++) {
+                if (scope.mostProfitFarmers[j].imageId != null) {
+                    FarmerService.getFarmerImage(scope.mostProfitFarmers[j].merchantId, scope.mostProfitFarmers[j].imageId).then(function (img) {
+                        for (var i = 0; i < scope.mostProfitFarmers.length; i++) {
+                            if (scope.mostProfitFarmers[i].merchantId === img.index) {
+                                scope.mostProfitFarmers[i].img = "data:image/jpeg;base64," + img.document_content;
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        SearchService.getMostOrdersFarmers().then(function (data) {
+            scope.mostProductsFarmers = data;
+            for (var j = 0; j < scope.mostProductsFarmers.length; j++) {
+                if (scope.mostProductsFarmers[j].imageId != null) {
+                    FarmerService.getFarmerImage(scope.mostProductsFarmers[j].merchantId, scope.mostProductsFarmers[j].imageId).then(function (img) {
+                        for (var i = 0; i < scope.mostProductsFarmers.length; i++) {
+                            if (scope.mostProductsFarmers[i].merchantId === img.index) {
+                                scope.mostProductsFarmers[i].img = "data:image/jpeg;base64," + img.document_content;
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        SearchService.getMostProductsFarmers().then(function (data) {
+            scope.mostOrdersFarmers = data;
+            for (var j = 0; j < scope.mostOrdersFarmers.length; j++) {
+                if (scope.mostOrdersFarmers[j].imageId != null) {
+                    FarmerService.getFarmerImage(scope.mostOrdersFarmers[j].merchantId, scope.mostOrdersFarmers[j].imageId).then(function (img) {
+                        for (var i = 0; i < scope.mostOrdersFarmers.length; i++) {
+                            if (scope.mostOrdersFarmers[i].merchantId === img.index) {
+                                scope.mostOrdersFarmers[i].img = "data:image/jpeg;base64," + img.document_content;
+                            }
+                        }
+                    });
+                }
+            }
+        });
         scope.searchNameCallback = function(keyEvent) {
             if (keyEvent.which === 13){
                 scope.setSearchPrepared();

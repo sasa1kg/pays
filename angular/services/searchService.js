@@ -364,5 +364,62 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
             return deffered.promise;
         }
+
+        this.getMostProfitFarmers = function () {
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "merchant_most_profit").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getMostProfitFarmers |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+              }).
+              error(function (data, status) {
+                  console.log("getMostProfitFarmers | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
+        this.getMostOrdersFarmers = function () {
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "merchant_most_orders").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getMostOrdersFarmers |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+              }).
+              error(function (data, status) {
+                  console.log("getMostOrdersFarmers | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
+        this.getMostProductsFarmers = function () {
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "merchant_most_products").
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("getMostProductsFarmers |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+              }).
+              error(function (data, status) {
+                  console.log("getMostProductsFarmers | Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
     }]);
 

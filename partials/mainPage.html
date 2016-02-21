@@ -245,7 +245,7 @@
     <div class="col-sm-12">
     <h2 class="title text-center">{{ 'MARKETING_SPACE' | translate}}</h2>
 
-    <div cg-busy="{promise:nearByFarmers,message:'Loading...',backdrop:true}"></div>
+    <div cg-busy="{promise:nearByFarmers,message:loadMsg,backdrop:true}"></div>
     <div class="row">
       <div class="col-sm-12 padding-right">
         <div class="subtitle-center">
@@ -254,14 +254,14 @@
       </div>
       <div class="col-sm-12 padding-right">
         <div class="features_items"><!--features_items-->
-          <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
+          <div class="col-sm-4" ng-repeat="farmer in mostProfitFarmers | limitTo:3">
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="{{farmer.img}}" alt="{{farmer.businessSubject.name}}"
+                  <img src="{{farmer.img}}" alt="{{farmer.name}}"
                        style="width: 268px;height: 249px;"/>
 
-                  <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
+                  <h2 ng-bind-html="farmer.name | html"></h2>
 
                   <p ng-bind-html="farmer.businessSubject.location | html"></p>
                   <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
@@ -269,10 +269,10 @@
                 </div>
                 <div class="product-overlay">
                   <div class="overlay-content">
-                    <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
+                    <h2 ng-bind-html="farmer.name | html"></h2>
 
                     <p ng-bind-html="farmer.businessSubject.city | html"></p>
-                    <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                    <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
                       class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
                   </div>
                 </div>
@@ -293,14 +293,14 @@
       </div>
       <div class="col-sm-12 padding-right">
         <div class="features_items"><!--features_items-->
-          <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
+          <div class="col-sm-4" ng-repeat="farmer in mostProductsFarmers | limitTo:3">
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="{{farmer.img}}" alt="{{farmer.businessSubject.name}}"
+                  <img src="{{farmer.img}}" alt="{{farmer.name}}"
                        style="width: 268px;height: 249px;"/>
 
-                  <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
+                  <h2 ng-bind-html="farmer.name | html"></h2>
 
                   <p ng-bind-html="farmer.businessSubject.city | html"></p>
                   <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
@@ -308,10 +308,10 @@
                 </div>
                 <div class="product-overlay">
                   <div class="overlay-content">
-                    <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
+                    <h2 ng-bind-html="farmer.name | html"></h2>
 
                     <p ng-bind-html="farmer.businessSubject.city | html"></p>
-                    <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                    <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
                       class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
                   </div>
                 </div>
@@ -332,14 +332,14 @@
       </div>
       <div class="col-sm-12 padding-right">
         <div class="features_items"><!--features_items-->
-          <div class="col-sm-4" ng-repeat="farmer in farmers | limitTo:3">
+          <div class="col-sm-4" ng-repeat="farmer in mostOrdersFarmers | limitTo:3">
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="{{farmer.img}}" alt="{{farmer.businessSubject.name}}"
+                  <img src="{{farmer.img}}" alt="{{farmer.name}}"
                        style="width: 268px;height: 249px;"/>
 
-                  <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
+                  <h2 ng-bind-html="farmer.name | html"></h2>
 
                   <p ng-bind-html="farmer.businessSubject.city | html"></p>
                   <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
@@ -347,10 +347,10 @@
                 </div>
                 <div class="product-overlay">
                   <div class="overlay-content">
-                    <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
+                    <h2 ng-bind-html="farmer.name | html"></h2>
 
                     <p ng-bind-html="farmer.businessSubject.city | html"></p>
-                    <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                    <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
                       class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}s</a>
                   </div>
                 </div>
