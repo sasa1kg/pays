@@ -567,7 +567,8 @@ paysApp.config(function ($translateProvider) {
     NO_REVIEWS_MESSAGE : 'There are no reviews for this farmer. Buy products from this farmer and be the first one to leave a review!',
     WAIT_MSG : 'Please wait',
     LOAD_MSG : 'Loading...',
-    CALCULATE_TRANSPORT_PRICE : 'Calculate transport price'
+    CALCULATE_TRANSPORT_PRICE : 'Calculate transport price',
+    REQUIRED_FIELDS : 'Required fields'
 
   })
     .translations('rs_RS', {
@@ -904,7 +905,8 @@ paysApp.config(function ($translateProvider) {
       NO_REVIEWS_MESSAGE : 'Ne postoje komentari o ovom farmeru. Kupite proizvode od ovog farmera i budite prvi koji će mu ostaviti komentar!',
       WAIT_MSG : 'Molimo sačekajte',
       LOAD_MSG : 'Učitavanje...',
-      CALCULATE_TRANSPORT_PRICE : 'Izračunajte cenu prevoza'
+      CALCULATE_TRANSPORT_PRICE : 'Izračunajte cenu prevoza',
+      REQUIRED_FIELDS : 'Obavezna polja'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

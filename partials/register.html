@@ -17,6 +17,7 @@
             </select>
             <hr>
           </form>
+          <h5 ng-if="userType"> * - {{'REQUIRED_FIELDS' | translate}}</h5>
           <form name="userForm" id="userForm" ng-if="userType == buyerUserType" novalidate>
             <div>
 
