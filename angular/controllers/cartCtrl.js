@@ -29,6 +29,10 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
             for (var i = 0; i < scope.farmerProducts.length; i++) {
               if (scope.cartItems.items[j].itemId === scope.farmerProducts[i].product.id) {
                 scope.cartItems.items[j].amount    = scope.farmerProducts[i].amount;
+                if(scope.cartItems.items[j].amount < scope.cartItems.items[j].itemNum){
+                  scope.cartItems.items[j].resourceExcedeed = true;
+                  scope.cartItems.items[j].alertMessage     = filter('translate')('MAX_AVAILABLE') + " " + scope.cartItems.items[j].amount + " " + scope.cartItems.items[j].itemMeasure.code;
+                }
                 scope.cartItems.items[j].shortDesc = scope.farmerProducts[i].product.shortDesc;
                 if (scope.farmerProducts[i].customImage) {
                   FarmerService.getStockProductImage(scope.farmerProducts[i].stockItemId, scope.farmerProducts[i].customImage).then(function imgArrived(data) {
@@ -129,7 +133,6 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
           scope.loadData();
         }
       } else {
-        item.itemNum++;
         item.resourceExcedeed = true;
         item.alertMessage     = filter('translate')('MAX_AVAILABLE') + " " + item.amount + " " + item.itemMeasure.code;
       }

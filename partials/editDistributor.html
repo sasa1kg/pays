@@ -133,46 +133,46 @@
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'VEHICLE_MODEL' |
                           translate}}</h5></td>
-                        <td class="col-sm-9"><input type="text" ng-model="vehicleNew.name"
-                                                    placeholder="{{vehicle.name}}"/></td>
+                        <td class="col-sm-9"><input type="text" ng-model="model"
+                                                    placeholder="{{model}}"/></td>
                       </tr>
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'NUMBER_OF_VEHICLES' |
                           translate}}</h5></td>
-                        <td class="col-sm-9"><input type="text" ng-model="vehicleNew.number"
-                                                    placeholder="{{vehicle.number}}"/>
+                        <td class="col-sm-9"><input type="number"  min="0" ng-model="number"
+                                                    placeholder="{{number}}"/>
                         </td>
                       </tr>
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'HEIGHT' |
                           translate}}[cm]</h5></td>
-                        <td class="col-sm-9"><input type="text"
-                                                    ng-model="vehicleNew.height"
-                                                    placeholder="{{vehicle.height}}"/>
+                        <td class="col-sm-9"><input type="number" min="0"
+                                                    ng-model="height"
+                                                    placeholder="{{height}}"/>
                         </td>
                       </tr>
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'WIDTH' | translate}}[cm]</h5>
                         </td>
-                        <td class="col-sm-9"><input type="text"
-                                                    ng-model="vehicleNew.width"
-                                                    placeholder="{{vehicle.width}}"/>
+                        <td class="col-sm-9"><input type="number" min="0"
+                                                    ng-model="width"
+                                                    placeholder="{{width}}"/>
                         </td>
                       </tr>
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'DEPTH' | translate}}[cm]</h5>
                         </td>
-                        <td class="col-sm-9"><input type="text"
-                                                    ng-model="vehicleNew.depth"
-                                                    placeholder="{{vehicle.depth}}"/>
+                        <td class="col-sm-9"><input type="number" min="0"
+                                                    ng-model="depth"
+                                                    placeholder="{{depth}}"/>
                         </td>
                       </tr>
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'TRANSPORT_WEIGHT' |
                           translate}}[kg]</h5></td>
-                        <td class="col-sm-9"><input type="text"
-                                                    ng-model="vehicleNew.maxMass"
-                                                    placeholder="{{vehicle.maxMass}}"/>
+                        <td class="col-sm-9"><input type="number" min="0"
+                                                    ng-model="maxMass"
+                                                    placeholder="{{maxMass}}"/>
                         </td>
                       </tr>
                       <tr>
@@ -213,8 +213,8 @@
                             <div class="col-sm-3">
                               <label>
                                 <input type="radio" name="cooled" class="vehicle-radio"
-                                       value=true ng-model="vehicleNew.cooled"
-                                       ng-checked="isCooled(true)"/>{{'YES' |
+                                       value=true ng-model="cooled"
+                                       ng-checked="isCooled(cooled,true)"/>{{'YES' |
                                 translate}}
                               </label>
                             </div>
@@ -222,8 +222,8 @@
                               <label>
                                 <input type="radio" name="cooled"
                                        class="vehicle-radio"
-                                       value=false ng-model="vehicleNew.cooled"
-                                       ng-checked="isCooled(false)"/>
+                                       value=false ng-model="cooled"
+                                       ng-checked="isCooled(cooled,false)"/>
                                 {{'NO' | translate}}
                               </label>
                             </div>

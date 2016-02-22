@@ -40,7 +40,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
         };
       }
       ;
-      if((scope.farmer.images.profile != null) || (scope.farmer.images.banner.length)) {
+      if ((scope.distributor.images.profile != null) || (scope.distributor.images.banner.length)) {
         scope.loadAdvertisingDeffered = q.defer();
         var advertisingPromises       = 0;
         if (scope.distributor.images.profile != null) {
@@ -92,10 +92,10 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
     });
     scope.loadVehicleDeffered     = q.defer();
     DistributorService.getVehiclesByDistributorId(distributorId).then(function (data) {
-      scope.vehicles      = data;
-      if(scope.vehicles.length == 0){
+      scope.vehicles = data;
+      if (scope.vehicles.length == 0) {
         scope.loadVehicleDeffered.resolve();
-      }else {
+      } else {
         var vehiclePromises = 0;
         for (var j = 0; j < scope.vehicles.length; j++) {
           if (scope.vehicles[j].images) {
@@ -126,7 +126,7 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
     }).catch(function () {
       scope.loadVehicleDeffered.reject();
     });
-    scope.loadPricesDeffered     = q.defer();
+    scope.loadPricesDeffered      = q.defer();
     DistributorService.getPrices(routeParams.id).then(function (data) {
       if (data.prices && data.prices.length > 0) {
         angular.forEach(data.prices, function (price) {
@@ -148,7 +148,8 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
       scope.loadPricesDeffered.resolve();
     }).catch(function () {
       scope.loadPricesDeffered.reject();
-    });;
+    });
+    ;
 
     scope.saveGeneralChanges = function () {
       console.log("Saving general changes!");
@@ -241,8 +242,8 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
 
 
     scope.updatePrices         = function () {
-      scope.updatePricesDeffered     = q.defer();
-      var pricesObj = {
+      scope.updatePricesDeffered = q.defer();
+      var pricesObj              = {
         currency: rootScope.defaultCurrency.id,
         prices: []
       };
@@ -317,8 +318,13 @@ angular.module('paysApp').controller("editDistributorCtrl", ["$scope", "$rootSco
               DistributorService.updateVehicle(distributorId, vehicleNew).then(function () {
                 Notification.success({message: filter('translate')('VEHICLE_UPDATED')});
                 scope.uploadVehiclePicture(vehicleNew.id, vehicleNew.images ? vehicleNew.images : rootScope.undefinedImageId, newImage);
-                vehicle = vehicleNew;
-
+                vehicle.cooled  = vehicleNew.cooled;
+                vehicle.maxMass = vehicleNew.maxMass;
+                vehicle.depth   = vehicleNew.depth;
+                vehicle.width   = vehicleNew.width;
+                vehicle.height  = vehicleNew.height;
+                vehicle.name   = vehicleNew.name;
+                vehicle.number  = vehicleNew.number;
               }).catch(function () {
                 Notification.error({message: filter('translate')('VEHICLE_NOT_UPDATED')});
               });
@@ -360,14 +366,35 @@ angular.module('paysApp').controller('UpdateVehicleModalCtrl', function ($scope,
 
   var newVehicle    = false
   $scope.vehicleNew = $.extend({}, vehicle);
+
+  $scope.maxMass = 0;
+  $scope.depth   = 0;
+  $scope.width   = 0;
+  $scope.height  = 0;
+  $scope.model   = "";
+  $scope.number  = 0;
+  $scope.cooled  = false;
   if (typeof vehicle === 'undefined') {
     newVehicle = true;
+  } else {
+    $scope.maxMass = parseFloat($scope.vehicleNew.maxMass);
+    $scope.depth   = parseFloat($scope.vehicleNew.depth);
+    $scope.width   = parseFloat($scope.vehicleNew.width);
+    $scope.height  = parseFloat($scope.vehicleNew.height);
+    $scope.model   = "" + $scope.vehicleNew.name;
+    $scope.number  = parseFloat($scope.vehicleNew.number);
+    $scope.cooled = $scope.vehicleNew.cooled;
   }
 
   $scope.saveChanges = function () {
-    console.log($scope.vehicleNew);
-    $scope.vehicleNew.cooled = stringToBoolean($scope.vehicleNew.cooled);
-    var returnJson           = {
+    $scope.vehicleNew.cooled  = stringToBoolean($scope.cooled);
+    $scope.vehicleNew.maxMass = $scope.maxMass;
+    $scope.vehicleNew.depth   = $scope.depth;
+    $scope.vehicleNew.width   = $scope.width;
+    $scope.vehicleNew.height  = $scope.height;
+    $scope.vehicleNew.name   = $scope.model;
+    $scope.vehicleNew.number  = $scope.number;
+    var returnJson            = {
       info: $scope.vehicleNew,
       image: $scope.vehicleImage
     };
@@ -381,8 +408,8 @@ angular.module('paysApp').controller('UpdateVehicleModalCtrl', function ($scope,
     $modalInstance.dismiss('cancel');
   };
 
-  $scope.isCooled = function (value) {
-    if ($scope.vehicleNew.cooled == value) {
+  $scope.isCooled = function (field, value) {
+    if (field == value) {
       return true;
     }
     return false;

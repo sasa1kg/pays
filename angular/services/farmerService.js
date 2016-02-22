@@ -223,7 +223,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
                         http.post(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id +"/pricelist", {
                             "product": product.product.id,
                             "currencyId": product.price.currency.id,
-                            "price": product.price.price,
+                            "price": product.price.newPrice,
                             "minAmount":100,
                             "from":"2016-01-01",
                             "to":"2017-01-01"
@@ -439,7 +439,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
         this.getTransportPrice = function(farmerId, priceData){
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "merchant/" + farmerId + "/calculateTransport",priceData).
+            http.post(rootScope.serverURL + "merchant/" + farmerId + "/calculateTransport",priceData).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);

@@ -150,16 +150,16 @@
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_PRICE' |
                           translate}} [RSD]</h5></td>
-                        <td class="col-sm-9"><input type="number" min="0" ng-model="productNew.price.price"
-                                                    placeholder="{{productNew.price.price}}"/>
+                        <td class="col-sm-9"><input type="number" min="0" ng-model="productPrice"
+                                                    placeholder="{{productPrice}}"/>
                         </td>
                       </tr>
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_QUANTITY' | translate}}</h5>
                         </td>
                         <td class="col-sm-9"><input type="number" min="0"
-                                                    ng-model="productNew.amount"
-                                                    placeholder="{{productNew.amount}}"/>
+                                                    ng-model="productAmount"
+                                                    placeholder="{{productAmount}}"/>
                         </td>
                       </tr>
                       <tr>
@@ -279,6 +279,14 @@
                 <div class="signup-form">
                   <form>
                     <table class="col-sm-12">
+                      <tr>
+                        <td class="col-sm-3"><h5 class="text-left">{{ 'Id' |
+                          translate}}</h5></td>
+                        <td class="col-sm-9">
+                          <div class="text-left">{{order.id}}
+                          </div>
+                        </td>
+                      </tr>
                       <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'CLIENT_NAME' |
                           translate}}</h5></td>
@@ -449,6 +457,13 @@
               <thead>
               <tr class="vehicles_menu">
                 <td>
+                  <a class="cursor-pointer white-font" ng-click="sortTypeOrder = 'id'; sortReverseOrder = !sortReverseOrder">
+                    {{ 'Id' | translate}}
+                    <span ng-show="sortTypeOrder == 'id' && sortReverseOrder" class="fa fa-caret-down"></span>
+                    <span ng-show="sortTypeOrder == 'id' && !sortReverseOrder" class="fa fa-caret-up"></span>
+                  </a>
+                </td>
+                <td>
                   <a class="cursor-pointer white-font" ng-click="sortTypeOrder = 'client.privateSubject.name'; sortReverseOrder = !sortReverseOrder">
                     {{ 'CLIENT_NAME' | translate}}
                     <span ng-show="sortTypeOrder == 'client.privateSubject.name' && sortReverseOrder" class="fa fa-caret-down"></span>
@@ -482,6 +497,9 @@
               </thead>
               <tbody>
               <tr dir-paginate="order in orders | orderBy:sortTypeOrder:sortReverseOrder |itemsPerPage:maxItemsPerPage">
+                <td>
+                  <h4>{{order.id}}</h4>
+                </td>
                 <td>
                   <h4>{{order.client.privateSubject.name}} {{order.client.privateSubject.lastName}}</h4>
                 </td>

@@ -568,7 +568,9 @@ paysApp.config(function ($translateProvider) {
     WAIT_MSG : 'Please wait',
     LOAD_MSG : 'Loading...',
     CALCULATE_TRANSPORT_PRICE : 'Calculate transport price',
-    REQUIRED_FIELDS : 'Required fields'
+    REQUIRED_FIELDS : 'Required fields',
+    PRODUCT_IMAGE_REVERTED : 'Product image reverted',
+    PRODUCT_IMAGE_NOT_REVERTED : 'Product image not reverted'
 
   })
     .translations('rs_RS', {
@@ -848,6 +850,8 @@ paysApp.config(function ($translateProvider) {
       NO_IMAGE_PROVIDED: "Nepostojeća slika",
       VEHICLE_IMAGE_UPLOADED: "Postavljena nova slika vozila",
       VEHICLE_IMAGE_FAILURE: "Neuspešno postavljanje nove slike vozila",
+      PRODUCT_IMAGE_UPLOADED: "Postavljena nova slika proizvoda",
+      PRODUCT_IMAGE_FAILURE: "Neuspešno postavljanje nove slike proizvoda",
       ACCESS_NOT_ALLOWED: "Pristup stranici trenutno nije moguć. Molimo prijavite se sa validnim podacima.",
       PROFILE_IMAGE_FAILURE: "Neuspešno postavljanje nove profilne slike",
       PROFILE_IMAGE_UPLOADED: "Postavljena nova profilna slika",
@@ -906,7 +910,9 @@ paysApp.config(function ($translateProvider) {
       WAIT_MSG : 'Molimo sačekajte',
       LOAD_MSG : 'Učitavanje...',
       CALCULATE_TRANSPORT_PRICE : 'Izračunajte cenu prevoza',
-      REQUIRED_FIELDS : 'Obavezna polja'
+      REQUIRED_FIELDS : 'Obavezna polja',
+      PRODUCT_IMAGE_REVERTED : 'Vraćena slika proizvoda',
+      PRODUCT_IMAGE_NOT_REVERTED : 'Slika proizvoda nije vraćena'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

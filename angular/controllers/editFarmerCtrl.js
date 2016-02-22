@@ -409,8 +409,8 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
               FarmerService.updateProduct(routeParams.id, productNew).then(function () {
                 Notification.success({message: filter('translate')('PRODUCT_UPDATED')});
                 scope.uploadStockProductImage(productNew.product, productNew.stockItemId, productNew.customImage ? productNew.customImage : rootScope.undefinedImageId, newImage);
-                product = productNew;
-
+                product.amount = productNew.amount;
+                product.price.price = productNew.price.newPrice;
               }).catch(function () {
                 Notification.error({message: filter('translate')('PRODUCT_NOT_UPDATED')});
               });
@@ -468,15 +468,15 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
     };
   }]);
 
-angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope, $filter, $modalInstance, products, product, SearchService, FarmerService) {
+angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scope, $rootScope, $filter, $modalInstance, products, product, SearchService, FarmerService, Notification) {
   $scope.productImage      = {
     flow: null
   }
   $scope.newProduct        = false
   $scope.productNew        = $.extend({}, product);
   $scope.availableProducts = [];
-  console.log(products);
-  console.log($rootScope.allProducts);
+  $scope.productPrice = 0;
+  $scope.productAmount = 0;
   angular.forEach($rootScope.allProducts, function (product) {
     var found = false;
     angular.forEach(products, function (compProd) {
@@ -499,6 +499,8 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
   } else {
     $scope.productNew.price.price = parseFloat($scope.productNew.price.price);
     $scope.productNew.amount      = parseFloat($scope.productNew.amount);
+    $scope.productPrice = parseFloat($scope.productNew.price.price);;
+    $scope.productAmount = parseFloat($scope.productNew.amount);
   }
 
   $scope.onProductNameChanged = function () {
@@ -520,10 +522,21 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
 
   $scope.revertToDefaultImage = function () {
     FarmerService.deleteStockProductImage($scope.productNew.stockItemId).then(function () {
+      Notification.success({message: $filter('translate')('PRODUCT_IMAGE_REVERTED')});
+      $scope.productNew.customImage = null;
+      SearchService.getProductImage($scope.productNew.product.id, $scope.productNew.product.images).then(function imgArrived(data) {
+        if ($scope.productNew.product.id === data.index) {
+          $scope.productNew.product.img = "data:image/jpeg;base64," + data.document_content;
+        }
+      });
+    }).catch(function(){
+      Notification.error({message: $filter('translate')('PRODUCT_IMAGE_NOT_REVERTED')});
     });
   }
   $scope.saveChanges          = function () {
     console.log($scope.productNew);
+    $scope.productNew.price.newPrice = $scope.productPrice;
+    $scope.productNew.amount = ""+$scope.productAmount;
     var returnJson = {
       info: $scope.productNew,
       image: $scope.productImage
