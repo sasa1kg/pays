@@ -120,75 +120,78 @@
       </div>
       <div ng-if="page == 'VEHICLES'" class="col-sm-12" id="vehicles_data">
         <div cg-busy="{promise:loadVehicleDeffered.promise,message:loadMsg,backdrop:true}">
-          <div class="table-responsive vehicles_info">
-            <script type="text/ng-template" id="vehicleEditModal.html">
-              <div class="modal-header">
-                <button type="button" class="close" ng-click="cancelModal()">&times;</button>
-                <h4 class="modal-title">{{ 'VEHICLE_EDIT' | translate}}</h4>
-              </div>
-              <div class="modal-body">
-                <div class="signup-form">
-                  <form>
-                    <table class="col-sm-12">
-                      <tr>
-                        <td class="col-sm-3"><h5 class="text-left">{{ 'VEHICLE_MODEL' |
-                          translate}}</h5></td>
-                        <td class="col-sm-9"><input type="text" ng-model="model"
-                                                    placeholder="{{model}}"/></td>
-                      </tr>
-                      <tr>
-                        <td class="col-sm-3"><h5 class="text-left">{{ 'NUMBER_OF_VEHICLES' |
-                          translate}}</h5></td>
-                        <td class="col-sm-9"><input type="number"  min="0" ng-model="number"
-                                                    placeholder="{{number}}"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="col-sm-3"><h5 class="text-left">{{ 'HEIGHT' |
-                          translate}}[cm]</h5></td>
-                        <td class="col-sm-9"><input type="number" min="0"
-                                                    ng-model="height"
-                                                    placeholder="{{height}}"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="col-sm-3"><h5 class="text-left">{{ 'WIDTH' | translate}}[cm]</h5>
-                        </td>
-                        <td class="col-sm-9"><input type="number" min="0"
-                                                    ng-model="width"
-                                                    placeholder="{{width}}"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="col-sm-3"><h5 class="text-left">{{ 'DEPTH' | translate}}[cm]</h5>
-                        </td>
-                        <td class="col-sm-9"><input type="number" min="0"
-                                                    ng-model="depth"
-                                                    placeholder="{{depth}}"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="col-sm-3"><h5 class="text-left">{{ 'TRANSPORT_WEIGHT' |
-                          translate}}[kg]</h5></td>
-                        <td class="col-sm-9"><input type="number" min="0"
-                                                    ng-model="maxMass"
-                                                    placeholder="{{maxMass}}"/>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="col-sm-3"><h5 class="text-left">{{ 'VEHICLE_IMAGE' |
-                          translate}}</h5></td>
-                        <td class="col-sm-9" height="100px" width="128px">
-                          <div flow-init flow-files-submitted="" flow-name="vehicleImage.flow"
-                               flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
-                               class="ng-scope">
-                            <div class="thumbnail-vehicle" ng-show="!$flow.files.length">
-                              <img src="{{vehicleNew.img}}" class="vehicle-image-preview"/>
-                            </div>
-                            <div class="thumbnail-vehicle" ng-show="$flow.files.length">
-                              <img flow-img="$flow.files[0]" class="vehicle-image-preview"/>
-                            </div>
-                            <div>
+          <div cg-busy="{promise:saveInfo.promise,message:saveInfoMsg,backdrop:true}">
+            <div cg-busy="{promise:uploadImage.promise,message:uploadImgMsg,backdrop:true}">
+              <div cg-busy="{promise:loadImage.promise,message:loadImgMsg,backdrop:true}">
+                <div class="table-responsive vehicles_info">
+                  <script type="text/ng-template" id="vehicleEditModal.html">
+                    <div class="modal-header">
+                      <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+                      <h4 class="modal-title">{{ 'VEHICLE_EDIT' | translate}}</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="signup-form">
+                        <form>
+                          <table class="col-sm-12">
+                            <tr>
+                              <td class="col-sm-3"><h5 class="text-left">{{ 'VEHICLE_MODEL' |
+                                translate}}</h5></td>
+                              <td class="col-sm-9"><input type="text" ng-model="model"
+                                                          placeholder="{{model}}"/></td>
+                            </tr>
+                            <tr>
+                              <td class="col-sm-3"><h5 class="text-left">{{ 'NUMBER_OF_VEHICLES' |
+                                translate}}</h5></td>
+                              <td class="col-sm-9"><input type="number" min="0" ng-model="number"
+                                                          placeholder="{{number}}"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-sm-3"><h5 class="text-left">{{ 'HEIGHT' |
+                                translate}}[cm]</h5></td>
+                              <td class="col-sm-9"><input type="number" min="0"
+                                                          ng-model="height"
+                                                          placeholder="{{height}}"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-sm-3"><h5 class="text-left">{{ 'WIDTH' | translate}}[cm]</h5>
+                              </td>
+                              <td class="col-sm-9"><input type="number" min="0"
+                                                          ng-model="width"
+                                                          placeholder="{{width}}"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-sm-3"><h5 class="text-left">{{ 'DEPTH' | translate}}[cm]</h5>
+                              </td>
+                              <td class="col-sm-9"><input type="number" min="0"
+                                                          ng-model="depth"
+                                                          placeholder="{{depth}}"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-sm-3"><h5 class="text-left">{{ 'TRANSPORT_WEIGHT' |
+                                translate}}[kg]</h5></td>
+                              <td class="col-sm-9"><input type="number" min="0"
+                                                          ng-model="maxMass"
+                                                          placeholder="{{maxMass}}"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-sm-3"><h5 class="text-left">{{ 'VEHICLE_IMAGE' |
+                                translate}}</h5></td>
+                              <td class="col-sm-9" height="100px" width="128px">
+                                <div flow-init flow-files-submitted="" flow-name="vehicleImage.flow"
+                                     flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+                                     class="ng-scope">
+                                  <div class="thumbnail-vehicle" ng-show="!$flow.files.length">
+                                    <img src="{{vehicleNew.img}}" class="vehicle-image-preview"/>
+                                  </div>
+                                  <div class="thumbnail-vehicle" ng-show="$flow.files.length">
+                                    <img flow-img="$flow.files[0]" class="vehicle-image-preview"/>
+                                  </div>
+                                  <div>
                                                         <span class="btn btn-primary" ng-show="!$flow.files.length"
                                                               flow-btn="">{{'SELECT_IMAGE' | translate}}<input
                                                           type="file"
@@ -197,154 +200,159 @@
                                                               ng-show="$flow.files.length"
                                                               flow-btn="">{{'UPDATE' | translate}}<input type="file"
                                                                                                          style="visibility: hidden; position: absolute;"></span>
-                              <a class="btn btn-primary" ng-show="$flow.files.length"
-                                 ng-click="$flow.cancel()">
-                                {{'DELETE' | translate}}
-                              </a>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="col-sm-3"><h5 class="text-left">{{ 'COOLED_TRANSPORT' |
-                          translate}}</h5></td>
-                        <td class="col-sm-9">
-                          <div class="col-sm-12">
-                            <div class="col-sm-3">
-                              <label>
-                                <input type="radio" name="cooled" class="vehicle-radio"
-                                       value=true ng-model="cooled"
-                                       ng-checked="isCooled(cooled,true)"/>{{'YES' |
-                                translate}}
-                              </label>
-                            </div>
-                            <div class="col-sm-3">
-                              <label>
-                                <input type="radio" name="cooled"
-                                       class="vehicle-radio"
-                                       value=false ng-model="cooled"
-                                       ng-checked="isCooled(cooled,false)"/>
-                                {{'NO' | translate}}
-                              </label>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </table>
-                  </form>
-                </div>
-              </div>
-              <div class="modal-footer" id="vehicle-modal-footer">
-                <button type="button" class="btn btn-default"
-                        ng-click="saveChanges()">{{ 'SAVE_CHANGES' |
-                  translate}}
-                </button>
-                <button type="button" class="btn btn-default" ng-click="cancelModal()">{{ 'DISCARD_CHANGES'
-                  |
-                  translate}}
-                </button>
-              </div>
-            </script>
-            <table class="table table-condensed">
-              <thead>
-              <tr class="vehicles_menu">
-                <td>
-                  <a class="cursor-pointer white-font" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                    {{ 'VEHICLE_MODEL' | translate}}
-                    <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-up"></span>
-                  </a>
-                </td>
-                <td>{{ 'VEHICLE_PROPERTIES' | translate}}</td>
-                <td>{{' VEHICLE_IMAGE' | translate}}</td>
-                <td>{{' ACTIONS' | translate}}</td>
-              </tr>
-              </thead>
-              <tbody>
-              <tr dir-paginate="vehicle in vehicles | orderBy:sortType:sortReverse |itemsPerPage:maxItemsPerPagePictures">
-                <td>
-                  <h4 ng-bind-html="vehicle.name | html"></h4>
-                </td>
-                <td>
-                  <h5>{{ 'COOLED_TRANSPORT' | translate}} : <span
-                    ng-if="vehicle.cooled == true">{{'YES' | translate }}</span>
-                    <span ng-if="vehicle.cooled == false">{{'NO' | translate }}</span></h5>
-                  <h5>{{ 'TRANSPORT_VOLUME' | translate}} :
-                    {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}[cm]</h5>
-                  <h5>{{ 'TRANSPORT_WEIGHT' | translate}} : {{vehicle.maxMass}}[kg]</h5>
-                  <h5>{{ 'NUMBER_OF_VEHICLES' | translate}} : {{vehicle.number}}</h5>
-                </td>
-                <td>
-                  <div class="text-left">
-                    <img src="{{vehicle.img}}" height="100px" width="130px" class="cursorhover"/>
+                                    <a class="btn btn-primary" ng-show="$flow.files.length"
+                                       ng-click="$flow.cancel()">
+                                      {{'DELETE' | translate}}
+                                    </a>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-sm-3"><h5 class="text-left">{{ 'COOLED_TRANSPORT' |
+                                translate}}</h5></td>
+                              <td class="col-sm-9">
+                                <div class="col-sm-12">
+                                  <div class="col-sm-3">
+                                    <label>
+                                      <input type="radio" name="cooled" class="vehicle-radio"
+                                             value=true ng-model="cooled"
+                                             ng-checked="isCooled(cooled,true)"/>{{'YES' |
+                                      translate}}
+                                    </label>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <label>
+                                      <input type="radio" name="cooled"
+                                             class="vehicle-radio"
+                                             value=false ng-model="cooled"
+                                             ng-checked="isCooled(cooled,false)"/>
+                                      {{'NO' | translate}}
+                                    </label>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="modal-footer" id="vehicle-modal-footer">
+                      <button type="button" class="btn btn-default"
+                              ng-click="saveChanges()">{{ 'SAVE_CHANGES' |
+                        translate}}
+                      </button>
+                      <button type="button" class="btn btn-default" ng-click="cancelModal()">{{ 'DISCARD_CHANGES'
+                        |
+                        translate}}
+                      </button>
+                    </div>
+                  </script>
+                  <table class="table table-condensed">
+                    <thead>
+                    <tr class="vehicles_menu">
+                      <td>
+                        <a class="cursor-pointer white-font" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                          {{ 'VEHICLE_MODEL' | translate}}
+                          <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-down"></span>
+                          <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                      </td>
+                      <td>{{ 'VEHICLE_PROPERTIES' | translate}}</td>
+                      <td>{{' VEHICLE_IMAGE' | translate}}</td>
+                      <td>{{' ACTIONS' | translate}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                      dir-paginate="vehicle in vehicles | orderBy:sortType:sortReverse |itemsPerPage:maxItemsPerPagePictures">
+                      <td>
+                        <h4 ng-bind-html="vehicle.name | html"></h4>
+                      </td>
+                      <td>
+                        <h5>{{ 'COOLED_TRANSPORT' | translate}} : <span
+                          ng-if="vehicle.cooled == true">{{'YES' | translate }}</span>
+                          <span ng-if="vehicle.cooled == false">{{'NO' | translate }}</span></h5>
+                        <h5>{{ 'TRANSPORT_VOLUME' | translate}} :
+                          {{vehicle.height}}x{{vehicle.width}}x{{vehicle.depth}}[cm]</h5>
+                        <h5>{{ 'TRANSPORT_WEIGHT' | translate}} : {{vehicle.maxMass}}[kg]</h5>
+                        <h5>{{ 'NUMBER_OF_VEHICLES' | translate}} : {{vehicle.number}}</h5>
+                      </td>
+                      <td>
+                        <div class="text-left">
+                          <img src="{{vehicle.img}}" height="100px" width="130px" class="cursorhover"/>
+                        </div>
+                      </td>
+                      <td>
+                        <button class="btn btn-default" ng-click="updateVehicle(vehicle)"><i
+                          class="fa fa-pencil-square-o"></i> {{ 'UPDATE' | translate}}
+                        </button>
+                        <button class="btn btn-default" ng-click="deleteVehicle(vehicle)"><i
+                          class="fa fa-times"></i> {{ 'DELETE' | translate}}
+                        </button>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <div class="text-center">
+                    <dir-pagination-controls
+                      max-size="5"
+                      direction-links="true"
+                      boundary-links="true">
+                    </dir-pagination-controls>
                   </div>
-                </td>
-                <td>
-                  <button class="btn btn-default" ng-click="updateVehicle(vehicle)"><i
-                    class="fa fa-pencil-square-o"></i> {{ 'UPDATE' | translate}}
-                  </button>
-                  <button class="btn btn-default" ng-click="deleteVehicle(vehicle)"><i
-                    class="fa fa-times"></i> {{ 'DELETE' | translate}}
-                  </button>
-              </tr>
-              </tbody>
-            </table>
-            <div class="text-center">
-              <dir-pagination-controls
-                max-size="5"
-                direction-links="true"
-                boundary-links="true">
-              </dir-pagination-controls>
+                </div>
+                <button class="btn btn-default btn-lg add-vehicle-btn" ng-click="addVehicle()"><i
+                  class="fa fa-plus"></i> {{'ADD_NEW_VEHICLE' |
+                  translate}}
+                </button>
+              </div>
             </div>
           </div>
-          <button class="btn btn-default btn-lg add-vehicle-btn" ng-click="addVehicle()"><i
-            class="fa fa-plus"></i> {{'ADD_NEW_VEHICLE' |
-            translate}}
-          </button>
         </div>
       </div>
       <div ng-if="page == 'DISTRIBUTOR_MARKETING'" class="col-sm-12">
         <div cg-busy="{promise:loadAdvertisingDeffered.promise,message:loadMsg,backdrop:true}">
-          <div>
-            <div class="col-sm-12 advertising-margin">
-              <div class="advertising-form col-sm-7">
-                <form>
-                  <div class="col-sm-12 advertising-text-form-margin">
-                    <table class="col-sm-12">
-                      <tr>
-                        <td><h5 class="text-center">{{ 'DISTRIBUTOR_ADVERTISING_TITLE' |
-                          translate}}</h5></td>
-                      </tr>
-                      <tr>
-                        <td><input type="text" ng-model="distributor.advertisingTitle"/>
-                        </td>
-                      </tr>
-                      <tr>
+          <div cg-busy="{promise:loadAdvertisingImage.promise,message:loadImgMsg,backdrop:true}">
+            <div cg-busy="{promise:uploadAdvertisingImage.promise,message:uploadImgMsg,backdrop:true}">
+              <div class="col-sm-12 advertising-margin">
+                <div class="advertising-form col-sm-7">
+                  <form>
+                    <div class="col-sm-12 advertising-text-form-margin">
+                      <table class="col-sm-12">
+                        <tr>
+                          <td><h5 class="text-center">{{ 'DISTRIBUTOR_ADVERTISING_TITLE' |
+                            translate}}</h5></td>
+                        </tr>
+                        <tr>
+                          <td><input type="text" ng-model="distributor.advertisingTitle"/>
+                          </td>
+                        </tr>
+                        <tr>
 
-                        <td><h5 class="text-center">{{ 'DISTRIBUTOR_ADVERTISING_MSG' |
-                          translate}}</h5></td>
-                      </tr>
-                      <tr>
-                        <td><textarea type="text" rows="3"
-                                      ng-model="distributor.advertisingText"/>
-                        </td>
-                      </tr>
-                    </table>
+                          <td><h5 class="text-center">{{ 'DISTRIBUTOR_ADVERTISING_MSG' |
+                            translate}}</h5></td>
+                        </tr>
+                        <tr>
+                          <td><textarea type="text" rows="3"
+                                        ng-model="distributor.advertisingText"/>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <button class="btn btn-default" ng-click="saveAdvertisingChanges()">{{'SAVE_CHANGES' |
+                      translate}}
+                    </button>
+                  </form>
+                </div>
+                <div flow-init flow-files-submitted="" flow-name="profilePic.flow"
+                     class="col-sm-5 advertising-img-form-margin banner-preview">
+                  <div ng-show="!$flow.files.length">
+                    <img src="{{distributor.profilePictureBase64}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
                   </div>
-                  <button class="btn btn-default" ng-click="saveAdvertisingChanges()">{{'SAVE_CHANGES' |
-                    translate}}
-                  </button>
-                </form>
-              </div>
-              <div flow-init flow-files-submitted="" flow-name="profilePic.flow"
-                   class="col-sm-5 advertising-img-form-margin banner-preview">
-                <div ng-show="!$flow.files.length">
-                  <img src="{{distributor.profilePictureBase64}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
-                </div>
-                <div ng-show="$flow.files.length">
-                  <img flow-img="$flow.files[0]"/>
-                </div>
-                <div>
+                  <div ng-show="$flow.files.length">
+                    <img flow-img="$flow.files[0]"/>
+                  </div>
+                  <div>
                         <span class="btn btn-primary" ng-show="!$flow.files.length"
                               flow-btn="">{{'SELECT_IMAGE' | translate}}<input
                           type="file"
@@ -353,30 +361,35 @@
                               ng-show="$flow.files.length"
                               flow-btn="">{{'UPDATE' | translate}}<input type="file"
                                                                          style="visibility: hidden; position: absolute;"></span>
-                  <a class="btn btn-primary" ng-show="$flow.files.length"
-                     ng-click="$flow.cancel()">
-                    {{'DELETE' | translate}}
-                  </a>
-                  <a class="btn btn-primary" ng-show="$flow.files.length"
-                     ng-click="uploadProfilePicture()">
-                    {{'UPLOAD' | translate}}
-                  </a>
+                    <a class="btn btn-primary" ng-show="$flow.files.length"
+                       ng-click="$flow.cancel()">
+                      {{'DELETE' | translate}}
+                    </a>
+                    <a class="btn btn-primary" ng-show="$flow.files.length"
+                       ng-click="uploadProfilePicture()">
+                      {{'UPLOAD' | translate}}
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <h4 class="text-center">{{'BANNER_PICTURES' | translate}}</h4>
+              <h4 class="text-center">{{'BANNER_PICTURES' | translate}}</h4>
 
-            <div flow-init flow-files-submitted="" flow-name="distributor.bannerImages[$index].flow" class="col-sm-12"
-                 ng-repeat="bannerIndex in range(bannerPicsLimit) track by $index">
-              <hr>
-              <div class="col-sm-12 banner-preview">
-                <div ng-show="!$flow.files.length">
-                  <img src="{{distributor.bannerImages[$index].imgData}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
-                </div>
-                <div ng-show="$flow.files.length">
-                  <img flow-img="$flow.files[0]"/>
-                </div>
-                <div>
+              <div flow-init flow-files-submitted="" flow-name="distributor.bannerImages[$index].flow"
+                   class="col-sm-12"
+                   ng-repeat="bannerIndex in range(bannerPicsLimit) track by $index">
+                <hr>
+                <div cg-busy="{promise:loadAdvertisingDeffered.promise,message:loadMsg,backdrop:true}">
+                  <div cg-busy="{promise:loadAdvertisingImage.promise,message:loadImgMsg,backdrop:true}">
+                    <div cg-busy="{promise:uploadAdvertisingImage.promise,message:uploadImgMsg,backdrop:true}">
+                      <div class="col-sm-12 banner-preview">
+                        <div ng-show="!$flow.files.length">
+                          <img src="{{distributor.bannerImages[$index].imgData}}"
+                               alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
+                        </div>
+                        <div ng-show="$flow.files.length">
+                          <img flow-img="$flow.files[0]"/>
+                        </div>
+                        <div>
                         <span class="btn btn-primary" ng-show="!$flow.files.length"
                               flow-btn="">{{'SELECT_IMAGE' | translate}}<input
                           type="file"
@@ -385,14 +398,18 @@
                               ng-show="$flow.files.length"
                               flow-btn="">{{'UPDATE' | translate}}<input type="file"
                                                                          style="visibility: hidden; position: absolute;"></span>
-                  <a class="btn btn-primary" ng-show="$flow.files.length"
-                     ng-click="$flow.cancel()">
-                    {{'DELETE' | translate}}
-                  </a>
-                  <a class="btn btn-primary" ng-show="$flow.files.length"
-                     ng-click="uploadDistributorBannerImage($index)">
-                    {{'UPLOAD' | translate}}
-                  </a>
+                          <a class="btn btn-primary" ng-show="$flow.files.length"
+                             ng-click="$flow.cancel()">
+                            {{'DELETE' | translate}}
+                          </a>
+                          <a class="btn btn-primary" ng-show="$flow.files.length"
+                             ng-click="uploadDistributorBannerImage($index)">
+                            {{'UPLOAD' | translate}}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -437,7 +454,9 @@
               <hr/>
               <div cg-busy="{promise:updatePricesDeffered.promise,message:waitMsg,backdrop:true}">
                 <div class="col-sm-12 text-center">
-                  <button class="btn btn-default apply-changes-btn" ng-disabled="(updatePricesDeffered != null && updatePricesDeffered.promise.$$state.status == 0)" ng-click="updatePrices()">{{'SAVE_CHANGES' |
+                  <button class="btn btn-default apply-changes-btn"
+                          ng-disabled="(updatePricesDeffered != null && updatePricesDeffered.promise.$$state.status == 0)"
+                          ng-click="updatePrices()">{{'SAVE_CHANGES' |
                     translate}}
                   </button>
                 </div>

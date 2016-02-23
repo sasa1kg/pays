@@ -119,6 +119,9 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
   $rootScope.bannerPicsLimit     = 5;
   $rootScope.waitMsg = $filter('translate')('WAIT_MSG');
   $rootScope.loadMsg = $filter('translate')('LOAD_MSG');
+  $rootScope.saveInfoMsg = $filter('translate')('SAVE_INFO_MSG');
+  $rootScope.uploadImgMsg = $filter('translate')('UPLOAD_IMAGE_MSG');
+  $rootScope.loadImgMsg = $filter('translate')('LOAD_IMAGE_MSG');
   $rootScope.range = function (n) {
     return new Array(n);
   };
@@ -570,7 +573,10 @@ paysApp.config(function ($translateProvider) {
     CALCULATE_TRANSPORT_PRICE : 'Calculate transport price',
     REQUIRED_FIELDS : 'Required fields',
     PRODUCT_IMAGE_REVERTED : 'Product image reverted',
-    PRODUCT_IMAGE_NOT_REVERTED : 'Product image not reverted'
+    PRODUCT_IMAGE_NOT_REVERTED : 'Product image not reverted',
+    SAVE_INFO_MSG : 'Saving information',
+    UPLOAD_IMAGE_MSG : 'Uploading image',
+    LOAD_IMAGE_MSG : 'Loading new image'
 
   })
     .translations('rs_RS', {
@@ -912,7 +918,10 @@ paysApp.config(function ($translateProvider) {
       CALCULATE_TRANSPORT_PRICE : 'Izračunajte cenu prevoza',
       REQUIRED_FIELDS : 'Obavezna polja',
       PRODUCT_IMAGE_REVERTED : 'Vraćena slika proizvoda',
-      PRODUCT_IMAGE_NOT_REVERTED : 'Slika proizvoda nije vraćena'
+      PRODUCT_IMAGE_NOT_REVERTED : 'Slika proizvoda nije vraćena',
+      SAVE_INFO_MSG : 'Ažuriranje informacija',
+      UPLOAD_IMAGE_MSG : 'Postavljanje nove slike',
+      LOAD_IMAGE_MSG : 'Učitavanje nove slike'
     })
   $translateProvider.preferredLanguage('en_EN');
 });
