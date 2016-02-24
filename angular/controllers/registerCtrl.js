@@ -5,6 +5,8 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout",
 
     scope.confPassword = "";
     scope.registerDeffered = {};
+
+    scope.passwordMatch = 0;
     scope.userTypes = [
       {
         name: "BUYER",
@@ -152,25 +154,38 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout",
 
     scope.validatePassword = function (conf, notify) {
       scope.confPassword = conf;
+      scope.passwordMatch = 0;
       var retVal         = false;
       if (conf.length > 0) {
         if (scope.userType == rootScope.buyerUserType) {
           if ((scope.buyer.password.length > 0) && (scope.buyer.password === scope.confPassword)) {
-            if (notify)
+            if (notify) {
               Notification.success({message: filter('translate')('PASSWORD_MATCH')});
+              scope.passwordMatch = 2;
+            }
             retVal = true;
+          } else {
+            scope.passwordMatch = 1;
           }
         } else if (scope.userType == rootScope.distributorUserType) {
           if ((scope.distributor.password.length > 0) && (scope.distributor.password === scope.confPassword)) {
-            if (notify)
+            if (notify) {
               Notification.success({message: filter('translate')('PASSWORD_MATCH')});
+              scope.passwordMatch = 2;
+            }
             retVal = true;
+          } else {
+            scope.passwordMatch = 1;
           }
         } else if (scope.userType == rootScope.farmerUserType) {
           if ((scope.farmer.password.length > 0) && (scope.farmer.password === scope.confPassword)) {
-            if (notify)
+            if (notify) {
               Notification.success({message: filter('translate')('PASSWORD_MATCH')});
+              scope.passwordMatch = 2;
+            }
             retVal = true;
+          } else {
+            scope.passwordMatch = 1;
           }
         }
       }

@@ -2,23 +2,23 @@
   <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
 </header><!--/header-->
 
-    <div class="col-lg-12 paysCarrouselHolder">
-      <div id="sliderCarousel" class="carousel slide" data-ride="carousel"
-           ng-show="noSelectedCategory() && noFoundFarmers()">
-        <ol class="carousel-indicators pays-carousel-indicators">
-          <li data-target="#sliderCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#sliderCarousel" data-slide-to="1"></li>
-          <li data-target="#sliderCarousel" data-slide-to="2"></li>
-        </ol>
+<div class="col-lg-12 paysCarrouselHolder">
+  <div id="sliderCarousel" class="carousel slide" data-ride="carousel"
+       ng-show="noSelectedCategory() && noFoundFarmers()">
+    <ol class="carousel-indicators pays-carousel-indicators">
+      <li data-target="#sliderCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#sliderCarousel" data-slide-to="1"></li>
+      <li data-target="#sliderCarousel" data-slide-to="2"></li>
+    </ol>
 
 
- 
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active carrouselItemFirst">
-          <img src="images/home/carrousel/carr_1.png" class="imgShift girl img-responsive carrouselPic" alt="">
-          <div class="container">
-            <div class="carousel-caption text-centered paysCaption">
+          <img src="images/carrousel/carr_1.png" class="imgShift girl img-responsive" alt="">
+
+          <div class="container ">
+            <div class="carousel-caption text-centered paysCaption carousel-ml150">
               <div class="opacTitle">
                 <h1><span>PAYS</span> web shop</h1>
               </div>
@@ -32,7 +32,8 @@
           </div>
         </div>
         <div class="item carrouselItemSecond">
-          <img src="images/home/carrousel/carr_2.png" class="imgShift girl img-responsive carrouselPic" alt="">
+          <img src="images/carrousel/carr_2.png" class="imgShift girl img-responsive" alt="">
+
           <div class="container">
             <div class="carousel-caption text-centered paysCaption">
               <div class="opacTitle">
@@ -48,7 +49,8 @@
           </div>
         </div>
         <div class="item carrouselItemThird">
-          <img src="images/home/carrousel/carr_3.png" class="imgShift_v girl img-responsive carrouselPic" alt="">
+          <img src="images/carrousel/carr_3.png" class="imgShift_v girl img-responsive carousel-ml200" alt="">
+
           <div class="container">
             <div class="carousel-caption text-centered paysCaptionAlt">
               <div class="opacTitle">
@@ -64,29 +66,30 @@
     </div>
 
 
-
-        <a class="control-carousel left paysCarrousel paysCarrouselLeft" ng-non-bindable data-slide="prev" role="button" data-target="#sliderCarousel">
-          <i class="fa fa-angle-left"></i>
-        </a>
-        <a class="control-carousel right paysCarrousel paysCarrouselRight" ng-non-bindable data-slide="next" role="button" data-target="#sliderCarousel">
-          <i class="fa fa-angle-right"></i>
-        </a>
-      </div>
-    </div>
-
-
-  <div class="fix-to-top-search" ng-show="!noSelectedCategory()">
-        <button type="button" class="btn btn-fefault cart actionbar"
-                ng-click="setSearchPrepared()">
-          <i class="fa fa-search"></i>
-          {{ 'SEARCH' | translate}}
-        </button>
-        <button type="button " class="btn btn-fefault cart actionbar new-wrap"
-                ng-click="clearSelectedSearchProducts()">
-          <i class="fa fa-times"></i>
-          {{ 'SEARCH_RESET' | translate}}
-        </button>
+    <a class="control-carousel left paysCarrousel paysCarrouselLeft" ng-non-bindable data-slide="prev" role="button"
+       data-target="#sliderCarousel">
+      <i class="fa fa-angle-left"></i>
+    </a>
+    <a class="control-carousel right paysCarrousel paysCarrouselRight" ng-non-bindable data-slide="next" role="button"
+       data-target="#sliderCarousel">
+      <i class="fa fa-angle-right"></i>
+    </a>
   </div>
+</div>
+
+
+<div class="fix-to-top-search" ng-show="!noSelectedCategory()">
+  <button type="button" class="btn btn-fefault cart actionbar"
+          ng-click="setSearchPrepared()">
+    <i class="fa fa-search"></i>
+    {{ 'SEARCH' | translate}}
+  </button>
+  <button type="button " class="btn btn-fefault cart actionbar new-wrap"
+          ng-click="clearSelectedSearchProducts()">
+    <i class="fa fa-times"></i>
+    {{ 'SEARCH_RESET' | translate}}
+  </button>
+</div>
 
 <section id="slider"><!--slider-->
   <div class="container">
@@ -190,219 +193,220 @@
     <div class="col-sm-9">
       <div class="row">
 
-      <div class="mainPageContainer">
-      <div class="col-sm-12" ng-show="!noSelectedCategory() && noFoundFarmers()">
-        <row class="col-sm-12" ng-repeat="product in foundProducts">
+        <div class="mainPageContainer">
+          <div class="col-sm-12" ng-show="!noSelectedCategory() && noFoundFarmers()">
+            <row class="col-sm-12" ng-repeat="product in foundProducts">
 
-          <div class="col-sm-1"><input type="checkbox" class="zoom-checkbox"
-                                       ng-model="product.checked"
-                                       ng-change="addOrRemoveSearchWishlistItem(product)">
+              <div class="col-sm-1"><input type="checkbox" class="zoom-checkbox"
+                                           ng-model="product.checked"
+                                           ng-change="addOrRemoveSearchWishlistItem(product)">
 
-          </div>
-
-          <h4 class="title text-left col-sm-3">{{product.name.localization[currentLang]}}</h4>
-          <h6 class="col-sm-2">{{ 'MIN_AMOUNT' | translate}}:</h6>
-
-          <div class="col-sm-2">
-            <input type="text" class="form-control">
-          </div>
-
-          <h6 class="col-sm-2">{{ 'MAX_PRICE' | translate}}:</h6>
-
-          <div class="col-sm-2">
-            <input type="text" class="form-control">
-          </div>
-        </row>
-      </div>
-
-      <div class="col-sm-12" ng-show="!noFoundFarmers()">
-        <div class="features_items col-sm-12"><!--features_items-->
-          <div class="col-sm-4" ng-repeat="farmer in farmers">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="{{farmer.img}}" alt="{{farmer.businessSubject.name}}"
-                       style="width: 168px;height: 149px;"/>
-
-                  <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
-
-                  <p ng-bind-html="farmer.businessSubject.city | html"></p>
-                  <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
-                    class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
-                </div>
               </div>
-            </div>
+
+              <h4 class="title text-left col-sm-3">{{product.name.localization[currentLang]}}</h4>
+              <h6 class="col-sm-2">{{ 'MIN_AMOUNT' | translate}}[{{product.unit.code}}]:</h6>
+
+              <div class="col-sm-2">
+                <input type="text" class="form-control">
+              </div>
+
+              <h6 class="col-sm-2">{{ 'MAX_PRICE' | translate}}[RSD]:</h6>
+
+              <div class="col-sm-2">
+                <input type="text" class="form-control">
+              </div>
+            </row>
           </div>
-        </div>
-      </div>
-      </div>
+          <div class="col-sm-12" ng-show="foundFarmers.length > 0">
+            <div class="features_items col-sm-12"><!--features_items-->
+              <div class="col-sm-4" ng-repeat="farmer in foundFarmers">
+                <div class="product-image-wrapper">
+                  <div class="single-products">
+                    <div class="productinfo text-center">
+                      <img src="{{farmer.img}}" alt="{{farmer.businessSubject.name}}"
+                           style="width: 168px;height: 149px;"/>
 
-      </div>
+                      <h2 ng-bind-html="farmer.businessSubject.name | html"></h2>
 
-  
-    <!-- Picks holder -->
-    <div class="row" ng-show="noSelectedCategory()">
-    <div class="col-sm-12">
-    <h2 class="title text-center">{{ 'MARKETING_SPACE' | translate}}</h2>
-
-    <div cg-busy="{promise:nearByFarmers,message:loadMsg,backdrop:true}"></div>
-    <div class="row">
-      <div class="col-sm-12 padding-right">
-        <div class="subtitle-center">
-        <h4 class="title text-center subtitle-header">{{ 'MOST_IN_YEAR' | translate}}</h4>
-        </div>
-      </div>
-      <div class="col-sm-12 padding-right">
-        <div class="features_items"><!--features_items-->
-          <div class="col-sm-4" ng-repeat="farmer in mostProfitFarmers | limitTo:3">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="{{farmer.img}}" alt="{{farmer.name}}"
-                       style="width: 268px;height: 249px;"/>
-
-                  <h2 ng-bind-html="farmer.name | html"></h2>
-
-                  <p ng-bind-html="farmer.location | html"></p>
-                  <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
-                    class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
-                </div>
-                <div class="product-overlay">
-                  <div class="overlay-content">
-                    <h2 ng-bind-html="farmer.name | html"></h2>
-
-                    <p ng-bind-html="farmer.city | html"></p>
-                    <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
-                      class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
+                      <p ng-bind-html="farmer.businessSubject.city | html"></p>
+                      <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                        class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-        </div>
-        <!--features_items-->
-
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 padding-right">
-        <div class="subtitle-center">
-          <h4 class="title text-center subtitle-header">{{ 'MOST_DIFFERENT' | translate}}</h4>
         </div>
       </div>
-      <div class="col-sm-12 padding-right">
-        <div class="features_items"><!--features_items-->
-          <div class="col-sm-4" ng-repeat="farmer in mostProductsFarmers | limitTo:3">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="{{farmer.img}}" alt="{{farmer.name}}"
-                       style="width: 268px;height: 249px;"/>
 
-                  <h2 ng-bind-html="farmer.name | html"></h2>
 
-                  <p ng-bind-html="farmer.city | html"></p>
-                  <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
-                    class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
-                </div>
-                <div class="product-overlay">
-                  <div class="overlay-content">
-                    <h2 ng-bind-html="farmer.name | html"></h2>
+      <!-- Picks holder -->
+      <div class="row" ng-show="noSelectedCategory() && foundFarmers.length == 0">
+        <div class="col-sm-12">
+          <h2 class="title text-center">{{ 'MARKETING_SPACE' | translate}}</h2>
 
-                    <p ng-bind-html="farmer.city | html"></p>
-                    <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
-                      class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
-                  </div>
-                </div>
+          <div cg-busy="{promise:nearByFarmers,message:loadMsg,backdrop:true}"></div>
+          <div class="row">
+            <div class="col-sm-12 padding-right">
+              <div class="subtitle-center">
+                <h4 class="title text-center subtitle-header">{{ 'MOST_IN_YEAR' | translate}}</h4>
               </div>
             </div>
-          </div>
+            <div class="col-sm-12 padding-right">
+              <div class="features_items"><!--features_items-->
+                <div class="col-sm-4" ng-repeat="farmer in mostProfitFarmers | limitTo:3">
+                  <div class="product-image-wrapper">
+                    <div class="single-products">
+                      <div class="productinfo text-center">
+                        <img src="{{farmer.img}}" alt="{{farmer.name}}"
+                             style="width: 268px;height: 249px;"/>
 
-        </div>
-        <!--features_items-->
+                        <h2 ng-bind-html="farmer.name | html"></h2>
 
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 padding-right">
-        <div class="subtitle-center">
-          <h4 class="title text-center subtitle-header">{{ 'MOST_ORDERS' | translate}}</h4>
-        </div>
-      </div>
-      <div class="col-sm-12 padding-right">
-        <div class="features_items"><!--features_items-->
-          <div class="col-sm-4" ng-repeat="farmer in mostOrdersFarmers | limitTo:3">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="{{farmer.img}}" alt="{{farmer.name}}"
-                       style="width: 268px;height: 249px;"/>
+                        <p ng-bind-html="farmer.location | html"></p>
+                        <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                          class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
+                      </div>
+                      <div class="product-overlay">
+                        <div class="overlay-content">
+                          <h2 ng-bind-html="farmer.name | html"></h2>
 
-                  <h2 ng-bind-html="farmer.name | html"></h2>
-
-                  <p ng-bind-html="farmer.city | html"></p>
-                  <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
-                    class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
-                </div>
-                <div class="product-overlay">
-                  <div class="overlay-content">
-                    <h2 ng-bind-html="farmer.name | html"></h2>
-
-                    <p ng-bind-html="farmer.city | html"></p>
-                    <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
-                      class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}s</a>
+                          <p ng-bind-html="farmer.city | html"></p>
+                          <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
+                            class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
               </div>
+              <!--features_items-->
+
             </div>
           </div>
+          <div class="row">
+            <div class="col-sm-12 padding-right">
+              <div class="subtitle-center">
+                <h4 class="title text-center subtitle-header">{{ 'MOST_DIFFERENT' | translate}}</h4>
+              </div>
+            </div>
+            <div class="col-sm-12 padding-right">
+              <div class="features_items"><!--features_items-->
+                <div class="col-sm-4" ng-repeat="farmer in mostProductsFarmers | limitTo:3">
+                  <div class="product-image-wrapper">
+                    <div class="single-products">
+                      <div class="productinfo text-center">
+                        <img src="{{farmer.img}}" alt="{{farmer.name}}"
+                             style="width: 268px;height: 249px;"/>
 
+                        <h2 ng-bind-html="farmer.name | html"></h2>
+
+                        <p ng-bind-html="farmer.city | html"></p>
+                        <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                          class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
+                      </div>
+                      <div class="product-overlay">
+                        <div class="overlay-content">
+                          <h2 ng-bind-html="farmer.name | html"></h2>
+
+                          <p ng-bind-html="farmer.city | html"></p>
+                          <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
+                            class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!--features_items-->
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 padding-right">
+              <div class="subtitle-center">
+                <h4 class="title text-center subtitle-header">{{ 'MOST_ORDERS' | translate}}</h4>
+              </div>
+            </div>
+            <div class="col-sm-12 padding-right">
+              <div class="features_items"><!--features_items-->
+                <div class="col-sm-4" ng-repeat="farmer in mostOrdersFarmers | limitTo:3">
+                  <div class="product-image-wrapper">
+                    <div class="single-products">
+                      <div class="productinfo text-center">
+                        <img src="{{farmer.img}}" alt="{{farmer.name}}"
+                             style="width: 268px;height: 249px;"/>
+
+                        <h2 ng-bind-html="farmer.name | html"></h2>
+
+                        <p ng-bind-html="farmer.city | html"></p>
+                        <a href="#/farmer/{{farmer.id}}" class="btn btn-default add-to-cart"><i
+                          class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
+                      </div>
+                      <div class="product-overlay">
+                        <div class="overlay-content">
+                          <h2 ng-bind-html="farmer.name | html"></h2>
+
+                          <p ng-bind-html="farmer.city | html"></p>
+                          <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
+                            class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}s</a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!--features_items-->
+
+            </div>
+          </div>
         </div>
-        <!--features_items-->
-
       </div>
-    </div>
-    </div>
-  </div>
       <hr>
       <div class="row" ng-show="noSelectedCategory()">
-      <div class="col-lg-4">
-        <div class="box text-center">
-          <h4 class="greenTxt">Who are we?</h4>
-          <hr class="hrBox">
-          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
-            obtaining best price and fastest transport is included.</p>
+        <div class="col-lg-4">
+          <div class="box text-center">
+            <h4 class="greenTxt">Who are we?</h4>
+            <hr class="hrBox">
+            <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and
+              set of products they want to buy. Furthermore,
+              obtaining best price and fastest transport is included.</p>
             <span class="glyphicon glyphicon-arrow-right greenTxt"></span>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="box text-center">
+            <h4 class="orangeTxt">What are we doing?</h4>
+            <hr class="hrBox">
+            <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and
+              set of products they want to buy. Furthermore,
+              obtaining best price and fastest transport is included.</p>
+            <span class="glyphicon glyphicon-arrow-right orangeTxt"></span>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="box text-center">
+            <h4 class="darnOrangeTxt">How can we help you?</h4>
+            <hr class="hrBox">
+            <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and
+              set of products they want to buy. Furthermore,
+              obtaining best price and fastest transport is included.</p>
+            <span class="glyphicon glyphicon-arrow-right darnOrangeTxt"></span>
+          </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="box text-center">
-          <h4 class="orangeTxt">What are we doing?</h4>
-          <hr class="hrBox">
-          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
-            obtaining best price and fastest transport is included.</p>
-           <span class="glyphicon glyphicon-arrow-right orangeTxt"></span>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="box text-center">
-          <h4 class="darnOrangeTxt">How can we help you?</h4>
-          <hr class="hrBox">
-          <p class="boxTxt">PAYS system is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore,
-            obtaining best price and fastest transport is included.</p>
-           <span class="glyphicon glyphicon-arrow-right darnOrangeTxt"></span>
-        </div>
-      </div>
-    </div>
     </div>
   </div>
   </div>
 </section><!--/slider-->
 
 <section>
-  
+
 </section>
 
 <div ng-include="'partials/footer.html'"></div>

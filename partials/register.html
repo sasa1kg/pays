@@ -26,7 +26,8 @@
               <input type="password" ng-model="buyer.password" placeholder="{{ 'PASSWORD' | translate}}" required/>
               <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword,true)"
                      placeholder="{{ 'CONFIRM_PASSWORD' | translate}}" required/>
-              <input type="text" ng-model="buyer.username" placeholder="{{ 'USERNAME' | translate}}" required>
+              <h5 ng-if="passwordMatch == 2" style="color: green"><strong>{{'PASSWORD_MATCH' | translate}}</strong></h5>
+              <h5 ng-if="passwordMatch == 1" style="color: red">{{'PASSWORD_NOT_MATCH' | translate}}</h5>
               <hr>
               <input type="text" ng-model="buyer.private.name" placeholder="{{ 'NAME' | translate}}" required/>
               <input type="text" ng-model="buyer.private.lastName" placeholder="{{ 'SURNAME' | translate}}" required/>
@@ -51,7 +52,8 @@
               <input type="password" ng-model="distributor.password" placeholder="{{ 'PASSWORD' | translate}}" required/>
               <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword,true)"
                      placeholder="{{ 'CONFIRM_PASSWORD' | translate}}" required/>
-              <input type="text" ng-model="distributor.username" placeholder="{{ 'USERNAME' | translate}}" required>
+              <h5 ng-if="passwordMatch == 2" style="color: green"><strong>{{'PASSWORD_MATCH' | translate}}</strong></h5>
+              <h5 ng-if="passwordMatch == 1" style="color: red">{{'PASSWORD_NOT_MATCH' | translate}}</h5>
               <hr>
               <input type="text" ng-model="distributor.company.name" placeholder="{{ 'COMPANY_NAME' | translate}}" required/>
               <input type="text" ng-model="distributor.company.account" placeholder="{{ 'BANK_NUMBER' | translate}}" required/>
@@ -78,7 +80,8 @@
               <input type="password" ng-model="farmer.password" placeholder="{{ 'PASSWORD' | translate}}" required/>
               <input type="password" ng-model="confPassword" ng-change="validatePassword(confPassword,true)"
                      placeholder="{{ 'CONFIRM_PASSWORD' | translate}}" required/>
-              <input type="text" ng-model="farmer.username" placeholder="{{ 'USERNAME' | translate}}" required/>
+              <h5 ng-if="passwordMatch == 2" style="color: green"><strong>{{'PASSWORD_MATCH' | translate}}</strong></h5>
+              <h5 ng-if="passwordMatch == 1" style="color: red">{{'PASSWORD_NOT_MATCH' | translate}}</h5>
               <hr>
               <input type="text" ng-model="farmer.company.name" placeholder="{{ 'FARM_NAME' | translate}}" required/>
               <input type="text" ng-model="farmer.company.account" placeholder="{{ 'BANK_NUMBER' | translate}}" required/>

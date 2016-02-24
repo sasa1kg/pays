@@ -223,7 +223,7 @@ input[required] {
 
 @media screen and (min-width: 768px) and (max-device-width: 1768px) {
     .paysCaptionAlt {
-        top: -120px;
+        top: -100px;
         left: 200px;
         max-width: 300px;
     }
@@ -311,22 +311,18 @@ input[required] {
 }
 
 .carrouselItemFirst {
-    background-image: url('/images/home/pays_green.jpg');
+    background-image: url('/images/carrousel/pays_green.jpg');
     height: 100%;
 }
 
 .carrouselItemSecond {
-    background-image: url('/images/home/pays_green.jpg');
+    background-image: url('/images/carrousel/pays_green.jpg');
     height: 100%;
 }
 
 .carrouselItemThird {
-    background-image: url('/images/home/pays_green.jpg');
+    background-image: url('/images/carrousel/pays_green.jpg');
     height: 100%;
-}
-
-.carrouselPic {
-    opacity: 0.7;
 }
 
 .opacTitle {
@@ -349,4 +345,11 @@ input[required] {
 
 .white-font {
     color: white;
+}
+
+.carousel-ml200 {
+    margin-left: 200px;
+}
+.carousel-ml150 {
+    margin-left: 150px;
 }

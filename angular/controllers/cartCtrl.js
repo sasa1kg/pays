@@ -22,14 +22,15 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
         scope.cartItems      = CartService.getItems();
         scope.loadData();
         scope.loadDeffered.resolve();
-        scope.loadDeffered   = q.defer();
-        var promisesWaiting  = 0;
         if (scope.cartItems != null) {
+          var promisesWaiting = 0;
+          scope.loadDeffered  = q.defer();
           for (var j = 0; j < scope.cartItems.items.length; j++) {
+            scope.cartItems.items[j].amount = 0;
             for (var i = 0; i < scope.farmerProducts.length; i++) {
               if (scope.cartItems.items[j].itemId === scope.farmerProducts[i].product.id) {
-                scope.cartItems.items[j].amount    = scope.farmerProducts[i].amount;
-                if(scope.cartItems.items[j].amount < scope.cartItems.items[j].itemNum){
+                scope.cartItems.items[j].amount = scope.farmerProducts[i].amount;
+                if (scope.cartItems.items[j].amount < scope.cartItems.items[j].itemNum) {
                   scope.cartItems.items[j].resourceExcedeed = true;
                   scope.cartItems.items[j].alertMessage     = filter('translate')('MAX_AVAILABLE') + " " + scope.cartItems.items[j].amount + " " + scope.cartItems.items[j].itemMeasure.code;
                 }
@@ -85,6 +86,13 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
                 }
               }
             }
+            if (scope.cartItems.items[j].amount < scope.cartItems.items[j].itemNum) {
+              scope.cartItems.items[j].resourceExcedeed = true;
+              scope.cartItems.items[j].alertMessage     = filter('translate')('MAX_AVAILABLE') + " " + scope.cartItems.items[j].amount + " " + scope.cartItems.items[j].itemMeasure.code;
+            }
+          }
+          if (promisesWaiting == 0) {
+            scope.loadDeffered.resolve();
           }
         }
       }).catch(function () {
@@ -180,8 +188,8 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
     }
 
     scope.calculateTransportPrice = function () {
-      SearchService.getDistanceBetweenCities("Novi Sad", "Beograd").then(function(data){
-        var reqData          = {
+      SearchService.getDistanceBetweenCities("Novi Sad", "Beograd").then(function (data) {
+        var reqData = {
           distance: data,
           items: []
         };
@@ -192,10 +200,10 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
           })
         });
         console.log(reqData);
-        FarmerService.getTransportPrice(scope.farmerData.farmerId,reqData).then(function(data){
+        FarmerService.getTransportPrice(scope.farmerData.farmerId, reqData).then(function (data) {
           scope.transportPrice = data.price;
           scope.calculateTotal();
-        }).catch(function (err){
+        }).catch(function (err) {
 
         })
       });

@@ -93,7 +93,6 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
             var order = {
                 farmerId: scope.orderData.farmerId,
                 clientId: scope.orderData.clientId,
-                transporterId: 15,
                 currencyId: scope.orderData.currency.id,
                 address: scope.addressJson,
                 deliveryDate: filter('date')(scope.deliveryDate.date, scope.dateFormat),

@@ -26,27 +26,10 @@
                        ng-blur="searchPlaceBlur()"
                        placeholder="{{'LOCATION_PLACE' | translate}}"/>
 
-                <h4 class="panel-title mt10"><a>{{ 'IN_CIRCLE_OF' | translate}} </a></h4>
-                <select ng-model="queryParams.distanceValue" ng-init="distanceValue = distances[0].value"
-                        ng-options="distance.value as distance.value for distance in distances"
-                        required></select>
-
                 <hr class="orangehr">
 
-                <h4 class="panel-title"><a>{{ 'PRICE_PER_KM' | translate}} </a></h4>
-
-                <input type="text" ng-model="queryParams.pricePerKm" class="col-sm-6 search_input_height"/>
-                <select class="col-sm-6" ng-model="queryParams.currency" ng-init="currency = currencies[0].code"
-                        ng-options="currency.code as currency.code for currency in currencies"
-                        required></select>
-                <hr class="orangehr">
-
-                <h4 class="panel-title"><a>{{ 'VEHICLE_MAX_LOAD' | translate}} </a></h4>
-                <input type="text" ng-model="queryParams.maxLoad" class="col-sm-6 search_input_height"/>
-                <select class="col-sm-6" ng-model="queryParams.loadMeasure"
-                        ng-init="queryParams.loadMeasure = measures[0].code"
-                        ng-options="loadMeasure.code as loadMeasure.code for loadMeasure in measures"
-                        required></select>
+                <h4 class="panel-title"><a>{{ 'VEHICLE_MAX_LOAD' | translate}} [kg] </a></h4>
+                <input type="number" min="0" ng-model="queryParams.maxLoad" class="search_input_height form-control"/>
                 <hr class="orangehr">
 
                 <button type="button" class="btn btn-fefault cart actionbar"

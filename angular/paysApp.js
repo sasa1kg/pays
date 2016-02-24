@@ -622,7 +622,7 @@ paysApp.config(function ($translateProvider) {
       TITLE_1: 'Kupovina svakodnevnih namirnica',
       TITLE_11: 'Prva online prodavnica svežih proizvoda direktno od farmera',
       TITLE_2: 'Direktno od proizvođača',
-      TITLE_22: 'Izaberite između mnoštva proizvoda pod najboljom cenom',
+      TITLE_22: 'Izaberite između mnoštva proizvoda po najboljim cenama',
       TITLE_3: 'Dostava do Vas',
       TITLE_33: 'Nađite najboljeg farmera za Vas koristeći naše preporuke',
       ADVERTISING_MSG: 'PAYS sistem je osmišljen da olakša kupovinu svežih namirnica. Kupci mogu izabrati farmera iz proizvode koje žele da naruče. Takođe, dobijanje najniže cene i najbržeg transporta se podrazumeva',

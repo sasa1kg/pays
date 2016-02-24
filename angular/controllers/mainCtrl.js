@@ -119,10 +119,10 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
                 if (data) {
                     scope.foundFarmers = data;
                     for (var j = 0; j < scope.foundFarmers.length; j++) {
-                        SearchService.getFarmerImage(scope.foundFarmers[j].id, 0).then(function (img) {
+                        FarmerService.getFarmerImage(scope.foundFarmers[j].id,scope.foundFarmers[j].images.profile).then(function (img) {
                             for (var i = 0; i < scope.foundFarmers.length; i++) {
                                 if (scope.foundFarmers[i].id === img.index) {
-                                    scope.foundFarmers[i].img = img.document_content;
+                                    scope.foundFarmers[i].img = "data:image/jpeg;base64," + img.document_content;
                                 }
                             }
                         });
