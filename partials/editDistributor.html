@@ -35,28 +35,21 @@
                   <tr>
                     <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
                     <td class="col-sm-9"><input type="text" ng-model="distributor.businessSubject.name"
-                                                placeholder="{{distributor.businessSubject.name}}"/>
+                                                placeholder="{{distributor.businessSubject.name}}" ng-disabled="true" ng-blur="true"/>
                     </td>
                   </tr>
                   <tr>
-                    <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
-                    <td class="col-sm-9"><input type="text"
-                                                ng-model="distributor.businessSubject.account"
-                                                placeholder="{{distributor.businessSubject.account}}"/>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="col-sm-3"><h5 class="text-left">{{ 'TAX_NUMBER' | translate}}</h5></td>
+                    <td class="col-sm-3"><h5 class="text-left">{{ 'PIB' | translate}}</h5></td>
                     <td class="col-sm-9"><input type="text"
                                                 ng-model="distributor.businessSubject.taxNum"
-                                                placeholder="{{distributor.businessSubject.taxNum}}"/>
+                                                placeholder="{{distributor.businessSubject.taxNum}}" ng-disabled="true" ng-blur="true"/>
                     </td>
                   </tr>
                   <tr>
-                    <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
+                    <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_REG_NUMBER' | translate}}</h5></td>
                     <td class="col-sm-9"><input type="text"
                                                 ng-model="distributor.businessSubject.companyNum"
-                                                placeholder="{{distributor.businessSubject.companyNum}}"/>
+                                                placeholder="{{distributor.businessSubject.companyNum}}" ng-disabled="true" ng-blur="true"/>
                     </td>
                   </tr>
                   <tr>
@@ -65,6 +58,13 @@
                     <td class="col-sm-9"><input type="text"
                                                 ng-model="distributor.businessSubject.businessActivityCode"
                                                 placeholder="{{distributor.businessSubject.businessActivityCode}}"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
+                    <td class="col-sm-9"><input type="text"
+                                                ng-model="distributor.businessSubject.account"
+                                                placeholder="{{distributor.businessSubject.account}}"/>
                     </td>
                   </tr>
                 </table>

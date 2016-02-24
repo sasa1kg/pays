@@ -35,8 +35,23 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'L
       }
       return ret;
     }
-  }).
-  config(['flowFactoryProvider', function (flowFactoryProvider) {
+  }).filter('orderItemStatus', function () {
+    return function (code) {
+      var ret = "N/A";
+      switch (code) {
+        case 'A':
+          ret = "YES";
+          break;
+        case 'R':
+          ret = "NO";
+          break;
+        default:
+          ret = code;
+          break;
+      }
+      return ret;
+    }
+  }).config(['flowFactoryProvider', function (flowFactoryProvider) {
     flowFactoryProvider.defaults = {
       target: 'upload.php',
       permanentErrors: [404, 500, 501],
@@ -408,7 +423,7 @@ paysApp.config(function ($translateProvider) {
     NON_ORGANIC: 'Non-organic',
     DELIVERY_OPTION: 'If not checked, farmer will consider you will pick up your order',
     BANK_NUMBER: "Bank account number",
-    PIB_NUMBER: "Company identification number",
+    COMPANY_REG_NUMBER: "Company identification number",
     INVALID_CREDENTIALS: "Invalid credentials",
     HELP: "Help",
     HELP_CENTER: "Help Center",
@@ -452,7 +467,7 @@ paysApp.config(function ($translateProvider) {
     FARMER_NAME: "Farmer name",
     NAME: "Name",
     SURNAME: "Surname",
-    TAX_NUMBER: "Tax number",
+    PIB: "Tax number",
     BUSSINESS_ACT_NUMBER: "Bussiness activity number",
     FAX_NUMBER: "Fax number",
     USER_NOT_ADDED: "Failed to add user",
@@ -576,7 +591,11 @@ paysApp.config(function ($translateProvider) {
     PRODUCT_IMAGE_NOT_REVERTED : 'Product image not reverted',
     SAVE_INFO_MSG : 'Saving information',
     UPLOAD_IMAGE_MSG : 'Uploading image',
-    LOAD_IMAGE_MSG : 'Loading new image'
+    LOAD_IMAGE_MSG : 'Loading new image',
+    ACCEPTED : 'Accepted',
+    YES: 'Yes',
+    NO: 'No',
+    PRICE_TO_CAPTURE : 'For capture'
 
   })
     .translations('rs_RS', {
@@ -754,7 +773,7 @@ paysApp.config(function ($translateProvider) {
       NON_ORGANIC: 'Neorganski',
       DELIVERY_OPTION: 'Ukoliko nije odabrana, farmer podrazumeva da ćete sami preuzeti proizvode',
       BANK_NUMBER: "Žiro račun",
-      PIB_NUMBER: "PIB",
+      COMPANY_REG_NUMBER: "Matični broj",
       INVALID_CREDENTIALS: "Nepostojeći korisnik",
       HELP: "Pomoć",
       HELP_CENTER: "Korisnička podrška",
@@ -798,8 +817,8 @@ paysApp.config(function ($translateProvider) {
       FARMER_NAME: "Naziv farmera",
       NAME: "Ime",
       SURNAME: "Prezime",
-      TAX_NUMBER: "Poreski broj",
-      BUSSINESS_ACT_NUMBER: "Broj preduzetnika",
+      PIB: "PIB",
+      BUSSINESS_ACT_NUMBER: "Šifra delatnosti",
       FAX_NUMBER: "Broj faksa",
       USER_NOT_ADDED: "Neuspešno dodavanje korisnika",
       PASSWORD_MATCH: "Lozinke se poklapaju",
@@ -921,7 +940,11 @@ paysApp.config(function ($translateProvider) {
       PRODUCT_IMAGE_NOT_REVERTED : 'Slika proizvoda nije vraćena',
       SAVE_INFO_MSG : 'Ažuriranje informacija',
       UPLOAD_IMAGE_MSG : 'Postavljanje nove slike',
-      LOAD_IMAGE_MSG : 'Učitavanje nove slike'
+      LOAD_IMAGE_MSG : 'Učitavanje nove slike',
+      ACCEPTED : 'Prihvaćeno',
+      YES: 'Da',
+      NO: 'Ne',
+      PRICE_TO_CAPTURE : 'Za naplatu'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

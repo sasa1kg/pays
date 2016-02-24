@@ -153,6 +153,15 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
         if (order.status != 'C') {
           order.totalPrice    = parseFloat(order.totalPrice);
           order.numericStatus = rootScope.getNumericOrderStatus(order.status);
+          order.acceptedPrice = parseFloat(0);
+          if (order.status == 'D' || order.status == 'P') {
+            order.acceptedPrice = parseFloat(0);
+            angular.forEach(order.items, function (item) {
+              if (item.status == "A") {
+                order.acceptedPrice += parseFloat(item.totalItemPrice);
+              }
+            });
+          }
           scope.orders.push(order);
           if (clientIds.indexOf(order.orderedBy) == -1) {
             clientIds.push(order.orderedBy);
@@ -222,7 +231,6 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
     }
 
     scope.saveGeneralInfoChanges = function () {
-      console.log("Saving general info changes!");
       FarmerService.updateGeneralInfo(scope.farmer.id,
         {
           businessSubject: scope.farmer.businessSubject
@@ -234,7 +242,6 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
           console.error(err);
           Notification.error({message: filter('translate')('GENERAL_INFO_NOT_UPDATED')});
         })
-      console.log("update end");
     }
 
     scope.updateProduct = function (product) {

@@ -38,28 +38,21 @@
                 <tr>
                   <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_NAME' | translate}}</h5></td>
                   <td class="col-sm-9"><input type="text" ng-model="farmer.businessSubject.name"
-                                              placeholder="{{farmer.businessSubject.name}}"/>
+                                              placeholder="{{farmer.businessSubject.name}}" ng-disabled="true" ng-blur="true"/>
                   </td>
                 </tr>
                 <tr>
-                  <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
-                  <td class="col-sm-9"><input type="text"
-                                              ng-model="farmer.businessSubject.account"
-                                              placeholder="{{farmer.businessSubject.account}}"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="col-sm-3"><h5 class="text-left">{{ 'TAX_NUMBER' | translate}}</h5></td>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'PIB' | translate}}</h5></td>
                   <td class="col-sm-9"><input type="text"
                                               ng-model="farmer.businessSubject.taxNum"
-                                              placeholder="{{farmer.businessSubject.taxNum}}"/>
+                                              placeholder="{{farmer.businessSubject.taxNum}}" ng-disabled="true" ng-blur="true"/>
                   </td>
                 </tr>
                 <tr>
-                  <td class="col-sm-3"><h5 class="text-left">{{ 'PIB_NUMBER' | translate}}</h5></td>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'COMPANY_REG_NUMBER' | translate}}</h5></td>
                   <td class="col-sm-9"><input type="text"
                                               ng-model="farmer.businessSubject.companyNum"
-                                              placeholder="{{farmer.businessSubject.companyNum}}"/>
+                                              placeholder="{{farmer.businessSubject.companyNum}}" ng-disabled="true" ng-blur="true"/>
                   </td>
                 </tr>
                 <tr>
@@ -68,6 +61,13 @@
                   <td class="col-sm-9"><input type="text"
                                               ng-model="farmer.businessSubject.businessActivityCode"
                                               placeholder="{{farmer.businessSubject.businessActivityCode}}"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-sm-3"><h5 class="text-left">{{ 'BANK_NUMBER' | translate}}</h5></td>
+                  <td class="col-sm-9"><input type="text"
+                                              ng-model="farmer.businessSubject.account"
+                                              placeholder="{{farmer.businessSubject.account}}"/>
                   </td>
                 </tr>
               </table>
@@ -115,7 +115,7 @@
           </div>
         </div>
         <div class="col-sm-12 text-center">
-          <button class="btn btn-default apply-changes-btn" ng-click="saveGeneralChanges()">{{'SAVE_CHANGES' |
+          <button class="btn btn-default apply-changes-btn" ng-click="saveGeneralInfoChanges()">{{'SAVE_CHANGES' |
             translate}}
           </button>
         </div>
@@ -357,6 +357,13 @@
                         <div class="text-left">{{order.totalPrice}} RSD</div>
                       </td>
                     </tr>
+                    <tr ng-if="(order.status == 'D') || (order.status == 'P')">
+                      <td class="col-sm-3"><h5 class="text-left">{{ 'PRICE_TO_CAPTURE' | translate}}</h5>
+                      </td>
+                      <td class="col-sm-9">
+                        <div class="text-left">{{order.acceptedPrice}} RSD</div>
+                      </td>
+                    </tr>
                     <tr>
                       <td class="col-sm-3"><h5 class="text-left">{{ 'NOTE' | translate}}</h5>
                       </td>
@@ -369,9 +376,10 @@
                       </td>
                     </tr>
                     <tr>
-                      <div class="table-responsive vehicles_info">
+                      <div>{{order.status}}</div>
+                      <div class="table-responsive vehicles_info" >
 
-                        <table class="table table-condensed">
+                        <table class="table table-condensed" ng-if="(order.status != 'D') && (order.status != 'P')">
                           <thead>
                           <tr class="vehicles_menu">
                             <td>{{ 'PRODUCT_NAME' | translate}}</td>
@@ -386,6 +394,32 @@
                             </td>
                             <td>
                               <div>{{product.amount}} [{{product.unit}}]</div>
+                            </td>
+                            <td>
+                              <div>{{product.totalItemPrice}} RSD</div>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                        <table class="table table-condensed" ng-if="(order.status == 'D') || (order.status == 'P')">
+                          <thead>
+                          <tr class="vehicles_menu">
+                            <td>{{ 'PRODUCT_NAME' | translate}}</td>
+                            <td>{{ 'PRODUCT_QUANTITY' | translate}}</td>
+                            <td>{{ 'ACCEPTED' | translate}}</td>
+                            <td>{{' PRODUCT_TOTAL_PRICE' | translate}}</td>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr ng-repeat="product in order.items">
+                            <td>
+                              <div>{{product.product.name.localization[currentLang]}}</div>
+                            </td>
+                            <td>
+                              <div>{{product.amount}} [{{product.unit}}]</div>
+                            </td>
+                            <td>
+                              <div>{{product.status | orderItemStatus | translate}}</div>
                             </td>
                             <td>
                               <div>{{product.totalItemPrice}} RSD</div>
