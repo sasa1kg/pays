@@ -352,7 +352,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             }
             googleDirections.getDirections(args).then(function(directions) {
                 if(directions === undefined || directions.routes.length < 1 || directions.routes[0].legs.length < 1){
-                    deffered.$$reject("Error")
+                    deffered.reject("Error");
                 }
                 else {
                     var distanceMeters = directions.routes[0].legs[0].distance.value;
@@ -362,6 +362,21 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 console.log(directions);
             });
 
+            return deffered.promise;
+        }
+
+        this.getLocationByAddress = function(address) {
+            var deffered = q.defer();
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode( { "address": address }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+                    var location = results[0].geometry.location;
+                    deffered.resolve(location.toJSON());
+                }
+                else {
+                    deffered.reject("Error");
+                }
+            });
             return deffered.promise;
         }
 
