@@ -313,11 +313,12 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
     }
   }]);
 
-angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance, $location, CartService) {
+angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance, $location, CartService,OrderService) {
 
   $scope.emptyCart = function () {
     console.log("Empty cart");
     CartService.resetCart();
+    OrderService.clearOrderData();
     $modalInstance.close();
     $location.path('#/');
   }

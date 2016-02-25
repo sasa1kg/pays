@@ -1,7 +1,8 @@
-angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$filter","$window", "$location", "CartService", "WishlistService",
+angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$filter","$window", "$location","$modal", "CartService", "WishlistService",
     "OrderService", "UserService", "Notification",
-    function (scope, rootScope, filter, window,location, CartService, WishlistService, OrderService, UserService, Notification) {
+    function (scope, rootScope, filter, window,location,modal, CartService, WishlistService, OrderService, UserService, Notification) {
 
+        scope.termsAccepted = false;
         scope.orderData = OrderService.getOrderData();
         if (scope.orderData != null) {
             scope.amount = scope.orderData.totalPrice;
@@ -124,7 +125,36 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.openDate = function () {
             scope.datePopup.opened = true;
         };
-
+        scope.showPaysCompanyInfo = function () {
+            var modalInstance = modal.open({
+                animation: true,
+                templateUrl: 'paysCompanyInfoModal.html',
+                controller: 'PaymentRegulationsCtrl',
+                size: 'lg'
+            });
+        }
+        scope.showOfferedGoods = function () {
+            var modalInstance = modal.open({
+                animation: true,
+                templateUrl: 'offeredGoodsModal.html',
+                controller: 'PaymentRegulationsCtrl',
+                size: 'lg'
+            });
+        }
+        scope.showTermsOfService = function () {
+            var modalInstance = modal.open({
+                animation: true,
+                templateUrl: 'termsOfServiceModal.html',
+                controller: 'PaymentRegulationsCtrl',
+                size: 'lg'
+            });
+        }
     }
-])
-;
+]);
+
+angular.module('paysApp').controller('PaymentRegulationsCtrl', function ($scope, $modalInstance) {
+
+    $scope.cancelModal = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});

@@ -134,8 +134,7 @@
             </div>
             <div class="text-left col-sm-3 amount-currency-text">{{ orderData.currency.code}}</div>
           </div>
-          <a class="btn btn-fefault cart col-sm-2 text-center" ng-click="executePayment()">{{ 'PAY' |
-            translate}}</a>
+
         </div>
       </row>
 
@@ -145,7 +144,7 @@
         <div class="col-sm-1">
         </div>
         <div class="col-sm-11">
-          <div class="text-center col-sm-3">{{ 'NOTE' | translate}}</div>
+          <div class="text-right col-sm-3">{{ 'NOTE' | translate}}</div>
           <div class="col-sm-9">
                     <textarea type="text" rows="4" class="col-sm-12"
                               placeholder="{{ 'NOTE_MSG' | translate}} " ng-model="orderData.comment"></textarea>
@@ -153,6 +152,94 @@
         </div>
       </row>
       <hr class="orangehr">
+      <row class="col-sm-12 ">
+        <script type="text/ng-template" id="paysCompanyInfoModal.html">
+          <div class="modal-header">
+            <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+            <h4 class="modal-title">{{ 'PAYS_COMPANY_INFO' | translate}}</h4>
+          </div>
+          <div class="modal-body" style="height: 250px;">
+            <div class="col-sm-12 text-center mb25">
+              <h5><strong>{{paysCompanyInfo.title1}}</strong></h5>
+              <h4><strong>{{paysCompanyInfo.title2}}</strong></h4>
+
+              <p>{{paysCompanyInfo.description}}</p>
+            </div>
+            <div class="col-sm-6">
+              <p><strong>{{ 'CLIENT_ADDRESS' | translate}}</strong> : {{paysCompanyInfo.address}}</p>
+
+              <p><strong>{{ 'CITY' | translate}}</strong> : {{paysCompanyInfo.city}}</p>
+
+              <p><strong>{{ 'PHONE_NUMBER' | translate}}</strong> : {{paysCompanyInfo.phone}}</p>
+            </div>
+            <div class="col-sm-6">
+              <p><strong>{{ 'BUSSINESS_ACT_NUMBER' | translate}}</strong> : {{paysCompanyInfo.activityNum}} </p>
+              <p><strong>{{ 'COMPANY_REG_NUMBER' | translate}}</strong> : {{paysCompanyInfo.companyNum}}</p>
+              <p><strong>{{ 'PIB' | translate}}</strong> : {{paysCompanyInfo.pib}}</p>
+              <p><strong>{{ 'BANK_NUMBER' | translate}}</strong> :  {{paysCompanyInfo.bankNum}}</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default check_out" ng-click="cancelModal()">{{ 'OK'
+              |
+              translate}}
+            </button>
+          </div>
+        </script>
+        <script type="text/ng-template" id="offeredGoodsModal.html">
+          <div class="modal-header">
+            <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+            <h4 class="modal-title">{{ 'OFFERED_GOODS' | translate}}</h4>
+          </div>
+          <div class="modal-body" style="height: 250px;">
+            <h3>TBD</h3>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default check_out" ng-click="cancelModal()">{{ 'OK'
+              |
+              translate}}
+            </button>
+          </div>
+        </script>
+        <script type="text/ng-template" id="termsOfServiceModal.html">
+          <div class="modal-header">
+            <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+            <h4 class="modal-title">{{ 'TERMS_OF_SERVICE' | translate}}</h4>
+          </div>
+          <div class="modal-body" style="height: 250px;">
+            <h3>TBD</h3>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default check_out" ng-click="cancelModal()">{{ 'OK'
+              |
+              translate}}
+            </button>
+          </div>
+        </script>
+        <div class="col-sm-3 col-sm-offset-1">
+          <img src="images/eMS.jpg" style="max-width : 280px">
+        </div>
+        <div class="col-sm-4 text-center mt10">
+          <div class="col-sm-12">
+            <a class="cursor-pointer" ng-click="showPaysCompanyInfo()">{{'PAYS_COMPANY_INFO' | translate}} <i
+              class="fa fa-file-text-o"></i></a>
+          </div>
+          <div class="col-sm-12 mt20">
+            <a class="cursor-pointer" ng-click="showOfferedGoods()">{{'OFFERED_GOODS' | translate}} <i
+              class="fa fa-file-text-o"></i></a>
+          </div>
+        </div>
+        <div class="col-sm-3 mt10">
+          <div class="col-sm-offset-1 col-sm-11 text-center">
+            <input type="checkbox" ng-model="termsAccepted"/><a class="cursor-pointer" ng-click="showTermsOfService()">{{
+            'ACCEPT_TERMS_OF_SERVICE' | translate}}</a>
+          </div>
+          <a class="btn btn-default btn-lg cart col-sm-12 text-center mt10" ng-disabled="!termsAccepted"
+             ng-click="executePayment()">{{ 'PAY' |
+            translate}}</a>
+        </div>
+      </row>
+      <hr class="orangehr mb100">
     </div>
     <div ng-if="orderData && !userData">
       <h3 class="text-center" style="color:red;">{{ 'NO_LOGIN_CHECKOUT' | translate}}</h3>

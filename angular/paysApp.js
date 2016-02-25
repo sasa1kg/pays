@@ -125,6 +125,19 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
       $rootScope.lastPage = "#" + $location.url();
     }
   });
+
+  $rootScope.paysCompanyInfo = {
+    title1 : 'AGENCIJA ZA RAČUNARSKI INŽENJERING',
+    title2 : 'INDUSTRIAL PROJECT',
+    description :'Distributer PAYS sistema za Srbiju',
+    address : 'Milana Rakića 16/7',
+    city : '21000 Novi Sad ',
+    phone : '+381-21-455071',
+    activityNum : '6201 ',
+    companyNum : '62552778',
+    pib : '107176348',
+    bankNum : '200-2596270201891-47'
+  }
   $rootScope.paysEMail           = 'office@pays-system.com';
   $rootScope.paysPhone           = '+38121455071';
   $rootScope.showFooter          = false;
@@ -595,7 +608,11 @@ paysApp.config(function ($translateProvider) {
     ACCEPTED : 'Accepted',
     YES: 'Yes',
     NO: 'No',
-    PRICE_TO_CAPTURE : 'For capture'
+    PRICE_TO_CAPTURE : 'For capture',
+    PAYS_COMPANY_INFO : 'Information about company',
+    OFFERED_GOODS : 'Offered service declaration',
+    ACCEPT_TERMS_OF_SERVICE : 'I accept terms of service',
+    TERMS_OF_SERVICE : 'Terms of service'
 
   })
     .translations('rs_RS', {
@@ -944,7 +961,11 @@ paysApp.config(function ($translateProvider) {
       ACCEPTED : 'Prihvaćeno',
       YES: 'Da',
       NO: 'Ne',
-      PRICE_TO_CAPTURE : 'Za naplatu'
+      PRICE_TO_CAPTURE : 'Za naplatu',
+      PAYS_COMPANY_INFO : 'Informacije o firmi',
+      OFFERED_GOODS : 'Opis ponuđenih roba i usluga',
+      ACCEPT_TERMS_OF_SERVICE : 'Prihvatam uslove korišćenja',
+      TERMS_OF_SERVICE : 'Uslovi korišćenja'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

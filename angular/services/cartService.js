@@ -95,7 +95,7 @@ var CartService = angular.module('CartService', []).service('CartService', ['loc
                     var localItem = localStorageService.get(keys[i]);
                     for (var j = 0; j < localItem.items.length; j++) {
                         if (localItem.items[j].itemId == productId) {
-                            if (amount >= 1) {
+                            if (amount > 0) {
                                 localItem.items[j].itemNum = amount;
                                 localStorageService.set(keys[i], localItem);
                             } else {

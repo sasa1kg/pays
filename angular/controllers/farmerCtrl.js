@@ -111,7 +111,7 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
 
     scope.setAmount = function (product, amount) {
 
-      if ((amount != null) && (amount >= 0)) {
+      if ((amount != null) && (amount > 0)) {
         console.log("Amount of " + product.product.id + " = " + amount + " MAX " + product.amount);
         if (!_validateProductAmount(product, amount)) {
           product.resourceExcedeed = true;
