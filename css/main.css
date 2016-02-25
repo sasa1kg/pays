@@ -2896,10 +2896,13 @@ h2.title {
 
 .disable_number_spinner::-webkit-inner-spin-button,
 .disable_number_spinner::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+    -webkit-appearance: none !important;
+    margin: 0 !important;
 
+}
+.disable_number_spinner {
+    -moz-appearance:textfield !important;
+}
 .no-padding {
     padding-left: 0px;
     padding-right: 0px;
