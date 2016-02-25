@@ -120,6 +120,7 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
                     return localItem;
                 }
             }
+            return null;
         }
 
         this.clearOrderData = function (){

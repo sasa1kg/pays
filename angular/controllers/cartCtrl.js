@@ -14,6 +14,22 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
 
     scope.farmerData = CartService.getCartFarmer();
 
+    scope.address = {
+      city: "",
+      street: "",
+      houseNumber: "",
+      apartmentNumber: "",
+      floor: "",
+      postalCode: ""
+    }
+
+    scope.prevAddress = {
+      address: null
+    };
+    var orderData = OrderService.getOrderData();
+    if(orderData != null){
+      scope.address = orderData.address;
+    }
     scope.loadDeffered = null;
     if (scope.farmerData != null) {
       scope.loadDeffered = q.defer();
@@ -208,7 +224,13 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
         })
       });
     }
-
+    scope.saveAddress = function () {
+      var orderData = OrderService.getOrderData();
+      if(orderData == null){
+        OrderService.createOrderItem(scope.farmerData.farmerId, rootScope.credentials.id);
+      }
+      OrderService.saveAddress(scope.isShipped, scope.address);
+    }
     scope.openEmptyCartModal = function () {
 
       var modalInstance = modal.open({
@@ -261,19 +283,6 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
       OrderService.saveItems(scope.cartItems, scope.total);
       location.path("/checkout");
     }
-
-    scope.address = {
-      city: "",
-      street: "",
-      houseNumber: "",
-      apartmentNumber: "",
-      floor: "",
-      postalCode: ""
-    }
-
-    scope.prevAddress = {
-      address: null
-    };
 
     scope.$watch('prevAddress.address', function () {
       if (scope.prevAddress.address != null) {

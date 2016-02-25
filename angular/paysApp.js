@@ -612,7 +612,8 @@ paysApp.config(function ($translateProvider) {
     PAYS_COMPANY_INFO : 'Information about company',
     OFFERED_GOODS : 'Offered service declaration',
     ACCEPT_TERMS_OF_SERVICE : 'I accept terms of service',
-    TERMS_OF_SERVICE : 'Terms of service'
+    TERMS_OF_SERVICE : 'Terms of service',
+    SAVE_ADDRESS : 'Save address'
 
   })
     .translations('rs_RS', {
@@ -965,7 +966,8 @@ paysApp.config(function ($translateProvider) {
       PAYS_COMPANY_INFO : 'Informacije o firmi',
       OFFERED_GOODS : 'Opis ponuđenih roba i usluga',
       ACCEPT_TERMS_OF_SERVICE : 'Prihvatam uslove korišćenja',
-      TERMS_OF_SERVICE : 'Uslovi korišćenja'
+      TERMS_OF_SERVICE : 'Uslovi korišćenja',
+      SAVE_ADDRESS : 'Sačuvaj adresu'
     })
   $translateProvider.preferredLanguage('en_EN');
 });
