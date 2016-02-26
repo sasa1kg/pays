@@ -151,7 +151,7 @@
               <label class="mt6 col-sm-5">{{ 'POSTAL_CODE' | translate}}:</label>
 
               <div class="col-sm-6">
-                <input class="form-control" type="number"
+                <input class="form-control disable_number_spinner" type="number"
                        autocomplete="off" ng-model="address.postalCode"></div>
             </div>
             <div class="col-sm-6 mt20">
@@ -172,27 +172,32 @@
               <label class="mt6 col-sm-2">{{ 'FLOOR' | translate}}</label>
 
               <div class="col-sm-6">
-                <input class="form-control" type="number"
+                <input class="form-control disable_number_spinner" type="number"
                        autocomplete="off" ng-model="address.floor">
               </div>
             </div>
             <div class="col-sm-5 mt20">
-              <label class="mt6 col-sm-5">{{ 'APARTMENT' | translate}}</label>
+              <label class="mt6 col-sm-5 ">{{ 'APARTMENT' | translate}}</label>
 
               <div class="col-sm-6">
-                <input class="form-control" type="number"
+                <input class="form-control disable_number_spinner" type="number"
                        autocomplete="off" ng-model="address.apartmentNumber"></div>
             </div>
           </div>
           <div class="col-sm-12 mt25">
-            <div class="col-sm-3 \">
+
+            <div class="col-sm-3">
               <a class=" btn btn-default apply-changes-btn" ng-click="saveAddress()">{{
                 'SAVE_ADDRESS' | translate}}</a>
             </div>
-            <h5 class="col-sm-2 pull-right">{{transportPrice}} (RSD)</h5>
-            <div class="col-sm-3 pull-right">
-              <a class=" btn btn-default apply-changes-btn" ng-click="calculateTransportPrice()">{{
-                'CALCULATE_TRANSPORT_PRICE' | translate}}</a>
+            <div cg-busy="{promise:transportPriceDeffered.promise,message:waitMsg,backdrop:true}">
+              <h5 class="col-sm-3 pull-right">{{ 'TRANSPORT_PRICE' | translate}}: {{transportPrice}} (RSD)</h5>
+
+              <div class="col-sm-3 pull-right">
+                <a class=" btn btn-default apply-changes-btn" ng-click="calculateTransportPrice()"
+                   ng-disabled="!address.city">{{
+                  'CALCULATE_TRANSPORT_PRICE' | translate}}</a>
+              </div>
             </div>
           </div>
         </div>
@@ -233,12 +238,14 @@
                 </button>
               </div>
             </script>
-
-            <a class="btn btn-default update" ng-click="goBack()">{{ 'UPDATE_CART' | translate}}</a>
-            <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
-              'EMPTY_CART' | translate}}</a>
-            <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()" ng-click="goToPayment()">{{ 'PAY' |
-              translate}}</a>
+            <div cg-busy="{promise:paymentDeffered.promise,message:waitMsg,backdrop:true}">
+              <a class="btn btn-default update" ng-click="goToFarmerPage(farmerData)">{{ 'UPDATE_CART' | translate}}</a>
+              <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
+                'EMPTY_CART' | translate}}</a>
+              <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()" ng-click="goToPayment()">{{
+                'GO_TO_PAYMENT' |
+                translate}}</a>
+            </div>
 
           </div>
         </div>

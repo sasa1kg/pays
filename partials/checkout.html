@@ -12,9 +12,73 @@
     </div>
     <!--/breadcrums-->
     <div ng-if="userData">
-      <div class="step-one">
+      <hr class="orangehr">
+      <row class="col-sm-12">
+        <div class="col-sm-3 col-sm-offset-1">
+          <img src="images/eMS.jpg" style="max-width : 280px;margin-top: 35px;">
+        </div>
+        <div class="col-sm-offset-4 col-sm-3">
+          <img src="images/CElogo.png" style="max-height: 150px">
+        </div>
+      </row>
+      <hr class="orangehr">
+      <row class="col-sm-12">
+        <div class="col-sm-12 text-center mb25">
+          <h5><strong>{{paysCompanyInfo.title1}}</strong></h5>
+          <h4><strong>{{paysCompanyInfo.title2}}</strong></h4>
+
+          <p>{{paysCompanyInfo.description}}</p>
+        </div>
+        <div class="col-sm-3 col-sm-offset-3">
+          <p><strong>{{ 'CLIENT_ADDRESS' | translate}}</strong> : {{paysCompanyInfo.address}}</p>
+
+          <p><strong>{{ 'CITY' | translate}}</strong> : {{paysCompanyInfo.city}}</p>
+
+          <p><strong>{{ 'PHONE_NUMBER' | translate}}</strong> : {{paysCompanyInfo.phone}}</p>
+        </div>
+        <div class="col-sm-6">
+          <!--<p><strong>{{ 'BUSSINESS_ACT_NUMBER' | translate}}</strong> : {{paysCompanyInfo.activityNum}} </p>-->
+
+          <!--<p><strong>{{ 'COMPANY_REG_NUMBER' | translate}}</strong> : {{paysCompanyInfo.companyNum}}</p>-->
+
+          <p><strong>{{ 'PIB' | translate}}</strong> : {{paysCompanyInfo.pib}}</p>
+
+          <p><strong>{{ 'BANK_NUMBER' | translate}}</strong> : {{paysCompanyInfo.bankNum}}</p>
+        </div>
+      </row>
+      <hr class="orangehr">
+      <row class="col-sm-12">
         <h2 class="text-center">{{'ORDER_DATA_SUFFIX' | translate}}</h2>
-      </div>
+        <div class="col-sm-12">
+          <table class="table table-condensed">
+            <thead>
+            <th>{{ 'ORDINAL' | translate}}</th>
+            <th>{{ 'PRODUCT_NAME' | translate}}</th>
+            <th>{{ 'PRODUCT_QUANTITY' | translate}}</th>
+            <th>{{ 'PRICE_PER_UNIT' | translate}}</th>
+            <th>{{ 'TAX' | translate}}</th>
+            <th>{{ 'TAX_AMOUNT' | translate}}</th>
+            <th>{{ 'PRODUCT_TOTAL_PRICE' | translate}}</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in orderData.items.items">
+              <td>{{$index+1}}</td>
+              <td>{{item.itemName.localization[currentLang]}}</td>
+              <td>{{item.itemNum}}</td>
+              <td>{{item.itemPriceNoTax}}</td>
+              <td>{{item.tax}} %</td>
+              <td>{{item.totalTax}}</td>
+              <td>{{item.itemPrice}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-5 pull-right text-right fs18">
+          <div><strong>{{ 'TOTAL' | translate}} ({{ orderData.currency.code}}): </strong> {{ orderData.totalProductPrice}} </div>
+          <div><strong>{{ 'TRANSPORT_PRICE' | translate}} ({{ orderData.currency.code}}): </strong> {{orderData.transportPrice}}</div>
+          <div><strong>{{ 'TOTAL_PAY_PRICE' | translate}} ({{ orderData.currency.code}}): </strong> {{ orderData.totalPrice}}</div>
+        </div>
+      </row>
 
       <hr class="orangehr">
 
@@ -174,9 +238,12 @@
             </div>
             <div class="col-sm-6">
               <p><strong>{{ 'BUSSINESS_ACT_NUMBER' | translate}}</strong> : {{paysCompanyInfo.activityNum}} </p>
+
               <p><strong>{{ 'COMPANY_REG_NUMBER' | translate}}</strong> : {{paysCompanyInfo.companyNum}}</p>
+
               <p><strong>{{ 'PIB' | translate}}</strong> : {{paysCompanyInfo.pib}}</p>
-              <p><strong>{{ 'BANK_NUMBER' | translate}}</strong> :  {{paysCompanyInfo.bankNum}}</p>
+
+              <p><strong>{{ 'BANK_NUMBER' | translate}}</strong> : {{paysCompanyInfo.bankNum}}</p>
             </div>
           </div>
           <div class="modal-footer">
@@ -216,25 +283,12 @@
             </button>
           </div>
         </script>
-        <div class="col-sm-3 col-sm-offset-1">
-          <img src="images/eMS.jpg" style="max-width : 280px">
-        </div>
-        <div class="col-sm-4 text-center mt10">
-          <div class="col-sm-12">
-            <a class="cursor-pointer" ng-click="showPaysCompanyInfo()">{{'PAYS_COMPANY_INFO' | translate}} <i
-              class="fa fa-file-text-o"></i></a>
-          </div>
-          <div class="col-sm-12 mt20">
-            <a class="cursor-pointer" ng-click="showOfferedGoods()">{{'OFFERED_GOODS' | translate}} <i
-              class="fa fa-file-text-o"></i></a>
-          </div>
-        </div>
-        <div class="col-sm-3 mt10">
+        <div class="col-sm-offset-4 col-sm-4 mt10">
           <div class="col-sm-offset-1 col-sm-11 text-center">
             <input type="checkbox" ng-model="termsAccepted"/><a class="cursor-pointer" ng-click="showTermsOfService()">{{
             'ACCEPT_TERMS_OF_SERVICE' | translate}}</a>
           </div>
-          <a class="btn btn-default btn-lg cart col-sm-12 text-center mt10" ng-disabled="!termsAccepted"
+          <a class="btn btn-primary btn-lg cart col-sm-12 text-center mt10" ng-disabled="!termsAccepted"
              ng-click="executePayment()">{{ 'PAY' |
             translate}}</a>
         </div>

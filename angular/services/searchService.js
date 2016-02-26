@@ -343,6 +343,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         }
 
         this.getDistanceBetweenCities = function(originCity, destinationCity){
+            console.log(originCity + " - "+destinationCity);
             var deffered = q.defer();
             var args = {
                 origin: originCity.toString(),

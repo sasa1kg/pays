@@ -5,6 +5,15 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.termsAccepted = false;
         scope.orderData = OrderService.getOrderData();
         if (scope.orderData != null) {
+            scope.orderData.totalPrice = parseFloat(scope.orderData.totalPrice).toFixed(2);
+            scope.orderData.transportPrice = parseFloat(scope.orderData.transportPrice).toFixed(2);
+            scope.orderData.totalProductPrice = (parseFloat(scope.orderData.totalPrice) - parseFloat(scope.orderData.transportPrice)).toFixed(2);
+            angular.forEach(scope.orderData.items.items , function(item){
+                var taxLower = (100 * parseFloat(item.tax))/(100+parseFloat(item.tax))/100;
+                item.totalTax = (parseFloat(item.itemNum) * parseFloat(item.itemPrice) * taxLower).toFixed(2);
+                item.itemPriceNoTax =  (parseFloat(item.itemPrice) -  parseFloat(item.itemPrice) * taxLower).toFixed(2);
+               console.log(item);
+            });
             scope.amount = scope.orderData.totalPrice;
             scope.currency = scope.orderData.currency;
             if (typeof scope.orderData.address === 'string') {
@@ -99,6 +108,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 deliveryDate: filter('date')(scope.deliveryDate.date, scope.dateFormat),
                 deliveryFrom: filter('date')(scope.fromTime.time, scope.timeFormat),
                 deliveryTo: filter('date')(scope.toTime.time, scope.timeFormat),
+                transportPrice : scope.orderData.transportPrice,
                 withTransport: scope.orderData.withTransport,
                 totalPrice: scope.orderData.totalPrice,
                 items: [],

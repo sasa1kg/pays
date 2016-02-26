@@ -1,6 +1,6 @@
 angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", "$location", "$modal", "$filter", "CartService", "WishlistService",
-  "SearchService", "OrderService", "UserService", "FarmerService",
-  function (scope, rootScope, q, location, modal, filter, CartService, WishlistService, SearchService, OrderService, UserService, FarmerService) {
+  "SearchService", "OrderService", "UserService", "FarmerService","Notification",
+  function (scope, rootScope, q, location, modal, filter, CartService, WishlistService, SearchService, OrderService, UserService, FarmerService,Notification) {
 
     console.log("Cart Ctrl!");
 
@@ -26,8 +26,11 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
     scope.prevAddress = {
       address: null
     };
+
+    scope.transportPriceDeffered = null;
+
     var orderData = OrderService.getOrderData();
-    if(orderData != null){
+    if (orderData != null) {
       scope.address = orderData.address;
     }
     scope.loadDeffered = null;
@@ -204,7 +207,8 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
     }
 
     scope.calculateTransportPrice = function () {
-      SearchService.getDistanceBetweenCities("Novi Sad", "Beograd").then(function (data) {
+      scope.transportPriceDeffered = q.defer();
+      SearchService.getDistanceBetweenCities(scope.address.city + ", Serbia", scope.farmerData.farmerLocation+ ", Serbia").then(function (data) {
         var reqData = {
           distance: data,
           items: []
@@ -219,17 +223,27 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
         FarmerService.getTransportPrice(scope.farmerData.farmerId, reqData).then(function (data) {
           scope.transportPrice = data.price;
           scope.calculateTotal();
-        }).catch(function (err) {
+          Notification.success({message: filter('translate')('TRANSPORT_PRICE_SUCCESS')});
+          scope.transportPriceDeffered.resolve();
 
+        }).catch(function (err) {
+          Notification.error({message: filter('translate')('TRANSPORT_PRICE_FAILED')});
+          scope.transportPriceDeffered.reject();
         })
+      }).catch(function (err) {
+        Notification.error({message: filter('translate')('LOCATION_NOT_FOUND')});
+        scope.transportPriceDeffered.reject();
       });
+      return scope.transportPriceDeffered.promise;
     }
-    scope.saveAddress = function () {
+
+
+    scope.saveAddress        = function () {
       var orderData = OrderService.getOrderData();
-      if(orderData == null){
+      if (orderData == null) {
         OrderService.createOrderItem(scope.farmerData.farmerId, rootScope.credentials.id);
       }
-      OrderService.saveAddress(scope.isShipped, scope.address);
+      OrderService.saveAddress(scope.isShipped, scope.address, scope.transportPrice);
     }
     scope.openEmptyCartModal = function () {
 
@@ -275,13 +289,20 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
       }
       return false;
     }
+    scope.paymentDeffered = null;
     scope.goToPayment    = function () {
+      scope.paymentDeffered = q.defer();
       console.log(scope.locationType.selected);
       console.log(scope.address);
-      OrderService.createOrderItem(scope.farmerData.farmerId, rootScope.credentials.id);
-      OrderService.saveAddress(scope.isShipped, scope.address);
-      OrderService.saveItems(scope.cartItems, scope.total);
-      location.path("/checkout");
+      scope.calculateTransportPrice().then(function () {
+        OrderService.createOrderItem(scope.farmerData.farmerId, rootScope.credentials.id);
+        OrderService.saveAddress(scope.isShipped, scope.address, scope.transportPrice);
+        OrderService.saveItems(scope.cartItems, scope.total);
+        scope.paymentDeffered.resolve();
+        location.path("/checkout");
+      }).catch(function(err){
+        scope.paymentDeffered.reject();
+      });
     }
 
     scope.$watch('prevAddress.address', function () {
@@ -322,7 +343,7 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
     }
   }]);
 
-angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance, $location, CartService,OrderService) {
+angular.module('paysApp').controller('EmptyCartModalInstanceCtrl', function ($scope, $modalInstance, $location, CartService, OrderService) {
 
   $scope.emptyCart = function () {
     console.log("Empty cart");

@@ -376,7 +376,6 @@
                       </td>
                     </tr>
                     <tr>
-                      <div>{{order.status}}</div>
                       <div class="table-responsive vehicles_info" >
 
                         <table class="table table-condensed" ng-if="(order.status != 'D') && (order.status != 'P')">
@@ -422,7 +421,7 @@
                               <div>{{product.status | orderItemStatus | translate}}</div>
                             </td>
                             <td>
-                              <div>{{product.totalItemPrice}} RSD</div>
+                              <div>{{product.totalPayPrice}} RSD</div>
                             </td>
                           </tr>
                           </tbody>

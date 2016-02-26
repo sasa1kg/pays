@@ -136,7 +136,8 @@
       </div>
     </div>
     <hr class="orangehr">
-    <h5 ng-if="canShop() && !canBeAdded()" class="text-center" style="color:red;">{{ 'UNABLE_CART_INSERT' | translate}}</h5>
+    <h5 ng-if="canShop() && !canBeAdded()" class="text-center" style="color:red;">{{ 'UNABLE_CART_INSERT' |
+      translate}}</h5>
 
     <div ng-if="searchedItems.length" class="row">
       <h2 class="title text-center">{{ 'SEARCHED_PRODUCTS' | translate}}</h2>
@@ -256,32 +257,32 @@
         </div>
       </div>
     </div>
-    <a class="cursor-pointer" data-toggle="collapse" data-target="#reviews"><h2 class="title text-center">{{
-      'FARMER_REVIEWS' | translate}} <i
-        class="fa fa-caret-down"></i></h2></a>
-
-    <div id="reviews" class="collapse">
+    <div id="reviews">
       <div ng-if="reviews.length == 0"><h3 class="text-center">{{ 'NO_REVIEWS_MESSAGE' | translate}}</h3></div>
-      <div ng-if="reviews.length > 0" class="col-sm-4" ng-repeat="review in reviews">
-        <div class="bubble" class="col-sm-7 ">
-          <div class="col-sm-12 text-left">
-            <h4 class="col-sm-12 text-center">{{review.commentBy}}</h4>
+      <div ng-if="reviews.length > 0">
+        <h2 class="title text-center">{{ 'FARMER_REVIEWS' | translate}}</h2>
 
-            <div class="col-sm-12 text-center">
-              <ul class="star-rating">
-                <li ng-repeat="star in range(1,review.rating)" class="filled review-backgorund">
-                  <i class="fa fa-star fa-2x"></i>
-                </li>
-              </ul>
+        <div class="col-sm-4" ng-repeat="review in reviews">
+          <div class="bubble" class="col-sm-7 ">
+            <div class="col-sm-12 text-left">
+              <h4 class="col-sm-12 text-center">{{review.commentBy}}</h4>
+
+              <div class="col-sm-12 text-center">
+                <ul class="star-rating">
+                  <li ng-repeat="star in range(1,review.rating)" class="filled review-backgorund">
+                    <i class="fa fa-star fa-2x"></i>
+                  </li>
+                </ul>
+              </div>
             </div>
+            <div class="col-sm-12">
+              <p>"{{review.comment}}"</p>
+            </div>
+            <h5 class="text-center">{{ 'POSTED_ON' | translate }}:
+              <t/>
+              {{review.date | date : 'dd-M-yyyy'}}
+            </h5>
           </div>
-          <div class="col-sm-12">
-            <p>"{{review.comment}}"</p>
-          </div>
-          <h5 class="text-center">{{ 'POSTED_ON' | translate }}:
-            <t/>
-            {{review.date | date : 'dd-M-yyyy'}}
-          </h5>
         </div>
       </div>
     </div>

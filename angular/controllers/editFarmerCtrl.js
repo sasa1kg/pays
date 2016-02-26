@@ -157,8 +157,9 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
           if (order.status == 'D' || order.status == 'P') {
             order.acceptedPrice = parseFloat(0);
             angular.forEach(order.items, function (item) {
+              item.totalPayPrice = parseFloat(item.totalItemPrice) * parseFloat(item.amount);
               if (item.status == "A") {
-                order.acceptedPrice += parseFloat(item.totalItemPrice);
+                order.acceptedPrice += (parseFloat(item.totalItemPrice) * parseFloat(item.amount));
               }
             });
           }

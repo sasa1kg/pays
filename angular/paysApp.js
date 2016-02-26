@@ -530,7 +530,7 @@ paysApp.config(function ($translateProvider) {
     UNABLE_CART_INSERT: "Products of another farmer are present in cart. Please add this farmer's products to wishlist and move them to cart once you finish current order.",
     NO_PREDEFINED_LOCATIONS: "You are not logged in at the moment. Please log in to see previous delivery locations of your account.",
     NO_LOGIN_CHECKOUT: "You are not logged in at the moment. Please log in to finish your order.",
-    NO_ORDER_CREATED: "You haven't created your order yet. Please visit Cart overview page and create order.",
+    NO_ORDER_CREATED: "You haven't created your order yet. Please create one.",
     FROM: "From",
     TO: "To",
     ORDER_CREATED: "Order successfully created!",
@@ -598,7 +598,7 @@ paysApp.config(function ($translateProvider) {
     NO_REVIEWS_MESSAGE : 'There are no reviews for this farmer. Buy products from this farmer and be the first one to leave a review!',
     WAIT_MSG : 'Please wait',
     LOAD_MSG : 'Loading...',
-    CALCULATE_TRANSPORT_PRICE : 'Calculate transport price',
+    CALCULATE_TRANSPORT_PRICE : 'Preview transport price',
     REQUIRED_FIELDS : 'Required fields',
     PRODUCT_IMAGE_REVERTED : 'Product image reverted',
     PRODUCT_IMAGE_NOT_REVERTED : 'Product image not reverted',
@@ -613,7 +613,17 @@ paysApp.config(function ($translateProvider) {
     OFFERED_GOODS : 'Offered service declaration',
     ACCEPT_TERMS_OF_SERVICE : 'I accept terms of service',
     TERMS_OF_SERVICE : 'Terms of service',
-    SAVE_ADDRESS : 'Save address'
+    SAVE_ADDRESS : 'Save address',
+    ORDINAL : 'Ordinal',
+    PRICE_PER_UNIT : 'Price per unit',
+    TAX : 'Tax',
+    TAX_AMOUNT : 'Tax amount',
+    TRANSPORT_PRICE : 'Transport price',
+    TOTAL_PAY_PRICE : 'Total price',
+    GO_TO_PAYMENT : 'Calculate transport price an proceed to payment',
+    TRANSPORT_PRICE_SUCCESS : 'Transport price calculated',
+    TRANSPORT_PRICE_FAILED : 'Failed to calculate transport price',
+    LOCATION_NOT_FOUND : 'Location not found'
 
   })
     .translations('rs_RS', {
@@ -638,7 +648,7 @@ paysApp.config(function ($translateProvider) {
       BLOG_LIST: 'Lista blogova',
       ONE_BLOG: 'Jedan blog',
       SEARCH_RESET: 'Poništi izbor za pretragu',
-      PAY: ' Plaćanje',
+      PAY: 'Plaćanje',
       DELIVERY: 'Dostava',
       TOTAL: 'Ukupno',
       UPDATE_CART: 'Nastavi naručivanje',
@@ -664,7 +674,7 @@ paysApp.config(function ($translateProvider) {
       TITLE_33: 'Nađite najboljeg farmera za Vas koristeći naše preporuke',
       ADVERTISING_MSG: 'PAYS sistem je osmišljen da olakša kupovinu svežih namirnica. Kupci mogu izabrati farmera iz proizvode koje žele da naruče. Takođe, dobijanje najniže cene i najbržeg transporta se podrazumeva',
       ORDER: 'Narudžbina',
-      ORDER_DATA_SUFFIX: 'Podaci za dostavu Vaše narudžbine',
+      ORDER_DATA_SUFFIX: 'Podaci o Vašoj narudžbini',
       WHO: 'Kome',
       NAME_SURNAME: 'Ime i prezime',
       WHERE: 'Gde',
@@ -952,7 +962,7 @@ paysApp.config(function ($translateProvider) {
       NO_REVIEWS_MESSAGE : 'Ne postoje komentari o ovom farmeru. Kupite proizvode od ovog farmera i budite prvi koji će mu ostaviti komentar!',
       WAIT_MSG : 'Molimo sačekajte',
       LOAD_MSG : 'Učitavanje...',
-      CALCULATE_TRANSPORT_PRICE : 'Izračunajte cenu prevoza',
+      CALCULATE_TRANSPORT_PRICE : 'Proveri cenu prevoza',
       REQUIRED_FIELDS : 'Obavezna polja',
       PRODUCT_IMAGE_REVERTED : 'Vraćena slika proizvoda',
       PRODUCT_IMAGE_NOT_REVERTED : 'Slika proizvoda nije vraćena',
@@ -967,7 +977,17 @@ paysApp.config(function ($translateProvider) {
       OFFERED_GOODS : 'Opis ponuđenih roba i usluga',
       ACCEPT_TERMS_OF_SERVICE : 'Prihvatam uslove korišćenja',
       TERMS_OF_SERVICE : 'Uslovi korišćenja',
-      SAVE_ADDRESS : 'Sačuvaj adresu'
+      SAVE_ADDRESS : 'Sačuvaj adresu',
+      ORDINAL : 'Redni broj',
+      PRICE_PER_UNIT : 'Jedinična cena',
+      TAX : 'PDV',
+      TAX_AMOUNT : 'Iznos PDV-a',
+      TRANSPORT_PRICE : 'Troškovi dostave',
+      TOTAL_PAY_PRICE : 'Ukupna cena',
+      GO_TO_PAYMENT : 'Izračunaj cenu transporta i nastavi na plaćanje',
+      TRANSPORT_PRICE_SUCCESS : 'Izračunata cena transporta',
+      TRANSPORT_PRICE_FAILED : 'Neuspešno računanje cene transporta',
+      LOCATION_NOT_FOUND : 'Lokacija nije pronadjena'
     })
   $translateProvider.preferredLanguage('en_EN');
 });
