@@ -440,7 +440,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
           console.log(returnJson);
           angular.forEach(scope.products, function (product) {
             if (product.product.id == productNew.product.id) {
-              found = true;
+              found          = true;
               scope.saveInfo = q.defer();
               FarmerService.updateProduct(routeParams.id, productNew).then(function () {
                 scope.saveInfo.resolve();
@@ -542,7 +542,7 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
     $scope.productNew.price.price = parseFloat($scope.productNew.price.price);
     $scope.productNew.amount      = parseFloat($scope.productNew.amount);
     $scope.productPrice           = parseFloat($scope.productNew.price.price);
-    $scope.productAmount = parseFloat($scope.productNew.amount);
+    $scope.productAmount          = parseFloat($scope.productNew.amount);
   }
 
   $scope.onProductNameChanged = function () {
@@ -595,17 +595,24 @@ angular.module('paysApp').controller('ProductModalInstanceCtrl', function ($scop
 
 });
 
-angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope, $filter, $modalInstance, farmer, orders, order, FarmerService, Notification) {
+angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope, $filter, $modalInstance, $q, farmer, orders, order, FarmerService, Notification) {
 
-  $scope.orders = orders;
-  $scope.order  = order;
-
+  $scope.orders          = orders;
+  $scope.order           = order;
+  $scope.order.totalMass = 0;
+  $scope.farmerName      = farmer.businessSubject.name;
+  console.log(farmer.businessSubject);
+  for (var i = 0; i < order.items.length; i++) {
+    $scope.order.totalMass += parseInt(order.items[i].product.avgWeight);
+  }
   $scope.qr = {};
 
-  check = function () {
+  $scope.qrGenerationDeffered = null;
+  check                       = function () {
     if (($scope.qr.content == null) && (document.getElementsByClassName("qrcode-link").length > 0)) {
       var qrElement     = angular.element(document.getElementsByClassName("qrcode-link"));
       $scope.qr.content = qrElement[0].attributes['href'].value;
+      $scope.qrGenerationDeffered.resolve();
     }
     else {
       setTimeout(check, 100); // check again in a second
@@ -613,18 +620,21 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
   }
 
   if (order.status != 'C' && order.status != 'A') {
-    $scope.qr.packagesNumber = order.packageNumber;
-    $scope.qr.img            = FarmerService.generateOrderQRCode(order, farmer, order.packageNumber);
+    $scope.qrGenerationDeffered = $q.defer();
+    $scope.qr.packagesNumber    = order.packageNumber;
+    $scope.qr.img               = FarmerService.generateOrderQRCode(order, farmer, order.packageNumber);
     check();
     console.log("QR data generated: " + $scope.qr.img);
   }
   $scope.generateQr = function () {
+    $scope.qrGenerationDeffered = $q.defer();
     FarmerService.setTransportOrderStatus(farmer.id, order.id, $scope.qr.packagesNumber).then(function (data) {
       Notification.success({message: $filter('translate')('ORDER_STATUS_TRANSPORT')});
       $scope.order.status = "T";
       $scope.qr.img       = FarmerService.generateOrderQRCode(order, farmer, $scope.qr.packagesNumber);
       check();
     }).catch(function () {
+      $scope.qrGenerationDeffered.reject();
       Notification.error({message: $filter('translate')('NOT_ORDER_STATUS_TRANSPORT')});
     });
   }
@@ -633,7 +643,31 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
     var printDiv      = document.getElementById(divName).innerHTML;
     var printContents = "";
     for (var i = 0; i < $scope.qr.packagesNumber; i++) {
-      printContents += printDiv;
+      var prefix = '<div style="border: dashed;padding: 50px;margin-bottom: 80px; margin-top: 30px;width: 40%; text-align :center;' + (i == ($scope.qr.packagesNumber - 1) ? '' : 'page-break-after: always')
+        + '"> <div style="margin-bottom: 50px;">' + printDiv + '</div>';
+      prefix += '<h5><strong>Id : </strong>' + $scope.order.id + ' </h5>';
+      prefix += '<h5><strong> ' + $filter('translate')('COMPANY_NAME') + ': </strong> ' + $scope.farmerName + '</h5>';
+      prefix += '<h5><strong> ' + $filter('translate')('NUMBER_OF_PACKAGES') + ': </strong> ' + (i + 1) + '/' + $scope.qr.packagesNumber + '</h5>';
+      prefix += '<h5><strong> ' + $filter('translate')('TOTAL_MASS') + ': </strong> ' + $scope.order.totalMass + ' [kg]</h5>';
+      prefix += '<h5><strong> ' + $filter('translate')('CLIENT_NAME') + ': </strong> ' + $scope.order.client.privateSubject.name + ' ' + $scope.order.client.privateSubject.lastName + '</h5>';
+      prefix += '<h5><strong> ' + $filter('translate')('CITY') + ': </strong> ' + $scope.order.address.city + ' &nbsp; ' +
+        '<strong> ' + $filter('translate')('POSTAL_CODE') + ': </strong> ' + $scope.order.address.postalCode + '</h5>';
+      prefix += '<h5><strong> ' + $filter('translate')('STREET') + ' </strong> ' + $scope.order.address.street + ' &nbsp; ' +
+        '<strong> ' + $filter('translate')('HOUSE_NUMBER') + ' </strong> ' + $scope.order.address.houseNumber + '</h5>';
+      if ($scope.order.address.floor && $scope.order.address.apartmentNumber) {
+        prefix += '<h5>';
+        if ($scope.order.address.floor) {
+          prefix += '<strong> ' + $filter('translate')('FLOOR') + ' </strong> ' + $scope.order.address.floor;
+        }
+        prefix += ' &nbsp; ';
+        if ($scope.order.address.apartmentNumber) {
+          prefix += '<strong> ' + $filter('translate')('APARTMENT') + ' </strong> ' + $scope.order.address.apartmentNumber;
+        }
+        prefix += '</h5>';
+      }
+      prefix += '<h5><strong> ' + $filter('translate')('DELIVERY_DATE') + ': </strong> ' + $scope.order.deliveryDate + '</h5>';
+      prefix += '<h5><strong> ' + $filter('translate')('DELIVERY_TIME') + ': </strong> ' + $scope.order.deliveryFrom + ' - ' + $scope.order.deliveryTo + '</h5></div></div>';
+      printContents += prefix;
     }
 
     if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {

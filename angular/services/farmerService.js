@@ -420,19 +420,8 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.generateOrderQRCode = function(order, farmer, packageNumber){
 
             var qrData;
-            var weight = 0;
-            for(var i=0; i < order.items.length; i++){ //TODO: What if product is not measured in KGs?
-                if(order.items[i].unit === "kilogram"){
-                    weight += parseInt(order.items[i].amount);
-                }
-            }
             qrData = {
-                id: order.id,
-                farm: farmer.businessSubject.name,
-                brpaket: packageNumber,
-                tezina: weight,
-                kupac: order.client.privateSubject.name + " " + order.client.privateSubject.lastName + " " + order.client.privateSubject.address + " " + order.client.privateSubject.city,
-                vremedostave: order.deliveryDate + "," + order.deliveryFrom + "-" + order.deliveryTo
+                id: order.id
             };
             return JSON.stringify(qrData);
         }

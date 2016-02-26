@@ -623,7 +623,8 @@ paysApp.config(function ($translateProvider) {
     GO_TO_PAYMENT : 'Calculate transport price an proceed to payment',
     TRANSPORT_PRICE_SUCCESS : 'Transport price calculated',
     TRANSPORT_PRICE_FAILED : 'Failed to calculate transport price',
-    LOCATION_NOT_FOUND : 'Location not found'
+    LOCATION_NOT_FOUND : 'Location not found',
+    TOTAL_MASS : 'Total weight'
 
   })
     .translations('rs_RS', {
@@ -987,7 +988,8 @@ paysApp.config(function ($translateProvider) {
       GO_TO_PAYMENT : 'Izračunaj cenu transporta i nastavi na plaćanje',
       TRANSPORT_PRICE_SUCCESS : 'Izračunata cena transporta',
       TRANSPORT_PRICE_FAILED : 'Neuspešno računanje cene transporta',
-      LOCATION_NOT_FOUND : 'Lokacija nije pronadjena'
+      LOCATION_NOT_FOUND : 'Lokacija nije pronadjena',
+      TOTAL_MASS : 'Ukupna težina'
     })
   $translateProvider.preferredLanguage('en_EN');
 });
