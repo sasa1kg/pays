@@ -31,6 +31,8 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
                 maxPrice: ""
             }
         }
+
+        scope.searchPlaceValue = "";
         scope.initGeo = function () {
             GeoLocationService.getLocation().then(function (data) {
                 if (data) {
@@ -114,24 +116,62 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
 
 
         scope.setSearchPrepared = function () {
-            SearchService.setSearchedItems(scope.searchWishlistItems);
-            SearchService.getFarmers().then(function (data) {
-                if (data) {
-                    scope.foundFarmers = data;
-                    for (var j = 0; j < scope.foundFarmers.length; j++) {
-                        FarmerService.getFarmerImage(scope.foundFarmers[j].id,scope.foundFarmers[j].images.profile).then(function (img) {
-                            for (var i = 0; i < scope.foundFarmers.length; i++) {
-                                if (scope.foundFarmers[i].id === img.index) {
-                                    scope.foundFarmers[i].img = "data:image/jpeg;base64," + img.document_content;
-                                }
+            var query = {};
+            if(scope.searchName.length > 0){
+                query.name = scope.searchName;
+            }
+            if(scope.searchWishlistItems.length > 0){
+                query.items = [];
+                angular.forEach(scope.searchWishlistItems, function(item){
+                    query.items.push({
+                        productId : item.id,
+                        minAmount : (typeof item.minAmount == 'undefined') ? 0  : item.minAmount,
+                        maxPrice : (typeof item.maxPrice == 'undefined') ? 0  : item.maxPrice
+                    });
+                })
+            }
+            if(scope.searchPlaceValue.length > 0 ){
+                SearchService.getLocationByAddress(scope.searchPlaceValue + " , Serbia").then(function(coordinates){
+                    query.location = { latitude : coordinates.lat , longitude : coordinates.lng, range : scope.distanceValue.num};
+                    console.log(query);
+                    SearchService.searchFarmers(query).then(function (data) {
+                        if (data) {
+                            scope.foundFarmers = data;
+                            for (var j = 0; j < scope.foundFarmers.length; j++) {
+                                FarmerService.getFarmerImage(scope.foundFarmers[j].id,scope.foundFarmers[j].images.profile).then(function (img) {
+                                    for (var i = 0; i < scope.foundFarmers.length; i++) {
+                                        if (scope.foundFarmers[i].id === img.index) {
+                                            scope.foundFarmers[i].img = "data:image/jpeg;base64," + img.document_content;
+                                        }
+                                    }
+                                });
                             }
-                        });
+                        }
+                        else {
+                            console.log("Unable to load farmers from DB");
+                        }
+                    });
+                });
+            } else {
+
+                SearchService.searchFarmers(query).then(function (data) {
+                    if (data) {
+                        scope.foundFarmers = data;
+                        for (var j = 0; j < scope.foundFarmers.length; j++) {
+                            FarmerService.getFarmerImage(scope.foundFarmers[j].id,scope.foundFarmers[j].images.profile).then(function (img) {
+                                for (var i = 0; i < scope.foundFarmers.length; i++) {
+                                    if (scope.foundFarmers[i].id === img.index) {
+                                        scope.foundFarmers[i].img = "data:image/jpeg;base64," + img.document_content;
+                                    }
+                                }
+                            });
+                        }
                     }
-                }
-                else {
-                    console.log("Unable to load farmers from DB");
-                }
-            });
+                    else {
+                        console.log("Unable to load farmers from DB");
+                    }
+                });
+            }
         };
         scope.cancelSearch = function () {
             console.log("Search configuration canceled.");

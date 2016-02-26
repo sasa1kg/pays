@@ -120,8 +120,8 @@
                 </br>
 
                 <h4 class="panel-title"><a>{{ 'IN_CIRCLE_OF' | translate}} </a></h4>
-                <select ng-model="distanceValue" ng-init="distanceValue = distances[0].value"
-                        ng-options="distance.value as distance.value for distance in distances"
+                <select ng-model="distanceValue" ng-init="distanceValue = distances[0]"
+                        ng-options="distance as distance.value for distance in distances"
                         required></select>
 
                 <hr class="orangehr">
@@ -207,13 +207,13 @@
               <h6 class="col-sm-2">{{ 'MIN_AMOUNT' | translate}}[{{product.unit.code}}]:</h6>
 
               <div class="col-sm-2">
-                <input type="text" class="form-control">
+                <input type="number" class="form-control" ng-model="product.minAmount">
               </div>
 
               <h6 class="col-sm-2">{{ 'MAX_PRICE' | translate}}[RSD]:</h6>
 
               <div class="col-sm-2">
-                <input type="text" class="form-control">
+                <input type="number" class="form-control" ng-model="product.maxPrice">
               </div>
             </row>
           </div>

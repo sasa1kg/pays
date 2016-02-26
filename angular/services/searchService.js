@@ -85,6 +85,29 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             return deffered.promise;
         }
 
+
+        this.searchFarmers = function (query) {
+            console.log("SEARCH FARMER QUERY");
+            console.log(query);
+            var deffered = q.defer();
+            http.post(rootScope.serverURL + "merchant_search",query).
+              success(function (data, status) {
+                  if (status == 200) {
+                      deffered.resolve(data);
+                  } else {
+                      console.log("searchFarmers |Status not OK " + status);
+                      deffered.reject("Error");
+                  }
+
+              }).
+              error(function (data, status) {
+                  console.log("Error " + status);
+                  deffered.reject("Error");
+              });
+
+            return deffered.promise;
+        }
+
         this.getFarmerById = function (id) {
             var deffered = q.defer();
             http.get(rootScope.serverURL + "merchant/" + id).
@@ -269,16 +292,20 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         this.getDistances = function () {
             return [
                 {
-                    value: "10 km"
+                    value: "10 km",
+                    num : 10
                 },
                 {
-                    value: "20 km"
+                    value: "20 km",
+                    num : 20
                 },
                 {
-                    value: "50 km"
+                    value: "50 km",
+                    num : 50
                 },
                 {
-                    value: "100 km"
+                    value: "100 km",
+                    num : 100
                 }
             ]
         }
@@ -367,6 +394,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         }
 
         this.getLocationByAddress = function(address) {
+            console.log(address);
             var deffered = q.defer();
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode( { "address": address }, function(results, status) {
