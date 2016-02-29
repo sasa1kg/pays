@@ -133,6 +133,15 @@ input[required] {
     background-position-y: top !important;
 }
 
+input[type="text"]:disabled {
+    background-color: darkgrey;
+}
+input[type="email"]:disabled {
+    background-color: darkgrey;
+}
+input[type="number"]:disabled {
+    background-color: darkgrey;
+}
 .bubble {
     position: relative;
     width: 70%;

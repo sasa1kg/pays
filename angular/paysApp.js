@@ -96,10 +96,16 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
 
   $rootScope.currentLang = $rootScope.serbianLangCode;
 
+  var storedLang = UserService.getDefaultLanguage();
+  if(storedLang != null){
+    $rootScope.currentLang = storedLang;
+  }
+
   $rootScope.translate = function (lang) {
     $rootScope.currentLang = lang;
     $rootScope.waitMsg = $filter('translate')('WAIT_MSG');
     $rootScope.loadMsg = $filter('translate')('LOAD_MSG');
+    UserService.storeDefaultLanguage(lang);
     $translate.use(lang);
   };
 
@@ -624,8 +630,16 @@ paysApp.config(function ($translateProvider) {
     TRANSPORT_PRICE_SUCCESS : 'Transport price calculated',
     TRANSPORT_PRICE_FAILED : 'Failed to calculate transport price',
     LOCATION_NOT_FOUND : 'Location not found',
-    TOTAL_MASS : 'Total weight'
-
+    TOTAL_MASS : 'Total weight',
+    FRACTALS_FUNDING : 'This project is funded by FRACTALS (Future Internet Enabled Agricultural Applications, FP7 project No. 632874),under the funding framework of the European Commission',
+    WHO_ARE_WE : 'Who are we?',
+    WHO_ARE_WE_ANSWER : 'Owner of PAYS WEBSHOP portal is the company CAM ENGINEERING DOO from Novi Sad, Serbia. Company is oriented on developing modern software solutions and tools, and  implementing activities on e-commerce. ',
+    WHAT_ARE_WE_DOING : 'What are we doing? ',
+    WHAT_ARE_WE_DOING_ANSWER : 'PAYS SYSTEM is a new concept for online selling of agricultural product that enables money transfer between customer, farmer and deliverer with product traceability.',
+    HOW_CAN_WE_HELP : 'How can we help you? ',
+    HOW_CAN_WE_HELP_ANSWER : 'PAYS SYSTEM is designed to make buying fresh products easier. Users can choose farmer and set of products they want to buy. Furthermore, obtaining best prices and fastest transport is included.',
+    MAX : 'maximum',
+    CHARS : 'characters'
   })
     .translations('rs_RS', {
       HOME: 'Početna',
@@ -665,7 +679,7 @@ paysApp.config(function ($translateProvider) {
       ADVERTISING: 'Reklame',
       MOST_IN_YEAR: 'Najviše prodali u toku godine',
       MOST_DIFFERENT: 'Najviše različitih proizvoda',
-      MOST_ORDERS: 'Najviše porudžbina',
+      MOST_ORDERS: 'Najviše narudžbina',
       ABOUT_US: 'O nama',
       TITLE_1: 'Kupovina svakodnevnih namirnica',
       TITLE_11: 'Prva online prodavnica svežih proizvoda direktno od farmera',
@@ -842,7 +856,7 @@ paysApp.config(function ($translateProvider) {
       REMOVE_FROM_WISHLIST: "Ukloni iz liste želja",
       REMOVED_FROM_WISHLIST: "Proizvod uklonjen iz liste želja",
       ITEM_ADDED_TO_CART: "Proizvod dodat u korpu",
-      DISTRIBUTOR_NAME: "Naziv distributora",
+      DISTRIBUTOR_NAME: "Naziv distributera",
       FARMER_NAME: "Naziv farmera",
       NAME: "Ime",
       SURNAME: "Prezime",
@@ -866,7 +880,7 @@ paysApp.config(function ($translateProvider) {
       GENERAL_INFO_NOT_UPDATED: "Neuspešno ažuriranje generalnih informacija",
       LOGOUT: "Odjava",
       GENERAL_FARMER_DATA: "Generalne informacije",
-      ORDERS: "Porudžbine",
+      ORDERS: "Narudžbine",
       FARMER_MARKETING: "Reklamni materijali",
       FARMER_PRICES: "Cenovnik",
       PRODUCT_NAME: "Naziv proizvoda",
@@ -896,7 +910,7 @@ paysApp.config(function ($translateProvider) {
       UNABLE_CART_INSERT: "Proizvodi drugog farmera se nalaze u korpi. Molimo Vas dodajte proizvode ovog farmera u listu želja i premestite ih u korpu kada naručite proizvode iz trenutne korpe.",
       NO_PREDEFINED_LOCATIONS: "Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste videli lokacije prethodnih dostava za Vaš nalog.",
       NO_LOGIN_CHECKOUT: "Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste naručili željene proizvode.",
-      NO_ORDER_CREATED: "Porudžbina još nije kreirana. Molimo Vas posetite stranicu Pregled korpe i kreiranje porudžbinu.",
+      NO_ORDER_CREATED: "Narudžbina još nije kreirana. Molimo Vas posetite stranicu Pregled korpe i kreiranje narudžbinu.",
       FROM: "Od",
       TO: "Do",
       ORDER_CREATED: "Narudžbina uspešno kreirana!",
@@ -945,8 +959,8 @@ paysApp.config(function ($translateProvider) {
       PAID : 'Plaćena',
       GENERATE_QR : 'Generiši QR kod',
       NUMBER_OF_PACKAGES : 'Broj paketa',
-      ENTER_NUMBER_OF_PACKAGES : 'Molimo unesite broj paketa u porudžbini',
-      SEND_ORDER : 'Pošalji porudžbinu',
+      ENTER_NUMBER_OF_PACKAGES : 'Molimo unesite broj paketa u narudžbini',
+      SEND_ORDER : 'Pošalji narudžbinu',
       ORDER_STATUS_TRANSPORT : 'Stanje narudžbine promenjeno u - U transportu',
       NOT_ORDER_STATUS_TRANSPORT : 'Neuspela promena stanja narudžbine',
       FARMER_REVIEWS : 'Komentari farmera',
@@ -989,7 +1003,16 @@ paysApp.config(function ($translateProvider) {
       TRANSPORT_PRICE_SUCCESS : 'Izračunata cena transporta',
       TRANSPORT_PRICE_FAILED : 'Neuspešno računanje cene transporta',
       LOCATION_NOT_FOUND : 'Lokacija nije pronadjena',
-      TOTAL_MASS : 'Ukupna težina'
+      TOTAL_MASS : 'Ukupna težina',
+      FRACTALS_FUNDING : ' Ovaj projekat financira FRACTALS (Future Internet Enabled Agricultural Applications, FP7 projekat br. 632874), u okviru programa financiranja Europske komisije.',
+      WHO_ARE_WE : 'Ko smo mi?',
+      WHO_ARE_WE_ANSWER : 'Vlasnik PAYS WEBSHOP portala je kompanija CAM INŽENJERING DOO iz Novog Sada, Srbija. Kompanija  je usmerena na razvoj savremenih softverskih rešenja i alata, te sprovođenje aktivnosti e-trgovine.',
+      WHAT_ARE_WE_DOING : 'Šta mi radimo?',
+      WHAT_ARE_WE_DOING_ANSWER : 'PAYS sistem je novi koncept za online prodaju poljoprivrednog proizvoda koji omogućuje prenos novca između kupca, farmera i dostavljača sa praćenjem podataka o proizvodu.',
+      HOW_CAN_WE_HELP : 'Kako možemo da pomognemo?',
+      HOW_CAN_WE_HELP_ANSWER : 'PAYS sistem je osmišljen da olakša kupovinu svežih namirnica. Kupci mogu izabrati farmera iz proizvode koje žele da naruče. Takođe, dobijanje najniže cene i najbržeg transporta se podrazumeva.',
+      MAX : 'maksimum',
+      CHARS : 'karaktera'
     })
   $translateProvider.preferredLanguage('en_EN');
 });
