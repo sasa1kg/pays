@@ -2919,3 +2919,12 @@ h2.title {
 .alert_color {
     background-color: #FF3333;
 }
+
+.narrow {
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.info_link {
+    color: #FE980F;
+}

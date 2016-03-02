@@ -97,5 +97,9 @@ angular.module("paysApp").config(['$routeProvider', function (routeProvider) {
       templateUrl: "partials/order.html",
       controller: "orderCtrl",
       restricted: false
+    }).when("/info", {
+      templateUrl: "partials/infoPage.html",
+      controller: "",
+      restricted: false
     }).otherwise({redirectTo: '/'});
 }]);
