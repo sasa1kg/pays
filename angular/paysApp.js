@@ -451,6 +451,7 @@ paysApp.config(function ($translateProvider) {
     COMPANY_REG_NUMBER: "Company identification number",
     INVALID_CREDENTIALS: "Invalid credentials",
     HELP: "Help",
+    INFO: "Info",
     HELP_CENTER: "Help Center",
     COMPLAINT: "File a Complaint",
     EDIT_DISTRIBUTOR_DATA: "Distributor data",
@@ -651,18 +652,19 @@ paysApp.config(function ($translateProvider) {
     INFO_HELP_YOU : 'How can we help you?',
     INFO_COMMENTS : 'Comments and sugestions ',
     INFO_DOCUMENTS : 'Documents',
-    INFO_WHO_ARE_WE_TEXT : 'Owner of PAYS WEBSHOP portal is the company CAM ENGINEERING DOO from Novi Sad, Serbia. Company is oriented on developing modern software solutions and tools, and  implementing activities on e-commerce.<br><br>Company information:<br>Full name: CAM ENGINEERING DOO<br>Adress: Filipa Filipovica 8, Novi Sad<br>Phone: 021-455-071<br>Tax number: 107010207<br>Identification number :20723297<br>Website: <a class="info_link" href="http://www.cam.co.rs">www.cam.co.rs</a> <br><br>Authorized distributor of PAYS WEBSHOP for Serbia is a company INDUSTRIAL PROJECT from Novi Sad, Serbia.<br><br>Distributor information:<br>Full name: AGENCIJA ZA RACUNARSKI INŽENJERING INDUSTRIAL PROJECT <br>Adress: Milana Rakica 16, Novi Sad<br>Phone : 021/455-071<br>Tax number: 107176348<br>Identification number : 62552778<br>Email: <a class="info_link" href="mailto:office@pays-system.com">office@pays-system.com</a><br>',
-    INFO_WHAT_WE_DO_TEXT : 'PAYS SYSTEM is a new concept for online selling of agriculture product that enables money transfer and networking between customer, farmer and deliverer with product traceability.',
+    INFO_WHO_ARE_WE_TEXT : 'Owner of PAYS WEBSHOP portal is the company CAM ENGINEERING DOO from Novi Sad, Serbia. Company is oriented on developing modern software solutions and tools, and  implementing activities on e-commerce.<br><br>Company information:<br>Full name: CAM ENGINEERING DOO<br>Adress: Filipa Filipovica 8, Novi Sad<br>Phone: 021-455-071<br>Tax number: 107010207<br>Identification number :20723297<br>Website: <a class="info_link" target="_blank" href="http://www.cam.co.rs">www.cam.co.rs</a> <br><br>Authorized distributor of PAYS WEBSHOP for Serbia is a company INDUSTRIAL PROJECT from Novi Sad, Serbia.<br><br>Distributor information:<br>Full name: AGENCIJA ZA RACUNARSKI INŽENJERING INDUSTRIAL PROJECT <br>Adress: Milana Rakica 16, Novi Sad<br>Phone : 021/455-071<br>Tax number: 107176348<br>Identification number : 62552778<br>Email: <a class="info_link" href="mailto:office@pays-system.com">office@pays-system.com</a><br>',
+    INFO_WHAT_WE_DO_TEXT : 'PAYS SYSTEM is a new concept for online selling of agricultural product that enables money transfer between customer, farmer and deliverer with product traceability. This project is funded by FRACTALS (Future Internet Enabled Agricultural Applications, FP7 project No. 632874), under the funding framework  of the European Commission.',
     INFO_HELP_YOU_TEXT : 'PAYS SYSTEM is designed to make buying fresh products easier. Users can choose farmer and products they want to buy. Furthermore, obtaining best prices and fastest transport is included.',
     INFO_COMMENTS_TEXT : 'Please comment and grade your orders in My profile section of the website. For all other comments and suggestions send us an email on:',
     INFO_DOCUMENTS_TEXT_MANUAL : 'Instruction Manual',
     INFO_DOCUMENTS_TEXT_TOU_FARMER : 'Terms of use – Farmer',
     INFO_DOCUMENTS_TEXT_TOU_DISTRIBUTOR : 'Terms of use – Distributor',
     INFO_DOCUMENTS_TEXT_TOU_BUYER : 'Terms of use – Buyer',
-    INFO_DOCUMENTS_TEXT_MANUAL_LINK : '/docs/dummy.pdf',
-    INFO_DOCUMENTS_TEXT_TOU_FARMER_LINK : '/docs/dummy.pdf',
-    INFO_DOCUMENTS_TEXT_TOU_DISTRIBUTOR_LINK : '/docs/dummy.pdf',
-    INFO_DOCUMENTS_TEXT_TOU_BUYER_LINK : '/docs/dummy.pdf'
+    INFO_DOCUMENTS_TEXT_MANUAL_LINK : 'docs/manual_EN.pdf',
+    INFO_DOCUMENTS_TEXT_TOU_FARMER_LINK : 'docs/Terms_of_use_Farmer.pdf',
+    INFO_DOCUMENTS_TEXT_TOU_DISTRIBUTOR_LINK : 'docs/Terms_of_use_Distributor.pdf',
+    INFO_DOCUMENTS_TEXT_TOU_BUYER_LINK : 'docs/Terms_of_use_Buyer.pdf'
+
 
   })
     .translations('rs_RS', {
@@ -843,6 +845,7 @@ paysApp.config(function ($translateProvider) {
       COMPANY_REG_NUMBER: "Matični broj",
       INVALID_CREDENTIALS: "Nepostojeći korisnik",
       HELP: "Pomoć",
+      INFO: "Informacije",
       HELP_CENTER: "Korisnička podrška",
       COMPLAINT: "Slanje predloga",
       EDIT_DISTRIBUTOR_DATA: "Informacije o distributeru",
@@ -1042,18 +1045,18 @@ paysApp.config(function ($translateProvider) {
       INFO_HELP_YOU : 'Kako možemo da pomognemo?',
       INFO_COMMENTS : 'Komentari i sugestije',
       INFO_DOCUMENTS : 'Dokumenti',
-      INFO_WHO_ARE_WE_TEXT : 'Vlasnik PAYS WEBSHOP portala je kompanija CAM INŽENJERING DOO iz Novog Sada, Srbija. Kompanija  je usmerena na razvoj savremenih softverskih rešenja i alata, te sprovođenje aktivnosti e-trgovine.<br><br>Company information:<br>Full name: CAM ENGINEERING DOO<br>Adress: Filipa Filipovica 8, Novi Sad<br>Phone: 021-455-071<br>Tax number: 107010207<br>Identification number :20723297<br>Website: <a class="info_link" href="http://www.cam.co.rs">www.cam.co.rs</a> <br><br>Authorized distributor of PAYS WEBSHOP for Serbia is a company INDUSTRIAL PROJECT from Novi Sad, Serbia.<br><br>Distributor information:<br>Full name: AGENCIJA ZA RACUNARSKI INŽENJERING INDUSTRIAL PROJECT <br>Adress: Milana Rakica 16, Novi Sad<br>Phone : 021/455-071<br>Tax number: 107176348<br>Identification number : 62552778<br>Email: <a class="info_link" href="mailto:office@pays-system.com">office@pays-system.com</a><br>',
-      INFO_WHAT_WE_DO_TEXT : 'PAYS sistem je novi koncept za online prodaju poljoprivrednih proizvoda koji omogućuje prenos novca i povezivanje između kupca, farmera i dostavljača sa praćenjem podataka o proizvodu.',
+      INFO_WHO_ARE_WE_TEXT : 'Vlasnik PAYS WEBSHOP portala je kompanija CAM INŽENJERING DOO iz Novog Sada, Srbija. Kompanija  je usmerena na razvoj savremenih softverskih rešenja i alata, te sprovođenje aktivnosti e-trgovine.<br><br>Informacije o kompaniji:<br>Naziv: CAM ENGINEERING DOO<br>Adresa: Filipa Filipovica 8, Novi Sad<br>Telefon: 021-455-071<br>PIB: 107010207<br>Matični broj: 20723297<br>Internet adresa: <a class="info_link" target="_blank" href="http://www.cam.co.rs">www.cam.co.rs</a> <br><br>Ovlašćeni distributer za PAYS WEBSHOP za teritoriju Republike Srbije je kompanija INDUSTRIAL PROJECT iz Novog Sada, Srbija.<br><br>Informacije o distributeru:<br>Naziv: AGENCIJA ZA RACUNARSKI INŽENJERING INDUSTRIAL PROJECT <br>Adresa: Milana Rakica 16, Novi Sad<br>Telefon: 021/455-071<br>PIB: 107176348<br>Matični broj: 62552778<br>Email: <a class="info_link" href="mailto:office@pays-system.com">office@pays-system.com</a><br>',
+      INFO_WHAT_WE_DO_TEXT : 'PAYS SYSTEM je novi koncept za online prodaju poljoprivrednog proizvoda koji omogućuje prenos novca između kupca, farmera i dostavljača sa praćenjem podataka o proizvodu. Ovaj projekat finansira FRACTALS (Future Internet Enabled Agricultural Applications, FP7 projekat br. 632874), u okviru programa finansiranja Evropske komisije.',
       INFO_HELP_YOU_TEXT : 'PAYS SYSTEM je dizajniran kako bi se omogućila lakša kupovina svežih poljoprivrednih proizvoda. Korisnici mogu odabrati farmera i proizvode koje žele kupiti. Osim toga, dobijanje najbolje cene i prevoza je uključeno u servis.',
       INFO_COMMENTS_TEXT : 'Postavite Vaš komentar i ocenu Vaše narudžbe u odjeljku Moj profil u sklopu web stranice. Za sve ostale komentare i predloge pošaljite nam e-mail na:',
       INFO_DOCUMENTS_TEXT_MANUAL : 'Uputstvo za upotrebu',
       INFO_DOCUMENTS_TEXT_TOU_FARMER : 'Uslovi korišćenja – Farmer ',
       INFO_DOCUMENTS_TEXT_TOU_DISTRIBUTOR : 'Uslovi korišćenja – Distributer',
       INFO_DOCUMENTS_TEXT_TOU_BUYER : 'Uslovi korišćenja – Kupac',
-      INFO_DOCUMENTS_TEXT_MANUAL_LINK : '/docs/dummy.pdf',
-      INFO_DOCUMENTS_TEXT_TOU_FARMER_LINK : '/docs/dummy.pdf',
-      INFO_DOCUMENTS_TEXT_TOU_DISTRIBUTOR_LINK : '/docs/dummy.pdf',
-      INFO_DOCUMENTS_TEXT_TOU_BUYER_LINK : '/docs/dummy.pdf'
+      INFO_DOCUMENTS_TEXT_MANUAL_LINK : 'docs/manual_SR.pdf',
+      INFO_DOCUMENTS_TEXT_TOU_FARMER_LINK : 'docs/Pravila_i_uslovi_koriscenja_Farmer.pdf',
+      INFO_DOCUMENTS_TEXT_TOU_DISTRIBUTOR_LINK : 'docs/Pravila_i_uslovi_koriscenja_Distributer.pdf',
+      INFO_DOCUMENTS_TEXT_TOU_BUYER_LINK : 'docs/Pravila_i_uslovi_koriscenja_Kupac.pdf'
     })
   $translateProvider.preferredLanguage('en_EN');
 });

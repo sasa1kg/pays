@@ -49,12 +49,12 @@
                         <li ng-if="!isLoggedIn()"><a href="#/login"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a>
                         <li ng-if="isLoggedIn()"><a href="#/" ng-click="logout()"><i class="fa fa-lock"></i> {{ 'LOGOUT' | translate}}</a>
                         </li>
-                        <li><a href="#/info"><i class="fa fa-question-circle"></i>
-                            {{ 'HELP' | translate}}<i class="fa fa-angle-down"></i></a>
-                            <ul role="menu" class="sub-menu">
+                        <li><a href="#/info"><i class="fa fa-info-circle"></i>
+                            {{ 'INFO' | translate}}<!--<i class="fa fa-angle-down"></i>--></a>
+                            <!--<ul role="menu" class="sub-menu">
                                 <li><a href="#/404"><i class="fa fa-info-circle"></i>{{ 'HELP_CENTER' | translate}}</a></li>
                                 <li><a href="#/404"><i class="fa fa-comment"></i>{{ 'COMPLAINT' | translate}}</a></li>
-                            </ul>
+                            </ul>-->
                         </li>
                     </ul>
                 </div>

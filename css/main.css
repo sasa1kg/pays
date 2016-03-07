@@ -2925,6 +2925,13 @@ h2.title {
     padding-right: 150px;
 }
 
+.info_text {
+    text-align: justify;
+}
 .info_link {
     color: #FE980F;
+}
+
+.info_link:hover {
+    color: #FF3333;
 }
