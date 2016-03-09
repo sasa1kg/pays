@@ -94,6 +94,12 @@ paysApp.filter("htmlSafe", ['$sce', function($sce) {
   };
 }]);
 
+paysApp.run(function($rootScope, $location, $anchorScroll) {
+  //when the route is changed scroll to the proper element.
+  $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
+    if($location.hash()) $anchorScroll();
+  });
+});
 
 paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notification, SearchService, UserService) {
 
@@ -1045,7 +1051,7 @@ paysApp.config(function ($translateProvider) {
       INFO_HELP_YOU : 'Kako možemo da pomognemo?',
       INFO_COMMENTS : 'Komentari i sugestije',
       INFO_DOCUMENTS : 'Dokumenti',
-      INFO_WHO_ARE_WE_TEXT : 'Vlasnik PAYS WEBSHOP portala je kompanija CAM INŽENJERING DOO iz Novog Sada, Srbija. Kompanija  je usmerena na razvoj savremenih softverskih rešenja i alata, te sprovođenje aktivnosti e-trgovine.<br><br>Informacije o kompaniji:<br>Naziv: CAM ENGINEERING DOO<br>Adresa: Filipa Filipovica 8, Novi Sad<br>Telefon: 021-455-071<br>PIB: 107010207<br>Matični broj: 20723297<br>Internet adresa: <a class="info_link" target="_blank" href="http://www.cam.co.rs">www.cam.co.rs</a> <br><br>Ovlašćeni distributer za PAYS WEBSHOP za teritoriju Republike Srbije je kompanija INDUSTRIAL PROJECT iz Novog Sada, Srbija.<br><br>Informacije o distributeru:<br>Naziv: AGENCIJA ZA RACUNARSKI INŽENJERING INDUSTRIAL PROJECT <br>Adresa: Milana Rakica 16, Novi Sad<br>Telefon: 021/455-071<br>PIB: 107176348<br>Matični broj: 62552778<br>Email: <a class="info_link" href="mailto:office@pays-system.com">office@pays-system.com</a><br>',
+      INFO_WHO_ARE_WE_TEXT : 'Vlasnik PAYS WEBSHOP portala je kompanija CAM INŽENJERING DOO iz Novog Sada, Srbija. Kompanija  je usmerena na razvoj savremenih softverskih rešenja i alata, te sprovođenje aktivnosti e-trgovine.<br><br>Informacije o kompaniji:<br>Naziv: CAM ENGINEERING DOO<br>Adresa: Filipa Filipovića 8, Novi Sad<br>Telefon: 021-455-071<br>PIB: 107010207<br>Matični broj: 20723297<br>Internet adresa: <a class="info_link" target="_blank" href="http://www.cam.co.rs">www.cam.co.rs</a> <br><br>Ovlašćeni distributer za PAYS WEBSHOP za teritoriju Republike Srbije je kompanija INDUSTRIAL PROJECT iz Novog Sada, Srbija.<br><br>Informacije o distributeru:<br>Naziv: AGENCIJA ZA RAČUNARSKI INŽENJERING INDUSTRIAL PROJECT <br>Adresa: Milana Rakića 16, Novi Sad<br>Telefon: 021/455-071<br>PIB: 107176348<br>Matični broj: 62552778<br>Email: <a class="info_link" href="mailto:office@pays-system.com">office@pays-system.com</a><br>',
       INFO_WHAT_WE_DO_TEXT : 'PAYS SYSTEM je novi koncept za online prodaju poljoprivrednog proizvoda koji omogućuje prenos novca između kupca, farmera i dostavljača sa praćenjem podataka o proizvodu. Ovaj projekat finansira FRACTALS (Future Internet Enabled Agricultural Applications, FP7 projekat br. 632874), u okviru programa finansiranja Evropske komisije.',
       INFO_HELP_YOU_TEXT : 'PAYS SYSTEM je dizajniran kako bi se omogućila lakša kupovina svežih poljoprivrednih proizvoda. Korisnici mogu odabrati farmera i proizvode koje žele kupiti. Osim toga, dobijanje najbolje cene i prevoza je uključeno u servis.',
       INFO_COMMENTS_TEXT : 'Postavite Vaš komentar i ocenu Vaše narudžbe u odjeljku Moj profil u sklopu web stranice. Za sve ostale komentare i predloge pošaljite nam e-mail na:',

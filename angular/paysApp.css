@@ -267,6 +267,7 @@ input[type="number"]:disabled {
     min-height: 200px;
     padding: 15px;
     margin: 15px;
+    cursor: pointer;
 }
 
 .greenTxt {
@@ -283,6 +284,7 @@ input[type="number"]:disabled {
 
 .boxTxt {
     font-size: 12px;
+    color: #333;
 }
 
 .hrBox {
