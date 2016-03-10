@@ -185,8 +185,8 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
 
   $rootScope.paysEMail = 'office@pays-system.com';
 
-  $rootScope.serverURL       = "http://185.23.171.43/PEP/PaysRest/";
-  $rootScope.serverImagesURL = "http://185.23.171.43/PaysImages/";
+  $rootScope.serverURL       = "http://148.6.81.216/PEP/PaysRest/";
+  $rootScope.serverImagesURL = "http://148.6.81.216/PaysImages/";
 
   $rootScope.undefinedImageId = -1;
 

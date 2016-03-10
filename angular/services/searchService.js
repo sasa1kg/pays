@@ -388,6 +388,9 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                     deffered.resolve(distanceMeters/1000);
                 }
                 console.log(directions);
+            }).catch(function(err){
+                console.err(err);
+                deffered.reject(err);
             });
 
             return deffered.promise;

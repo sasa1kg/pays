@@ -177,7 +177,16 @@
                       + </a>
                   </div>
                   <div class="col-sm-4 no-padding">
-                    <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                    <input ng-if="product.product.unit.decimalAllowed == false"
+                           class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                           onkeypress="return isNumberKey(event)"
+                           name="quantity"
+                           ng-model="product.itemNum"
+                           ng-change="setAmount(product,product.itemNum)" autocomplete="off"
+                           ng-class="{'alert_color' : product.resourceExcedeed}"
+                           size="5">
+                    <input ng-if="product.product.unit.decimalAllowed == true"
+                           class="form-control col-sm-12 text-center disable_number_spinner" type="number"
                            name="quantity"
                            ng-model="product.itemNum"
                            ng-change="setAmount(product,product.itemNum)" autocomplete="off"
@@ -236,12 +245,20 @@
                         + </a>
                     </div>
                     <div class="col-sm-4 no-padding">
-                      <input class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                      <input ng-if="product.product.unit.decimalAllowed == false"
+                             class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                             onkeypress="return isNumberKey(event)"
                              name="quantity"
                              ng-model="product.itemNum"
-                             ng-change="setAmount(product,product.itemNum)"
+                             ng-change="setAmount(product,product.itemNum)" autocomplete="off"
                              ng-class="{'alert_color' : product.resourceExcedeed}"
-                             autocomplete="off"
+                             size="5">
+                      <input ng-if="product.product.unit.decimalAllowed == true"
+                             class="form-control col-sm-12 text-center disable_number_spinner" type="number"
+                             name="quantity"
+                             ng-model="product.itemNum"
+                             ng-change="setAmount(product,product.itemNum)" autocomplete="off"
+                             ng-class="{'alert_color' : product.resourceExcedeed}"
                              size="5">
                     </div>
                     <div class="col-sm-3 no-padding">
