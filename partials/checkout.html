@@ -143,7 +143,8 @@
                             <p class="input-group">
                                 <input type="text" class="form-control" datepicker-popup="{{dateFormat}}"
                                        ng-model="deliveryDate.date"
-                                       is-open="datePopup.opened" min-date="minDate"
+                                       is-open="datePopup.opened" min-date="minDate" max-date="maxDate"
+                                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
                                        ng-required="true" close-text="Close"/>
                                       <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="openDate()"><i
@@ -161,7 +162,7 @@
                                     <tr>
                                         <div class="text-center">
                                             <timepicker ng-model="fromTime.time" hour-step="hstep"
-                                                        min="fromTime.minTime"
+                                                        min="fromTime.minTime" max="fromTime.maxTime"
                                                         minute-step="mstep"
                                                         show-meridian="ismeridian"></timepicker>
                                         </div>
@@ -176,7 +177,7 @@
                                     <tr>
                                         <div class="text-center">
                                             <timepicker ng-model="toTime.time" hour-step="hstep" min="toTime.minTime"
-                                                        minute-step="mstep"
+                                                        max="toTime.maxTime" minute-step="mstep"
                                                         show-meridian="ismeridian"></timepicker>
                                         </div>
                                     </tr>

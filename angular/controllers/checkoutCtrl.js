@@ -39,29 +39,53 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
             }
         }
 
-
-        scope.fromTime = {
-            minTime: null,
-            time: new Date()
-        };
-        scope.toTime = {
-            minTime: null,
-            time: new Date()
-        };
-
-
-        scope.deliveryDate = {
-            date: new Date()
-        }
-
-        scope.minDate = new Date();
         scope.dateFormat = 'yyyy-MM-dd';
         scope.timeFormat = 'HH:mm';
 
+        scope.deliveryDate = {
+            date: null
+        }
+
+        scope.dateOptions = {
+            startingDay: 1
+        };
+        scope.minDate = new Date(new Date().getTime()+24*3600*1000);
+        scope.maxDate = new Date(new Date().getTime()+15*24*3600*1000);
+
+        scope.disabled = function(date, mode) {
+            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        }
+
+        var today = new Date().getTime();
+        var date = null;
+        var counter =1;
+        while (scope.deliveryDate.date == null){
+            date = new Date(new Date().getTime()+counter*24*3600*1000);
+            if(date.getDay() !== 0 && date.getDay() !== 6){
+                scope.deliveryDate.date = date;
+            }
+            counter++;
+        }
 
         scope.hstep = 1;
         scope.mstep = 30;
         scope.ismeridian = false;
+
+        var startTimeDeliveryHours = 8;
+        var endTimeDeliveryHours = 19;
+        var minimalHoursDistance = 1;
+
+
+        scope.fromTime = {
+            minTime: null,
+            maxTime : null,
+            time: null
+        };
+        scope.toTime = {
+            minTime: null,
+            maxTime : null,
+            time: null
+        };
 
         scope.datePopup = {
             opened: false
@@ -70,30 +94,23 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.note = "";
 
         scope.$watch('fromTime.time', function () {
-            if (scope.fromTime.time > scope.toTime.time) {
-                scope.toTime.time = scope.fromTime.time;
-                scope.toTime.minTime = scope.fromTime.time;
+            var minToTime = scope.fromTime.time.getTime() +1*3600*1000;
+            if (minToTime > scope.toTime.time.getTime()) {
+                scope.toTime.time = new Date(minToTime);
+                scope.toTime.minTime = new Date(minToTime);
             } else {
-                scope.toTime.minTime = scope.fromTime.time;
+                scope.toTime.minTime = new Date(minToTime);
             }
         });
 
         scope.$watch('deliveryDate.date', function () {
-
-            var todayMillis = new Date(new Date().toLocaleDateString("en-au", {
-                year: "numeric",
-                month: "short",
-                day: "numeric"
-            })).getTime();
-            var deliveryMillis = new Date(scope.deliveryDate.date).getTime();
-            if ((deliveryMillis - todayMillis) > 1000 * 60 * 60 * 24) {
-                //if selected day is not today, enable all time periods for selection
-                scope.fromTime.minTime = null;
-                scope.fromTime.time = new Date();
-            } else {
-                // if selected day is today, enable just incoming time period
-                scope.fromTime.minTime = new Date();
-                scope.fromTime.time = new Date();
+            if(scope.fromTime.minTime == null){
+                scope.fromTime.minTime = new Date(new Date().setHours(startTimeDeliveryHours,0,0,0));
+                scope.fromTime.maxTime = new Date(new Date().setHours(endTimeDeliveryHours,0,0,0));
+                scope.fromTime.time = new Date(new Date().setHours(startTimeDeliveryHours,0,0,0));
+                scope.toTime.minTime = new Date(new Date().setHours(startTimeDeliveryHours+1,0,0,0));
+                scope.toTime.time = new Date(new Date().setHours(startTimeDeliveryHours+1,0,0,0));
+                scope.toTime.maxTime = new Date(new Date().setHours(endTimeDeliveryHours+1,0,0,0));
             }
         });
 
