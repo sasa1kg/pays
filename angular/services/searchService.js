@@ -468,5 +468,24 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
             return deffered.promise;
         }
+
+        this.getPredefinedLocations = function(){
+            var deffered = q.defer();
+            http.get(rootScope.serverURL + "delivery_place").
+            success(function (data, status) {
+                if (status == 200) {
+                    deffered.resolve(data);
+                } else {
+                    console.log("getPredefinedLocations |Status not OK " + status);
+                    deffered.reject("Error");
+                }
+            }).
+            error(function (data, status) {
+                console.log("getPredefinedLocations | Error " + status);
+                deffered.reject("Error");
+            });
+
+            return deffered.promise;
+        }
     }]);
 

@@ -121,10 +121,29 @@
             <div class="row total_area">
                 <!--predefined location -->
                 <div ng-if="credentials.role !== buyerUserType " class="col-sm-12 mt20">
-                    <h5 class="text-center" style="color:red;">{{ 'NO_PREDEFINED_LOCATIONS' | translate}}</h5>
+                    <h5 class="text-center" style="color:red;">{{ 'NO_PREVIOUS_LOCATIONS' | translate}}</h5>
                 </div>
 
                 <div ng-if="credentials.role === buyerUserType && previousAddresses.length" class="col-sm-12 mt20">
+                    <div class="col-sm-3">
+                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
+                               value="{{previousLocationString}}">
+                        {{ 'PREVIOUS_LOCATION' | translate}}
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-12">
+                            <select ng-model="prevAddress.address" class="form-control"
+                                    ng-disabled="locationType.selected!=previousLocationString">
+                                <option ng-repeat="addr in previousAddresses" value="{{addr}}">{{addr.street | html}}
+                                    {{addr.houseNumber
+                                    |
+                                    html}}, {{addr.postalCode | html}}, {{addr.city | html}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="predefinedLocations.length >0" class="col-sm-12 mt20">
                     <div class="col-sm-3">
                         <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
                                value="{{predefinedLocationString}}">
@@ -132,12 +151,12 @@
                     </div>
                     <div class="col-sm-9">
                         <div class="col-sm-12">
-                            <select ng-model="prevAddress.address" class="form-control"
+                            <select ng-model="predefinedLocation.data" class="form-control"
                                     ng-disabled="locationType.selected!=predefinedLocationString">
-                                <option ng-repeat="addr in previousAddresses" value="{{addr}}">{{addr.street | html}}
-                                    {{addr.houseNumber
+                                <option ng-repeat="addr in predefinedLocations" value="{{addr}}">{{addr.address.street | html}}
+                                    {{addr.address.houseNumber
                                     |
-                                    html}}, {{addr.postalCode | html}}, {{addr.city | html}}
+                                    html}}, {{addr.address.postalCode | html}}, {{addr.address.city | html}}
                                 </option>
                             </select>
                         </div>
@@ -155,7 +174,7 @@
                             <label class="col-sm-2 mt6">{{ 'CITY' | translate}}:</label>
 
                             <form class="col-sm-10">
-                                <select ng-model="address.city" class="form-control">
+                                <select ng-disabled="locationType.selected!=newAddressString" ng-model="address.city" class="form-control">
                                     <option ng-repeat="city in cities | orderBy:'name':false" value="{{city.name}}">
                                         {{city.name |
                                         html}}
@@ -167,28 +186,28 @@
                             <label class="mt6 col-sm-5">{{ 'POSTAL_CODE' | translate}}:</label>
 
                             <div class="col-sm-6">
-                                <input class="form-control disable_number_spinner" type="number"
+                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control disable_number_spinner" type="number"
                                        autocomplete="off" ng-model="address.postalCode"></div>
                         </div>
                         <div class="col-sm-6 mt20">
                             <label class="mt6 col-sm-2">{{ 'STREET' | translate}}</label>
 
                             <div class="col-sm-10">
-                                <input class="form-control" type="text"
+                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control" type="text"
                                        autocomplete="off" ng-model="address.street"></div>
                         </div>
                         <div class="col-sm-5 mt20">
                             <label class="mt6 col-sm-5">{{ 'HOUSE_NUMBER' | translate}}</label>
 
                             <div class="col-sm-6">
-                                <input class="form-control" type="text"
+                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control" type="text"
                                        autocomplete="off" ng-model="address.houseNumber"></div>
                         </div>
                         <div class="col-sm-6 mt20">
                             <label class="mt6 col-sm-2">{{ 'FLOOR' | translate}}</label>
 
                             <div class="col-sm-6">
-                                <input class="form-control disable_number_spinner" type="number"
+                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control disable_number_spinner" type="number"
                                        autocomplete="off" ng-model="address.floor">
                             </div>
                         </div>
@@ -196,7 +215,7 @@
                             <label class="mt6 col-sm-5 ">{{ 'APARTMENT' | translate}}</label>
 
                             <div class="col-sm-6">
-                                <input class="form-control disable_number_spinner" type="number"
+                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control disable_number_spinner" type="number"
                                        autocomplete="off" ng-model="address.apartmentNumber"></div>
                         </div>
                     </div>

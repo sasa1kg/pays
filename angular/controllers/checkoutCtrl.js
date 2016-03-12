@@ -1,26 +1,23 @@
-angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$filter","$window", "$location","$modal", "CartService", "WishlistService",
+angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$filter", "$window", "$location", "$modal", "CartService", "WishlistService",
     "OrderService", "UserService", "Notification",
-    function (scope, rootScope, filter, window,location,modal, CartService, WishlistService, OrderService, UserService, Notification) {
+    function (scope, rootScope, filter, window, location, modal, CartService, WishlistService, OrderService, UserService, Notification) {
 
         scope.termsAccepted = false;
         scope.orderData = OrderService.getOrderData();
         if (scope.orderData != null) {
             scope.orderData.totalPrice = parseFloat(scope.orderData.totalPrice).toFixed(2);
-            scope.orderData.transportPrice = parseFloat(scope.orderData.transportPrice).toFixed(2);
+            scope.orderData.transportPrice = scope.orderData.withTransport == true ? parseFloat(scope.orderData.transportPrice).toFixed(2) : parseFloat("0.00").toFixed(2);
             scope.orderData.totalProductPrice = (parseFloat(scope.orderData.totalPrice) - parseFloat(scope.orderData.transportPrice)).toFixed(2);
-            angular.forEach(scope.orderData.items.items , function(item){
-                var taxLower = (100 * parseFloat(item.tax))/(100+parseFloat(item.tax))/100;
+            angular.forEach(scope.orderData.items.items, function (item) {
+                var taxLower = (100 * parseFloat(item.tax)) / (100 + parseFloat(item.tax)) / 100;
                 item.totalTax = (parseFloat(item.itemNum) * parseFloat(item.itemPrice) * taxLower).toFixed(2);
-                item.itemPriceNoTax =  (parseFloat(item.itemPrice) -  parseFloat(item.itemPrice) * taxLower).toFixed(2);
-               console.log(item);
+                item.itemPriceNoTax = (parseFloat(item.itemPrice) - parseFloat(item.itemPrice) * taxLower).toFixed(2);
+                console.log(item);
             });
             scope.amount = scope.orderData.totalPrice;
             scope.currency = scope.orderData.currency;
-            if (typeof scope.orderData.address === 'string') {
-                scope.address = scope.orderData.address;
-            } else {
-                scope.addressJson = scope.orderData.address;
-            }
+            scope.addressJson = scope.orderData.address;
+
 
             if (scope.orderData.clientId == null) {
                 if (rootScope.credentials.id) {
@@ -43,12 +40,12 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         }
 
 
-        scope.fromTime ={
-            minTime : null,
+        scope.fromTime = {
+            minTime: null,
             time: new Date()
         };
         scope.toTime = {
-            minTime : null,
+            minTime: null,
             time: new Date()
         };
 
@@ -73,7 +70,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.note = "";
 
         scope.$watch('fromTime.time', function () {
-            if(scope.fromTime.time > scope.toTime.time){
+            if (scope.fromTime.time > scope.toTime.time) {
                 scope.toTime.time = scope.fromTime.time;
                 scope.toTime.minTime = scope.fromTime.time;
             } else {
@@ -83,9 +80,13 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
 
         scope.$watch('deliveryDate.date', function () {
 
-            var todayMillis = new Date(new Date().toLocaleDateString("en-au", {year: "numeric", month: "short",day: "numeric"})).getTime();
+            var todayMillis = new Date(new Date().toLocaleDateString("en-au", {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            })).getTime();
             var deliveryMillis = new Date(scope.deliveryDate.date).getTime();
-            if((deliveryMillis - todayMillis) > 1000*60*60*24){
+            if ((deliveryMillis - todayMillis) > 1000 * 60 * 60 * 24) {
                 //if selected day is not today, enable all time periods for selection
                 scope.fromTime.minTime = null;
                 scope.fromTime.time = new Date();
@@ -104,16 +105,20 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 farmerId: scope.orderData.farmerId,
                 clientId: scope.orderData.clientId,
                 currencyId: scope.orderData.currency.id,
-                address: scope.addressJson,
                 deliveryDate: filter('date')(scope.deliveryDate.date, scope.dateFormat),
                 deliveryFrom: filter('date')(scope.fromTime.time, scope.timeFormat),
                 deliveryTo: filter('date')(scope.toTime.time, scope.timeFormat),
-                transportPrice : scope.orderData.transportPrice,
+                transportPrice: scope.orderData.transportPrice,
                 withTransport: scope.orderData.withTransport,
                 totalPrice: scope.orderData.totalPrice,
                 items: [],
-                comment : scope.orderData.comment
+                comment: scope.orderData.comment
             };
+            if(scope.orderData.predefinedLocation == null){
+                order.address = scope.addressJson;
+            } else {
+                order.deliveryPlace = scope.orderData.predefinedLocation.id;
+            }
             angular.forEach(scope.orderData.items.items, function (item) {
                 console.log(item);
                 order.items.push({
@@ -121,9 +126,10 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                     amount: item.itemNum,
                     measurementUnitId: item.itemMeasure.id,
                     totalPrice: item.itemPrice,
-                    tax : item.tax
+                    tax: item.tax
                 });
             });
+            console.log(order);
             OrderService.createOrder(order).then(function (data) {
                 Notification.success({message: filter('translate')('ORDER_CREATED')});
                 window.location.href = data.redirectURL;

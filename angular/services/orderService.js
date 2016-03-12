@@ -61,7 +61,7 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
             });
         }
 
-        this.saveAddress = function(isShipped,address,transportPrice) {
+        this.saveAddress = function(isShipped,address,transportPrice,predefinedLocation) {
             var keys = localStorageService.keys();
             for (var i = keys.length - 1; i >= 0; i--) {
                 var identifier = JSON.parse(keys[i]);
@@ -70,6 +70,7 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
                     localItem.address = address;
                     localItem.withTransport = isShipped;
                     localItem.transportPrice = transportPrice;
+                    localItem.predefinedLocation = predefinedLocation;
                     localStorageService.set(keys[i], localItem);
                 }
             }
