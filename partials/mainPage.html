@@ -17,7 +17,7 @@
         <div class="item active carrouselItemFirst">
           <img src="images/carrousel/carr_1.png" class="imgShift girl img-responsive" alt="">
 
-          <div class="container ">
+          <div class="container1 ">
             <div class="carousel-caption text-centered paysCaption carousel-ml150">
               <div class="opacTitle">
                 <h1><span>PAYS</span> web shop</h1>
@@ -204,7 +204,7 @@
               </div>
 
               <h4 class="title text-left col-sm-3">{{product.name.localization[currentLang]}}</h4>
-              <h6 class="col-sm-2">{{ 'MIN_AMOUNT' | translate}}[{{product.unit.code}}]:</h6>
+              <h6 class="col-sm-2">{{ 'MIN_AMOUNT' | translate}}[{{product.unit.code.default}}]:</h6>
 
               <div class="col-sm-2">
                 <input type="number" class="form-control" ng-model="product.minAmount">
@@ -352,7 +352,7 @@
 
                           <p ng-bind-html="farmer.city | html"></p>
                           <a href="#/farmer/{{farmer.merchantId}}" class="btn btn-default add-to-cart"><i
-                            class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}s</a>
+                            class="fa fa-user"></i>{{ 'VIEW_OFFER' | translate}}</a>
                         </div>
                       </div>
 

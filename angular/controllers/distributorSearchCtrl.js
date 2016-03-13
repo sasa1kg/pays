@@ -58,12 +58,13 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
         });
 
         scope.setSearchPrepared = function () {
-            scope.searchPerformed = true;
+
             scope.queryParams.name = (scope.queryParams.name != null && scope.queryParams.name.length > 0) ? scope.queryParams.name : null;
             scope.queryParams.city = (scope.queryParams.city != null && scope.queryParams.city.length > 0) ? scope.queryParams.city : null;
             scope.queryParams.weight = (scope.queryParams.weight != null) ? scope.queryParams.weight : null;
             DistributorService.searchDistributors(scope.queryParams).then(function (data) {
                 scope.foundDistributors = data;
+                scope.searchPerformed = true;
                 for (var j = 0; j < scope.foundDistributors.length; j++) {
                     if (scope.foundDistributors[j].images.profile != null) {
                         DistributorService.getDistributorImage(scope.foundDistributors[j].id, scope.allDistributors[j].images.profile).then(function (img) {

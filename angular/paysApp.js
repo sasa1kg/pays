@@ -674,7 +674,8 @@ paysApp.config(function ($translateProvider) {
             DELIVERY_TIME_PREDEFINED_LOCATION: ' You can pick up your order from PAYS delivery location in time period',
             PREVIOUS_LOCATION : 'Previous locations',
             REGISTERED_DISTRIBUTORS : 'Registered distributors',
-            NO_DISTRIBUTORS_FOUND : 'No distributors were found using your criteria. Please retry with different criterias'
+            NO_DISTRIBUTORS_FOUND : 'No distributors were found using your criteria. Please retry with different criterias',
+            NO_PREVIOUS_LOCATIONS : 'You are not logged in at the moment. Please log in to see previous delivery locations of your account.'
         })
         .translations('rs_RS', {
             HOME: 'Početna',
@@ -1071,7 +1072,8 @@ paysApp.config(function ($translateProvider) {
             DELIVERY_TIME_PREDEFINED_LOCATION: 'Vašu narudžbinu možete preuzeti sa PAYS dostavnog mesta u vremenskom intervalu',
             PREVIOUS_LOCATION : 'Prethodno korišćena mesta',
             REGISTERED_DISTRIBUTORS : 'Registrovani distributeri',
-            NO_DISTRIBUTORS_FOUND : 'Nijedan distributer nije pronađen koristeći zadane kriterijume. Molimo Vas pokušajte sa drugim kriterijumima.'
+            NO_DISTRIBUTORS_FOUND : 'Nijedan distributer nije pronađen koristeći zadane kriterijume. Molimo Vas pokušajte sa drugim kriterijumima.',
+            NO_PREVIOUS_LOCATIONS : 'Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste videli lokacije prethodnih dostava za Vaš nalog.'
         })
     $translateProvider.preferredLanguage('en_EN');
 });

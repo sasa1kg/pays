@@ -207,7 +207,7 @@ input[type="number"]:disabled {
 }
 
 .paysCaption {
-
+    right : 5% !important;
 }
 
 @media screen and (min-width: 768px) and (max-device-width: 1768px) {
