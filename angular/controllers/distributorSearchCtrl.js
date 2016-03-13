@@ -14,6 +14,8 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
         scope.cancelSearch = function () {
             console.log("Search configuration canceled.");
             scope.foundDistributors = [];
+            scope.queryParams = {};
+            scope.searchPerformed = false;
         };
 
         DistributorService.getDistributors().then(function (data) {
