@@ -230,16 +230,6 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
         return ret;
     }
 
-    $rootScope.getMeasureUnitObjectFromCode = function (code) {
-        var retVal = {};
-        angular.forEach($rootScope.measures, function (measure) {
-            if (measure.code === code) {
-                retVal = measure;
-            }
-        });
-        return retVal;
-    };
-
     $rootScope.getCurrencyObjectFromCode = function (code) {
         var retVal = {};
         angular.forEach($rootScope.currencies, function (currency) {

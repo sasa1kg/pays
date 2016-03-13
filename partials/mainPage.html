@@ -204,7 +204,7 @@
               </div>
 
               <h4 class="title text-left col-sm-3">{{product.name.localization[currentLang]}}</h4>
-              <h6 class="col-sm-2">{{ 'MIN_AMOUNT' | translate}}[{{product.unit.code.default}}]:</h6>
+              <h6 class="col-sm-2">{{ 'MIN_AMOUNT' | translate}}[{{product.unit.code.localization[currentLang]}}]:</h6>
 
               <div class="col-sm-2">
                 <input type="number" class="form-control" ng-model="product.minAmount">
