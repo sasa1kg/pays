@@ -367,3 +367,12 @@ input[type="number"]:disabled {
 .fs18 {
     font-size:18px;
 }
+
+.subtitle-header-rounded{
+    background-color: #FE980F;
+    color : white;
+    padding : 5px;
+    border-radius : 50px;
+    width : 50px;
+    height : 50px;
+}
