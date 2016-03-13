@@ -5,7 +5,7 @@
 <section id="carrousel"><!--slider-->
     <div class="container-fluid">
         <div id="sliderCarousel" class="carousel slide" data-ride="carousel"
-             ng-if="foundDistributors.length == 0">
+             ng-if="(foundDistributors.length == 0) && (searchPerformed == false)">
             <ol class="carousel-indicators pays-carousel-indicators">
                 <li data-target="#sliderCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#sliderCarousel" data-slide-to="1"></li>
@@ -96,14 +96,14 @@
                             <!--< class="signup-form">-->
                             <form>
                                 <h4 class="panel-title"><a>{{ 'DISTRIBUTOR_NAME' | translate}} </a></h4>
-                                <input type="text" ng-model="queryParams.searchName"
+                                <input type="text" ng-model="queryParams.name"
                                        ng-keypress="searchNameCallback($event)"
                                        class="search_input_height form-control"
                                        placeholder="{{ 'DISTRIBUTOR_NAME' | translate}}"/>
                                 <hr class="orangehr">
 
                                 <h4 class="panel-title"><a>{{ 'LOCATION_PLACE' | translate}} </a></h4>
-                                <input type="text" ng-model="queryParams.locationValue"
+                                <input type="text" ng-model="queryParams.city"
                                        class="search_input_height form-control"
                                        ng-blur="searchPlaceBlur()"
                                        placeholder="{{'LOCATION_PLACE' | translate}}"/>
@@ -111,7 +111,7 @@
                                 <hr class="orangehr">
 
                                 <h4 class="panel-title"><a>{{ 'VEHICLE_MAX_LOAD' | translate}} [kg] </a></h4>
-                                <input type="number" min="0" ng-model="queryParams.maxLoad"
+                                <input type="number" min="0" ng-model="queryParams.weight"
                                        class="search_input_height disable_number_spinner form-control"/>
                                 <hr class="orangehr">
 
@@ -135,7 +135,7 @@
         </div>
         <!--</div>-->
         <div class="col-sm-9">
-            <div class="col-sm-12" ng-if="foundDistributors.length > 0">
+            <div class="col-sm-12" ng-if="foundDistributors.length > 0 && searchPerformed == true">
                 <div class="features_items col-sm-12"><!--features_items-->
                     <div class="col-sm-4" ng-repeat="distributor in foundDistributors">
                         <div class="product-image-wrapper">
@@ -155,10 +155,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12" ng-if="foundDistributors.length == 0">
+            <div class="col-sm-12" ng-if="foundDistributors.length == 0 && searchPerformed == true">
+                <h3 class="text-center">{{ 'NO_DISTRIBUTORS_FOUND' | translate}}</h3>
+            </div>
+            <div class="col-sm-12" ng-if="(foundDistributors.length == 0) && (searchPerformed == false)">
                 <h2 class="title text-center">{{ 'REGISTERED_DISTRIBUTORS' | translate}}</h2>
                 <div class="features_items col-sm-12">
-                    <div class="col-sm-12" ng-repeat="name in distributorsNamesArray | orderBy:'letter':false | limitTo:3"
+                    <div class="col-sm-12"
+                         ng-repeat="name in distributorsNamesArray | orderBy:'letter':false | limitTo:3"
                          ng-if="name.distributors.length > 0">
                         <div class="col-sm-12">
                             <div class="col-sm-offset-5 col-sm-2 text-center">

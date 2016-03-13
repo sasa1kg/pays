@@ -3,32 +3,19 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
 
         scope.distances = SearchService.getDistances();
 
+        scope.searchPerformed = false;
         scope.allDistributors = [];
         scope.foundDistributors = [];
 
         scope.distributorsNamesArray = [];
 
-        //create array from A to Z
-        //for(var i = 65;i<=90;i++){
-        //    scope.distributorsNamesArray.push({
-        //        letter : String.fromCharCode(i),
-        //        distributors : []
-        //    });
-        //}
-        scope.queryParams = {
-            searchName: "",
-            locationValue: "",
-            distanceValue: "",
-            pricePerKm: "",
-            maxLoad: "",
-            currency: "",
-            loadMeasure: ""
-        }
+        scope.queryParams = {};
 
         scope.cancelSearch = function () {
             console.log("Search configuration canceled.");
             scope.foundDistributors = [];
         };
+
         DistributorService.getDistributors().then(function (data) {
             scope.allDistributors = data;
             for (var j = 0; j < scope.allDistributors.length; j++) {
@@ -55,8 +42,6 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
                     } else {
                         distributorName.distributors.push(scope.allDistributors[j]);
                     }
-
-                    console.log(scope.distributorsNamesArray);
                     if (scope.allDistributors[j].images.profile != null) {
                         DistributorService.getDistributorImage(scope.allDistributors[j].id, scope.allDistributors[j].images.profile).then(function (img) {
                             for (var i = 0; i < scope.allDistributors.length; i++) {
@@ -71,9 +56,11 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
         });
 
         scope.setSearchPrepared = function () {
-            scope.queryParams.currency = rootScope.getCurrencyObjectFromCode(scope.queryParams.currency);
-            scope.queryParams.loadMeasure = rootScope.getMeasureUnitObjectFromCode(scope.queryParams.loadMeasure);
-            DistributorService.getDistributors().then(function (data) {
+            scope.searchPerformed = true;
+            scope.queryParams.name = (scope.queryParams.name != null && scope.queryParams.name.length > 0) ? scope.queryParams.name : null;
+            scope.queryParams.city = (scope.queryParams.city != null && scope.queryParams.city.length > 0) ? scope.queryParams.city : null;
+            scope.queryParams.weight = (scope.queryParams.weight != null) ? scope.queryParams.weight : null;
+            DistributorService.searchDistributors(scope.queryParams).then(function (data) {
                 scope.foundDistributors = data;
                 for (var j = 0; j < scope.foundDistributors.length; j++) {
                     if (scope.foundDistributors[j].images.profile != null) {
@@ -91,10 +78,8 @@ angular.module('paysApp').controller("distributorSearchCtrl", ["$scope", "$rootS
 
         scope.clearSelectedSearchProducts = function () {
             scope.foundDistributors = [];
-            scope.pricePerKm = "";
-            scope.maxLoad = "";
-            scope.locationValue = "";
-            scope.distanceValue = "";
+            scope.queryParams = {};
+            scope.searchPerformed = false;
         }
 
         scope.searchNameCallback = function (keyEvent) {

@@ -29,6 +29,27 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             return deffered.promise;
         }
 
+        this.searchDistributors = function (query) {
+            var deffered = q.defer();
+
+            http.post(rootScope.serverURL + "transporter_search",query).
+            success(function (data, status) {
+                if (status == 200) {
+                    deffered.resolve(data);
+                } else {
+                    console.log("searchDistributors | Status not OK " + status);
+                    deffered.reject("Error");
+                }
+
+            }).
+            error(function (data, status) {
+                console.log("searchDistributors | Error " + status);
+                deffered.reject("Error");
+            });
+
+            return deffered.promise;
+        }
+
         this.getDistributorById = function (distributorId) {
             var deffered = q.defer();
 
