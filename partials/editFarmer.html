@@ -28,7 +28,7 @@
         </div>
       </div>
     </nav>
-    <div class="row">
+    <div class="container-fluid">
       <div ng-if="page == 'GENERAL_FARMER_DATA'">
         <div cg-busy="{promise:loadGeneralDeffered.promise,message:loadMsg,backdrop:true}">
           <div class="col-sm-6">
@@ -244,7 +244,7 @@
                         <h5>{{ 'PRODUCT_QUANTITY' | translate}} : {{product.amount}} [ {{product.product.unit.code.localization[currentLang]}}
                           ]</h5>
                         <h5>{{ 'PRODUCT_PRICE' | translate}} : {{product.price.price}}
-                          {{product.price.currency.code.default}}</h5>
+                          [{{product.price.currency.code}}]</h5>
                       </td>
                       <td>
                         <div class="text-left">
@@ -483,7 +483,7 @@
                       <div cg-busy="{promise:qrGenerationDeffered.promise,message:loadMsg,backdrop:true}">
                         <div class="text-center " ng-if="qr.img">
                           <div class="col-sm-12 thumbnail-vehicle text-center">
-                            <qrcode ng-hide="true" size="150" version="10" data="{{qr.img}}" download></qrcode>
+                            <qrcode ng-hide="true" size="150" version="1" data="{{qr.img}}" download></qrcode>
                             <div id="qrDivPrintImg">
                                 <div style="margin-bottom: 50px;">
                                   <img src="{{qr.content}}" alt="{{ 'NO_IMAGE_PROVIDED' | translate}}"/>
@@ -703,9 +703,9 @@
           </div>
         </div>
       </div>
-      <div ng-if="page == 'FARMER_PRICES'" class="col-sm-12">
+      <div ng-if="page == 'FARMER_PRICES'">
         <div cg-busy="{promise:loadPricesDeffered.promise,message:loadMsg,backdrop:true}">
-          <h4 class="text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}}</h4>
+          <h4 class="text-center">{{ 'DISTRIBUTOR_PRICE_LIST' | translate}} [RSD]</h4>
           <hr/>
           <div class="col-sm-1 text-center">
             <h5 class="side-caption">{{ 'WEIGHT' | translate}} [kg]</h5>
@@ -714,7 +714,7 @@
 
             <h5 class="text-center">{{ 'DISTANCE' | translate}} [km]</h5>
 
-            <div class="col-sm-12 text-center">
+            <div class="text-center">
               <table class="table table-responsive table-bordered" id="priceTable">
                 <tr>
                   <td>
@@ -732,7 +732,7 @@
                     <h5 ng-if="$index == (transportWeights.length -1)">{{'>'}} {{weight}}</h5>
                   </td>
                   <td ng-repeat="dist in transportDistances">
-                    <input type="number" placeholder="{{prices[dist][weight]}}"
+                    <input type="number" class="disable_number_spinner " placeholder="{{prices[dist][weight]}}"
                            ng-model="prices[dist][weight]"/>
                   </td>
                 </tr>

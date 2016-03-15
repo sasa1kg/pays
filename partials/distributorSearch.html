@@ -105,7 +105,7 @@
                                 <h4 class="panel-title"><a>{{ 'LOCATION_PLACE' | translate}} </a></h4>
                                 <input type="text" ng-model="queryParams.city"
                                        class="search_input_height form-control"
-                                       ng-blur="searchPlaceBlur()"
+                                       ng-keypress="searchNameCallback($event)"
                                        placeholder="{{'LOCATION_PLACE' | translate}}"/>
 
                                 <hr class="orangehr">

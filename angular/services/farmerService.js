@@ -264,7 +264,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
                         http.post(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id +"/pricelist", {
                             "product": product.product.id,
                             "currencyId": product.price.currency.id,
-                            "price": product.price.price
+                            "price": product.price.newPrice
                         }).success(function (dataPrice, status) {
                             if (status == 200) {
                                 deffered.resolve(data);

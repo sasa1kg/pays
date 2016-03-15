@@ -187,6 +187,8 @@ angular.module('paysApp').controller("farmCtrl", ["$scope", "$rootScope", "$filt
         }
 
         var searched = SearchService.getSearchedItems();
+        console.log("Searched");
+        console.log(searched);
         for (var i = searched.length - 1; i >= 0; i--) {
           for (var j = scope.farmerProducts.length - 1; j >= 0; j--) {
             if (searched[i].id == scope.farmerProducts[j].product.id) {

@@ -33,6 +33,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         }
 
         scope.searchPlaceValue = "";
+        scope.searchPerformed = false;
         scope.initGeo = function () {
             GeoLocationService.getLocation().then(function (data) {
                 if (data) {
@@ -45,34 +46,6 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             });
         }
 
-        scope.locationDefined = function () {
-            if (scope.geoLoc == null) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-        
-        scope.searchPlaceBlur = function () {
-            if (scope.searchPlaceValue.length > 0) {
-                scope.locationFound = false;
-                console.log("search place " + scope.searchPlaceValue);
-                GeoLocationService.findGeoLoc(scope.searchPlaceValue).then(function (data) {
-
-                    console.log("Ctrl res " + JSON.stringify(data));
-                    scope.geoLocSearch = data;
-                    scope.locationFound = true;
-                    scope.gmapsLocLink = "https://www.google.rs/maps/place/" + data.lat + "," + data.lng;
-
-                }, function (error) {
-                    console.log("Ctrl res null");
-                    scope.locationFound = false;
-                    scope.geoLoc = null;
-                    scope.geoLocSearch = null;
-                    scope.locationDefined();
-                });
-            }
-        }
 
         scope.farmers = [];
 
@@ -88,14 +61,12 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.changeSearchMode = function () {
             scope.geoLoc = null;
             scope.locationFound = false;
-            scope.locationDefined();
         };
 
         scope.clearSearch = function () {
             scope.searchPlaceValue = "";
             scope.geoLoc = null;
             scope.locationFound = false;
-            scope.locationDefined();
         };
 
 
@@ -130,12 +101,14 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
                     });
                 })
             }
+            SearchService.setSearchedItems(scope.searchWishlistItems);
             if(scope.searchPlaceValue.length > 0 ){
                 SearchService.getLocationByAddress(scope.searchPlaceValue + " , Serbia").then(function(coordinates){
                     query.location = { latitude : coordinates.lat , longitude : coordinates.lng, range : scope.distanceValue.num};
                     console.log(query);
                     SearchService.searchFarmers(query).then(function (data) {
                         if (data) {
+                            scope.searchPerformed = true;
                             scope.foundFarmers = data;
                             for (var j = 0; j < scope.foundFarmers.length; j++) {
                                 FarmerService.getFarmerImage(scope.foundFarmers[j].id,scope.foundFarmers[j].images.profile).then(function (img) {
@@ -156,6 +129,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
 
                 SearchService.searchFarmers(query).then(function (data) {
                     if (data) {
+                        scope.searchPerformed = true;
                         scope.foundFarmers = data;
                         for (var j = 0; j < scope.foundFarmers.length; j++) {
                             FarmerService.getFarmerImage(scope.foundFarmers[j].id,scope.foundFarmers[j].images.profile).then(function (img) {
@@ -176,6 +150,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
         scope.cancelSearch = function () {
             console.log("Search configuration canceled.");
             scope.foundFarmers = [];
+            scope.searchPerformed = false;
         };
 
 
@@ -265,6 +240,7 @@ angular.module('paysApp').controller("mainCtrl", ["$scope", "$sce", "$document",
             scope.selectedCategories = [];
             scope.foundProducts = [];
             scope.foundFarmers = [];
+            scope.searchPerformed = false;
         }
         scope.distance = "";
 

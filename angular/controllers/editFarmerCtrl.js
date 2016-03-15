@@ -102,6 +102,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
       } else {
         var productPromises = 0;
         for (var i = 0; i < scope.products.length; i++) {
+          scope.products[i].amount = parseFloat(scope.products[i].amount).toFixed(2);
           if (scope.products[i].customImage) {
             FarmerService.getStockProductImage(scope.products[i].stockItemId, scope.products[i].customImage).then(function imgArrived(data) {
               productPromises--;
@@ -470,6 +471,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
                   if (exists == false) {
                     newProd.stockItemId = newProdData.id;
                     newProd.price.price = productNew.price.newPrice;
+                    newProd.amount = parseFloat(newProd.amount).toFixed(2);
                     scope.products.push(newProd);
                     scope.uploadStockProductImage(newProd.product, newProd.stockItemId, rootScope.undefinedImageId, newImage);
                   }

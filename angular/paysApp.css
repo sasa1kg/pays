@@ -134,14 +134,17 @@ input[required] {
 }
 
 input[type="text"]:disabled {
-    background-color: darkgrey;
+    background-color: #b3c2c7;
 }
+
 input[type="email"]:disabled {
-    background-color: darkgrey;
+    background-color: #b3c2c7;
 }
+
 input[type="number"]:disabled {
-    background-color: darkgrey;
+    background-color: #b3c2c7;
 }
+
 .bubble {
     position: relative;
     width: 70%;
@@ -207,7 +210,7 @@ input[type="number"]:disabled {
 }
 
 .paysCaption {
-    right : 5% !important;
+    right: 5% !important;
 }
 
 @media screen and (min-width: 768px) and (max-device-width: 1768px) {
@@ -361,18 +364,28 @@ input[type="number"]:disabled {
 .carousel-ml200 {
     margin-left: 200px;
 }
+
 .carousel-ml150 {
     margin-left: 150px;
 }
+
 .fs18 {
-    font-size:18px;
+    font-size: 18px;
 }
 
-.subtitle-header-rounded{
+.fs12 {
+    font-size: 12px;
+}
+
+.subtitle-header-rounded {
     background-color: #FE980F;
-    color : white;
-    padding : 5px;
-    border-radius : 50px;
-    width : 50px;
-    height : 50px;
+    color: white;
+    padding: 5px;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+}
+
+.min_width_price_table {
+    width: 55px;
 }

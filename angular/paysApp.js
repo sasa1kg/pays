@@ -100,7 +100,7 @@ paysApp.run(function ($rootScope, $location, $anchorScroll) {
     });
 });
 
-paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notification, SearchService, UserService) {
+paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notification, SearchService, UserService, OrderService) {
 
     $rootScope.englishLangCode = "en_EN";
     $rootScope.serbianLangCode = "rs_RS";
@@ -242,6 +242,8 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
 
     $rootScope.logout = function () {
         UserService.logoutUser();
+        OrderService.clearOrderData();
+
     }
 
     $rootScope.isLoggedIn = function () {
@@ -475,7 +477,7 @@ paysApp.config(function ($translateProvider) {
             DISTRIBUTOR_ADVERTISING_TITLE: "Advertising title",
             DISTRIBUTOR_ADVERTISING_MSG: "Advertising message",
             BANNER_PICTURES: "Pictures for banner",
-            DISTRIBUTOR_PRICE_LIST: "Distributor price list",
+            DISTRIBUTOR_PRICE_LIST: "Transport price list",
             DISTANCE: "Distance",
             WEIGHT: "Weight",
             PRICE_PER_KM: "Price per km",
@@ -664,8 +666,9 @@ paysApp.config(function ($translateProvider) {
             DELIVERY_TIME_PREDEFINED_LOCATION: ' You can pick up your order from PAYS delivery location in time period',
             PREVIOUS_LOCATION : 'Previous locations',
             REGISTERED_DISTRIBUTORS : 'Registered distributors',
-            NO_DISTRIBUTORS_FOUND : 'No distributors were found using your criteria. Please retry with different criterias',
-            NO_PREVIOUS_LOCATIONS : 'You are not logged in at the moment. Please log in to see previous delivery locations of your account.'
+            NO_DISTRIBUTORS_FOUND : 'No distributors were found using your criteria. Please retry with different criteria',
+            NO_PREVIOUS_LOCATIONS : 'You are not logged in at the moment. Please log in to see previous delivery locations of your account.',
+            NO_FARMERS_FOUND : 'No farmers were found using your criteria. Please retry with different criteria'
         })
         .translations('rs_RS', {
             HOME: 'Početna',
@@ -873,7 +876,7 @@ paysApp.config(function ($translateProvider) {
             SELECT_IMAGE: "Odaberi sliku",
             DISTRIBUTOR_ADVERTISING_TITLE: "Reklamni naslov",
             DISTRIBUTOR_ADVERTISING_MSG: "Reklamna poruka",
-            BANNER_PICTURES: "Silke za baner",
+            BANNER_PICTURES: "Slike za baner",
             DISTRIBUTOR_PRICE_LIST: "Cenovnik dostave",
             DISTANCE: "Udaljenost",
             WEIGHT: "Težina",
@@ -1063,7 +1066,8 @@ paysApp.config(function ($translateProvider) {
             PREVIOUS_LOCATION : 'Prethodno korišćena mesta',
             REGISTERED_DISTRIBUTORS : 'Registrovani distributeri',
             NO_DISTRIBUTORS_FOUND : 'Nijedan distributer nije pronađen koristeći zadane kriterijume. Molimo Vas pokušajte sa drugim kriterijumima.',
-            NO_PREVIOUS_LOCATIONS : 'Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste videli lokacije prethodnih dostava za Vaš nalog.'
+            NO_PREVIOUS_LOCATIONS : 'Trenutno niste prijavljeni. Molimo Vas da se prijavite da biste videli lokacije prethodnih dostava za Vaš nalog.',
+            NO_FARMERS_FOUND : 'Nijedan farmer nije pronađen koristeći zadane kriterijume. Molimo Vas pokušajte sa drugim kriterijumima.'
         })
     $translateProvider.preferredLanguage('en_EN');
 });
