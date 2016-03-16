@@ -65,7 +65,7 @@
                             <td>{{item.itemPriceNoTax}}</td>
                             <td>{{item.tax}} %</td>
                             <td>{{item.totalTax}}</td>
-                            <td>{{item.itemPrice}}</td>
+                            <td>{{item.itemPrice*item.itemNum}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -203,14 +203,8 @@
 
             <hr class="orangehr">
             <row class="col-sm-12">
-                <div class="col-sm-offset-1 col-sm-11">
-                    <div class="text-right col-sm-3">{{ 'VALUE' | translate}}</div>
-                    <div class="text-right col-sm-5">
-                        <div class="text-right col-sm-8 amount-currency-text amount-text">{{ orderData.totalPrice}}
-                        </div>
-                        <div class="text-left col-sm-3 amount-currency-text">{{ orderData.currency.code}}</div>
-                    </div>
-
+                <div class="text-center">
+                    <strong>{{ 'WORKING_HOURS_DESC' | translate}}</strong>
                 </div>
             </row>
 

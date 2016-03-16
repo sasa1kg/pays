@@ -1,118 +1,128 @@
 <header id="header"><!--header-->
-  <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
+    <div ng-include="'partials/navBar.html'" ng-controller="navbarCtrl"></div>
 </header><!--/header-->
 <section class="mb100"><!--form-->
-  <div class="container" ng-if="order">
-    <div class="row">
-      <div class="col-sm-12">
-        <h3 class="text-center">{{ 'ORDER_INFO' | translate}} : {{order.status | orderStatus | translate}}</h3>
-        <div class="col-sm-4 text-center">
-          <h4 class="text-center">{{'EDIT_FARMER_DATA' | translate}}</h4>
+    <div class="container" ng-if="order && order.status != 'C'">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="text-center">{{ 'ORDER_INFO' | translate}} : {{order.status | orderStatus | translate}}</h3>
+                <div class="col-sm-4 text-center">
+                    <h4 class="text-center">{{'EDIT_FARMER_DATA' | translate}}</h4>
 
-          <div class="col-sm-12">
-            <div class="col-sm-4">
-              <strong>{{'COMPANY_NAME' | translate}}</strong>
-            </div>
-            <div class="col-sm-8">
-              {{order.farmer.businessSubject.name}}
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4">
-              <strong>{{'EMAIL' | translate}}</strong>
-            </div>
-            <div class="col-sm-8">
-              {{order.farmer.email}}
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4">
-              <strong>{{'PHONE_NUMBER' | translate}}</strong>
-            </div>
-            <div class="col-sm-8">
-              {{order.farmer.businessSubject.phone}}
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4">
-              <strong>{{'CLIENT_ADDRESS' | translate}}</strong>
-            </div>
-            <div class="col-sm-8">
-              {{order.farmer.businessSubject.address}}
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4">
-              <strong>{{'CITY' | translate}}</strong>
-            </div>
-            <div class="col-sm-8">
-              {{order.farmer.businessSubject.postalCode}}, {{order.farmer.businessSubject.city}}
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4 text-center">
-          <h4 class="text-center">{{'DELIVERY' | translate}}</h4>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <strong>{{'COMPANY_NAME' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{order.farmer.businessSubject.name}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <strong>{{'EMAIL' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{order.farmer.email}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <strong>{{'PHONE_NUMBER' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{order.farmer.businessSubject.phone}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <strong>{{'CLIENT_ADDRESS' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{order.farmer.businessSubject.address}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <strong>{{'CITY' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{order.farmer.businessSubject.postalCode}}, {{order.farmer.businessSubject.city}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <h4 class="text-center">{{'DELIVERY' | translate}}</h4>
 
-          <div class="col-sm-12">
-            <div class="col-sm-6">
-              <strong>{{'DELIVERY_DATE' | translate}}</strong>
-            </div>
-            <div class="col-sm-6">
-              {{order.deliveryDate}}
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <strong>{{'DELIVERY_TIME' | translate}}</strong>
-          </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4">
-              <strong>{{'FROM' | translate}}</strong>
-            </div>
-            <div class="col-sm-8">
-              {{order.deliveryFrom}}
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4">
-              <strong>{{'TO' | translate}}</strong>
-            </div>
-            <div class="col-sm-8">
-              {{order.deliveryTo}}
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <br/>
-          </div>
-          <div class="col-sm-12">
-            <div class="col-sm-4">
-              <strong>{{'NOTE' | translate}}</strong>
-            </div>
-            <div class="col-sm-8">
-              {{order.comment}}
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <h4 class="text-center">{{'PRODUCTS' | translate}}</h4>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <strong>{{'DELIVERY_DATE' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-6">
+                            {{order.deliveryDate}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <strong>{{'DELIVERY_TIME' | translate}}</strong>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <strong>{{'FROM' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{order.deliveryFrom}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <strong>{{'TO' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{order.deliveryTo}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <br/>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <strong>{{'NOTE' | translate}}</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{order.comment}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <h4 class="text-center">{{'PRODUCTS' | translate}}</h4>
 
-          <div ng-repeat="item in order.items">
-            <div class="col-sm-8">
-              {{item.product.name.localization[currentLang]}}
+                    <div ng-repeat="item in order.items">
+                        <div class="col-sm-8">
+                            {{item.product.name.localization[currentLang]}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{item.amount}} {{item.product.unit.code.localization[currentLang]}}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-4">
-              {{item.amount}} {{item.unit}}
+            <h3 class="text-center">{{ 'ORDER_MESSAGE' | translate}}</h3>
+            <div class="text-center col-sm-12 mt20">
+                <button type="submit" ng-click="goToMainPage()"
+                        class="btn btn-default btn-lg col-sm-4 col-sm-offset-4 apply-changes-btn">
+                    {{ 'MAIN_PAGE' | translate}}
+                </button>
             </div>
-          </div>
         </div>
-      </div>
-      <h3 class="text-center">{{ 'ORDER_MESSAGE' | translate}}</h3>
-      <div class="text-center col-sm-12 mt20">
-        <button type="submit" ng-click="goToMainPage()" class="btn btn-default btn-lg col-sm-4 col-sm-offset-4 apply-changes-btn">
-          {{ 'MAIN_PAGE' | translate}}
-        </button>
-      </div>
     </div>
-  </div>
+    <div class="container" ng-if="order && order.status == 'C'">
+        <h3 class="text-center">{{ 'ORDER_INFO_ERROR' | translate}}</h3>
+        <div class="text-center col-sm-12 mt20">
+            <button type="submit" ng-click="goToMainPage()"
+                    class="btn btn-default btn-lg col-sm-4 col-sm-offset-4 apply-changes-btn">
+                {{ 'MAIN_PAGE' | translate}}
+            </button>
+        </div>
+    </div>
 </section><!--/form-->
 
 

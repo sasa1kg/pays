@@ -12,6 +12,9 @@ angular.module('paysApp').controller("orderCtrl", ["$scope", "$rootScope", "$rou
       scope.order     = order;
       var credentials = UserService.getUserCredentials();
       if (credentials.role == rootScope.buyerUserType && scope.order.orderedBy == credentials.id) {
+        if(order.status != 'C'){
+          CartService.resetCart();
+        }
         SearchService.getClientById(scope.order.orderedBy, 0).then(function clientDataArrived(client) {
           scope.order.client = client;
         });
@@ -22,7 +25,7 @@ angular.module('paysApp').controller("orderCtrl", ["$scope", "$rootScope", "$rou
           UserService.storeUserDeliveryAddresses(scope.order.orderedBy, address);
         });
       } else {
-        scope.order = null;
+        //scope.order = null;
       }
     });
 
