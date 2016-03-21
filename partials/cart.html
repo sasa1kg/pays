@@ -2,295 +2,311 @@
     <div ng-include="'partials/navBar.html'"></div>
 </header><!--/header-->
 <div cg-busy="{promise:loadDeffered.promise,message:waitMsg,backdrop:true}">
+    <div ng-if="!farmerData" class="mb100 mt60 ">
+        <h3 class="text-center" style="color:red;">{{ 'NO_PRODUCTS_IN_CART' | translate}}</h3>
+    </div>
+    <div ng-if="farmerData">
+        <div id="cart_items">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li><a href="#/">{{ 'HOME' | translate}}</a></li>
+                        <li class="active">{{ 'CART' | translate }}</li>
+                    </ol>
+                </div>
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr class="cart_menu">
+                            <td class="image">{{ 'FARMER' | translate}}</td>
+                            <td class="price">{{ 'LOCATION' | translate}}</td>
+                            <td class="quantity">{{' EMAIL' | translate}}</td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a href="" class="cursor-pointer" ng-click="goToFarmerPage(farmerData)"><h4
+                                        class="farmer_data farmer_data_padding" ng-bind-html="farmerData.farmer | html">
+                                    {{
+                                    'VISIT_FARMER_PAGE'
+                                    |
+                                    translate}}</h4></a>
+                            </td>
+                            <td>
+                                <h4 class="farmer_data" ng-bind-html="farmerData.farmerLocation | html"></h4>
+                            </td>
+                            <td>
+                                <h4 class="farmer_data" ng-bind-html="farmerData.farmerEMail | html"></h4>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr class="cart_menu">
+                            <td class="image">{{ 'ITEM' | translate}}</td>
+                            <td class="description"></td>
+                            <td class="price">{{ 'PRICE' | translate}}</td>
+                            <td class="quantity">{{ 'ITEM_AMOUNT' | translate}}</td>
+                            <td class="total">{{ 'MONEY_AMOUNT' | translate}}</td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in cartItems.items">
+                            <td class="cart_product">
+                                <img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}"
+                                     style="width:100%;height:170px;">
+                            </td>
+                            <td class="cart_description col-sm-2">
+                                <h4><a href="">{{item.itemName.localization[currentLang]}}</a></h4>
 
-    <div id="cart_items">
-        <div class="container">
-            <div class="breadcrumbs">
-                <ol class="breadcrumb">
-                    <li><a href="#/">{{ 'HOME' | translate}}</a></li>
-                    <li class="active">{{ 'CART' | translate }}</li>
-                </ol>
-            </div>
-            <div class="table-responsive cart_info">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr class="cart_menu">
-                        <td class="image">{{ 'FARMER' | translate}}</td>
-                        <td class="price">{{ 'LOCATION' | translate}}</td>
-                        <td class="quantity">{{' EMAIL' | translate}}</td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <a href="" class="cursor-pointer" ng-click="goToFarmerPage(farmerData)"><h4
-                                    class="farmer_data farmer_data_padding" ng-bind-html="farmerData.farmer | html">{{
-                                'VISIT_FARMER_PAGE'
-                                |
-                                translate}}</h4></a>
-                        </td>
-                        <td>
-                            <h4 class="farmer_data" ng-bind-html="farmerData.farmerLocation | html"></h4>
-                        </td>
-                        <td>
-                            <h4 class="farmer_data" ng-bind-html="farmerData.farmerEMail | html"></h4>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="table-responsive cart_info">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr class="cart_menu">
-                        <td class="image">{{ 'ITEM' | translate}}</td>
-                        <td class="description"></td>
-                        <td class="price">{{ 'PRICE' | translate}}</td>
-                        <td class="quantity">{{ 'ITEM_AMOUNT' | translate}}</td>
-                        <td class="total">{{ 'MONEY_AMOUNT' | translate}}</td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in cartItems.items">
-                        <td class="cart_product">
-                            <img src="{{item.img}}" alt="{{item.itemName.localization[currentLang]}}"
-                                 style="width:100%;height:170px;">
-                        </td>
-                        <td class="cart_description col-sm-2">
-                            <h4><a href="">{{item.itemName.localization[currentLang]}}</a></h4>
+                                <p>{{item.shortDesc.localization[currentLang]}}</p>
+                            </td>
+                            <td class="cart_price col-sm-2">
+                                <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code.localization[currentLang]}}</p>
+                            </td>
+                            <td class="cart_quantity col-sm-2">
 
-                            <p>{{item.shortDesc.localization[currentLang]}}</p>
-                        </td>
-                        <td class="cart_price col-sm-2">
-                            <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code.localization[currentLang]}}</p>
-                        </td>
-                        <td class="cart_quantity col-sm-2">
-
-                            <div class="cart_quantity_button">
-                                <div class="col-sm-3 no-padding">
-                                    <a class="cursor-pointer form-control" ng-click="addMore(item)">
-                                        + </a>
+                                <div class="cart_quantity_button">
+                                    <div class="col-sm-3 no-padding">
+                                        <a class="cursor-pointer form-control" ng-click="addMore(item)">
+                                            + </a>
+                                    </div>
+                                    <div class="col-sm-5 no-padding">
+                                        <input ng-if="item.itemMeasure.decimalAllowed == false"
+                                               onkeypress="return isNumberKey(event)"
+                                               class="form-control col-sm-12 text-center disable_number_spinner"
+                                               type="number"
+                                               name="quantity"
+                                               ng-model="item.itemNum"
+                                               ng-change="setAmount(item,item.itemNum)"
+                                               ng-class="{'alert_color' : item.resourceExcedeed}"
+                                               autocomplete="off"
+                                               size="5">
+                                        <input ng-if="item.itemMeasure.decimalAllowed == true"
+                                               class="form-control col-sm-12 text-center disable_number_spinner"
+                                               type="number"
+                                               name="quantity"
+                                               ng-model="item.itemNum"
+                                               ng-change="setAmount(item,item.itemNum)"
+                                               ng-class="{'alert_color' : item.resourceExcedeed}"
+                                               autocomplete="off"
+                                               size="5">
+                                    </div>
+                                    <div class="col-sm-3 no-padding">
+                                        <a class="cursor-pointer form-control" ng-click="less(item)"> - </a>
+                                    </div>
+                                    <h5 ng-show="item.resourceExcedeed" class="text-center" style="color:red;">
+                                        {{item.alertMessage}}</h5>
                                 </div>
-                                <div class="col-sm-5 no-padding">
-                                    <input ng-if="item.itemMeasure.decimalAllowed == false"
-                                           onkeypress="return isNumberKey(event)"
-                                           class="form-control col-sm-12 text-center disable_number_spinner"
-                                           type="number"
-                                           name="quantity"
-                                           ng-model="item.itemNum"
-                                           ng-change="setAmount(item,item.itemNum)"
-                                           ng-class="{'alert_color' : item.resourceExcedeed}"
-                                           autocomplete="off"
-                                           size="5">
-                                    <input ng-if="item.itemMeasure.decimalAllowed == true"
-                                           class="form-control col-sm-12 text-center disable_number_spinner"
-                                           type="number"
-                                           name="quantity"
-                                           ng-model="item.itemNum"
-                                           ng-change="setAmount(item,item.itemNum)"
-                                           ng-class="{'alert_color' : item.resourceExcedeed}"
-                                           autocomplete="off"
-                                           size="5">
-                                </div>
-                                <div class="col-sm-3 no-padding">
-                                    <a class="cursor-pointer form-control" ng-click="less(item)"> - </a>
-                                </div>
-                                <h5 ng-show="item.resourceExcedeed" class="text-center" style="color:red;">
-                                    {{item.alertMessage}}</h5>
-                            </div>
-                        </td>
-                        <td class="cart_total col-sm-2">
-                            <p class="cart_total_price">{{item.itemPrice * item.itemNum}} RSD</p>
-                        </td>
-                        <td class="cart_delete col-sm-1">
-                            <a class="cart_quantity_delete" ng-click="deleteCartItem(item)"><i
-                                    class="fa fa-times"></i></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                            </td>
+                            <td class="cart_total col-sm-2">
+                                <p class="cart_total_price">{{item.itemPrice * item.itemNum}} RSD</p>
+                            </td>
+                            <td class="cart_delete col-sm-1">
+                                <a class="cart_quantity_delete" ng-click="deleteCartItem(item)"><i
+                                        class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    </section> <!--/#cart_items-->
+        </section> <!--/#cart_items-->
 
-    <section id="delivery">
-        <div class="container ">
-            <div class="row total_area">
-                <!--predefined location -->
-                <div ng-if="credentials.role !== buyerUserType " class="col-sm-12 mt20">
-                    <h5 class="text-center" style="color:red;">{{ 'NO_PREVIOUS_LOCATIONS' | translate}}</h5>
-                </div>
-
-                <div ng-if="credentials.role === buyerUserType && previousAddresses.length" class="col-sm-12 mt20">
-                    <div class="col-sm-3">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
-                               value="{{previousLocationString}}">
-                        {{ 'PREVIOUS_LOCATION' | translate}}
+        <section id="delivery">
+            <div class="container ">
+                <div class="row total_area">
+                    <!--predefined location -->
+                    <div ng-if="credentials.role !== buyerUserType " class="col-sm-12 mt20">
+                        <h5 class="text-center" style="color:red;">{{ 'NO_PREVIOUS_LOCATIONS' | translate}}</h5>
                     </div>
-                    <div class="col-sm-9">
-                        <div class="col-sm-12">
-                            <select ng-model="prevAddress.address" class="form-control"
-                                    ng-disabled="locationType.selected!=previousLocationString">
-                                <option ng-repeat="addr in previousAddresses" value="{{addr}}">{{addr.street | html}}
-                                    {{addr.houseNumber
-                                    |
-                                    html}}, {{addr.postalCode | html}}, {{addr.city | html}}
-                                </option>
-                            </select>
+
+                    <div ng-if="credentials.role === buyerUserType && previousAddresses.length" class="col-sm-12 mt20">
+                        <div class="col-sm-3">
+                            <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
+                                   value="{{previousLocationString}}">
+                            {{ 'PREVIOUS_LOCATION' | translate}}
                         </div>
-                    </div>
-                </div>
-                <div ng-if="predefinedLocations.length >0" class="col-sm-12 mt20">
-                    <div class="col-sm-3">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
-                               value="{{predefinedLocationString}}">
-                        {{ 'PREDEFINED_LOCATION' | translate}}
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="col-sm-12">
-                            <select ng-model="predefinedLocation.data" class="form-control"
-                                    ng-disabled="locationType.selected!=predefinedLocationString">
-                                <option ng-repeat="addr in predefinedLocations" value="{{addr}}">{{addr.address.street | html}}
-                                    {{addr.address.houseNumber
-                                    |
-                                    html}}, {{addr.address.postalCode | html}}, {{addr.address.city | html}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <!-- New address-->
-                <div class="col-sm-12 mt20">
-                    <div class="col-sm-3 ">
-                        <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
-                               value="{{newAddressString}}">
-                        {{ 'NEW_ADDRESS' | translate}}
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="col-sm-6">
-                            <label class="col-sm-2 mt6">{{ 'CITY' | translate}}:</label>
-
-                            <form class="col-sm-10">
-                                <select ng-disabled="locationType.selected!=newAddressString" ng-model="address.city" class="form-control">
-                                    <option ng-repeat="city in cities | orderBy:'name':false" value="{{city.name}}">
-                                        {{city.name |
+                        <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <select ng-model="prevAddress.address" class="form-control"
+                                        ng-disabled="locationType.selected!=previousLocationString">
+                                    <option ng-repeat="addr in previousAddresses" value="{{addr}}">{{addr.street |
                                         html}}
+                                        {{addr.houseNumber
+                                        |
+                                        html}}, {{addr.postalCode | html}}, {{addr.city | html}}
                                     </option>
                                 </select>
-                            </form>
-                        </div>
-                        <div class="col-sm-5">
-                            <label class="mt6 col-sm-5">{{ 'POSTAL_CODE' | translate}}:</label>
-
-                            <div class="col-sm-6">
-                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control disable_number_spinner" type="number"
-                                       autocomplete="off" ng-model="address.postalCode"></div>
-                        </div>
-                        <div class="col-sm-6 mt20">
-                            <label class="mt6 col-sm-2">{{ 'STREET' | translate}}</label>
-
-                            <div class="col-sm-10">
-                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control" type="text"
-                                       autocomplete="off" ng-model="address.street"></div>
-                        </div>
-                        <div class="col-sm-5 mt20">
-                            <label class="mt6 col-sm-5">{{ 'HOUSE_NUMBER' | translate}}</label>
-
-                            <div class="col-sm-6">
-                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control" type="text"
-                                       autocomplete="off" ng-model="address.houseNumber"></div>
-                        </div>
-                        <div class="col-sm-6 mt20">
-                            <label class="mt6 col-sm-2">{{ 'FLOOR' | translate}}</label>
-
-                            <div class="col-sm-6">
-                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control disable_number_spinner" type="number"
-                                       autocomplete="off" ng-model="address.floor">
                             </div>
                         </div>
-                        <div class="col-sm-5 mt20">
-                            <label class="mt6 col-sm-5 ">{{ 'APARTMENT' | translate}}</label>
-
-                            <div class="col-sm-6">
-                                <input ng-disabled="locationType.selected!=newAddressString" class="form-control disable_number_spinner" type="number"
-                                       autocomplete="off" ng-model="address.apartmentNumber"></div>
-                        </div>
                     </div>
-                    <div class="col-sm-12 mt25">
-
+                    <div ng-if="predefinedLocations.length >0" class="col-sm-12 mt20">
                         <div class="col-sm-3">
-                            <a class=" btn btn-default apply-changes-btn" ng-click="saveAddress()">{{
-                                'SAVE_ADDRESS' | translate}}</a>
+                            <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
+                                   value="{{predefinedLocationString}}">
+                            {{ 'PREDEFINED_LOCATION' | translate}}
                         </div>
-                        <div cg-busy="{promise:transportPriceDeffered.promise,message:waitMsg,backdrop:true}">
-                            <h5 class="col-sm-3 pull-right">{{ 'TRANSPORT_PRICE' | translate}}: {{transportPrice}}
-                                (RSD)</h5>
+                        <div class="col-sm-9">
+                            <div class="col-sm-12">
+                                <select ng-model="predefinedLocation.data" class="form-control"
+                                        ng-disabled="locationType.selected!=predefinedLocationString">
+                                    <option ng-repeat="addr in predefinedLocations" value="{{addr}}">
+                                        {{addr.address.street | html}}
+                                        {{addr.address.houseNumber
+                                        |
+                                        html}}, {{addr.address.postalCode | html}}, {{addr.address.city | html}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New address-->
+                    <div class="col-sm-12 mt20">
+                        <div class="col-sm-3 ">
+                            <input type="radio" name="locOptionRadio" class="col-sm-3" ng-model="locationType.selected"
+                                   value="{{newAddressString}}">
+                            {{ 'NEW_ADDRESS' | translate}}
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="col-sm-6">
+                                <label class="col-sm-2 mt6">{{ 'CITY' | translate}}:</label>
 
-                            <div class="col-sm-3 pull-right">
-                                <a class=" btn btn-default apply-changes-btn" ng-click="calculateTransportPrice()"
-                                   ng-disabled="!address.city">{{
-                                    'CALCULATE_TRANSPORT_PRICE' | translate}}</a>
+                                <form class="col-sm-10">
+                                    <select ng-disabled="locationType.selected!=newAddressString"
+                                            ng-model="address.city" class="form-control">
+                                        <option ng-repeat="city in cities | orderBy:'name':false" value="{{city.name}}">
+                                            {{city.name |
+                                            html}}
+                                        </option>
+                                    </select>
+                                </form>
+                            </div>
+                            <div class="col-sm-5">
+                                <label class="mt6 col-sm-5">{{ 'POSTAL_CODE' | translate}}:</label>
+
+                                <div class="col-sm-6">
+                                    <input ng-disabled="locationType.selected!=newAddressString"
+                                           class="form-control disable_number_spinner" type="number"
+                                           autocomplete="off" ng-model="address.postalCode"></div>
+                            </div>
+                            <div class="col-sm-6 mt20">
+                                <label class="mt6 col-sm-2">{{ 'STREET' | translate}}</label>
+
+                                <div class="col-sm-10">
+                                    <input ng-disabled="locationType.selected!=newAddressString" class="form-control"
+                                           type="text"
+                                           autocomplete="off" ng-model="address.street"></div>
+                            </div>
+                            <div class="col-sm-5 mt20">
+                                <label class="mt6 col-sm-5">{{ 'HOUSE_NUMBER' | translate}}</label>
+
+                                <div class="col-sm-6">
+                                    <input ng-disabled="locationType.selected!=newAddressString" class="form-control"
+                                           type="text"
+                                           autocomplete="off" ng-model="address.houseNumber"></div>
+                            </div>
+                            <div class="col-sm-6 mt20">
+                                <label class="mt6 col-sm-2">{{ 'FLOOR' | translate}}</label>
+
+                                <div class="col-sm-6">
+                                    <input ng-disabled="locationType.selected!=newAddressString"
+                                           class="form-control disable_number_spinner" type="number"
+                                           autocomplete="off" ng-model="address.floor">
+                                </div>
+                            </div>
+                            <div class="col-sm-5 mt20">
+                                <label class="mt6 col-sm-5 ">{{ 'APARTMENT' | translate}}</label>
+
+                                <div class="col-sm-6">
+                                    <input ng-disabled="locationType.selected!=newAddressString"
+                                           class="form-control disable_number_spinner" type="number"
+                                           autocomplete="off" ng-model="address.apartmentNumber"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt25">
+
+                            <div class="col-sm-3">
+                                <a class=" btn btn-default apply-changes-btn" ng-click="saveAddress()">{{
+                                    'SAVE_ADDRESS' | translate}}</a>
+                            </div>
+                            <div cg-busy="{promise:transportPriceDeffered.promise,message:waitMsg,backdrop:true}">
+                                <h5 class="col-sm-3 pull-right">{{ 'TRANSPORT_PRICE' | translate}}: {{transportPrice}}
+                                    (RSD)</h5>
+
+                                <div class="col-sm-3 pull-right">
+                                    <a class=" btn btn-default apply-changes-btn" ng-click="calculateTransportPrice()"
+                                       ng-disabled="!address.city">{{
+                                        'CALCULATE_TRANSPORT_PRICE' | translate}}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </section>
-    <section id="do_action">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="total_area">
-                        <ul>
-                            <li class="amount_data">{{ 'CART' | translate}} <span>{{totalPrice}} RSD</span></li>
-                            <li class="amount_data"><input type="checkbox"
-                                                           ng-model="isShipped" ng-click="changeShipment(isShipped)"
-                                                           style="width: 20px;height: 20px;">{{ 'DELIVERY' | translate}}
-                                ({{ 'DELIVERY_OPTION' | translate}})
-                                <span>{{isShipped ? transportPrice : "0"}} RSD</span></li>
-                            <li class="amount_data">{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
-                        </ul>
-
-                        <script type="text/ng-template" id="emptyCartModal.html">
-                            <div class="modal-header">
-                                <button type="button" class="close" ng-click="cancelModal()">&times;</button>
-                                <h4 class="modal-title">{{ 'EMPTY_CART' | translate}}</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>{{ 'DIALOG_EMPTY_CART_QUESTION' | translate}}</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default check_out"
-                                        ng-click="emptyCart()">{{ 'YES' |
+        </section>
+        <section id="do_action">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="total_area">
+                            <ul>
+                                <li class="amount_data">{{ 'CART' | translate}} <span>{{totalPrice}} RSD</span></li>
+                                <li class="amount_data"><input type="checkbox"
+                                                               ng-model="isShipped" ng-click="changeShipment(isShipped)"
+                                                               style="width: 20px;height: 20px;">{{ 'DELIVERY' |
                                     translate}}
-                                </button>
-                                <button type="button" class="btn btn-default check_out" ng-click="cancelModal()">{{ 'NO'
+                                    ({{ 'DELIVERY_OPTION' | translate}})
+                                    <span>{{isShipped ? transportPrice : "0"}} RSD</span></li>
+                                <li class="amount_data">{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
+                            </ul>
+
+                            <script type="text/ng-template" id="emptyCartModal.html">
+                                <div class="modal-header">
+                                    <button type="button" class="close" ng-click="cancelModal()">&times;</button>
+                                    <h4 class="modal-title">{{ 'EMPTY_CART' | translate}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{ 'DIALOG_EMPTY_CART_QUESTION' | translate}}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default check_out"
+                                            ng-click="emptyCart()">{{ 'YES' |
+                                        translate}}
+                                    </button>
+                                    <button type="button" class="btn btn-default check_out" ng-click="cancelModal()">{{
+                                        'NO'
+                                        |
+                                        translate}}
+                                    </button>
+                                </div>
+                            </script>
+                            <div cg-busy="{promise:paymentDeffered.promise,message:waitMsg,backdrop:true}">
+                                <a class="btn btn-default update" ng-click="goToFarmerPage(farmerData)">{{ 'UPDATE_CART'
                                     |
-                                    translate}}
-                                </button>
+                                    translate}}</a>
+                                <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
+                                    'EMPTY_CART' | translate}}</a>
+                                <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()"
+                                   ng-click="goToPayment()">{{
+                                    'GO_TO_PAYMENT' |
+                                    translate}}</a>
                             </div>
-                        </script>
-                        <div cg-busy="{promise:paymentDeffered.promise,message:waitMsg,backdrop:true}">
-                            <a class="btn btn-default update" ng-click="goToFarmerPage(farmerData)">{{ 'UPDATE_CART' |
-                                translate}}</a>
-                            <a class="btn btn-default check_out" ng-click="openEmptyCartModal()">{{
-                                'EMPTY_CART' | translate}}</a>
-                            <a class="btn btn-default check_out" ng-disabled="!canGoToPayment()"
-                               ng-click="goToPayment()">{{
-                                'GO_TO_PAYMENT' |
-                                translate}}</a>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
     <!--/#do_action-->
 </div>
 <div ng-include="'partials/footer.html'"></div>

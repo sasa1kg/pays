@@ -25,7 +25,7 @@ angular.module('paysApp').controller("orderCtrl", ["$scope", "$rootScope", "$rou
           UserService.storeUserDeliveryAddresses(scope.order.orderedBy, address);
         });
       } else {
-        //scope.order = null;
+        scope.order = null;
       }
     });
 

@@ -280,6 +280,20 @@
       </div>
       <div ng-if="page == 'ORDERS'" class="col-sm-12" id="orders_data">
         <div cg-busy="{promise:loadOrdersDeffered.promise,message:loadMsg,backdrop:true}">
+          <div class="col-sm-12 mb25">
+            <div class="col-sm-3 no-padding mt85">
+              <p class="info_text" class="col-sm-3">{{'ANDROID_APP_TEXT' | translate}}</p><br>
+            </div>
+            <div class="col-sm-3 mt6">
+              <img src="{{ 'APK_PAYS_ICON' | translate}}" width="150px">
+            </div>
+            <div class="col-sm-3 mt20">
+              <img src="{{ 'APK_QR_ICON' | translate}}" width="150px">
+            </div>
+            <div class="col-sm-3 mt60">
+              <img src="images/android/GooglePlay1.jpg" width="150px">
+            </div>
+          </div>
           <div class="table-responsive vehicles_info">
             <script type="text/ng-template" id="orderEditModal.html">
               <div class="modal-header">
@@ -368,6 +382,13 @@
                         </td>
                       </tr>
                       <tr>
+                        <td class="col-sm-3"><h5 class="text-left">{{ 'TRANSPORT_PRICE' | translate}}</h5>
+                        </td>
+                        <td class="col-sm-9">
+                          <div class="text-left">{{order.transportPrice}} RSD</div>
+                        </td>
+                      </tr>
+                      <tr>
                         <td class="col-sm-3"><h5 class="text-left">{{ 'PRODUCT_TOTAL_PRICE' | translate}}</h5>
                         </td>
                         <td class="col-sm-9">
@@ -409,10 +430,10 @@
                                 <div>{{product.product.name.localization[currentLang]}}</div>
                               </td>
                               <td>
-                                <div>{{product.amount}} [{{product.product.unit.name.localization[currentLang]}}]</div>
+                                <div>{{product.amount}} {{product.product.unit.code.localization[currentLang]}}</div>
                               </td>
                               <td>
-                                <div>{{product.totalItemPrice}} RSD</div>
+                                <div>{{product.totalItemPrice*product.amount}} RSD</div>
                               </td>
                             </tr>
                             </tbody>
@@ -432,7 +453,7 @@
                                 <div>{{product.product.name.localization[currentLang]}}</div>
                               </td>
                               <td>
-                                <div>{{product.amount}} [{{product.product.unit.name.localization[currentLang]}}]</div>
+                                <div>{{product.amount}} {{product.product.unit.code.localization[currentLang]}}</div>
                               </td>
                               <td>
                                 <div>{{product.status | orderItemStatus | translate}}</div>

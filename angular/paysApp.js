@@ -666,12 +666,18 @@ paysApp.config(function ($translateProvider) {
             DELIVERY_TIME_PREDEFINED_LOCATION: ' You can pick up your order from PAYS delivery location in time period',
             PREVIOUS_LOCATION : 'Previous locations',
             REGISTERED_DISTRIBUTORS : 'Registered distributors',
-            NO_DISTRIBUTORS_FOUND : 'No distributors were found using your criteria. Please retry with different criteria',
+            NO_DISTRIBUTORS_FOUND : 'No distributors were found using your criteria. Please retry with different criteria.',
             NO_PREVIOUS_LOCATIONS : 'You are not logged in at the moment. Please log in to see previous delivery locations of your account.',
             NO_FARMERS_FOUND : 'No farmers were found using your criteria. Please retry with different criteria',
             WORKING_HOURS_DESC :'In case of problems with the delivery time, farmer/ deliverer will contact you directly on your contact phone number.',
             ORDER_INFO_ERROR : 'An error occured during payment procedure for you order. Please check entered information of your credit card and try to create another order.',
-            PASSWORD_FORMAT: 'Password\'s length must be minimum 8 characters.<br>Password must contain : 1 small letter, 1 capital letter, 1 digit.'
+            PASSWORD_FORMAT: 'Password\'s length must be minimum 8 characters.<br>Password must contain : 1 small letter, 1 capital letter, 1 digit.',
+            ANDROID_APP_TEXT : 'To accept delivery you will need:',
+            PAYS_ANDROID : 'Experience PAYS on Android',
+            APK_PAYS_ICON : 'images/android/pays-en.jpg',
+            APK_QR_ICON : 'images/android/englQRAPK.png',
+            APK_GOOGLE_PLAY_LINK : 'https://play.google.com/store/apps/details?id=camengineeringns.pays.english',
+            NO_PRODUCTS_IN_CART : 'There are no products in your cart. Please find desired products and add them to your cart.'
         })
         .translations('rs_RS', {
             HOME: 'Početna',
@@ -1073,7 +1079,13 @@ paysApp.config(function ($translateProvider) {
             NO_FARMERS_FOUND : 'Nijedan farmer nije pronađen koristeći zadane kriterijume. Molimo Vas pokušajte sa drugim kriterijumima.',
             WORKING_HOURS_DESC : 'U slučaju nastanka problema sa vremenom dostave, kontaktiraće vas direktno farmer/dostavljač na Vaš kontakt telefon.',
             ORDER_INFO_ERROR : 'Dogodila se greška prilikom plaćanja Vaše narudžbine. Molimo Vas proverite unete podatke sa Vaše platne kartice i pokušajte sa kreiranjem nove narudžbine.',
-            PASSWORD_FORMAT: 'Dužina lozinke mora biti minimum 8 karaktera.<br> Lozinka mora sadržati : 1 malo slovo, 1 veliko slovo, 1 broj'
+            PASSWORD_FORMAT: 'Dužina lozinke mora biti minimum 8 karaktera.<br> Lozinka mora sadržati : 1 malo slovo, 1 veliko slovo, 1 broj',
+            ANDROID_APP_TEXT : 'Za prihvatanje pošiljke trebaće vam:',
+            PAYS_ANDROID : 'Iskusite PAYS na Android-u',
+            APK_PAYS_ICON : 'images/android/pays-rs.jpg',
+            APK_QR_ICON : 'images/android/srpQRAPK.png',
+            APK_GOOGLE_PLAY_LINK : 'https://play.google.com/store/apps/details?id=camengineeringns.pays.srpski',
+            NO_PRODUCTS_IN_CART : 'U vašoj korpi nema proizvoda. Molimo Vas pronađite željene proizvode i ubacite ih u Vašu korpu.'
         })
     $translateProvider.preferredLanguage('en_EN');
 });

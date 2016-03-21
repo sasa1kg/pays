@@ -2914,6 +2914,13 @@ h2.title {
     margin-top: 25px;
 }
 
+.mt60 {
+    margin-top: 60px;
+}
+.mt85 {
+    margin-top: 85px;
+}
+
 .alert_color {
     background-color: #FF3333;
 }

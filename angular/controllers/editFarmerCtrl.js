@@ -152,17 +152,18 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
       var clientIds = [];
       angular.forEach(data, function (order) {
         if (order.status != 'C') {
-          order.totalPrice    = parseFloat(order.totalPrice);
+          order.totalPrice    = parseFloat(order.totalPrice).toFixed(2);
           order.numericStatus = rootScope.getNumericOrderStatus(order.status);
           order.acceptedPrice = parseFloat(0);
           if (order.status == 'D' || order.status == 'P') {
             order.acceptedPrice = parseFloat(0);
             angular.forEach(order.items, function (item) {
-              item.totalPayPrice = parseFloat(item.totalItemPrice) * parseFloat(item.amount);
+              item.totalPayPrice = (parseFloat(item.totalItemPrice) * parseFloat(item.amount)).toFixed(2);
               if (item.status == "A") {
-                order.acceptedPrice += (parseFloat(item.totalItemPrice) * parseFloat(item.amount));
+                order.acceptedPrice += parseFloat(item.totalItemPrice) * parseFloat(item.amount);
               }
             });
+            order.acceptedPrice = order.acceptedPrice.toFixed(2);
           }
           scope.orders.push(order);
           if (clientIds.indexOf(order.orderedBy) == -1) {

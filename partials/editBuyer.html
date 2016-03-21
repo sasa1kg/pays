@@ -71,6 +71,20 @@
       </div>
       <div ng-if="page == 'ORDERS'" class="col-sm-12" id="orders_data">
         <div cg-busy="{promise:loadOrdersDeffered.promise,message:loadMsg,backdrop:true}">
+          <div class="col-sm-12 mb25">
+            <div class="col-sm-3 no-padding mt85">
+              <p class="info_text" class="col-sm-3">{{'ANDROID_APP_TEXT' | translate}}</p><br>
+            </div>
+            <div class="col-sm-3 mt6">
+              <img src="{{ 'APK_PAYS_ICON' | translate}}" width="150px">
+            </div>
+            <div class="col-sm-3 mt20">
+              <img src="{{ 'APK_QR_ICON' | translate}}" width="150px">
+            </div>
+            <div class="col-sm-3 mt60">
+              <img src="images/android/GooglePlay1.jpg" width="150px">
+            </div>
+          </div>
           <table class="table table-condensed">
             <thead>
             <tr class="vehicles_menu">
