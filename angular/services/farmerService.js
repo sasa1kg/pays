@@ -447,7 +447,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
         this.saveWorkHours = function(farmerId, hoursData){
             var deffered = q.defer();
-            http.put(rootScope.serverURL + "merchant/" + farmerId + "/workHours",hoursData).
+            http.post(rootScope.serverURL + "merchant/" + farmerId + "/deliveryConstraints",hoursData).
             success(function (data, status) {
                 if (status == 200) {
                     deffered.resolve(data);

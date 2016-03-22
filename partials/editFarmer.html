@@ -140,6 +140,13 @@
             </div>
             <div ng-if="page == 'BUSINESS_POLICY'" class="col-sm-12" id="business_policy">
                 <div cg-busy="{promise:loadGeneralDeffered.promise,message:loadMsg,backdrop:true}">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <h4 class="text-center col-sm-5">{{ 'MINIMAL_ORDER_AMOUNT' | translate}} [RSD]</h4>
+                        <div class="col-sm-3"><input type="number" class="form-control disable_number_spinner"
+                                                     ng-model="farmer.minOrderPrice"
+                                                     placeholder="{{farmer.minOrderPrice}}"/></div>
+                    </div>
+                    <hr class="orangehr"/>
                     <h4 class="text-center">{{ 'WORK_HOURS' | translate}}</h4>
                     <div class="col-sm-12">
                         <div class="col-sm-3 mb25" ng-repeat="day in workHours">
@@ -168,24 +175,12 @@
                             </div>
                         </div>
                     </div>
+                    <hr class="orangehr"/>
                     <div class="col-sm-12 text-center">
-                        <button class="btn btn-default apply-changes-btn" ng-click="saveWorkHours()">
+                        <button class="btn btn-default apply-changes-btn" ng-click="saveConstraints()">
                             {{'SAVE_CHANGES' |
                             translate}}
                         </button>
-                    </div>
-                    <hr class="orangehr"/>
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <h4 class="text-center col-sm-5">{{ 'MINIMAL_ORDER_AMOUNT' | translate}} [RSD]</h4>
-                        <div class="col-sm-3"><input type="number" class="form-control disable_number_spinner"
-                                                     ng-model="farmer.minimalAmount"
-                                                     placeholder="{{farmer.minimalAmount}}"/></div>
-                        <div class="col-sm-3">
-                            <button class="btn btn-default apply-changes-btn" ng-click="saveMinimalAmount()">
-                                {{'SAVE_CHANGES' |
-                                translate}}
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -635,10 +630,10 @@
                                                             {{ 'PRINT' | translate}}
                                                         </button>
                                                         <!--<a target="_self" href="{{qr.content}}" download="qrCode.png">-->
-                                                            <!--<button class="btn btn-primary">-->
-                                                                <!--<i class="fa fa-download"></i>-->
-                                                                <!--{{ 'DOWNLOAD' | translate}}-->
-                                                            <!--</button>-->
+                                                        <!--<button class="btn btn-primary">-->
+                                                        <!--<i class="fa fa-download"></i>-->
+                                                        <!--{{ 'DOWNLOAD' | translate}}-->
+                                                        <!--</button>-->
                                                         <!--</a>-->
                                                     </div>
                                                 </div>

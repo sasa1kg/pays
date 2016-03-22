@@ -88,6 +88,17 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
                 }
             }
         }
+        this.saveFarmerTime = function(workHours){
+            var keys = localStorageService.keys();
+            for (var i = keys.length - 1; i >= 0; i--) {
+                var identifier = JSON.parse(keys[i]);
+                if (identifier.type == "checkout") {
+                    var localItem = localStorageService.get(keys[i]);
+                    localItem.workHours = workHours;
+                    localStorageService.set(keys[i], localItem);
+                }
+            }
+        }
 
         this.saveDeliveryPeriod = function(deliveryPeriod){
             var keys = localStorageService.keys();

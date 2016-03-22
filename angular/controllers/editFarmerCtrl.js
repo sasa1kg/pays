@@ -42,6 +42,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
 
         SearchService.getFarmerById(routeParams.id).then(function (data) {
             scope.farmer = data;
+            scope.farmer.minOrderPrice = scope.farmer.minOrderPrice != null ? scope.farmer.minOrderPrice : 0;
             scope.farmer.bannerImages = [];
             _convertWorkHoursStringToObj(scope.farmer.workHours);
             scope.loadGeneralDeffered.resolve();
@@ -170,11 +171,11 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
                                 order.acceptedPrice += parseFloat(item.totalItemPrice) * parseFloat(item.amount);
                             }
                         });
-                        order.acceptedPrice = order.acceptedPrice.toFixed(2);
-                        if(order.acceptedPrice > 0){
-                            order.acceptedPrice = (order.acceptedPrice + parseFloat(order.transportPrice)).toFixed(2);
-                        }
 
+                        if(order.acceptedPrice > 0){
+                            order.acceptedPrice = order.acceptedPrice + parseFloat(order.transportPrice);
+                        }
+                        order.acceptedPrice = order.acceptedPrice.toFixed(2);
                     }
                     scope.orders.push(order);
                     if (clientIds.indexOf(order.orderedBy) == -1) {
@@ -425,7 +426,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
 
             scope.workHours.push(_convertDayStringToObj(workHoursStrings.mon, 'MONDAY'));
             scope.workHours.push(_convertDayStringToObj(workHoursStrings.tue, 'TUESDAY'));
-            scope.workHours.push(_convertDayStringToObj(workHoursStrings.wen, 'WEDNESDAY'));
+            scope.workHours.push(_convertDayStringToObj(workHoursStrings.wed, 'WEDNESDAY'));
             scope.workHours.push(_convertDayStringToObj(workHoursStrings.thu, 'THURSDAY'));
             scope.workHours.push(_convertDayStringToObj(workHoursStrings.fri, 'FRIDAY'));
             scope.workHours.push(_convertDayStringToObj(workHoursStrings.sat, 'SATURDAY'));
@@ -497,14 +498,18 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
         }
 
 
-        scope.saveWorkHours = function () {
+        scope.saveConstraints = function () {
             var obj = {
-                workHours : _convertWorkHoursObjectToStrings(scope.workHours)
+                workHours : _convertWorkHoursObjectToStrings(scope.workHours),
+                minOrderPrice : scope.farmer.minOrderPrice
             }
+            scope.loadGeneralDeffered = q.defer();
             FarmerService.saveWorkHours(scope.farmer.id,obj).then(function(){
                 Notification.success({message: filter('translate')('WORK_HOURS_UPDATED')});
+                scope.loadGeneralDeffered.resolve();
             }).catch(function(){
                 Notification.error({message: filter('translate')('WORK_HOURS_NOT_UPDATED')});
+                scope.loadGeneralDeffered.resolve();
             });
         }
 

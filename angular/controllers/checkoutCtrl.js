@@ -39,6 +39,35 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
             }
         }
 
+        _convertWorkHoursObjToDaysArray = function (workHours) {
+
+            scope.workDaysArray.push(_convertDayStringToObj(workHours.sun));
+            scope.workDaysArray.push(_convertDayStringToObj(workHours.mon));
+            scope.workDaysArray.push(_convertDayStringToObj(workHours.tue));
+            scope.workDaysArray.push(_convertDayStringToObj(workHours.wed));
+            scope.workDaysArray.push(_convertDayStringToObj(workHours.thu));
+            scope.workDaysArray.push(_convertDayStringToObj(workHours.fri));
+            scope.workDaysArray.push(_convertDayStringToObj(workHours.sat));
+
+        }
+        _convertDayStringToObj = function (day) {
+            var retObj = null;
+            if (day != null && day.length > 1) {
+                var retObj = {};
+                var timeString = day.split('-');
+                var fromStrings = timeString[0].split(':');
+                var toStrings = timeString[1].split(':');
+                retObj.fromTime = new Date(new Date().setHours(parseInt(fromStrings[0]), parseInt(fromStrings[1]), 0, 0));
+                retObj.toTime = new Date(new Date().setHours(parseInt(toStrings[0]), parseInt(toStrings[1]), 0, 0));
+                scope.workDaysSize++;
+            }
+            return retObj;
+        }
+
+        scope.workDaysArray = [];
+        scope.workDaysSize = 0;
+        _convertWorkHoursObjToDaysArray(scope.orderData.workHours);
+
         scope.dateFormat = 'yyyy-MM-dd';
         scope.timeFormat = 'HH:mm';
 
@@ -49,19 +78,19 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.dateOptions = {
             startingDay: 1
         };
-        scope.minDate = new Date(new Date().getTime()+24*3600*1000);
-        scope.maxDate = new Date(new Date().getTime()+15*24*3600*1000);
+        scope.minDate = new Date(new Date().getTime() + 24 * 3600 * 1000);
+        scope.maxDate = new Date(new Date().getTime() + 15 * 24 * 3600 * 1000);
 
-        scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+        scope.disabled = function (date, mode) {
+            return ( mode === 'day' && ( scope.workDaysArray[date.getDay()] == null));
         }
 
         var today = new Date().getTime();
         var date = null;
-        var counter =1;
-        while (scope.deliveryDate.date == null){
-            date = new Date(new Date().getTime()+counter*24*3600*1000);
-            if(date.getDay() !== 0 && date.getDay() !== 6){
+        var counter = 1;
+        while (scope.deliveryDate.date == null && counter < 8) {
+            date = new Date(new Date().getTime() + counter * 24 * 3600 * 1000);
+            if (scope.workDaysArray[date.getDay()] != null) {
                 scope.deliveryDate.date = date;
             }
             counter++;
@@ -71,19 +100,17 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.mstep = 30;
         scope.ismeridian = false;
 
-        var startTimeDeliveryHours = 8;
-        var endTimeDeliveryHours = 19;
         var minimalHoursDistance = 1;
 
 
         scope.fromTime = {
             minTime: null,
-            maxTime : null,
+            maxTime: null,
             time: null
         };
         scope.toTime = {
             minTime: null,
-            maxTime : null,
+            maxTime: null,
             time: null
         };
 
@@ -94,7 +121,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.note = "";
 
         scope.$watch('fromTime.time', function () {
-            var minToTime = scope.fromTime.time.getTime() +1*3600*1000;
+            var minToTime = scope.fromTime.time.getTime() + 1 * 3600 * 1000;
             if (minToTime > scope.toTime.time.getTime()) {
                 scope.toTime.time = new Date(minToTime);
                 scope.toTime.minTime = new Date(minToTime);
@@ -104,13 +131,19 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         });
 
         scope.$watch('deliveryDate.date', function () {
-            if(scope.fromTime.minTime == null){
-                scope.fromTime.minTime = new Date(new Date().setHours(startTimeDeliveryHours,0,0,0));
-                scope.fromTime.maxTime = new Date(new Date().setHours(endTimeDeliveryHours,0,0,0));
-                scope.fromTime.time = new Date(new Date().setHours(startTimeDeliveryHours,0,0,0));
-                scope.toTime.minTime = new Date(new Date().setHours(startTimeDeliveryHours+1,0,0,0));
-                scope.toTime.time = new Date(new Date().setHours(startTimeDeliveryHours+1,0,0,0));
-                scope.toTime.maxTime = new Date(new Date().setHours(endTimeDeliveryHours+1,0,0,0));
+            if (scope.deliveryDate.date) {
+                var obj = scope.workDaysArray[scope.deliveryDate.date.getDay()];
+                console.log(obj);
+                scope.fromTime.minTime = new Date(obj.fromTime.getTime());
+                scope.fromTime.maxTime = new Date(obj.toTime.getTime()-3600*1000);
+                scope.toTime.minTime = new Date(obj.fromTime.getTime()+3600*1000);
+                scope.toTime.maxTime = new Date(obj.toTime.getTime());
+                //delayed update because of timepicker data race condition
+                setTimeout(function() {
+                    scope.toTime.time = obj.toTime;
+                    scope.fromTime.time = obj.fromTime;
+                }, 10);
+
             }
         });
 
@@ -131,7 +164,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 items: [],
                 comment: scope.orderData.comment
             };
-            if(scope.orderData.predefinedLocation == null){
+            if (scope.orderData.predefinedLocation == null) {
                 order.address = scope.addressJson;
             } else {
                 order.deliveryPlace = scope.orderData.predefinedLocation.id;
