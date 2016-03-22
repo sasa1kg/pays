@@ -677,7 +677,19 @@ paysApp.config(function ($translateProvider) {
             APK_PAYS_ICON : 'images/android/pays-en.jpg',
             APK_QR_ICON : 'images/android/englQRAPK.png',
             APK_GOOGLE_PLAY_LINK : 'https://play.google.com/store/apps/details?id=camengineeringns.pays.english',
-            NO_PRODUCTS_IN_CART : 'There are no products in your cart. Please find desired products and add them to your cart.'
+            NO_PRODUCTS_IN_CART : 'There are no products in your cart. Please find desired products and add them to your cart.',
+            BUSINESS_POLICY : 'Business policy',
+            MINIMAL_ORDER_AMOUNT : 'Minimal order amount',
+            WORK_HOURS : 'Work hours',
+            MONDAY : 'Monday',
+            TUESDAY : 'Tuesday',
+            WEDNESDAY : 'Wednesday',
+            THURSDAY : 'Thursday',
+            FRIDAY : 'Friday',
+            SATURDAY : 'Saturday',
+            SUNDAY : 'Sunday',
+            WORK_HOURS_UPDATED : 'Work hours updated',
+            WORK_HOURS_NOT_UPDATED : 'Failed to update work hours'
         })
         .translations('rs_RS', {
             HOME: 'Početna',
@@ -1085,7 +1097,19 @@ paysApp.config(function ($translateProvider) {
             APK_PAYS_ICON : 'images/android/pays-rs.jpg',
             APK_QR_ICON : 'images/android/srpQRAPK.png',
             APK_GOOGLE_PLAY_LINK : 'https://play.google.com/store/apps/details?id=camengineeringns.pays.srpski',
-            NO_PRODUCTS_IN_CART : 'U vašoj korpi nema proizvoda. Molimo Vas pronađite željene proizvode i ubacite ih u Vašu korpu.'
+            NO_PRODUCTS_IN_CART : 'U vašoj korpi nema proizvoda. Molimo Vas pronađite željene proizvode i ubacite ih u Vašu korpu.',
+            BUSINESS_POLICY : 'Poslovna pravila',
+            MINIMAL_ORDER_AMOUNT : 'Minimalan iznos narudžbine',
+            WORK_HOURS : 'Radno vreme',
+            MONDAY : 'Ponedeljak',
+            TUESDAY : 'Utorak',
+            WEDNESDAY : 'Sreda',
+            THURSDAY : 'Četvrtak',
+            FRIDAY : 'Petak',
+            SATURDAY : 'Subota',
+            SUNDAY : 'Nedelja',
+            WORK_HOURS_UPDATED : 'Radno vreme ažurirano',
+            WORK_HOURS_NOT_UPDATED : 'Neuspešno ažuriranje radnog vremena'
         })
     $translateProvider.preferredLanguage('en_EN');
 });

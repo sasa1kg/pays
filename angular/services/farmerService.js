@@ -444,4 +444,25 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
               });
             return deffered.promise;
         }
+
+        this.saveWorkHours = function(farmerId, hoursData){
+            var deffered = q.defer();
+            http.put(rootScope.serverURL + "merchant/" + farmerId + "/workHours",hoursData).
+            success(function (data, status) {
+                if (status == 200) {
+                    deffered.resolve(data);
+                } else {
+                    console.log("saveWorkHours | Status not OK " + status);
+                    deffered.reject("Error");
+                }
+
+            }).
+            error(function (data, status) {
+                console.log("saveWorkHours | Error " + status);
+                deffered.reject("Error");
+            });
+            return deffered.promise;
+        }
+
+
     }]);
