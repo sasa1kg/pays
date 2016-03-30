@@ -19,7 +19,7 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
                 }).
                 error(function (data, status) {
                     console.log("createOrder | Error " + status);
-                    deffered.reject("Error");
+                    deffered.reject(data);
                 });
 
             return deffered.promise;
@@ -53,22 +53,23 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
                 "clientId": clientId,
                 "items": [],
                 "totalPrice" : "",
-                "withTransport" : "",
+                "transportType" : "",
                 "transportPrice" : "",
                 "address": "",
                 "deliveryPeriod": {},
-                "currency": rootScope.defaultCurrency
+                "currency": rootScope.defaultCurrency,
+                "transportCalculated" : false
             });
         }
 
-        this.saveAddress = function(isShipped,address,transportPrice,predefinedLocation) {
+        this.saveAddress = function(transportType,address,transportPrice,predefinedLocation) {
             var keys = localStorageService.keys();
             for (var i = keys.length - 1; i >= 0; i--) {
                 var identifier = JSON.parse(keys[i]);
                 if (identifier.type == "checkout") {
                     var localItem = localStorageService.get(keys[i]);
                     localItem.address = address;
-                    localItem.withTransport = isShipped;
+                    localItem.transportType = transportType;
                     localItem.transportPrice = transportPrice;
                     localItem.predefinedLocation = predefinedLocation;
                     localStorageService.set(keys[i], localItem);
@@ -76,6 +77,17 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
             }
         }
 
+        this.savePriceCalculatePrice = function(flag){
+            var keys = localStorageService.keys();
+            for (var i = keys.length - 1; i >= 0; i--) {
+                var identifier = JSON.parse(keys[i]);
+                if (identifier.type == "checkout") {
+                    var localItem = localStorageService.get(keys[i]);
+                    localItem.transportCalculated = flag;
+                    localStorageService.set(keys[i], localItem);
+                }
+            }
+        }
         this.saveItems = function(items, totalPrice){
             var keys = localStorageService.keys();
             for (var i = keys.length - 1; i >= 0; i--) {

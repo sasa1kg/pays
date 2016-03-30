@@ -389,7 +389,6 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
                 }
                 console.log(directions);
             }).catch(function(err){
-                console.err(err);
                 deffered.reject(err);
             });
 

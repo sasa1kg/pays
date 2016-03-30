@@ -1,5 +1,5 @@
-angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout", "$rootScope", "$filter", "$modal", "UserService", "WishlistService", "CartService", "Notification",
-  function (scope, q, timeout, rootScope, filter, modal, UserService, WishlistService, CartService, Notification) {
+angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout", "$rootScope", "$filter", "$modal", "UserService","SearchService", "WishlistService", "CartService", "Notification",
+  function (scope, q, timeout, rootScope, filter, modal, UserService,SearchService, WishlistService, CartService, Notification) {
 
     scope.userType = "";
 
@@ -28,8 +28,7 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout",
       "username": "",
       "password": "",
       "email": "",
-      "isPrivateUser": true,
-      "private": {
+      "privateSubject": {
         "name": "",
         "lastName": "",
         "address": "",
@@ -44,15 +43,14 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout",
       username: "",
       password: "",
       email: "",
-      isPrivateUser: false,
-      company: {
+      businessSubject: {
         name: "",
         account: "",
         taxNum: "",
         companyNum: "",
         businessActivityCode: "",
         address: "",
-        phoneNum: "",
+        phone: "",
         fax: "",
         city: "",
         postalCode: ""
@@ -64,15 +62,14 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout",
       username: "",
       password: "",
       email: "",
-      isPrivateUser: false,
-      company: {
+      businessSubject: {
         name: "",
         account: "",
         taxNum: "",
         companyNum: "",
         businessActivityCode: "",
         address: "",
-        phoneNum: "",
+        phone: "",
         fax: "",
         city: "",
         postalCode: ""
@@ -124,17 +121,26 @@ angular.module('paysApp').controller("registerCtrl", ["$scope", "$q","$timeout",
         if ((scope.farmer.password.length == 0) || (scope.confPassword.length == 0) || (scope.farmer.password !== scope.confPassword)) {
           Notification.error({message: filter('translate')('PASSWORD_NOT_MATCH')});
         } else {
-          UserService.registerUser(scope.farmer).then(function (data) {
-            scope.registerDeffered.resolve();
-            var modalInstance = modal.open({
-              animation: true,
-              templateUrl: 'userActivateModal.html',
-              controller: 'userActivateModalCtrl',
-              size: 'sm'
+          SearchService.getLocationByAddress(scope.farmer.businessSubject.city+", Serbia").then(function(loc){
+            scope.farmer.location = {
+              latitude : loc.lat,
+              longitude : loc.lng
+            };
+            UserService.registerUser(scope.farmer).then(function (data) {
+              scope.registerDeffered.resolve();
+              var modalInstance = modal.open({
+                animation: true,
+                templateUrl: 'userActivateModal.html',
+                controller: 'userActivateModalCtrl',
+                size: 'sm'
+              });
+            }).catch(function (error) {
+              scope.registerDeffered.reject();
+              Notification.error({message: filter('translate')('USER_NOT_ADDED')});
             });
-          }).catch(function (error) {
+          }).catch(function(){
+            Notification.error({message: filter('translate')('LOCATION_NOT_FOUND')});
             scope.registerDeffered.reject();
-            Notification.error({message: filter('translate')('USER_NOT_ADDED')});
           });
         }
       }

@@ -31,14 +31,14 @@
               <h5 ng-if="userForm.password.$invalid == false && passwordMatch == 2" style="color: green"><strong>{{'PASSWORD_MATCH' | translate}}</strong></h5>
               <h5 ng-if="userForm.password.$invalid == false &&  passwordMatch == 1" style="color: red">{{'PASSWORD_NOT_MATCH' | translate}}</h5>
               <hr>
-              <input type="text" ng-model="buyer.private.name" placeholder="{{ 'NAME' | translate}}" required/>
-              <input type="text" ng-model="buyer.private.lastName" placeholder="{{ 'SURNAME' | translate}}" required/>
-              <input type="text" ng-model="buyer.private.address" placeholder="{{'STREET_AND_NUMBER' | translate}}"
+              <input type="text" ng-model="buyer.privateSubject.name" placeholder="{{ 'NAME' | translate}}" required/>
+              <input type="text" ng-model="buyer.privateSubject.lastName" placeholder="{{ 'SURNAME' | translate}}" required/>
+              <input type="text" ng-model="buyer.privateSubject.address" placeholder="{{'STREET_AND_NUMBER' | translate}}"
                      required/>
-              <input type="text" ng-model="buyer.private.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"
+              <input type="text" ng-model="buyer.privateSubject.postalCode" placeholder="{{'POSTAL_CODE' | translate}}"
                      required/>
-              <input type="text" ng-model="buyer.private.city" placeholder="{{'CITY' | translate}}" required/>
-              <input type="text" ng-model="buyer.private.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
+              <input type="text" ng-model="buyer.privateSubject.city" placeholder="{{'CITY' | translate}}" required/>
+              <input type="text" ng-model="buyer.privateSubject.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
             </div>
             <div>
               <div class="loading-min-height" cg-busy="{promise:registerDeffered.promise,message:waitMsg,backdrop:true}"></div>
@@ -59,18 +59,18 @@
               <h5 ng-if="distributorForm.dPassword.$invalid == false && passwordMatch == 2" style="color: green"><strong>{{'PASSWORD_MATCH' | translate}}</strong></h5>
               <h5 ng-if="distributorForm.dPassword.$invalid == false &&  passwordMatch == 1" style="color: red">{{'PASSWORD_NOT_MATCH' | translate}}</h5>
               <hr>
-              <input type="text" ng-model="distributor.company.name" placeholder="{{ 'COMPANY_NAME' | translate}}" required/>
-              <input type="text" ng-model="distributor.company.account" placeholder="{{ 'BANK_NUMBER' | translate}}" required/>
-              <input type="text" ng-model="distributor.company.taxNum" placeholder="{{ 'PIB' | translate}}( {{ 'MAX' | translate}} 9 {{ 'CHARS' | translate}})" required maxlength="9"/>
-              <input type="text" ng-model="distributor.company.companyNum"placeholder="{{ 'COMPANY_REG_NUMBER' | translate}}( {{ 'MAX' | translate}} 8 {{ 'CHARS' | translate}})" required maxlength="8"/>
-              <input type="text" ng-model="distributor.company.businessActivityCode"
+              <input type="text" ng-model="distributor.businessSubject.name" placeholder="{{ 'COMPANY_NAME' | translate}}" required/>
+              <input type="text" ng-model="distributor.businessSubject.account" placeholder="{{ 'BANK_NUMBER' | translate}}" required/>
+              <input type="text" ng-model="distributor.businessSubject.taxNum" placeholder="{{ 'PIB' | translate}}( {{ 'MAX' | translate}} 9 {{ 'CHARS' | translate}})" required maxlength="9"/>
+              <input type="text" ng-model="distributor.businessSubject.companyNum"placeholder="{{ 'COMPANY_REG_NUMBER' | translate}}( {{ 'MAX' | translate}} 8 {{ 'CHARS' | translate}})" required maxlength="8"/>
+              <input type="text" ng-model="distributor.businessSubject.businessActivityCode"
                      placeholder="{{ 'BUSSINESS_ACT_NUMBER' | translate}}" required/>
-              <input type="text" ng-model="distributor.company.address"
+              <input type="text" ng-model="distributor.businessSubject.address"
                      placeholder="{{'STREET_AND_NUMBER' | translate}}" required/>
-              <input type="text" ng-model="distributor.company.postalCode" placeholder="{{'POSTAL_CODE' | translate}}" required/>
-              <input type="text" ng-model="distributor.company.city" placeholder="{{'CITY' | translate}}" required/>
-              <input type="text" ng-model="distributor.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
-              <input type="text" ng-model="distributor.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
+              <input type="text" ng-model="distributor.businessSubject.postalCode" placeholder="{{'POSTAL_CODE' | translate}}" required/>
+              <input type="text" ng-model="distributor.businessSubject.city" placeholder="{{'CITY' | translate}}" required/>
+              <input type="text" ng-model="distributor.businessSubject.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
+              <input type="text" ng-model="distributor.businessSubject.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
             </div>
             <div class="loading-min-height" cg-busy="{promise:registerDeffered.promise,message:waitMsg,backdrop:true}"></div>
             <button class="btn btn-default" ng-disabled="distributorForm.$invalid || !validatePassword(confPassword,false) || (registerDeffered != null && registerDeffered.promise.$$state.status == 0)" ng-click="register()">{{'REGISTER' |
@@ -89,17 +89,17 @@
               <h5 ng-if="farmerForm.fPassword.$invalid == false && passwordMatch == 2" style="color: green"><strong>{{'PASSWORD_MATCH' | translate}}</strong></h5>
               <h5 ng-if="farmerForm.fPassword.$invalid == false &&  passwordMatch == 1" style="color: red">{{'PASSWORD_NOT_MATCH' | translate}}</h5>
               <hr>
-              <input type="text" ng-model="farmer.company.name" placeholder="{{ 'FARM_NAME' | translate}}" required/>
-              <input type="text" ng-model="farmer.company.account" placeholder="{{ 'BANK_NUMBER' | translate}}" required/>
-              <input type="text" ng-model="farmer.company.taxNum" placeholder="{{ 'PIB' | translate}}( {{ 'MAX' | translate}} 9 {{ 'CHARS' | translate}})" required maxlength="9"/>
-              <input type="text" ng-model="farmer.company.companyNum" placeholder="{{ 'COMPANY_REG_NUMBER' | translate}}( {{ 'MAX' | translate}} 8 {{ 'CHARS' | translate}})" required maxlength="8" />
-              <input type="text" ng-model="farmer.company.businessActivityCode"
+              <input type="text" ng-model="farmer.businessSubject.name" placeholder="{{ 'FARM_NAME' | translate}}" required/>
+              <input type="text" ng-model="farmer.businessSubject.account" placeholder="{{ 'BANK_NUMBER' | translate}}" required/>
+              <input type="text" ng-model="farmer.businessSubject.taxNum" placeholder="{{ 'PIB' | translate}}( {{ 'MAX' | translate}} 9 {{ 'CHARS' | translate}})" required maxlength="9"/>
+              <input type="text" ng-model="farmer.businessSubject.companyNum" placeholder="{{ 'COMPANY_REG_NUMBER' | translate}}( {{ 'MAX' | translate}} 8 {{ 'CHARS' | translate}})" required maxlength="8" />
+              <input type="text" ng-model="farmer.businessSubject.businessActivityCode"
                      placeholder="{{ 'BUSSINESS_ACT_NUMBER' | translate}}" required/>
-              <input type="text" ng-model="farmer.company.address" placeholder="{{'STREET_AND_NUMBER' | translate}}" required/>
-              <input type="text" ng-model="farmer.company.postalCode" placeholder="{{'POSTAL_CODE' | translate}}" required/>
-              <input type="text" ng-model="farmer.company.city" placeholder="{{'CITY' | translate}}" required/>
-              <input type="text" ng-model="farmer.company.phoneNum" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
-              <input type="text" ng-model="farmer.company.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
+              <input type="text" ng-model="farmer.businessSubject.address" placeholder="{{'STREET_AND_NUMBER' | translate}}" required/>
+              <input type="text" ng-model="farmer.businessSubject.postalCode" placeholder="{{'POSTAL_CODE' | translate}}" required/>
+              <input type="text" ng-model="farmer.businessSubject.city" placeholder="{{'CITY' | translate}}" required/>
+              <input type="text" ng-model="farmer.businessSubject.phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required/>
+              <input type="text" ng-model="farmer.businessSubject.fax" placeholder="{{ 'FAX_NUMBER' | translate}}"/>
             </div>
             <div class="loading-min-height" cg-busy="{promise:registerDeffered.promise,message:waitMsg,backdrop:true}"></div>
             <button class="btn btn-default" ng-disabled="farmerForm.$invalid || !validatePassword(confPassword,false) || (registerDeffered != null && registerDeffered.promise.$$state.status == 0)" ng-click="register()">{{'REGISTER' |

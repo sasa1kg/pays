@@ -11,7 +11,7 @@
             </ol>
         </div>
         <!--/breadcrums-->
-        <div ng-if="userData">
+        <div ng-if="userData && noTransportPrice ==false">
             <hr class="orangehr">
             <row class="col-sm-12">
                 <div class="col-sm-3 col-sm-offset-1">
@@ -74,6 +74,9 @@
                     <div><strong>{{ 'TOTAL' | translate}} ({{ orderData.currency.code}}): </strong> {{
                         orderData.totalProductPrice}}
                     </div>
+                    <div><strong> {{ 'TOTAL_TAX' | translate}}({{orderData.currency.code}}): </strong>
+                        {{totalOrderTax}}
+                    </div>
                     <div><strong>{{ 'TRANSPORT_PRICE' | translate}} ({{ orderData.currency.code}}): </strong>
                         {{orderData.transportPrice}}
                     </div>
@@ -105,39 +108,40 @@
 
             <hr class="orangehr">
 
-            <row class="col-sm-12">
-                <div class="col-sm-1">
-                    <div class="text-center">{{ 'WHERE' | translate}}</div>
-                </div>
-                <div class="col-sm-11 text-center">
-                    <div ng-if="address">
-                        <strong>{{ 'CLIENT_ADDRESS' | translate}}: </strong>{{address}}
+            <row ng-if="orderData.transportType != noDeliveryString">
+                <div class="col-sm-12">
+                    <div class="col-sm-1">
+                        <div class="text-center">{{ 'WHERE' | translate}}</div>
                     </div>
-                    <div ng-if="addressJson">
-                        <div>
-                            <strong>{{ 'CITY' | translate}}: </strong>{{addressJson.city}} &nbsp;
-                            <strong>{{ 'POSTAL_CODE' | translate}}: </strong>{{addressJson.postalCode}}
+                    <div class="col-sm-11 text-center">
+                        <div ng-if="address">
+                            <strong>{{ 'CLIENT_ADDRESS' | translate}}: </strong>{{address}}
                         </div>
-                        <div>
-                            <strong>{{ 'STREET' | translate}} </strong>{{addressJson.street}} &nbsp;
-                            <strong>{{ 'HOUSE_NUMBER' | translate}} </strong>{{addressJson.houseNumber}}
-                        </div>
-                        <div>
-                            <strong>{{ 'FLOOR' | translate}} </strong>{{addressJson.floor}} &nbsp;
-                            <strong>{{ 'APARTMENT' | translate}} </strong>{{addressJson.apartmentNumber}}
+                        <div ng-if="addressJson">
+                            <div>
+                                <strong>{{ 'CITY' | translate}}: </strong>{{addressJson.city}} &nbsp;
+                                <strong>{{ 'POSTAL_CODE' | translate}}: </strong>{{addressJson.postalCode}}
+                            </div>
+                            <div>
+                                <strong>{{ 'STREET' | translate}} </strong>{{addressJson.street}} &nbsp;
+                                <strong>{{ 'HOUSE_NUMBER' | translate}} </strong>{{addressJson.houseNumber}}
+                            </div>
+                            <div>
+                                <strong>{{ 'FLOOR' | translate}} </strong>{{addressJson.floor}} &nbsp;
+                                <strong>{{ 'APARTMENT' | translate}} </strong>{{addressJson.apartmentNumber}}
+                            </div>
                         </div>
                     </div>
                 </div>
+                <hr class="orangehr">
             </row>
-
-            <hr class="orangehr">
 
             <row class="col-sm-12">
                 <div class="col-sm-1">
                     <div class="text-center">{{ 'WHEN' | translate}}</div>
                 </div>
                 <div class="col-sm-11">
-                    <div class="col-sm-12" ng-if="orderData.predefinedLocation == null">
+                    <div class="col-sm-12" ng-if="orderData.transportType == previousLocationString || orderData.transportType == newAddressString">
                         <div class="text-right col-sm-3">{{ 'DELIVERY_DATE' | translate}}</div>
                         <div class="col-sm-9">
                             <p class="input-group">
@@ -193,22 +197,48 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12" ng-if="orderData.predefinedLocation != null">
+                    <div class="col-sm-12" ng-if="orderData.transportType == predefinedLocationString">
                         <div class="text-center">
                             <strong>{{ 'DELIVERY_TIME_PREDEFINED_LOCATION' | translate}}: </strong>{{orderData.predefinedLocation.workHours}}
+                        </div>
+                    </div>
+                    <div class="col-sm-12" ng-if="orderData.transportType == noDeliveryString">
+                        <div class="col-sm-12 text-center">
+                            <strong>{{ 'WORK_HOURS_FARMER' | translate}} </strong>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <strong>{{ 'MONDAY' | translate}}: </strong> {{orderData.workHours.mon ? orderData.workHours.mon : 'CLOSED' | translate}}
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <strong>{{ 'TUESDAY' | translate}}: </strong> {{orderData.workHours.tue ? orderData.workHours.tue : 'CLOSED' | translate}}
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <strong>{{ 'WEDNESDAY' | translate}}: </strong> {{orderData.workHours.wed ? orderData.workHours.wed : 'CLOSED' | translate}}
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <strong>{{ 'THURSDAY' | translate}}: </strong> {{orderData.workHours.thu ? orderData.workHours.thu : 'CLOSED' | translate}}
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <strong>{{ 'FRIDAY' | translate}}: </strong> {{orderData.workHours.fri ? orderData.workHours.fri : 'CLOSED' | translate}}
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <strong>{{ 'SATURDAY' | translate}}: </strong> {{orderData.workHours.sat ? orderData.workHours.sat : 'CLOSED' | translate}}
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <strong>{{ 'SUNDAY' | translate}}: </strong> {{orderData.workHours.sun ? orderData.workHours.sun : 'CLOSED' | translate}}
                         </div>
                     </div>
                 </div>
             </row>
 
             <hr class="orangehr">
-            <row class="col-sm-12">
-                <div class="text-center">
+            <row ng-if="orderData.transportType != predefinedLocationString">
+                <div class="col-sm-12 text-center">
                     <strong>{{ 'WORKING_HOURS_DESC' | translate}}</strong>
                 </div>
+                <hr class="orangehr">
             </row>
 
-            <hr class="orangehr">
 
             <row class="col-sm-12">
                 <div class="col-sm-1">
@@ -216,8 +246,9 @@
                 <div class="col-sm-11">
                     <div class="text-right col-sm-3">{{ 'NOTE' | translate}}</div>
                     <div class="col-sm-9">
-                    <textarea type="text" rows="4" class="col-sm-12"
-                              placeholder="{{ 'NOTE_MSG' | translate}} " ng-model="orderData.comment"></textarea>
+                    <textarea type="text" rows="4" class="col-sm-12" maxlength="250"
+                              placeholder="{{ 'NOTE_MSG' | translate}} ({{ 'MAX_250_CHARS_FOR_REVIEW' | translate}})"
+                              ng-model="orderData.comment"></textarea>
                     </div>
                 </div>
             </row>
@@ -321,10 +352,14 @@
             </row>
             <hr class="orangehr mb100">
         </div>
-        <div ng-if="orderData && !userData">
+
+        <div ng-if="noTransportPrice">
+            <h3 class="text-center" style="color:red;">{{ 'NO_TRANSPORT_PRICE' | translate}}</h3>
+        </div>
+        <div ng-if="!noTransportPrice && orderData && !userData">
             <h3 class="text-center" style="color:red;">{{ 'NO_LOGIN_CHECKOUT' | translate}}</h3>
         </div>
-        <div ng-if="!orderData">
+        <div ng-if="!noTransportPrice && !orderData">
             <h3 class="text-center" style="color:red;">{{ 'NO_ORDER_CREATED' | translate}}</h3>
         </div>
 

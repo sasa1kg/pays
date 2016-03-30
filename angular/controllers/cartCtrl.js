@@ -6,9 +6,7 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
 
         scope.total = "";
 
-        scope.shippingConst = 0;
-        scope.transportPrice = scope.shippingConst;
-        scope.isShipped = true;
+        scope.transportPrice = 0;
 
         scope.previousAddresses = UserService.getUserDeliveryAddress(rootScope.credentials.id);
 
@@ -29,42 +27,80 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
             address: null
         };
 
+        scope.locationType = {};
         scope.predefinedLocation = {
             data: null
         };
         //Checkout data
 
-        scope.predefinedLocationString = "predefinedLocation";
-        scope.previousLocationString = "previousLocation";
-        scope.newAddressString = "newAddress";
-
-        scope.locationType = {
-            selected: scope.newAddressString,
-        };
 
         scope.transportPriceDeffered = null;
 
-        var orderData = OrderService.getOrderData();
-        if (orderData != null) {
-            scope.address = orderData.address;
-            if (orderData.predefinedLocation != null) {
-                scope.locationType.selected = scope.predefinedLocationString;
+        scope.calculateTotal = function () {
+            scope.totalPrice = 0;
+            for (var i = scope.cartItems.items.length - 1; i >= 0; i--) {
+                scope.totalPrice = scope.totalPrice + scope.cartItems.items[i].itemPrice * scope.cartItems.items[i].itemNum;
             }
+            scope.total = scope.totalPrice + (scope.locationType.selected != rootScope.noDeliveryString ? parseFloat(scope.transportPrice) : 0);
+        }
+
+        scope.calculateTransportPrice = function () {
+            scope.transportPriceDeffered = q.defer();
+            if (scope.locationType.selected != rootScope.noDeliveryString) {
+                SearchService.getDistanceBetweenCities(scope.address.city + ", Serbia", scope.farmerData.farmerLocation + ", Serbia").then(function (data) {
+                    var reqData = {
+                        distance: data,
+                        items: []
+                    };
+                    angular.forEach(scope.cartItems.items, function (item) {
+                        reqData.items.push({
+                            item: item.itemId,
+                            amount: item.amount
+                        })
+                    });
+                    console.log(reqData);
+                    FarmerService.getTransportPrice(scope.farmerData.farmerId, reqData).then(function (data) {
+                        scope.transportPrice = data.price;
+                        scope.calculateTotal();
+                        Notification.success({message: filter('translate')('TRANSPORT_PRICE_SUCCESS')});
+                        scope.transportPriceDeffered.resolve();
+
+                    }).catch(function (err) {
+                        Notification.error({message: filter('translate')('TRANSPORT_PRICE_FAILED')});
+                        scope.transportPriceDeffered.reject();
+                    })
+                }).catch(function (err) {
+                    Notification.error({message: filter('translate')('LOCATION_NOT_FOUND')});
+                    scope.transportPriceDeffered.reject();
+                });
+            } else {
+                scope.transportPrice = 0;
+                scope.transportPriceDeffered.resolve();
+            }
+            return scope.transportPriceDeffered.promise;
         }
 
         SearchService.getPredefinedLocations().then(function (data) {
             scope.predefinedLocations = data;
-            console.log(scope.predefinedLocations);
         });
         scope.loadDeffered = null;
         if (scope.farmerData != null) {
             scope.loadDeffered = q.defer();
             SearchService.getFarmerById(scope.farmerData.farmerId).then(function (data) {
                 scope.farmer = data;
+
                 SearchService.getFarmerProducts(scope.farmerData.farmerId).then(function (data) {
                     scope.farmerProducts = data;
                     scope.cartItems = CartService.getItems();
                     scope.loadData();
+                    var orderData = OrderService.getOrderData();
+                    if (orderData != null) {
+                        scope.locationType.selected = orderData.transportType;
+                        scope.address = orderData.address;
+                        scope.calculateTransportPrice();
+                    } else {
+                        scope.locationType.selected = rootScope.newAddressString;
+                    }
                     scope.loadDeffered.resolve();
                     if (scope.cartItems != null) {
                         var promisesWaiting = 0;
@@ -77,6 +113,10 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
                                     if (scope.cartItems.items[j].amount < scope.cartItems.items[j].itemNum) {
                                         scope.cartItems.items[j].resourceExcedeed = true;
                                         scope.cartItems.items[j].alertMessage = filter('translate')('MAX_AVAILABLE') + " " + scope.cartItems.items[j].amount + " " + scope.cartItems.items[j].itemMeasure.code;
+                                    }
+                                    if(parseFloat(scope.cartItems.items[j].itemPrice) != parseFloat(scope.farmerProducts[i].price.price)){
+                                        scope.cartItems.items[j].oldPrice = parseFloat(scope.cartItems.items[j].itemPrice).toFixed(2);
+                                        scope.cartItems.items[j].itemPrice = parseFloat(scope.farmerProducts[i].price.price).toFixed(2);
                                     }
                                     scope.cartItems.items[j].shortDesc = scope.farmerProducts[i].product.shortDesc;
                                     if (scope.farmerProducts[i].customImage) {
@@ -147,15 +187,6 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
             });
         }
 
-        scope.calculateTotal = function () {
-            scope.totalPrice = 0;
-            for (var i = scope.cartItems.items.length - 1; i >= 0; i--) {
-                scope.totalPrice = scope.totalPrice + scope.cartItems.items[i].itemPrice * scope.cartItems.items[i].itemNum;
-            }
-            console.log((scope.isShipped == true ? parseFloat(scope.transportPrice) : 0));
-            scope.total = scope.totalPrice + (scope.isShipped == true ? parseFloat(scope.transportPrice) : 0);
-        }
-
 
         scope.deleteCartItem = function (item) {
             CartService.remove(item.itemId, scope.farmerData.farmerId);
@@ -214,7 +245,6 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
 
         scope.loadData = function () {
             scope.cartItems = CartService.getItems();
-            console.log("ITEMS")
             if (scope.cartItems != null) {
                 for (var j = 0; j < scope.cartItems.items.length; j++) {
                     for (var i = 0; i < scope.farmerProducts.length; i++) {
@@ -234,45 +264,14 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
             window.history.back();
         }
 
-        scope.calculateTransportPrice = function () {
-            scope.transportPriceDeffered = q.defer();
-            SearchService.getDistanceBetweenCities(scope.address.city + ", Serbia", scope.farmerData.farmerLocation + ", Serbia").then(function (data) {
-                var reqData = {
-                    distance: data,
-                    items: []
-                };
-                angular.forEach(scope.cartItems.items, function (item) {
-                    reqData.items.push({
-                        item: item.itemId,
-                        amount: item.amount
-                    })
-                });
-                console.log(reqData);
-                FarmerService.getTransportPrice(scope.farmerData.farmerId, reqData).then(function (data) {
-                    scope.transportPrice = data.price;
-                    scope.calculateTotal();
-                    Notification.success({message: filter('translate')('TRANSPORT_PRICE_SUCCESS')});
-                    scope.transportPriceDeffered.resolve();
-
-                }).catch(function (err) {
-                    Notification.error({message: filter('translate')('TRANSPORT_PRICE_FAILED')});
-                    scope.transportPriceDeffered.reject();
-                })
-            }).catch(function (err) {
-                Notification.error({message: filter('translate')('LOCATION_NOT_FOUND')});
-                scope.transportPriceDeffered.reject();
-            });
-            return scope.transportPriceDeffered.promise;
-        }
-
 
         scope.saveAddress = function () {
             var orderData = OrderService.getOrderData();
             if (orderData == null) {
                 OrderService.createOrderItem(scope.farmerData.farmerId, rootScope.credentials.id);
             }
-            OrderService.saveAddress(scope.isShipped, scope.address, scope.transportPrice,
-                (scope.locationType.selected == scope.predefinedLocationString) ? JSON.parse(scope.predefinedLocation.data) : null);
+            OrderService.saveAddress(scope.locationType.selected, scope.address, scope.transportPrice,
+                (scope.locationType.selected == rootScope.predefinedLocationString) ? JSON.parse(scope.predefinedLocation.data) : null);
         }
         scope.openEmptyCartModal = function () {
 
@@ -288,17 +287,12 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
         scope.wishlistItemsSize = WishlistService.getItemsSize();
 
 
-        scope.changeShipment = function (isShipped) {
-            scope.isShipped = isShipped;
-            scope.calculateTotal();
-        }
-
         SearchService.getCities().then(function (data) {
             scope.cities = data;
         });
 
         scope.canGoToPayment = function () {
-            if (scope.isShipped == false) {
+            if (scope.locationType.selected == rootScope.noDeliveryString) {
                 return true;
             } else {
                 if ((scope.address.city != null) && (scope.address.city.length > 0)
@@ -317,8 +311,9 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
             console.log(scope.address);
             scope.calculateTransportPrice().then(function () {
                 OrderService.createOrderItem(scope.farmerData.farmerId, rootScope.credentials.id);
-                OrderService.saveAddress(scope.isShipped, scope.address, scope.transportPrice,
-                    (scope.locationType.selected == scope.predefinedLocationString) ? JSON.parse(scope.predefinedLocation.data) : null);
+                OrderService.saveAddress(scope.locationType.selected, scope.address, scope.transportPrice,
+                    (scope.locationType.selected == rootScope.predefinedLocationString) ? JSON.parse(scope.predefinedLocation.data) : null);
+                OrderService.savePriceCalculatePrice(true);
                 OrderService.saveItems(scope.cartItems, scope.total);
                 OrderService.saveFarmerTime(scope.farmer.workHours);
                 scope.paymentDeffered.resolve();
@@ -367,6 +362,19 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
             }
         });
 
+        scope.$watch('locationType.selected', function () {
+            if (scope.locationType.selected != null) {
+                OrderService.savePriceCalculatePrice(false);
+                if (scope.locationType.selected == rootScope.noDeliveryString) {
+                    scope.transportPrice = 0;
+                    scope.address = {};
+                    scope.calculateTotal();
+                }
+                OrderService.saveAddress(scope.locationType.selected, scope.address, scope.transportPrice,
+                    (scope.locationType.selected == rootScope.predefinedLocationString) ? JSON.parse(scope.predefinedLocation.data) : null);
+            }
+        });
+
         _validateProductAmount = function (product, amount) {
             if (parseFloat(product.amount) >= amount) {
                 return true;
@@ -377,6 +385,17 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
         scope.goToFarmerPage = function (farmer) {
             console.log(farmer.farmerId);
             location.path("/farmer/" + farmer.farmerId);
+        }
+
+        //true ok, false to low
+        scope.lowOrderAmount = function () {
+            var retVal = false;
+            if (scope.farmer != null) {
+                if (parseFloat(scope.farmer.minOrderPrice) <= scope.totalPrice) {
+                    retVal = true;
+                }
+            }
+            return retVal;
         }
     }]);
 

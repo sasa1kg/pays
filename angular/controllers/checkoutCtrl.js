@@ -2,42 +2,10 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
     "OrderService", "UserService", "Notification",
     function (scope, rootScope, filter, window, location, modal, CartService, WishlistService, OrderService, UserService, Notification) {
 
-        scope.termsAccepted = false;
-        scope.orderData = OrderService.getOrderData();
-        if (scope.orderData != null) {
-            scope.orderData.totalPrice = parseFloat(scope.orderData.totalPrice).toFixed(2);
-            scope.orderData.transportPrice = scope.orderData.withTransport == true ? parseFloat(scope.orderData.transportPrice).toFixed(2) : parseFloat("0.00").toFixed(2);
-            scope.orderData.totalProductPrice = (parseFloat(scope.orderData.totalPrice) - parseFloat(scope.orderData.transportPrice)).toFixed(2);
-            angular.forEach(scope.orderData.items.items, function (item) {
-                var taxLower = (100 * parseFloat(item.tax)) / (100 + parseFloat(item.tax)) / 100;
-                item.totalTax = (parseFloat(item.itemNum) * parseFloat(item.itemPrice) * taxLower).toFixed(2);
-                item.itemPriceNoTax = (parseFloat(item.itemPrice) - parseFloat(item.itemPrice) * taxLower).toFixed(2);
-                console.log(item);
-            });
-            scope.amount = scope.orderData.totalPrice;
-            scope.currency = scope.orderData.currency;
-            scope.addressJson = scope.orderData.address;
+        scope.noTransportPrice = false;
 
-
-            if (scope.orderData.clientId == null) {
-                if (rootScope.credentials.id) {
-                    scope.orderData.clientId = rootScope.credentials.id;
-                    OrderService.saveClientId(scope.orderData.clientId);
-                }
-            }
-            if (scope.orderData.clientId != null) {
-                {
-                    UserService.getUserData(scope.orderData.clientId).then(function (data) {
-                        scope.userData = data;
-                    }).catch(function (err) {
-                        scope.userData = null;
-                    });
-                }
-            }
-            else {
-                scope.userData = null;
-            }
-        }
+        scope.workDaysArray = [];
+        scope.workDaysSize = 0;
 
         _convertWorkHoursObjToDaysArray = function (workHours) {
 
@@ -64,9 +32,49 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
             return retObj;
         }
 
-        scope.workDaysArray = [];
-        scope.workDaysSize = 0;
-        _convertWorkHoursObjToDaysArray(scope.orderData.workHours);
+        scope.termsAccepted = false;
+        scope.orderData = OrderService.getOrderData();
+        if (scope.orderData != null) {
+            if ((scope.orderData.transportType != rootScope.noDeliveryString) && (scope.orderData.transportCalculated == false)) {
+                scope.noTransportPrice = true;
+            } else {
+                _convertWorkHoursObjToDaysArray(scope.orderData.workHours);
+                scope.orderData.totalPrice = parseFloat(scope.orderData.totalPrice).toFixed(2);
+                scope.orderData.transportPrice = scope.orderData.transportType != rootScope.noDeliveryString ? parseFloat(scope.orderData.transportPrice).toFixed(2) : parseFloat("0.00").toFixed(2);
+                scope.orderData.totalProductPrice = (parseFloat(scope.orderData.totalPrice) - parseFloat(scope.orderData.transportPrice)).toFixed(2);
+                scope.totalOrderTax = 0;
+                angular.forEach(scope.orderData.items.items, function (item) {
+                    var taxLower = (100 * parseFloat(item.tax)) / (100 + parseFloat(item.tax)) / 100;
+                    item.totalTax = (parseFloat(item.itemNum) * parseFloat(item.itemPrice) * taxLower).toFixed(2);
+                    scope.totalOrderTax += item.totalTax;
+                    item.itemPriceNoTax = (parseFloat(item.itemPrice) - parseFloat(item.itemPrice) * taxLower).toFixed(2);
+                });
+                scope.amount = scope.orderData.totalPrice;
+                scope.currency = scope.orderData.currency;
+                scope.addressJson = scope.orderData.address;
+                scope.totalOrderTax = parseFloat(scope.totalOrderTax).toFixed(2);
+
+                if (scope.orderData.clientId == null) {
+                    if (rootScope.credentials.id) {
+                        scope.orderData.clientId = rootScope.credentials.id;
+                        OrderService.saveClientId(scope.orderData.clientId);
+                    }
+                }
+                if (scope.orderData.clientId != null) {
+                    {
+                        UserService.getUserData(scope.orderData.clientId).then(function (data) {
+                            scope.userData = data;
+                        }).catch(function (err) {
+                            scope.userData = null;
+                        });
+                    }
+                }
+                else {
+                    scope.userData = null;
+                }
+            }
+        }
+
 
         scope.dateFormat = 'yyyy-MM-dd';
         scope.timeFormat = 'HH:mm';
@@ -121,12 +129,14 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.note = "";
 
         scope.$watch('fromTime.time', function () {
-            var minToTime = scope.fromTime.time.getTime() + 1 * 3600 * 1000;
-            if (minToTime > scope.toTime.time.getTime()) {
-                scope.toTime.time = new Date(minToTime);
-                scope.toTime.minTime = new Date(minToTime);
-            } else {
-                scope.toTime.minTime = new Date(minToTime);
+            if (scope.fromTime != null && scope.fromTime.time != null) {
+                var minToTime = scope.fromTime.time.getTime() + 1 * 3600 * 1000;
+                if (minToTime > scope.toTime.time.getTime()) {
+                    scope.toTime.time = new Date(minToTime);
+                    scope.toTime.minTime = new Date(minToTime);
+                } else {
+                    scope.toTime.minTime = new Date(minToTime);
+                }
             }
         });
 
@@ -135,11 +145,11 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 var obj = scope.workDaysArray[scope.deliveryDate.date.getDay()];
                 console.log(obj);
                 scope.fromTime.minTime = new Date(obj.fromTime.getTime());
-                scope.fromTime.maxTime = new Date(obj.toTime.getTime()-3600*1000);
-                scope.toTime.minTime = new Date(obj.fromTime.getTime()+3600*1000);
+                scope.fromTime.maxTime = new Date(obj.toTime.getTime() - 3600 * 1000);
+                scope.toTime.minTime = new Date(obj.fromTime.getTime() + 3600 * 1000);
                 scope.toTime.maxTime = new Date(obj.toTime.getTime());
                 //delayed update because of timepicker data race condition
-                setTimeout(function() {
+                setTimeout(function () {
                     scope.toTime.time = obj.toTime;
                     scope.fromTime.time = obj.fromTime;
                 }, 10);
@@ -155,22 +165,24 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 farmerId: scope.orderData.farmerId,
                 clientId: scope.orderData.clientId,
                 currencyId: scope.orderData.currency.id,
-                deliveryDate: filter('date')(scope.deliveryDate.date, scope.dateFormat),
-                deliveryFrom: filter('date')(scope.fromTime.time, scope.timeFormat),
-                deliveryTo: filter('date')(scope.toTime.time, scope.timeFormat),
                 transportPrice: scope.orderData.transportPrice,
-                withTransport: scope.orderData.withTransport,
+                withTransport: scope.orderData.transportType != rootScope.noDeliveryString,
                 totalPrice: scope.orderData.totalPrice,
                 items: [],
                 comment: scope.orderData.comment
             };
-            if (scope.orderData.predefinedLocation == null) {
+            if (scope.orderData.transportType == rootScope.previousLocationString || scope.orderData.transportType == rootScope.newAddressString) {
                 order.address = scope.addressJson;
-            } else {
+            } else if (scope.orderData.transportType == rootScope.predefinedLocationString) {
                 order.deliveryPlace = scope.orderData.predefinedLocation.id;
             }
+
+            if (scope.orderData.transportType != rootScope.noDeliveryString) {
+                order.deliveryDate = filter('date')(scope.deliveryDate.date, scope.dateFormat);
+                order.deliveryFrom = filter('date')(scope.fromTime.time, scope.timeFormat);
+                order.deliveryTo = filter('date')(scope.toTime.time, scope.timeFormat);
+            }
             angular.forEach(scope.orderData.items.items, function (item) {
-                console.log(item);
                 order.items.push({
                     productId: item.itemId,
                     amount: item.itemNum,
@@ -184,7 +196,11 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 Notification.success({message: filter('translate')('ORDER_CREATED')});
                 window.location.href = data.redirectURL;
             }).catch(function (err) {
-                Notification.error({message: filter('translate')('ORDER_NOT_CREATED')});
+                if(err.error.message.indexOf("Item price changed") >= 0){
+                    Notification.error({message: filter('translate')('ITEM_PRICE_CHANGED')});
+                } else {
+                    Notification.error({message: filter('translate')('ORDER_NOT_CREATED')});
+                }
             });
         }
 
