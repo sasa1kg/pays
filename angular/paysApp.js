@@ -707,7 +707,8 @@ paysApp.config(function ($translateProvider) {
             ITEM_PRICE_CHANGED : 'Some product price has changed in the meantime. Please check product prices in cart overview page.',
             PRICE_CHANGED : 'Product price changed!',
             OLD_PRICE : 'Old price',
-            NEW_PRICE : 'New price'
+            NEW_PRICE : 'New price',
+            USER_PICK_UP : 'Products will not be delivered, since \'No delivery\' option is selected in order.'
         })
         .translations('rs_RS', {
             HOME: 'Početna',
@@ -1139,7 +1140,8 @@ paysApp.config(function ($translateProvider) {
             ITEM_PRICE_CHANGED : 'Cena nekog od željenih proizvoda se promenila. Proverite na stranici za pregled korpe.',
             PRICE_CHANGED : 'Promenjena cena proizvoda!',
             OLD_PRICE : 'Stara cena',
-            NEW_PRICE : 'Nova cena'
+            NEW_PRICE : 'Nova cena',
+            USER_PICK_UP : 'Dostava proizvoda nije izabrana prilikom kreiranja narudžbine.'
         })
     $translateProvider.preferredLanguage('en_EN');
 });

@@ -454,7 +454,7 @@
                                                     <div class="text-left">{{order.client.privateSubject.phone}}</div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr ng-if="order.deliveryDate">
                                                 <td class="col-sm-3"><h5 class="text-left">{{ 'DELIVERY_DATE' |
                                                     translate}}</h5>
                                                 </td>
@@ -462,7 +462,16 @@
                                                     <div class="text-left">{{order.deliveryDate}}</div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr ng-if="!order.deliveryDate">
+                                                <td class="col-sm-3"><h5 class="text-left">{{ 'DELIVERY_DATE' |
+                                                    translate}}</h5>
+                                                </td>
+                                                <td class="col-sm-9">
+                                                    <h5>{{'USER_PICK_UP' |
+                                                        translate}}</h5>
+                                                </td>
+                                            </tr>
+                                            <tr ng-if="order.deliveryFrom || order.deliveryTo">
                                                 <td class="col-sm-3"><h5 class="text-left">{{ 'DELIVERY_TIME' |
                                                     translate}}</h5>
                                                 </td>

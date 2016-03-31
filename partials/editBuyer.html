@@ -208,7 +208,7 @@
                 <div class="col-sm-4 text-center">
                   <h4 class="text-center">{{'DELIVERY' | translate}}</h4>
 
-                  <div class="col-sm-12">
+                  <div class="col-sm-12" ng-if="order.deliveryDate">
                     <div class="col-sm-6">
                       <strong>{{'DELIVERY_DATE' | translate}}</strong>
                     </div>
@@ -216,10 +216,13 @@
                       {{order.deliveryDate}}
                     </div>
                   </div>
-                  <div class="col-sm-12">
+                  <div class="col-sm-12" ng-if="!order.deliveryDate">
+                    <h5 class="text-center">{{'USER_PICK_UP' | translate}}</h5>
+                  </div>
+                  <div class="col-sm-12" ng-if="order.deliveryFrom || order.deliveryTo">
                     <strong>{{'DELIVERY_TIME' | translate}}</strong>
                   </div>
-                  <div class="col-sm-12">
+                  <div class="col-sm-12" ng-if="order.deliveryFrom">
                     <div class="col-sm-4">
                       <strong>{{'FROM' | translate}}</strong>
                     </div>
@@ -227,7 +230,7 @@
                       {{order.deliveryFrom}}
                     </div>
                   </div>
-                  <div class="col-sm-12">
+                  <div class="col-sm-12" ng-if="order.deliveryTo">
                     <div class="col-sm-4">
                       <strong>{{'TO' | translate}}</strong>
                     </div>
