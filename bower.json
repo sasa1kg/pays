@@ -24,6 +24,7 @@
     "angular-ui-notification": "~0.0.14",
     "angular-qrcode": "6.1.3",
     "angularjs-google-directions": "0.1.0",
-    "angularPrint": "angular-print#~0.3.8"
+    "angularPrint": "angular-print#~0.3.8",
+    "angular-md5": "^0.1.10"
   }
 }

@@ -1,6 +1,6 @@
 angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$filter", "$window", "$location", "$modal", "CartService", "WishlistService",
-    "OrderService", "UserService", "Notification",
-    function (scope, rootScope, filter, window, location, modal, CartService, WishlistService, OrderService, UserService, Notification) {
+    "OrderService", "UserService", "Notification","md5",
+    function (scope, rootScope, filter, window, location, modal, CartService, WishlistService, OrderService, UserService, Notification,md5) {
 
         scope.noTransportPrice = false;
 
@@ -161,6 +161,14 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
         scope.executePayment = function () {
             console.log("Payment Information!");
             console.log(scope.date);
+            var hashObj = {
+                currencyId: scope.orderData.currency.id,
+                transportPrice: scope.orderData.transportPrice,
+                farmerId: scope.orderData.farmerId,
+                clientId: scope.orderData.clientId,
+                items: [],
+                privateKey : rootScope.genKey
+            }
             var order = {
                 farmerId: scope.orderData.farmerId,
                 clientId: scope.orderData.clientId,
@@ -190,8 +198,14 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                     totalPrice: item.itemPrice,
                     tax: item.tax
                 });
+                hashObj.items.push({
+                    amount: item.itemNum.toFixed(2),
+                    productId :item.itemId
+                });
             });
-            console.log(order);
+
+            var hash = md5.createHash(hashObj.toString());
+            order.signature = hash;
             OrderService.createOrder(order).then(function (data) {
                 Notification.success({message: filter('translate')('ORDER_CREATED')});
                 window.location.href = data.redirectURL;

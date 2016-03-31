@@ -1,7 +1,7 @@
 var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'LocalStorageModule',
         'GeoLocationService', 'CartService', 'WishlistService', 'SearchService', 'DistributorService', 'FarmerService', 'UserService', 'OrderService',
         'ui-rangeSlider', 'cgBusy', 'brantwills.paging', 'pascalprecht.translate', 'ui.bootstrap', 'ui-notification', 'flow', 'monospaced.qrcode', 'dbaq.google.directions',
-        'angularUtils.directives.dirPagination'])
+        'angularUtils.directives.dirPagination','angular-md5'])
     .filter('html', function ($sce) {
         return function (input) {
             return $sce.trustAsHtml(input);
@@ -162,6 +162,7 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
     $rootScope.farmerUserType = 'F';
     $rootScope.distributorUserType = 'T';
     $rootScope.bannerPicsLimit = 5;
+    $rootScope.genKey = "a231ae09-da45-4952-8a23-b48fbe19f99c";
     $rootScope.waitMsg = $filter('translate')('WAIT_MSG');
     $rootScope.loadMsg = $filter('translate')('LOAD_MSG');
     $rootScope.saveInfoMsg = $filter('translate')('SAVE_INFO_MSG');
