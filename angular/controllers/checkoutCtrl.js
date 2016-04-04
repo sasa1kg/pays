@@ -204,7 +204,7 @@ angular.module('paysApp').controller("checkoutCtrl", ["$scope", "$rootScope", "$
                 });
             });
 
-            var hash = md5.createHash(hashObj.toString());
+            var hash = md5.createHash(JSON.stringify(hashObj));
             order.signature = hash;
             OrderService.createOrder(order).then(function (data) {
                 Notification.success({message: filter('translate')('ORDER_CREATED')});

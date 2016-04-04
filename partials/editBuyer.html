@@ -149,7 +149,7 @@
                         ng-click="order.showDetails = !order.showDetails;order.showReview = false;"><i
                   class="fa fa-pencil-square-o"></i> {{ 'DETAILS' | translate}}
                 </button>
-                <button ng-disabled="(order.status != 'D' && order.status != 'P') || order.hasComments == true"
+                <button ng-disabled="(order.status != 'D' && order.status != 'P') || order.hasComments == true || !buyer.isActive"
                         class="btn btn-default apply-changes-btn"
                         ng-click="order.showReview = !order.showReview;order.showDetails = false;"><i
                   class="fa fa-star-half-o"></i> {{

@@ -1136,7 +1136,7 @@ paysApp.config(function ($translateProvider) {
             MINIMUM_ORDER_AMOUNT : 'Minimalna cena narudžbine kod ovog farmera je',
             CURRENT_AMOUNT : 'Trenutna ukupna cena proizvoda u vašoj narudžbini je',
             CLOSED : 'Ne radi',
-            TOTAL_TAX :' Ukupan iznos poreza',
+            TOTAL_TAX :' Ukupan iznos PDV-a',
             NO_TRANSPORT_PRICE : 'Molimo Vas da proverite da li ste izračunali cenu prevoza na stranici \'Pregled korpe\' i vratite se da biste završili naručivanje.',
             ITEM_PRICE_CHANGED : 'Cena nekog od željenih proizvoda se promenila. Proverite na stranici za pregled korpe.',
             PRICE_CHANGED : 'Promenjena cena proizvoda!',

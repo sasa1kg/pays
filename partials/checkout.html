@@ -47,41 +47,45 @@
             <row class="col-sm-12">
                 <h2 class="text-center">{{'ORDER_DATA_SUFFIX' | translate}}</h2>
                 <div class="col-sm-12">
-                    <table class="table table-condensed">
+                    <table class="table table-condensed ">
                         <thead>
                         <th>{{ 'ORDINAL' | translate}}</th>
                         <th>{{ 'PRODUCT_NAME' | translate}}</th>
-                        <th>{{ 'PRODUCT_QUANTITY' | translate}}</th>
-                        <th>{{ 'PRICE_PER_UNIT' | translate}}</th>
-                        <th>{{ 'TAX' | translate}}</th>
-                        <th>{{ 'TAX_AMOUNT' | translate}}</th>
-                        <th>{{ 'PRODUCT_TOTAL_PRICE' | translate}}</th>
+                        <th class="text-center">{{ 'PRODUCT_QUANTITY' | translate}}</th>
+                        <th class="text-center">{{ 'PRICE_PER_UNIT' | translate}}(RSD)</th>
+                        <th>{{ 'TAX' | translate}} %</th>
+                        <th class="text-center">{{ 'TAX_AMOUNT' | translate}} (RSD)</th>
+                        <th class="text-center">{{ 'PRODUCT_TOTAL_PRICE' | translate}}(RSD)</th>
                         </thead>
                         <tbody>
                         <tr ng-repeat="item in orderData.items.items">
-                            <td>{{$index+1}}</td>
+                            <td>{{$index+1}}.</td>
                             <td>{{item.itemName.localization[currentLang]}}</td>
-                            <td>{{item.itemNum}}</td>
-                            <td>{{item.itemPriceNoTax}}</td>
-                            <td>{{item.tax}} %</td>
-                            <td>{{item.totalTax}}</td>
-                            <td>{{item.itemPrice*item.itemNum}}</td>
+                            <td class="text-center">{{item.itemNum}} {{item.itemMeasure.code.localization[currentLang]}}</td>
+                            <td class="text-center">{{item.itemPriceNoTax}}</td>
+                            <td>{{item.tax}}</td>
+                            <td class="text-center">{{item.totalTax}}</td>
+                            <td class="text-center">{{(item.itemPrice*item.itemNum).toFixed(2)}}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-5 pull-right text-right fs18">
-                    <div><strong>{{ 'TOTAL' | translate}} ({{ orderData.currency.code}}): </strong> {{
-                        orderData.totalProductPrice}}
+                <div class="col-sm-offset-6 col-sm-6 col-lg-5 col-lg-offset-7 pull-right text-right fs18">
+                    <div class="col-sm-12  text-left">
+                        <strong class="col-sm-7">{{ 'TOTAL' | translate}} ({{ orderData.currency.code}}): </strong>
+                        <span class="col-sm-5 text-right">{{orderData.totalProductPrice}}</span>
                     </div>
-                    <div><strong>{{ 'TRANSPORT_PRICE' | translate}} ({{ orderData.currency.code}}): </strong>
-                        {{orderData.transportPrice}}
+                    <div class=" col-sm-12 text-left">
+                        <strong class="col-sm-9">{{ 'TRANSPORT_PRICE' | translate}} ({{ orderData.currency.code}}): </strong>
+                        <span class="col-sm-3 text-right">{{orderData.transportPrice}}</span>
                     </div>
-                    <div><strong> {{ 'TOTAL_TAX' | translate}}({{orderData.currency.code}}): </strong>
-                        {{totalOrderTax}}
+                    <div class="col-sm-12 text-left">
+                        <strong class="col-sm-9">{{ 'TOTAL_TAX' | translate}}({{orderData.currency.code}}): </strong>
+                        <span class="col-sm-3 text-right">{{totalOrderTax}}</span>
                     </div>
-                    <div><strong>{{ 'TOTAL_PAY_PRICE' | translate}} ({{ orderData.currency.code}}): </strong> {{
-                        orderData.totalPrice}}
+                    <div class="col-sm-12 text-left">
+                        <strong class="col-sm-7">{{ 'TOTAL_PAY_PRICE' | translate}} ({{ orderData.currency.code}}): </strong>
+                        <span class="col-sm-5 text-right">{{orderData.totalPrice}}</span>
                     </div>
                 </div>
             </row>
@@ -345,7 +349,7 @@
                                                                             ng-click="showTermsOfService()">{{
                         'ACCEPT_TERMS_OF_SERVICE' | translate}}</a>
                     </div>
-                    <a class="btn btn-primary btn-lg cart col-sm-12 text-center mt10" ng-disabled="!termsAccepted"
+                    <a class="btn btn-primary btn-lg cart col-sm-12 text-center mt10" ng-disabled="!termsAccepted || !userData.isActive"
                        ng-click="executePayment()">{{ 'PAY' |
                         translate}}</a>
                 </div>
