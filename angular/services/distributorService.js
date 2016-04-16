@@ -11,7 +11,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.getDistributors = function () {
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "transporter").
+            http.get("transporter").
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -32,7 +32,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.searchDistributors = function (query) {
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "transporter_search",query).
+            http.post("transporter_search",query).
             success(function (data, status) {
                 if (status == 200) {
                     deffered.resolve(data);
@@ -53,7 +53,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.getDistributorById = function (distributorId) {
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "transporter/" + distributorId).
+            http.get("transporter/" + distributorId).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -74,7 +74,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.updateGeneralInfo = function (distributorId, info) {
             var deffered = q.defer();
 
-            http.put(rootScope.serverURL + "transporter/" + distributorId, info).
+            http.put("transporter/" + distributorId, info).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -95,7 +95,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.updateAdvertisingInfo = function (distributorId, info) {
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "transporter/" + distributorId + "/advertising", info).
+            http.post("transporter/" + distributorId + "/advertising", info).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -120,7 +120,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.getVehiclesByDistributorId = function (distributorId) {
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "transporter/" + distributorId + "/vehicles").
+            http.get("transporter/" + distributorId + "/vehicles").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -141,7 +141,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.addNewVehicle = function (distributorId, vehicle) {
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "transporter/" + distributorId + "/vehicles", vehicle).
+            http.post("transporter/" + distributorId + "/vehicles", vehicle).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -162,7 +162,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.updateVehicle = function (distributorId, vehicle) {
             var deffered = q.defer();
 
-            http.put(rootScope.serverURL + "transporter/" + distributorId + "/vehicles/" + vehicle.id, vehicle).
+            http.put("transporter/" + distributorId + "/vehicles/" + vehicle.id, vehicle).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -183,7 +183,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.deleteVehicle = function (distributorId, vehicleId) {
             var deffered = q.defer();
 
-            http.delete(rootScope.serverURL + "transporter/" + distributorId + "/vehicles/" + vehicleId).
+            http.delete("transporter/" + distributorId + "/vehicles/" + vehicleId).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -207,8 +207,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
 
         this.getDistributorImage = function (distId, imageId) {
             var deffered = q.defer();
-            console.log(rootScope.serverURL  + "transporter/" + distId+"/images/"+imageId+"/imagefile");
-            http.get(rootScope.serverURL  + "transporter/" + distId+"/images/"+imageId+"/imagefile").
+            http.get( "transporter/" + distId+"/images/"+imageId+"/imagefile").
               success(function (data, status) {
                   if (status == 200) {
                       data.index = distId;
@@ -231,7 +230,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.getVehicleImage = function (vehicleId, imageId) {
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "vehicle/" + vehicleId + "/images/" + imageId + "/imagefile").
+            http.get("vehicle/" + vehicleId + "/images/" + imageId + "/imagefile").
               success(function (data, status) {
                   if (status == 200) {
                       data.index = vehicleId;
@@ -252,7 +251,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.getVehicleImages = function(vehicleId){
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "vehicle/" + vehicleId + "/images").
+            http.get("vehicle/" + vehicleId + "/images").
               success(function (data, status) {
                   if (status == 200) {
                       data.index = vehicleId;
@@ -274,10 +273,10 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverURL+"vehicle/"+vehicleId+"/imagefile";
+                flowObj.opts.target = "vehicle/"+vehicleId+"/imagefile";
             } else {
                 // update current picture of vehicle
-                flowObj.opts.target = rootScope.serverURL+"vehicle/"+vehicleId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = "vehicle/"+vehicleId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -301,10 +300,10 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/imagetype/P/imagefile";
+                flowObj.opts.target = "transporter/"+distributorId+"/imagetype/P/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = "transporter/"+distributorId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -328,10 +327,10 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/imagetype/B/imagefile";
+                flowObj.opts.target = "transporter/"+distributorId+"/imagetype/B/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = "transporter/"+distributorId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -354,7 +353,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.updatePrices = function(distributorId, pricesData){
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "transporter/" + distributorId + "/pricelist", pricesData).
+            http.post("transporter/" + distributorId + "/pricelist", pricesData).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -375,7 +374,7 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
         this.getPrices = function(distributorId){
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "transporter/" + distributorId + "/pricelist").
+            http.get("transporter/" + distributorId + "/pricelist").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);

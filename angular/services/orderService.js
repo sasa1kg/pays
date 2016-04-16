@@ -7,7 +7,7 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
         this.createOrder = function (order) {
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "order",order).
+            http.post("order",order).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -26,7 +26,7 @@ var OrderService = angular.module('OrderService', []).service('OrderService', ["
         }
         this.getOrder = function (orderId) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "order/"+orderId).
+            http.get("order/"+orderId).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);

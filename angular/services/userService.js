@@ -7,7 +7,7 @@ var UserService = angular.module('UserService', []).service('UserService',
     /*-------------------------- USER OPERATIONS----------------------------*/
     this.registerUser = function (user) {
       var deffered = q.defer();
-      http.post(rootScope.serverURL + "user", user).
+      http.post("user", user).
         success(function (data, status) {
           if (status == 200) {
             deffered.resolve(data);
@@ -27,7 +27,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
     this.getUserIdFromIDMId = function (idmId, role) {
       var deffered = q.defer();
-      http.get(rootScope.serverURL + "user/" + idmId + "/userForRole/" + role).
+      http.get("user/" + idmId + "/userForRole/" + role).
         success(function (data, status) {
           if (status == 200) {
             deffered.resolve(data);
@@ -47,7 +47,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
     this.getUserData = function (userId) {
       var deffered = q.defer();
-      http.get(rootScope.serverURL + "client/" + userId).
+      http.get("client/" + userId).
         success(function (data, status) {
           if (status == 200) {
             deffered.resolve(data);
@@ -67,7 +67,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
     this.getUserPreviousDeliveryAddress = function (userId) {
       var deffered = q.defer();
-      http.get(rootScope.serverURL + "client/" + userId + "/previousDelivery").
+      http.get("client/" + userId + "/previousDelivery").
         success(function (data, status) {
           if (status == 200) {
             deffered.resolve(data);
@@ -87,7 +87,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
     this.sendForgotPasswordEmail = function (destEmailData) {
       var deffered = q.defer();
-      http.post(rootScope.serverURL + "passwordChangeToken", destEmailData).
+      http.post("passwordChangeToken", destEmailData).
         success(function (data, status) {
           if (status == 200) {
             deffered.resolve(data);
@@ -106,7 +106,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
     this.resetPassword = function (newPassData) {
       var deffered = q.defer();
-      http.post(rootScope.serverURL + "resetPassword", newPassData).
+      http.post("resetPassword", newPassData).
         success(function (data, status) {
           if (status == 200) {
             deffered.resolve(data);
@@ -125,7 +125,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
     this.activateUser = function (token) {
       var deffered = q.defer();
-      http.get(rootScope.serverURL + "confirmUser/" + token).
+      http.get("confirmUser/" + token).
         success(function (data, status) {
           if (status == 200) {
             deffered.resolve(data);
@@ -145,7 +145,7 @@ var UserService = angular.module('UserService', []).service('UserService',
     this.updateBuyerGeneralInfo = function (buyerId, info) {
       var deffered = q.defer();
 
-      http.put(rootScope.serverURL + "client/" + buyerId, info).
+      http.put("client/" + buyerId, info).
         success(function (data, status) {
           if (status == 200) {
             console.log("updateBuyerGeneralInfo | Status OK " + status);
@@ -237,7 +237,7 @@ var UserService = angular.module('UserService', []).service('UserService',
 
     this.postOrderReview = function (clientId, orderId, reviewData) {
       var deffered = q.defer();
-      http.post(rootScope.serverURL + "client/" + clientId + "/orders/" + orderId + "/review", reviewData).
+      http.post("client/" + clientId + "/orders/" + orderId + "/review", reviewData).
         success(function (data, status) {
           if (status == 200) {
             deffered.resolve(data);

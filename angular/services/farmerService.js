@@ -6,7 +6,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.updateGeneralInfo = function (farmerId, info) {
             var deffered = q.defer();
 
-            http.put(rootScope.serverURL + "merchant/" + farmerId, info).
+            http.put("merchant/" + farmerId, info).
                 success(function (data, status) {
                     if (status == 200) {
                         console.log("updateGeneralInfo | Status OK " + status);
@@ -28,7 +28,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.updateAdvertisingInfo = function (farmerId, info) {
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "merchant/" + farmerId + "/advertising", info).
+            http.post("merchant/" + farmerId + "/advertising", info).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -50,7 +50,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.getProductImage = function (productId, imageId) {
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "product/" + productId + "/images/" + imageId + "/imagefile").
+            http.get("product/" + productId + "/images/" + imageId + "/imagefile").
                 success(function (data, status) {
                     if (status == 200) {
                         data.index = productId;
@@ -71,7 +71,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.getProductImages = function(productId){
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "product/" + productId + "/images").
+            http.get("product/" + productId + "/images").
                 success(function (data, status) {
                     if (status == 200) {
                         data.index = productId;
@@ -92,7 +92,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.getStockProductImage = function(stockId,imageId){
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "stock_item/" + stockId + "/images/"+imageId+"/imagefile").
+            http.get("stock_item/" + stockId + "/images/"+imageId+"/imagefile").
               success(function (data, status) {
                   if (status == 200) {
                       data.index = stockId;
@@ -114,10 +114,10 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverURL+"stock_item/"+stockId+"/imagefile";
+                flowObj.opts.target = "stock_item/"+stockId+"/imagefile";
             } else {
                 // update current picture of vehicle
-                flowObj.opts.target = rootScope.serverURL+"stock_item/"+stockId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = "stock_item/"+stockId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -140,7 +140,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.deleteStockProductImage = function(stockId){
             var deffered = q.defer();
 
-            http.delete(rootScope.serverURL + "stock_item/" + stockId + "/images").
+            http.delete("stock_item/" + stockId + "/images").
               success(function (data, status) {
                   if (status == 200) {
                       data.index = stockId;
@@ -162,10 +162,10 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/imagetype/P/imagefile";
+                flowObj.opts.target = "merchant/"+farmerId+"/imagetype/P/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = "merchant/"+farmerId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -189,10 +189,10 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/imagetype/B/imagefile";
+                flowObj.opts.target = "merchant/"+farmerId+"/imagetype/B/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = "merchant/"+farmerId+"/image/"+imageId+"/imagefile";
             }
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
@@ -216,11 +216,11 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.updateProduct = function (farmerId, product) {
             var deffered = q.defer();
 
-            http.put(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id + "/amount/" + product.amount).
+            http.put("merchant/" + farmerId + "/products/" + product.product.id + "/amount/" + product.amount).
                 success(function (data, status) {
                     if (status == 200) {
                         console.log(data);
-                        http.post(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id +"/pricelist", {
+                        http.post("merchant/" + farmerId + "/products/" + product.product.id +"/pricelist", {
                             "product": product.product.id,
                             "currencyId": product.price.currency.id,
                             "price": product.price.newPrice,
@@ -257,11 +257,11 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.addNewProduct = function (farmerId, product) {
             var deffered = q.defer();
 
-            http.put(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id + "/amount/" + product.amount).
+            http.put("merchant/" + farmerId + "/products/" + product.product.id + "/amount/" + product.amount).
                 success(function (data, status) {
                     if (status == 200) {
                         console.log(data);
-                        http.post(rootScope.serverURL + "merchant/" + farmerId + "/products/" + product.product.id +"/pricelist", {
+                        http.post("merchant/" + farmerId + "/products/" + product.product.id +"/pricelist", {
                             "product": product.product.id,
                             "currencyId": product.price.currency.id,
                             "price": product.price.newPrice
@@ -295,7 +295,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.deleteProduct = function (farmerId, productId) {
             var deffered = q.defer();
 
-            http.delete(rootScope.serverURL + "merchant/" + farmerId + "/products/" + productId).
+            http.delete("merchant/" + farmerId + "/products/" + productId).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -315,7 +315,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
         this.getFarmerImage = function (farmerId, imageId) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL  + "merchant/" + farmerId+"/images/"+imageId+"/imagefile").
+            http.get("merchant/" + farmerId+"/images/"+imageId+"/imagefile").
               success(function (data, status) {
                   if (status == 200) {
                       data.index = farmerId;
@@ -338,7 +338,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.updatePrices = function(farmerId, pricesData){
             var deffered = q.defer();
 
-            http.post(rootScope.serverURL + "merchant/" + farmerId + "/transportPricelist", pricesData).
+            http.post("merchant/" + farmerId + "/transportPricelist", pricesData).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -359,7 +359,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.getPrices = function(farmerId){
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "merchant/" + farmerId + "/transportPricelist").
+            http.get("merchant/" + farmerId + "/transportPricelist").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -380,7 +380,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
         this.getReviews = function(farmerId){
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "merchant/" + farmerId + "/reviews").
+            http.get("merchant/" + farmerId + "/reviews").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -400,7 +400,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
         this.setTransportOrderStatus = function(farmerId,orderId,packageNumber) {
             var deffered = q.defer();
-            http.put(rootScope.serverURL + "merchant/" + farmerId + "/orders/" + orderId + "/startTransport/"+packageNumber).
+            http.put("merchant/" + farmerId + "/orders/" + orderId + "/startTransport/"+packageNumber).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -428,7 +428,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
         this.getTransportPrice = function(farmerId, priceData){
             var deffered = q.defer();
-            http.post(rootScope.serverURL + "merchant/" + farmerId + "/calculateTransport",priceData).
+            http.post("merchant/" + farmerId + "/calculateTransport",priceData).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -447,7 +447,7 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
 
         this.saveWorkHours = function(farmerId, hoursData){
             var deffered = q.defer();
-            http.post(rootScope.serverURL + "merchant/" + farmerId + "/deliveryConstraints",hoursData).
+            http.post("merchant/" + farmerId + "/deliveryConstraints",hoursData).
             success(function (data, status) {
                 if (status == 200) {
                     deffered.resolve(data);

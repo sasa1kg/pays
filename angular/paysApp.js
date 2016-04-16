@@ -51,7 +51,10 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'L
             }
             return ret;
         }
-    }).config(['flowFactoryProvider', function (flowFactoryProvider) {
+    }).config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.interceptors.push('myHttpInterceptor');
+
+    }]).config(['flowFactoryProvider', function (flowFactoryProvider) {
         flowFactoryProvider.defaults = {
             target: 'upload.php',
             permanentErrors: [404, 500, 501],

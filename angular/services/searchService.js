@@ -6,7 +6,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         /*-------------------------- USER OPERATIONS----------------------------*/
         this.getCategories = function () {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "product_category_first").
+            http.get("product_category_first").
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -27,7 +27,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         this.getProductsInCategory = function (category) {
             console.log("Search category ".concat(category));
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "product_category/" + category).
+            http.get("product_category/" + category).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -47,7 +47,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getAllProducts = function () {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "product").
+            http.get("product").
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -67,7 +67,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getFarmers = function () {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "merchant").
+            http.get("merchant").
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -90,7 +90,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             console.log("SEARCH FARMER QUERY");
             console.log(query);
             var deffered = q.defer();
-            http.post(rootScope.serverURL + "merchant_search",query).
+            http.post("merchant_search",query).
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -110,7 +110,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getFarmerById = function (id) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "merchant/" + id).
+            http.get("merchant/" + id).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -137,8 +137,8 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
             };
             imgData.index = farmerId;
             deffered.resolve(imgData);
-            // http.get(rootScope.serverURL  + "merchant/" + id+"/images/"+imageId+"imagefile").
-            // http.get(rootScope.serverURL  + "product/1/images/10/imagefile").
+            // http.get("merchant/" + id+"/images/"+imageId+"imagefile").
+            // http.get("product/1/images/10/imagefile").
             //     success(function (data, status) {
             //         if (status == 200) {
             //             deffered.resolve(data);
@@ -158,7 +158,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getFarmerProducts = function (farmerId) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "merchant/" + farmerId + "/products").
+            http.get("merchant/" + farmerId + "/products").
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -177,7 +177,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         }
         this.getProductImage = function (productId,imageId) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "product/" + productId + "/images/"+imageId+"/imagefile").
+            http.get("product/" + productId + "/images/"+imageId+"/imagefile").
                 success(function (data, status) {
                     if (status == 200) {
                         data.index = productId;
@@ -198,7 +198,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getWishlistProductImage = function (productId,imageId,wishlistItemId) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "product/" + productId + "/images/"+imageId+"/imagefile").
+            http.get("product/" + productId + "/images/"+imageId+"/imagefile").
                 success(function (data, status) {
                     if (status == 200) {
                         data.index = productId;
@@ -221,7 +221,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getFarmerOrders = function (farmerId) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "merchant/" + farmerId + "/orders").
+            http.get("merchant/" + farmerId + "/orders").
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -242,7 +242,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         this.getCurrencies = function () {
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "currency").
+            http.get("currency").
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -263,7 +263,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
         this.getMeasurementUnits = function () {
             var deffered = q.defer();
 
-            http.get(rootScope.serverURL + "measurement_unit").
+            http.get("measurement_unit").
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -312,7 +312,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getClientById = function (id) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "client/" + id).
+            http.get("client/" + id).
                 success(function (data, status) {
                     if (status == 200) {
                         deffered.resolve(data);
@@ -332,7 +332,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getBuyerOrders = function (buyerId) {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "client/" + buyerId + "/orders").
+            http.get("client/" + buyerId + "/orders").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -352,7 +352,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getCities = function(){
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "city").
+            http.get("city").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -413,7 +413,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getMostProfitFarmers = function () {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "merchant_most_profit").
+            http.get("merchant_most_profit").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -432,7 +432,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getMostOrdersFarmers = function () {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "merchant_most_orders").
+            http.get("merchant_most_orders").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -451,7 +451,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getMostProductsFarmers = function () {
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "merchant_most_products").
+            http.get("merchant_most_products").
               success(function (data, status) {
                   if (status == 200) {
                       deffered.resolve(data);
@@ -470,7 +470,7 @@ var SearchService = angular.module('SearchService', []).service('SearchService',
 
         this.getPredefinedLocations = function(){
             var deffered = q.defer();
-            http.get(rootScope.serverURL + "delivery_place").
+            http.get("delivery_place").
             success(function (data, status) {
                 if (status == 200) {
                     deffered.resolve(data);
