@@ -44,7 +44,7 @@
                         <li ng-hide="isLoggedIn() && credentials.role!='C'"><a href="#/wishlist"><i class="fa fa-star"></i> {{ 'WISHLIST' | translate}} <span
                                 class="badge alert-warning">{{wishlistItemsSize}}</span></a></li>
                         <li ng-hide="isLoggedIn() && credentials.role!='C'"><a href="#/cart"><i class="fa fa-shopping-cart"></i> {{ 'CART' | translate}} <span
-                                class="badge alert-success">{{price}}</span></a></li>
+                                class="badge alert-success">{{getTwoDecimalsFormat(price)}}</span></a></li>
                         <li ng-hide="isLoggedIn() && credentials.role!='C'"><a href="#/checkout"> {{ 'PAY' | translate}}</a></li>
                         <li ng-if="!isLoggedIn()"><a href="#/login"><i class="fa fa-lock"></i> {{ 'LOGIN' | translate}}</a>
                         <li ng-if="isLoggedIn()"><a href="#/" ng-click="logout()"><i class="fa fa-lock"></i> {{ 'LOGOUT' | translate}}</a>

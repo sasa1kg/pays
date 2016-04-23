@@ -276,6 +276,10 @@ paysApp.run(function ($rootScope, $translate, $location, $window, $filter, Notif
             }
         }
     }
+
+    $rootScope.getTwoDecimalsFormat = function(inputStr){
+        return parseFloat(inputStr).toFixed(2);
+    }
 });
 
 paysApp.config(function ($translateProvider) {

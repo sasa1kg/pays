@@ -389,3 +389,18 @@ input[type="number"]:disabled {
 .min_width_price_table {
     width: 55px;
 }
+
+.ems img {
+    width : 155px;
+    height: 80px;
+}
+
+.master img {
+    width : 121px;
+    height: 80px;
+}
+
+.visa img {
+    width : 110px;
+    height: 80px;
+}

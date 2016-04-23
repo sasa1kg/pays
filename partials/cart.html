@@ -68,7 +68,7 @@
                                 <p>{{item.shortDesc.localization[currentLang]}}</p>
                             </td>
                             <td class="cart_price col-sm-2">
-                                <p>{{item.itemPrice}} RSD / {{item.itemMeasure.code.localization[currentLang]}}</p>
+                                <p>{{getTwoDecimalsFormat(item.itemPrice)}} RSD / {{item.itemMeasure.code.localization[currentLang]}}</p>
                             </td>
                             <td class="cart_quantity col-sm-2">
 
@@ -108,7 +108,7 @@
                                 </div>
                             </td>
                             <td class="cart_total col-sm-2">
-                                <p class="cart_total_price">{{item.itemPrice * item.itemNum}} RSD</p>
+                                <p class="cart_total_price">{{getTwoDecimalsFormat(item.itemPrice * item.itemNum)}} RSD</p>
                             </td>
                             <td class="cart_delete col-sm-1">
                                 <a class="cart_quantity_delete" ng-click="deleteCartItem(item)"><i
@@ -120,7 +120,7 @@
                     <h5 ng-if="farmer!= null && cartItems != null && !lowOrderAmount()" style="color: red;"
                         class="text-center">{{ 'MINIMUM_ORDER_AMOUNT' | translate}}: {{farmer.minOrderPrice}} [RSD].
                         {{'CURRENT_AMOUNT' | translate}}:
-                        {{totalPrice}} [RSD].</h5>
+                        {{getTwoDecimalsFormat(totalPrice)}} [RSD].</h5>
                 </div>
             </div>
         </div>
@@ -257,7 +257,7 @@
                                     'SAVE_ADDRESS' | translate}}</a>
                             </div>
                             <div cg-busy="{promise:transportPriceDeffered.promise,message:waitMsg,backdrop:true}">
-                                <h5 class="col-sm-3 pull-right">{{ 'TRANSPORT_PRICE' | translate}}: {{transportPrice}}
+                                <h5 class="col-sm-3 pull-right">{{ 'TRANSPORT_PRICE' | translate}}: {{getTwoDecimalsFormat(transportPrice)}}
                                     (RSD)</h5>
 
                                 <div class="col-sm-3 pull-right">
@@ -278,11 +278,11 @@
                     <div class="col-sm-12">
                         <div class="total_area">
                             <ul>
-                                <li class="amount_data">{{ 'CART' | translate}} <span>{{totalPrice}} RSD</span></li>
+                                <li class="amount_data">{{ 'CART' | translate}} <span>{{getTwoDecimalsFormat(totalPrice)}} RSD</span></li>
                                 <li class="amount_data">{{ 'DELIVERY' |
                                     translate}}
-                                    <span>{{transportPrice}} RSD</span></li>
-                                <li class="amount_data">{{ 'TOTAL' | translate}} <span>{{total}} RSD</span></li>
+                                    <span>{{getTwoDecimalsFormat(transportPrice)}} RSD</span></li>
+                                <li class="amount_data">{{ 'TOTAL' | translate}} <span>{{getTwoDecimalsFormat(total)}} RSD</span></li>
                             </ul>
 
                             <script type="text/ng-template" id="emptyCartModal.html">
