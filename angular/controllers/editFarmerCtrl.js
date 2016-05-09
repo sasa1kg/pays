@@ -211,11 +211,17 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
             scope.loadOrdersDeffered.reject();
         });
         scope.loadPricesDeffered = q.defer();
+        for (var i in rootScope.transportDistances) {
+            scope.prices[rootScope.transportDistances[i]] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+            for (var j in rootScope.transportWeights) {
+                scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
+            }
+        }
         FarmerService.getPrices(routeParams.id).then(function (data) {
             if (data.prices && data.prices.length > 0) {
                 angular.forEach(data.prices, function (price) {
                     if (!scope.prices[price.distance]) {
-                        scope.prices[price.distance] = new Array();
+                        scope.prices[price.distance] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                         scope.prices[price.distance][price.weight] = parseFloat(price.price);
                     } else {
                         scope.prices[price.distance][price.weight] = parseFloat(price.price);
@@ -223,7 +229,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
                 });
             } else {
                 for (var i in rootScope.transportDistances) {
-                    scope.prices[rootScope.transportDistances[i]] = [];
+                    scope.prices[rootScope.transportDistances[i]] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                     for (var j in rootScope.transportWeights) {
                         scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
                     }
@@ -232,7 +238,7 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
             scope.loadPricesDeffered.resolve();
         }).catch(function (err) {
             for (var i in rootScope.transportDistances) {
-                scope.prices[rootScope.transportDistances[i]] = [];
+                scope.prices[rootScope.transportDistances[i]] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
                 for (var j in rootScope.transportWeights) {
                     scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]] = 0;
                 }
@@ -404,6 +410,10 @@ angular.module('paysApp').controller("editFarmerCtrl", ["$scope", "$rootScope", 
 
             for (var i in rootScope.transportDistances) {
                 for (var j in rootScope.transportWeights) {
+                    console.log("i = "+i +", j = "+j);
+                    console.log("weight "+rootScope.transportWeights[j]);
+                    console.log("dist  "+rootScope.transportDistances[j]);
+                    console.log("price " +  scope.prices[rootScope.transportDistances[i]][rootScope.transportWeights[j]]);
                     pricesObj.prices.push({
                         weight: rootScope.transportWeights[j],
                         distance: rootScope.transportDistances[i],
