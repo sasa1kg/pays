@@ -766,20 +766,38 @@ angular.module('paysApp').controller('OrderModalInstanceCtrl', function ($scope,
             prefix += '<h5><strong> ' + $filter('translate')('NUMBER_OF_PACKAGES') + ': </strong> ' + (i + 1) + '/' + $scope.qr.packagesNumber + '</h5>';
             prefix += '<h5><strong> ' + $filter('translate')('TOTAL_MASS') + ': </strong> ' + $scope.order.totalMass + ' [kg]</h5>';
             prefix += '<h5><strong> ' + $filter('translate')('CLIENT_NAME') + ': </strong> ' + $scope.order.client.privateSubject.name + ' ' + $scope.order.client.privateSubject.lastName + '</h5>';
-            prefix += '<h5><strong> ' + $filter('translate')('CITY') + ': </strong> ' + $scope.order.address.city + ' &nbsp; ' +
-                '<strong> ' + $filter('translate')('POSTAL_CODE') + ': </strong> ' + $scope.order.address.postalCode + '</h5>';
-            prefix += '<h5><strong> ' + $filter('translate')('STREET') + ' </strong> ' + $scope.order.address.street + ' &nbsp; ' +
-                '<strong> ' + $filter('translate')('HOUSE_NUMBER') + ' </strong> ' + $scope.order.address.houseNumber + '</h5>';
-            if ($scope.order.address.floor && $scope.order.address.apartmentNumber) {
-                prefix += '<h5>';
-                if ($scope.order.address.floor) {
-                    prefix += '<strong> ' + $filter('translate')('FLOOR') + ' </strong> ' + $scope.order.address.floor;
+            if(!$scope.order.deliveryPlace) {
+                prefix += '<h5><strong> ' + $filter('translate')('CITY') + ': </strong> ' + $scope.order.address.city + ' &nbsp; ' +
+                    '<strong> ' + $filter('translate')('POSTAL_CODE') + ': </strong> ' + $scope.order.address.postalCode + '</h5>';
+                prefix += '<h5><strong> ' + $filter('translate')('STREET') + ' </strong> ' + $scope.order.address.street + ' &nbsp; ' +
+                    '<strong> ' + $filter('translate')('HOUSE_NUMBER') + ' </strong> ' + $scope.order.address.houseNumber + '</h5>';
+                if ($scope.order.address.floor && $scope.order.address.apartmentNumber) {
+                    prefix += '<h5>';
+                    if ($scope.order.address.floor) {
+                        prefix += '<strong> ' + $filter('translate')('FLOOR') + ' </strong> ' + $scope.order.address.floor;
+                    }
+                    prefix += ' &nbsp; ';
+                    if ($scope.order.address.apartmentNumber) {
+                        prefix += '<strong> ' + $filter('translate')('APARTMENT') + ' </strong> ' + $scope.order.address.apartmentNumber;
+                    }
+                    prefix += '</h5>';
                 }
-                prefix += ' &nbsp; ';
-                if ($scope.order.address.apartmentNumber) {
-                    prefix += '<strong> ' + $filter('translate')('APARTMENT') + ' </strong> ' + $scope.order.address.apartmentNumber;
+            } else {
+                prefix += '<h5><strong> ' + $filter('translate')('CITY') + ': </strong> ' + $scope.order.deliveryPlace.address.city + ' &nbsp; ' +
+                    '<strong> ' + $filter('translate')('POSTAL_CODE') + ': </strong> ' + $scope.order.deliveryPlace.address.postalCode + '</h5>';
+                prefix += '<h5><strong> ' + $filter('translate')('STREET') + ' </strong> ' + $scope.order.deliveryPlace.address.street + ' &nbsp; ' +
+                    '<strong> ' + $filter('translate')('HOUSE_NUMBER') + ' </strong> ' + $scope.order.deliveryPlace.address.houseNumber + '</h5>';
+                if ($scope.order.deliveryPlace.address.floor && $scope.order.deliveryPlace.address.apartmentNumber) {
+                    prefix += '<h5>';
+                    if ($scope.order.deliveryPlace.address.floor) {
+                        prefix += '<strong> ' + $filter('translate')('FLOOR') + ' </strong> ' + $scope.order.deliveryPlace.address.floor;
+                    }
+                    prefix += ' &nbsp; ';
+                    if ($scope.order.deliveryPlace.address.apartmentNumber) {
+                        prefix += '<strong> ' + $filter('translate')('APARTMENT') + ' </strong> ' + $scope.order.deliveryPlace.address.apartmentNumber;
+                    }
+                    prefix += '</h5>';
                 }
-                prefix += '</h5>';
             }
             prefix += '<h5><strong> ' + $filter('translate')('DELIVERY_DATE') + ': </strong> ' + $scope.order.deliveryDate + '</h5>';
             prefix += '<h5><strong> ' + $filter('translate')('DELIVERY_TIME') + ': </strong> ' + $scope.order.deliveryFrom + ' - ' + $scope.order.deliveryTo + '</h5>';

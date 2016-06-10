@@ -114,11 +114,12 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = "stock_item/"+stockId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"stock_item/"+stockId+"/imagefile";
             } else {
                 // update current picture of vehicle
-                flowObj.opts.target = "stock_item/"+stockId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"stock_item/"+stockId+"/image/"+imageId+"/imagefile";
             }
+            flowObj.opts.headers = {'X-Auth-Token' : rootScope.credentials.token};
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
             flowObj.on('fileSuccess', function (event,resp) {
@@ -162,11 +163,12 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = "merchant/"+farmerId+"/imagetype/P/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/imagetype/P/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = "merchant/"+farmerId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/image/"+imageId+"/imagefile";
             }
+            flowObj.opts.headers = {'X-Auth-Token' : rootScope.credentials.token};
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
             flowObj.on('fileSuccess', function (event,resp) {
@@ -189,11 +191,12 @@ var FarmerService = angular.module('FarmerService', []).service('FarmerService',
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = "merchant/"+farmerId+"/imagetype/B/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/imagetype/B/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = "merchant/"+farmerId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"merchant/"+farmerId+"/image/"+imageId+"/imagefile";
             }
+            flowObj.opts.headers = {'X-Auth-Token' : rootScope.credentials.token};
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
             flowObj.on('fileSuccess', function (event,resp) {

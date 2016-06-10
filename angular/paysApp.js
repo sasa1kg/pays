@@ -61,7 +61,8 @@ var paysApp = angular.module("paysApp", ['ngRoute', 'ngCookies', 'ngAnimate', 'L
             maxChunkRetries: 1,
             chunkRetryInterval: 5000,
             simultaneousUploads: 4,
-            singleFile: true
+            singleFile: true,
+            headers: {'X-Auth-Token' : '9F2490EC33584328A5E83991724C28AE'}
         };
         flowFactoryProvider.on('catchAll', function (event) {
             console.log('catchAll', arguments);

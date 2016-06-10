@@ -273,11 +273,12 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = "vehicle/"+vehicleId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"vehicle/"+vehicleId+"/imagefile";
             } else {
                 // update current picture of vehicle
-                flowObj.opts.target = "vehicle/"+vehicleId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"vehicle/"+vehicleId+"/image/"+imageId+"/imagefile";
             }
+            flowObj.opts.headers = {'X-Auth-Token' : rootScope.credentials.token};
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
             flowObj.on('fileSuccess', function (event,resp) {
@@ -300,11 +301,12 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = "transporter/"+distributorId+"/imagetype/P/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/imagetype/P/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = "transporter/"+distributorId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/image/"+imageId+"/imagefile";
             }
+            flowObj.opts.headers = {'X-Auth-Token' : rootScope.credentials.token};
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
             flowObj.on('fileSuccess', function (event,resp) {
@@ -327,11 +329,12 @@ var DistributorService = angular.module('DistributorService', []).service('Distr
             var deferred = q.defer();
             //image doesnt exists,create new one
             if(imageId == rootScope.undefinedImageId){
-                flowObj.opts.target = "transporter/"+distributorId+"/imagetype/B/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/imagetype/B/imagefile";
             } else {
                 // update current profile picture
-                flowObj.opts.target = "transporter/"+distributorId+"/image/"+imageId+"/imagefile";
+                flowObj.opts.target = rootScope.serverURL+"transporter/"+distributorId+"/image/"+imageId+"/imagefile";
             }
+            flowObj.opts.headers = {'X-Auth-Token' : rootScope.credentials.token};
             flowObj.opts.testChunks=false;
             flowObj.opts.fileParameterName = "file";
             flowObj.on('fileSuccess', function (event,resp) {

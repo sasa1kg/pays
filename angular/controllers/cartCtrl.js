@@ -55,7 +55,7 @@ angular.module('paysApp').controller("cartCtrl", ["$scope", "$rootScope", "$q", 
                     angular.forEach(scope.cartItems.items, function (item) {
                         reqData.items.push({
                             item: item.itemId,
-                            amount: item.amount
+                            amount: item.itemNum
                         })
                     });
                     console.log(reqData);
